@@ -1,6 +1,6 @@
 app.controller('teaEditSheetingCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-
+    keepHistory($window.user.id,"teacher-sheeting-edit-"+$window.sheetingID,dtJsToDtDB(new Date()));
     var allowed_file_type = "";
     $scope.myGroups = findMyGroup($scope.user.id);
     $scope.sheetGroups = findSheetGroupSharedToMe($scope.user.id);

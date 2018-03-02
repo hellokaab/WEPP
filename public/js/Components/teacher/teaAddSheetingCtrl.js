@@ -1,5 +1,6 @@
 app.controller('teaAddSheetingCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
+    keepHistory($window.user.id,"teacher-sheeting-add",dtJsToDtDB(new Date()));
 
     $scope.myGroups = findMyGroup($scope.user.id);
     $scope.sheetGroups = findSheetGroupSharedToMe($scope.user.id);

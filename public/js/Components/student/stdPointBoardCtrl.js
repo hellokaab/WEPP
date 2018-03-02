@@ -1,4 +1,5 @@
 app.controller('stdPointBoardCtrl', ['$scope', '$window', function ($scope, $window) {
+    keepHistory($window.user.id,"student-board-exam-"+$window.examingID,dtJsToDtDB(new Date()));
     $scope.examingID = $window.examingID;
     $scope.examing = findExamingByID($scope.examingID);
     $scope.group = findGroupDataByID($scope.examing.group_id);

@@ -1,5 +1,6 @@
 app.controller('teaCopySheetCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
+    keepHistory($window.user.id,"teacher-sheet-copy-"+$window.sheetID,dtJsToDtDB(new Date()));
     $scope.mySheetGroup = findMySheetGroup($scope.user.id);
     $scope.teacher = findAllTeacher();
 

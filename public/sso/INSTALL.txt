@@ -1,0 +1,21 @@
+RMUTi Single Sign-on Client Library -- PHP
+
+Installation
+
+1. Extract to root folder of your web. Example, /var/www/html/sso or C:\inetpub\wwwroot\sso
+2. Browse to sso sub-directory of your web. Excample, http://your.web.com/sso
+3. Get informations of web from 2. and ask RMUTi SSO admin to register your web as SP (Service Provider) to RMUTi SSO system with all of your web informations.
+  3.1 SP Name or name of your web.
+  3.2 SP Metadata URL.
+  3.3 SP Entity ID.
+  3.4 AssertionConsumerService URL.
+  3.5 SingleLogoutService URL.
+  3.6 NameIDFormat.
+4. Login using RMUTi SSO.
+  4.1 URL of your web which used to login with RMUTi SSO is
+      http://your.web.com/sso/?sso&redirect=<your_page_after_successful_login>
+  4.2 Variable that store user information after successful login is $_SESSION['ssoUserdata'];
+5. Logout from RMUTi SSO. URL of your web which used to logout from RMUTi SSO is
+   http://your.web.com/sso/?slo&redirect=<your_page_after_successful_logout>
+
+

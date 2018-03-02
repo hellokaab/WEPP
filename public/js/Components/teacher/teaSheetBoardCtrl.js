@@ -1,4 +1,5 @@
 app.controller('teaSheetBoardCtrl', ['$scope', '$window', function ($scope, $window) {
+    keepHistory($window.user.id,"teacher-board-sheet-"+$window.sheetingID,dtJsToDtDB(new Date()));
     $scope.sheetingID = $window.sheetingID;
     $scope.sheeting = findSheetingByID($scope.sheetingID);
     $scope.group = findGroupDataByID($scope.sheeting.group_id);

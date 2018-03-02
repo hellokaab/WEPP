@@ -233,7 +233,7 @@
 
                         {{--Share--}}
                         <div class="form-group">
-                            <label class="col-md-2 control-label">แบ่งปันถึง:</label>
+                            <label class="col-md-2 control-label">แบ่งปันถึง </label>
                             <div class="col-md-9">
                                 <h5 ng-repeat="st in selectTeacher">อ.<%st.fname_th%> <%st.lname_th%></h5>
                                 <button class="btn btn-outline-info btn-sm" ng-click="addUserShare()">
@@ -291,7 +291,7 @@
 
                         {{--sheet score--}}
                         <div class="form-group">
-                            <label class="col-md-2 control-label">คะแนนการทดลอง </label>
+                            <label class="col-md-2 control-label">คะแนนการทดลอง <b class="danger">*</b></label>
                             <div class="col-md-3">
                                 <input id="sheet_score" type="text" class="form-control" ng-model="sheetScore"  ng-keyup="checkFullScore()" maxlength="6" autofocus/>
                                 <div class="notice" id="notice_sheet_score" style="display: none">กรุณาระบุคะแนนการทดลอง</div>

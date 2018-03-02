@@ -1,6 +1,6 @@
 app.controller('teaExamingHistoryCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-
+    keepHistory($window.user.id,"teacher-examing-history",dtJsToDtDB(new Date()));
     $scope.groups = findMyGroup($scope.user.id);
     $scope.examings = findExamingByUserID($scope.user.id);
 

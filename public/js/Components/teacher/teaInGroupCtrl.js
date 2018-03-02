@@ -1,5 +1,6 @@
 app.controller('teaInGroupCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
+    keepHistory($window.user.id,"teacher-group-my-in-"+$window.groupId,dtJsToDtDB(new Date()));
     $scope.groupID = $window.groupId;
     $scope.groupData = findGroupDataByID($scope.groupID);
     $scope.examingComing = findExamingItsComing($scope.groupData.id);
