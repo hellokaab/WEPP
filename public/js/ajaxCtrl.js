@@ -643,7 +643,7 @@ function readFileEx(data) {
     return test;
 }
 
-function deleteExam(UID) {
+function deleteExam(EID) {
     $.ajax({
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -651,7 +651,7 @@ function deleteExam(UID) {
             Accept: "application/json"
         },
         url: url + 'exam-delete-exam',
-        data: {exam_id: UID},
+        data: {exam_id: EID},
         async: false,
         complete: function (xhr) {
             if (xhr.readyState == 4) {
@@ -662,7 +662,7 @@ function deleteExam(UID) {
                 } else {
                     $('#delete_exam_part').waitMe('hide');
                     $('#delete_exam_modal').modal('hide');
-                    $('#success_modal').modal({backdrop: 'static'});
+                    $('#unsuccess_modal').modal({backdrop: 'static'});
                 }
             }
         }

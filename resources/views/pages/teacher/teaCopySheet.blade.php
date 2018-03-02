@@ -291,7 +291,7 @@
 
                         {{--sheet score--}}
                         <div class="form-group">
-                            <label class="col-md-2 control-label">คะแนนการทดลอง </label>
+                            <label class="col-md-2 control-label">คะแนนการทดลอง <b class="danger">*</b></label>
                             <div class="col-md-3">
                                 <input id="sheet_score" type="text" class="form-control" ng-model="sheetScore"  ng-keyup="checkFullScore()" maxlength="6" autofocus/>
                                 <div class="notice" id="notice_sheet_score" style="display: none">กรุณาระบุคะแนนการทดลอง</div>

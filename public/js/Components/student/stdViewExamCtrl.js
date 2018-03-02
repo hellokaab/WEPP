@@ -1,5 +1,6 @@
 app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
+    keepHistory($window.user.id,"student-examing-doing-"+$window.examingID,dtJsToDtDB(new Date()));
 
     $scope.examing = $window.examing;
     $scope.groupData = findGroupDataByID($scope.examing.group_id);

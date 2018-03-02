@@ -1,6 +1,10 @@
 app.controller('stdAllGroupCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    // keepHistory($window.user.id,"student-group-all",dtJsToDtDB(new Date()));
+    if($window.user.user_type === 't'){
+        keepHistory($window.user.id,"teacher-group-all",dtJsToDtDB(new Date()));
+    } else if ($window.user.user_type === 's'){
+        keepHistory($window.user.id,"student-group-all",dtJsToDtDB(new Date()));
+    }
 
     $scope.allGroup = findAllGroup();
     $scope.selectRow = '10';

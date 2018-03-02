@@ -195,9 +195,9 @@ class ExamController extends Controller
         return response()->json($data);
     }
 
-    public function deleteExam($id)
+    public function deleteExam(Request $request)
     {
-        $exam = Exam::find($id);
+        $exam = Exam::find($request->exam_id);
         $folderPath = "";
         $getpath = explode("/",$exam->exam_data);
         for($i=0;$i<sizeof($getpath)-1;$i++){

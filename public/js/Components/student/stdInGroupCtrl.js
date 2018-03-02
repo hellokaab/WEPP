@@ -1,5 +1,10 @@
 app.controller('stdInGroupCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
+    if($window.user.user_type === 't'){
+        keepHistory($window.user.id,"teacher-group-other-in-"+$window.groupID,dtJsToDtDB(new Date()));
+    } else if ($window.user.user_type === 's'){
+        keepHistory($window.user.id,"student-group-in-"+$window.groupID,dtJsToDtDB(new Date()));
+    }
 
     $scope.screenSize = parseInt(screen.width);
     $scope.groupData = findGroupDataByID($window.groupID);

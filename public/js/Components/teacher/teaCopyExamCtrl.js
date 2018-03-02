@@ -1,5 +1,6 @@
 app.controller('teaCopyExamCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
+    keepHistory($window.user.id,"teacher-exam-copy-"+$window.examID,dtJsToDtDB(new Date()));
     var newKeywords = new Array();
     $scope.examID = $window.examID;
     $scope.examData = findExamByID($scope.examID);

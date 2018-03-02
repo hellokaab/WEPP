@@ -1,6 +1,6 @@
 app.controller('teaEditExamingCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-
+    keepHistory($window.user.id,"teacher-examing-edit-"+$window.examingID,dtJsToDtDB(new Date()));
     $scope.myGroups = findMyGroup($scope.user.id);
     $scope.examGroup = findExamGroupSharedToMe($scope.user.id);
     $scope.exams = findAllExamSharedToMe($scope.user.id);

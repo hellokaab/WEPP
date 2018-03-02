@@ -1,4 +1,5 @@
 app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $window) {
+    keepHistory($window.user.id,"student-sheeting-doing-"+$window.sheetingID,dtJsToDtDB(new Date()));
     $scope.sheeting = $window.sheeting;
     $scope.inputMode = 'key_input';
     $scope.allowedFileType = $scope.sheeting.allowed_file_type.split(",");

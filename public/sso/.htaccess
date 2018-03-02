@@ -1,0 +1,9 @@
+DirectoryIndex index.php
+
+RewriteEngine on 
+# If it does not exist as a directory 
+RewriteCond %{REQUEST_FILENAME} !-d 
+# And if it does not exist as a file 
+RewriteCond %{REQUEST_FILENAME} !-f 
+# Then add .php to get the actual filename 
+RewriteRule ^(.*)/? index.php?url=$1 [L]

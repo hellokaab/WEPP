@@ -1,6 +1,10 @@
 app.controller('stdMyGroupCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    // keepHistory($window.user.id,"student-group-my",dtJsToDtDB(new Date()));
+    if($window.user.user_type === 't'){
+        keepHistory($window.user.id,"teacher-group-join",dtJsToDtDB(new Date()));
+    } else if ($window.user.user_type === 's'){
+        keepHistory($window.user.id,"student-group-my",dtJsToDtDB(new Date()));
+    }
 
     $scope.myJoinGroup = findMyJoinGroup($scope.user.id);
 
