@@ -71,6 +71,6 @@
 //    );
 
     $_SESSION['ssoUserData'] = $user;
-    header( "location: http://localhost/WEPP2/public/user-login-user" );
+    header( "location: http://localhost/WEPP/public/user-login-user" );
     exit(0);
 ?>

@@ -65,15 +65,18 @@ class UserController extends Controller
                 }
 
                 $users->faculty = $_SESSION['ssoUserdata']['faculty'][0];
-                $users->department = $_SESSION['ssoUserdata']['program'][0];
-                $users->email = $_SESSION['ssoUserdata']['mail'][0];
                 if($_SESSION['ssoUserdata']['gidNumber'][0] == "4500"){
                     $users->user_type = 's';
+                    $users->department = $_SESSION['ssoUserdata']['program'][0];
                 }elseif ($_SESSION['ssoUserdata']['gidNumber'][0] == "2500"){
                     $users->user_type = 't';
+                    $users->department = $_SESSION['ssoUserdata']['department'][0];
                 }else{
                     $users->user_type = 'o';
+                    $users->department = $_SESSION['ssoUserdata']['department'][0];
                 }
+                $users->email = $_SESSION['ssoUserdata']['mail'][0];
+
                 $users->save();
 //                return response()->json($users);
             }else{
@@ -92,15 +95,19 @@ class UserController extends Controller
                 }
 
                 $users->faculty = $_SESSION['ssoUserdata']['faculty'][0];
-                $users->department = $_SESSION['ssoUserdata']['program'][0];
-                $users->email = $_SESSION['ssoUserdata']['mail'][0];
                 if($_SESSION['ssoUserdata']['gidNumber'][0] == "4500"){
                     $users->user_type = 's';
+                    $users->department = $_SESSION['ssoUserdata']['program'][0];
                 }elseif ($_SESSION['ssoUserdata']['gidNumber'][0] == "2500"){
                     $users->user_type = 't';
+                    $users->department = $_SESSION['ssoUserdata']['department'][0];
                 }else{
                     $users->user_type = 'o';
-                } $users->save();
+                    $users->department = $_SESSION['ssoUserdata']['department'][0];
+                }
+                $users->email = $_SESSION['ssoUserdata']['mail'][0];
+
+                $users->save();
 //                return response()->json($users);
             }
 //
