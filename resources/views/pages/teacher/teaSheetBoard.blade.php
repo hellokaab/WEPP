@@ -1,6 +1,6 @@
 @extends('layouts.userSite')
 @section('content')
-    <script src="js/Components/student/teaSheetBoardCtrl.js"></script>
+    <script src="js/Components/teacher/teaSheetBoardCtrl.js"></script>
     <script>
         var sheetingID = {{$sheetingID}};
     </script>

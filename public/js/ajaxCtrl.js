@@ -1,4 +1,17 @@
 //--------------------------- UserController ---------------------------
+function checkAdmin() {
+    var admin = $.ajax ({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            Accept: "application/json"
+        },
+        url: url + 'user-find-admin',
+        async: false,
+    }).responseJSON;
+    return admin;
+}
+
 function checkUser() {
     var user = $.ajax({
         contentType: "application/json; charset=utf-8",

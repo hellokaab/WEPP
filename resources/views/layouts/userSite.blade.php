@@ -3,10 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="_token" content="{{ csrf_token() }}"/>
+    {{--<title>@yield('page-title') - Software for worksheet and examination programming practice</title>--}}
+    <link rel="icon" href="{!! asset('img/rmuti.ico') !!}"/>
     <link href="{{ url('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="css/side_nav.css" rel="stylesheet">
     <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -35,6 +39,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.2/fullcalendar.min.css">
     <script>hljs.initHighlightingOnLoad();</script>
     <script>
+        window.onunload = function() {
+            window.history.forward();
+//            location.reload();
+        };
         app.controller("urlCtrl", function($scope) {
             $scope.myUrl = '{{ URL::asset('') }}';
         });
