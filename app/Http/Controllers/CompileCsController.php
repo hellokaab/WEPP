@@ -296,38 +296,13 @@ class CompileCsController extends Controller
 
         // ถ้าเจอเมธอด Main() ในโฟลเดอร์
         if ($file_main) {
-            // อ่านโค้ดในไฟล์
-            $myfile = fopen("$folder_ans/$file_main", 'r');
-            $origin_code = fread($myfile, filesize("$folder_ans/$file_main"));
-            fclose($myfile);
-
-            // แก้ชื่อคลาสเป็น WEPP_Main
-            $class_name = $this->get_class_name($origin_code);
-            $pos_begin_class_name = strpos($origin_code, $class_name);
-            $new_class_code = substr_replace($origin_code, 'WEPP', $pos_begin_class_name, strlen($class_name));
-
-            // เพิ่มโค้ดส่วนการเช็คลูป เช็คเมมโมรี่ เช็คเวลา
-            $path_input = "";
-            if($request->mode == "exam") {
-                $exam = Exam::find($request->exam_id);
-                $path_input = $exam->exam_input_file;
-            } else if($request->mode == "sheet") {
-                $sheet = Sheet::find($request->sheet_id);
-                $path_input = $sheet->sheet_input_file;
-            }
-            $code_add_checker = $this->add_check_code($new_class_code,$path_input);
-
-            // เก็บไว้ในไฟล์ชื่อ Main.cs
-            $file = 'Main';
-            $handle = fopen("$folder_ans/$file.cs", 'w') or die('Cannot open file:  ' . $file);
-            fwrite($handle, $code_add_checker);
-
             // สร้าง bat file เพื่อ compile
-            $bat = $this->create_bat($folder_ans,$file,$str_file);
+            $bat = $this->create_bat($folder_ans,$file_main,$str_file);
             return response()->json($bat);
         } else {
-            // ถ้าไม่พบเมธอด main() ในโค้ดที่ส่ง
+            // ถ้าไม่พบเมธอด Main() ในโค้ดที่ส่ง
             // ตรวจสอบว่า เป็นข้อสอบเขียนคลาส หรือไม่
+
             $file_main = "";
             if($request->mode == "exam") {
                 $exam = Exam::find($request->exam_id);
@@ -343,26 +318,15 @@ class CompileCsController extends Controller
                 $origin_code = fread($myfile, filesize($file_main));
                 fclose($myfile);
 
-                // แก้ชื่อคลาสเป็น WEPP
+                // แก้ชื่อคลาสเป็น wepp_main
                 $class_name = $this->get_class_name($origin_code);
                 $pos_begin_class_name = strpos($origin_code, $class_name);
-                $new_class_code = substr_replace($origin_code, "WEPP", $pos_begin_class_name, strlen($class_name));
+                $new_class_code = substr_replace($origin_code, "wepp_main", $pos_begin_class_name, strlen($class_name));
 
-                // เพิ่มโค้ดส่วนการเช็คลูป เช็คเมมโมรี่ เช็คเวลา
-                $path_input = "";
-                if($request->mode == "exam") {
-                    $exam = Exam::find($request->exam_id);
-                    $path_input = $exam->exam_input_file;
-                } else if($request->mode == "sheet") {
-                    $sheet = Sheet::find($request->sheet_id);
-                    $path_input = $sheet->sheet_input_file;
-                }
-                $code_add_checker = $this->add_check_code($new_class_code,$path_input);
-
-                // เก็บไว้ในไฟล์ชื่อ Main.cs
-                $file = 'Main';
-                $handle = fopen("$folder_ans/$file.cs", 'w') or die('Cannot open file:  ' . $file);
-                fwrite($handle, $code_add_checker);
+                // เก็บไว้ในไฟล์ชื่อ wepp_main.java
+                $file = "wepp_main.cs";
+                $handle = fopen("$folder_ans/$file", 'w') or die('Cannot open file:  ' . $file);
+                fwrite($handle, $new_class_code);
 
                 // สร้าง bat file เพื่อ compile
                 $bat = $this->create_bat($folder_ans,$file,$str_file);
@@ -392,66 +356,52 @@ class CompileCsController extends Controller
         }
 
         $ans = "";
-        if($bat){
+        if($bat) {
             // ถ้ามีให้คอมไพล์โค้ดที่ส่ง
             $this->compile_code($request->pathBat);
 
-            // ตรวจสอบการคอมไพล์(มีไฟล์ weep_ex.exe ไหม)
-            if (file_exists("$folder_ans/wepp_ex.exe")) {
+            // ตรวจสอบการคอมไพล์(มีไฟล์ wepp_ans.exe ไหม)
+            if (file_exists("$folder_ans/wepp_ans.exe")) {
+                $input_file = "";
                 // คิวรี่ ไฟล์อินพุทของข้อสอบ
-                $input = "";
-                if($request->mode == "exam") {
+                if ($request->mode == "exam") {
                     $exam = Exam::find($request->exam_id);
-                    if (strlen($exam->exam_input_file) > 0) {
-                        $handle = fopen($exam->exam_input_file, "r");
-                        $input = fread($handle, filesize($exam->exam_input_file));
-                        fclose($handle);
-
-//                        $input_spilt = explode("\n",$input);
-//                        $pos_count_loop = strpos($input,$input_spilt[0]);
-//                        $input = substr_replace($input,"",$pos_count_loop,strlen($input_spilt[0])+1);
-                    }
-                } else if($request->mode == "sheet"){
+                    $input_file = $exam->exam_input_file;
+                } else if ($request->mode == "sheet") {
                     $sheet = Sheet::find($request->sheet_id);
-                    if (strlen($sheet->sheet_input_file) > 0) {
-                        $handle = fopen($sheet->sheet_input_file, "r");
-                        $input = fread($handle, filesize($sheet->sheet_input_file));
-                        fclose($handle);
-
-//                        $input_spilt = explode("\n",$input);
-//                        $pos_count_loop = strpos($input,$input_spilt[0]);
-//                        $input = substr_replace($input,"",$pos_count_loop,strlen($input_spilt[0])+1);
-                    }
+                    $input_file = $sheet->sheet_input_file;
                 }
 
-                // รันโค้ดที่ส่ง
-                $lines_run = $this->run_code($input,$folder_ans);
+                // รันโค้ด
+                $lines_run = $this->run_code($input_file, $folder_ans, $request->mode, $request->exam_id);
+//                return response()->json($lines_run);
 
                 // ตรวจสอบคำตอบ
                 $checker = "";
-                if($request->mode == "exam") {
+                if ($request->mode == "exam") {
                     $checker = $this->check_correct_ans_ex($lines_run, $request->exam_id);
-                } else if($request->mode == "sheet") {
+                } else if ($request->mode == "sheet") {
                     $checker = $this->check_correct_ans_sh($lines_run, $request->sheet_id);
                 }
 
-                // เครียร์ไฟล์ขยะ (*.bat)
+                // เครียร์ไฟล์ขยะ (*.class, *.bat)
                 $this->clearFolderAns($folder_ans);
 
                 // อัพเดตสถานะการส่ง เป็นสถานะที่เช็คได้
-                if($request->mode == "exam"){
-                    $status = $this->update_resexam($request->pathExamID,$request->exam_id,$checker,$folder_ans);
-                } else if($request->mode == "sheet") {
-                    $status = $this->update_resworksheet($request->pathSheetID,$request->sheet_id,$checker,$folder_ans);
+                if ($request->mode == "exam") {
+                    $status = $this->update_resexam($request->pathExamID, $request->exam_id, $checker, $folder_ans);
+                } else if ($request->mode == "sheet") {
+                    $status = $this->update_resworksheet($request->pathSheetID, $request->sheet_id, $checker, $folder_ans);
                 }
             } else {
-                // ไม่เเจอ wepp_ex.exe
-                if($request->mode == "exam"){
+                // ไม่พบไฟล์ wepp_ans.exe
+                // อัพเดตสถานะการส่ง เป็น complie error
+                if ($request->mode == "exam") {
                     $checker = array("status" => "c", "res_run" => null, "time" => null, "mem" => null);
-                    $status = $this->update_resexam($request->pathExamID,$request->exam_id,$checker,$folder_ans);
-                } else if($request->mode == "sheet") {
+                    $status = $this->update_resexam($request->pathExamID, $request->exam_id, $checker, $folder_ans);
+                } else if ($request->mode == "sheet") {
                     $checker = array("status" => "c", "res_run" => null, "time" => null, "mem" => null);
-                    $status = $this->update_resworksheet($request->pathSheetID,$request->sheet_id,$checker,$folder_ans);
+                    $status = $this->update_resworksheet($request->pathSheetID, $request->sheet_id, $checker, $folder_ans);
                 }
             }
         } else {
@@ -466,6 +416,7 @@ class CompileCsController extends Controller
         }
         return response()->json($status);
     }
+
 
     function check_namespace($code) {
         $class = $this->get_class_name($code);
@@ -498,95 +449,8 @@ class CompileCsController extends Controller
         return false;
     }
 
-    function add_check_code($code,$path_input) {
-//        $count_loop = 1;
-//
-//        if (strlen($path_input) > 0) {
-//            $handle = fopen($path_input, "r");
-//            $input = fread($handle, filesize($path_input));
-//            fclose($handle);
-//
-//            $input_split = explode('\n',$input);
-//            $count_loop = (int)trim($input_split[0]);
-//        }
-//
-//        $sss = 'for (int i = 0 ; i < '.$count_loop.' ; i++){
-//
-//                            }';
-
-        $using_code = 'using System.Management;
-                       using System.Threading;
-                       using System.Diagnostics;
-                       ';
-
-        $str_check_code = 'static Thread timeThr = new Thread(new ThreadStart(TimerThread));
-                        static Thread runThr = new Thread(new ThreadStart(RunThread));		       
-		                static void TimerThread(){
-			                Thread.Sleep(3000);
-			                runThr.Abort();
-			                Console.WriteLine("OverTime");
-			                System.Environment.Exit(0);
-		                }
-                        static void RunThread(){
-                            var watch = System.Diagnostics.Stopwatch.StartNew();
-                            long memoryBefore = System.Diagnostics.Process.GetCurrentProcess().PrivateMemorySize64;
-                            long memoryAfter = System.Diagnostics.Process.GetCurrentProcess().PrivateMemorySize64;
-                            timeThr.Abort();
-                            watch.Stop();
-                            var elapsedMs = watch.ElapsedMilliseconds;
-                            Console.WriteLine("UsedMem : {0}",(memoryAfter-memoryBefore)/1024);
-                            Console.WriteLine("Runtime : {0}",elapsedMs/1000.00);
-                        }';
-
-        // เก็บโค้ด ที่อยู่ในเมธอด main
-        $code_in_main = $this->get_code_in_main($code);
-
-        // นำโค้ดที่อยู่ในเมธอด main ใส่ในเทรดการรัน
-        $pos_add_code = strpos($str_check_code, "long memoryAfter") - 1;
-//        $pos_add_code = strpos($str_check_code, "}long memoryAfter") - 1;
-        $check_code = substr_replace($str_check_code, $code_in_main["code"], $pos_add_code, 0);
-
-        // ตัดโค้ด ที่อยู่ในเมธอด main ออก
-        $code_cut_in_main = str_replace($code_in_main["code"], "", $code);
-
-        // เพิ่มโค้ด สั่งรันเทรด ให้เมธอด main
-        $code_add_in_main = substr_replace($code_cut_in_main, "timeThr.Start(); runThr.Start();", $code_in_main["begin"], 0);
-
-        // เพิ่มโค้ดที่ใช้เช็คหน่วยความจำ เวลา และลูปไม่รู้จบ
-        $pos_bracket_class = strpos($code_add_in_main, "{");
-        $full_code = substr_replace($code_add_in_main, $check_code, $pos_bracket_class + 1, 0);
-        $complete_code = substr_replace($full_code,$using_code,0,0);
-
-        return $complete_code;
-    }
-
-    function get_code_in_main($code) {
-        $res = array();
-
-        $pos_main = strpos($code, "Main");
-        $code_from_main = substr($code, $pos_main);
-
-        $pos_bracket_main = strpos($code_from_main, "{") + $pos_main;
-        $braket = array();
-
-        for ($i = $pos_bracket_main; $i < strlen($code); $i++) {
-            if ($code[$i] == "{") {
-                array_push($braket, "{");
-            } else if ($code[$i] == "}") {
-                array_pop($braket);
-                if (empty($braket)) {
-                    $res["begin"] = $pos_bracket_main + 1;
-                    $res["length"] = $i - $pos_bracket_main - 1;
-                    $res["code"] = substr($code, $res["begin"], $res["length"]);
-                    return $res;
-                }
-            }
-        }
-        return FALSE;
-    }
-
     function create_bat($folder_code,$file_main,$str_file){
-        exec("Taskkill /IM wepp_ex.exe /F");
+        exec("Taskkill /IM wepp_ans.exe /F");
 
         // ค้าหาพาร์ทของไฟล์ที่จะคอมไฟล์
         $dir = getcwd();
@@ -604,7 +468,7 @@ class CompileCsController extends Controller
         // สร้างไฟล์ .bat สำหรับการคอมไพล์
         $file_bat = 'compile.bat';
         $openfile = fopen("$folder_code/$file_bat", 'w');
-        fwrite($openfile, $cmd . " \n csc -t:exe -out:wepp_ex.exe $file_main.cs ".$str_file."");
+        fwrite($openfile, $cmd . " \n csc -t:exe -out:wepp_ans.exe $file_main ".$str_file."");
         fclose($openfile);
 
         exec($dir_code.$file_bat);
@@ -615,37 +479,153 @@ class CompileCsController extends Controller
         exec($path_bat);
     }
 
-    function run_code($input,$folder_ans){
-        $resoutput = "";
-        $descriptorspec = array(
-            0 => array("pipe", "r"), // stdin is a pipe that the child will read from
-            1 => array("pipe", "w"), // stdout is a pipe that the child will write to
-            2 => array("file", "ex.txt", "a") // stderr is a file to write to
-        );
+    function run_code($input_file,$folder_ans,$mode,$exam_id) {
+        // กำหนดเวลาในการรันไว้ 5 วินาที
+        $ruutimeIn = 5000;
+        // ถ้าเป็นการสอบ
+        if($mode == "exam") {
+            // คิวรี่ runtime ของข้อสอบ
+            $exam = Exam::find($exam_id);
+            $ruutimeIn = $exam->time_limit*1000;
+        }
 
+        $amount_input = 1;
+        if($input_file){
+            // อ่านไฟล์ input
+            $handle = fopen("$input_file", "r");
+            $input = trim(fread($handle, filesize("$input_file")));
+            fclose($handle);
+
+            // แบ่ง input ด้วยเครื่องหมาย ",,"
+            $input_split = explode(",,",$input);
+            $amount_input = sizeof($input_split);
+
+            // เขียนไฟล์อินพุตใหม่ ตามจำนวนอินพุต
+            for($i = 0;$i<$amount_input;$i++){
+                $new_input_file = 'input'.$i;
+                $handle = fopen("$folder_ans/$new_input_file.txt", 'w') or die('Cannot open file:  ' . $new_input_file);
+                fwrite($handle, $input_split[$i]);
+                fclose($handle);
+            }
+        }
+
+        // แปลงรูปแบบที่อยู่ของโฟลเดอร์ข้อสอบที่ส่ง
         $dir = getcwd();
         $dir_split = explode("\\",$dir);
         $dir_code = "";
+        $dir_in_check_code = "";
         for($i = 0;$i<sizeof($dir_split)-1;$i++){
             $dir_code = $dir_code.$dir_split[$i]."\\";
+            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."\\\\";
         }
         $dir_split = explode("/",$folder_ans);
         for($i = 1;$i<sizeof($dir_split);$i++){
             $dir_code = $dir_code.$dir_split[$i]."\\";
-        }
-        $cwd = $dir_code;
-        $process = proc_open('wepp_ex.exe', $descriptorspec, $pipes, $cwd);
-        if (is_resource($process)) {
-            fwrite($pipes[0], $input);
-            fclose($pipes[0]);
-            $resoutput = stream_get_contents($pipes[1]);
-            fclose($pipes[1]);
-            $return_value = proc_close($process);
+            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."\\\\";
         }
 
-        unlink('ex.txt');
+        $code_checker = 'using System;
+        using System.Management;
+        using System.Threading;
+        using System.Diagnostics;
 
-        return $resoutput;
+	    class wepp_check{
+
+		    static Thread timeThr = new Thread(new ThreadStart(TimerThread));
+            static Thread runThr = new Thread(new ThreadStart(RunThread));
+
+		    static void TimerThread(){
+			    Thread.Sleep('.$ruutimeIn.');
+			    runThr.Abort();
+			    Console.WriteLine("OverTime");
+			    System.Environment.Exit(0);
+		    }
+
+		    static void RunThread(){
+			    var watch = System.Diagnostics.Stopwatch.StartNew();
+			    long memoryBefore = System.Diagnostics.Process.GetCurrentProcess().PrivateMemorySize64;
+
+                for(int i=0;i<'.$amount_input.';i++)
+			    {
+                    var proc = new Process {
+                        StartInfo = new ProcessStartInfo {
+                            FileName = "'.$dir_in_check_code.'run_ans_"+i+".bat",
+                            Arguments = "command line arguments to your executable",
+                            UseShellExecute = false,
+                            RedirectStandardOutput = true,
+                            CreateNoWindow = true
+                        }
+                    };
+    
+                    proc.Start();
+                    int count = 0;
+                    while (!proc.StandardOutput.EndOfStream) {
+                        string line = proc.StandardOutput.ReadLine();
+                        if(count >= 4){
+                            Console.WriteLine("{0}",line);
+                        }
+                        count++;
+			        }
+			    }
+
+			    long memoryAfter = System.Diagnostics.Process.GetCurrentProcess().PrivateMemorySize64;
+			    timeThr.Abort();
+			    watch.Stop();
+			    var elapsedMs = watch.ElapsedMilliseconds;
+			    Console.WriteLine("UsedMem:{0}",(memoryAfter-memoryBefore)/1024);
+			    Console.WriteLine("RunTime:{0}",elapsedMs/1000.00);
+		    }
+
+		    public static void Main(string[] args){
+        		timeThr.Start();
+        		runThr.Start();
+		    }
+	    }';
+
+        // เขียนไฟล์สำหรับเช็คเวลา
+        $file = 'wepp_check';
+        $handle = fopen("$folder_ans/$file.cs", 'w') or die('Cannot open file:  ' . $file);
+        fwrite($handle, $code_checker);
+        fclose($handle);
+
+        // เขียนไฟล์ bat เพื่อคอมไพล์ ไฟล์ wepp_check
+        $compile_file_check = "cd ".$dir_code." \n csc wepp_check.cs";
+        $file = 'compile_check';
+        $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+        fwrite($handle, $compile_file_check);
+        fclose($handle);
+
+        // เขียนไฟล์ bat เพื่อรันไฟล์ wepp_check
+        $run_file_check = "cd ".$dir_code." \n wepp_check";
+        $file = 'run_check';
+        $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+        fwrite($handle, $run_file_check);
+        fclose($handle);
+
+        // เขียนไฟล์ bat เพื่อรันไฟล์ wepp_ans
+        $run_file_ans = "";
+        if($input_file){
+            for($i = 0 ; $i < $amount_input ; $i++){
+                $run_file_ans = "cd ".$dir_code." \n wepp_ans < ".$dir_code."input".$i.".txt";
+
+                $file = 'run_ans_'.$i;
+                $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+                fwrite($handle, $run_file_ans);
+                fclose($handle);
+            }
+        } else {
+            $run_file_ans = "cd ".$dir_code." \n wepp_ans";
+
+            $file = 'run_ans_0';
+            $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+            fwrite($handle, $run_file_ans);
+            fclose($handle);
+        }
+
+        exec($dir_code."compile_check.bat");
+        $lines_run = array();
+        exec($dir_code."run_check.bat",$lines_run);
+        return $lines_run;
     }
 
     function check_correct_ans_ex($lines_run, $exam_id){
@@ -719,27 +699,36 @@ class CompileCsController extends Controller
         }
     }
 
-    function prepare_result($result_run) {
-        $checkSuccess = $checkOverTime = false;
+    function prepare_result($lines_run) {
+        $iMem = $iTime = $iOverTime = -1;
         $res_run = '';
-        $time = 0;
-        $mem = 0;
 
-        if(strpos($result_run,'UsedMem :') && strpos($result_run,'Runtime :')){
-            $checkSuccess = true;
-        } else if(strpos($result_run,'OverTime')){
-            $checkOverTime = true;
+        for ($i = 4; $i < count($lines_run); $i++) {
+            $line = $lines_run[$i];
+            if (strpos($line, "UsedMem:") > -1) {
+                $iMem = $i;
+            } else if (strpos($line, "RunTime:") > -1) {
+                $iTime = $i;
+            } else if (strpos($line, "OverTime") > -1) {
+                $iOverTime = $i;
+            }
         }
 
-        if ($checkOverTime){
+        if ($iOverTime > -1) {
             return "OverTime";
-        } else if($checkSuccess){
-            $arr_res_run1 = explode('UsedMem : ',$result_run);
-            $res_run = trim($arr_res_run1[0]);
-            $arr_res_run2 = explode('Runtime : ',$arr_res_run1[1]);
-            $mem = trim($arr_res_run2[0]);
-            $time = trim($arr_res_run2[1]);
-            return array('res_run' => $res_run, 'mem' => $mem, 'time' => $time);
+        } else if ($iMem > -1 && $iTime > -1) {
+
+            $ar_res_run = array_slice($lines_run, 4, $iMem - 4);
+            $i = 0;
+            foreach ($ar_res_run as $val) {
+                $ar_res_run[$i] = iconv(mb_detect_encoding($val), "utf-8", $val);
+                $res_run .= $ar_res_run[$i++]."\n";
+            }
+
+            $mem = substr($lines_run[$iMem], 8);
+            $time = substr($lines_run[$iTime], 8);
+
+            return array('res_run' => trim($res_run), 'mem' => $mem, 'time' => $time);
         }
     }
 
@@ -909,7 +898,7 @@ class CompileCsController extends Controller
 
         // ลูปลบไฟล์ที่นามสกุลไม่ใช่ .cs และ Main.cs
         foreach ($files as $f) {
-            if (!strpos($f, '.cs') || $f == 'Main.cs') {
+            if (!strpos($f, '.cs') || $f == 'wepp_check.cs' || $f == 'wepp_main.cs') {
                 @unlink("$folder_ans/$f");
             }
         }

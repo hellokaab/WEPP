@@ -297,34 +297,17 @@ class CompileJavaController extends Controller
         if ($file_main) {
             // อ่านโค้ดในไฟล์
             $myfile = fopen("$folder_ans/$file_main", 'r');
-            $origin_code = fread($myfile, filesize("$folder_ans/$file_main"));
+            $main_code = fread($myfile, filesize("$folder_ans/$file_main"));
             fclose($myfile);
 
-            // แก้ชื่อคลาสเป็น Main
-            $class_name = $this->get_class_name($origin_code);
-            $pos_begin_class_name = strpos($origin_code, $class_name);
-            $new_class_code = substr_replace($origin_code, 'Main', $pos_begin_class_name, strlen($class_name));
+            // แก้ชื่อคลาสเป็น wepp_ans
+            $class_name_main = $this->get_class_name($main_code);
 
-            // เพิ่มโค้ดส่วนการเช็คลูป เช็คเมมโมรี่ เช็คเวลา
-            $path_input = "";
-            if($request->mode == "exam") {
-                $exam = Exam::find($request->exam_id);
-                $path_input = $exam->exam_input_file;
-            } else if($request->mode == "sheet") {
-                $sheet = Sheet::find($request->sheet_id);
-                $path_input = $sheet->sheet_input_file;
-            }
-            $code_add_checker = $this->add_check_code($new_class_code,$path_input);
-
-            // เก็บไว้ในไฟล์ชื่อ Main.java
-            $file = 'Main';
-            $handle = fopen("$folder_ans/$file.java", 'w') or die('Cannot open file:  ' . $file);
-            fwrite($handle, $code_add_checker);
 
             // คอมไพล์โค้ดที่ส่ง
-            $this->compile_code($folder_ans, $file);
-            // ตรวจสอบการคอมไพล์(มีไฟล์ Main.class ไหม)
-            if (file_exists("$folder_ans/Main.class")) {
+            $this->compile_code($folder_ans, $class_name_main);
+            // ตรวจสอบการคอมไพล์(มีไฟล์ .class ไหม)
+            if (file_exists("$folder_ans/$class_name_main.class")) {
                 $input_file = "";
                 // คิวรี่ ไฟล์อินพุทของข้อสอบ
                 if($request->mode == "exam") {
@@ -336,7 +319,8 @@ class CompileJavaController extends Controller
                 }
 
                 // รันโค้ดที่ส่ง
-                $lines_run = $this->run_code($folder_ans, $file, $input_file);
+                $lines_run = $this->run_code($input_file,$folder_ans,$request->mode,$request->exam_id,$class_name_main);
+//                return response()->json($lines_run);
 
                 // ตรวจสอบคำตอบ
                 $checker = "";
@@ -356,7 +340,7 @@ class CompileJavaController extends Controller
                     $status = $this->update_resworksheet($request->pathSheetID,$request->sheet_id,$checker,$folder_ans);
                 }
             } else {
-                // ไม่พบไฟล์ Main.class
+                // ไม่พบไฟล์ .class
                 // อัพเดตสถานะการส่ง เป็น complie error
                 if($request->mode == "exam"){
                     $checker = array("status" => "c", "res_run" => null, "time" => null, "mem" => null);
@@ -384,32 +368,21 @@ class CompileJavaController extends Controller
                 $origin_code = fread($myfile, filesize($file_main));
                 fclose($myfile);
 
-                // แก้ชื่อคลาสเป็น Main
+                // แก้ชื่อคลาสเป็น wepp_main
                 $class_name = $this->get_class_name($origin_code);
                 $pos_begin_class_name = strpos($origin_code, $class_name);
-                $new_class_code = substr_replace($origin_code, "Main", $pos_begin_class_name, strlen($class_name));
+                $new_class_code = substr_replace($origin_code, "wepp_main", $pos_begin_class_name, strlen($class_name));
 
-                // เพิ่มโค้ดส่วนการเช็คลูป เช็คเมมโมรี่ เช็คเวลา
-                $path_input = "";
-                if($request->mode == "exam") {
-                    $exam = Exam::find($request->exam_id);
-                    $path_input = $exam->exam_input_file;
-                } else if($request->mode == "sheet") {
-                    $sheet = Sheet::find($request->sheet_id);
-                    $path_input = $sheet->sheet_input_file;
-                }
-                $code_add_checker = $this->add_check_code($new_class_code,$path_input);
-
-                // เก็บไว้ในไฟล์ชื่อ Main.java
-                $file = "Main";
+                // เก็บไว้ในไฟล์ชื่อ wepp_main.java
+                $file = "wepp_main";
                 $handle = fopen("$folder_ans/$file.java", 'w') or die('Cannot open file:  ' . $file);
-                fwrite($handle, $code_add_checker);
+                fwrite($handle, $new_class_code);
 
                 // คอมไพล์โค้ดที่ส่ง
                 $this->compile_code($folder_ans, $file);
 
-                // ตรวจสอบการคอมไพล์(มีไฟล์ Main.class ไหม)
-                if (file_exists("$folder_ans/Main.class")) {
+                // ตรวจสอบการคอมไพล์(มีไฟล์ .class ไหม)
+                if (file_exists("$folder_ans/$file.class")) {
                     $input_file = "";
                     // คิวรี่ ไฟล์อินพุทของข้อสอบ
                     if($request->mode == "exam") {
@@ -421,7 +394,8 @@ class CompileJavaController extends Controller
                     }
 
                     // รันโค้ดที่ส่ง
-                    $lines_run = $this->run_code($folder_ans, $file, $input_file);
+                    $lines_run = $this->run_code($input_file,$folder_ans,$request->mode,$request->exam_id,$file);
+//                return response()->json($lines_run);
 
                     // ตรวจสอบคำตอบ
                     $checker = "";
@@ -441,7 +415,7 @@ class CompileJavaController extends Controller
                         $status = $this->update_resworksheet($request->pathSheetID,$request->sheet_id,$checker,$folder_ans);
                     }
                 } else {
-                    // ไม่พบไฟล์ Main.class
+                    // ไม่พบไฟล์ .class
                     // อัพเดตสถานะการส่ง เป็น complie error
                     if($request->mode == "exam"){
                         $checker = array("status" => "c", "res_run" => null, "time" => null, "mem" => null);
@@ -496,93 +470,6 @@ class CompileJavaController extends Controller
         return false;
     }
 
-    // JCP process code function
-    function add_check_code($code,$path_input) {
-//        $count_loop = 1;
-
-//        if (strlen($path_input) > 0) {
-//            $handle = fopen($path_input, "r");
-//            $input = fread($handle, filesize($path_input));
-//            fclose($handle);
-//
-//            $input_split = explode("\n",$input);
-//            $count_loop = (int)trim($input_split[0]);
-//        }
-//
-//        $sss = 'for (int i = 0 ; i < '.$count_loop.' ; i++){
-//
-//                                }';
-
-        $str_check_code = ' static TimerThread timeThr = new TimerThread();
-                        static RunThread runThr = new RunThread();
-                        static class TimerThread extends Thread {
-                            public void run() {
-                                try {
-                                    sleep(10000);
-                                    runThr.stop();
-                                    System.out.println("OverTime");
-                                    System.exit(0);
-                                } catch (InterruptedException e) {}
-                            }
-                        }
-                        static class RunThread extends Thread {
-                            public void run() {
-                                long start = System.currentTimeMillis();
-                                Runtime runtime = Runtime.getRuntime();
-                                runtime.gc();
-                                long mem = runtime.totalMemory() - runtime.freeMemory();
-                                long memNow = runtime.totalMemory() - runtime.freeMemory() - mem;
-                                System.out.println("UsedMem:" + memNow/1024.0);
-                                long time = System.currentTimeMillis() - start;
-                                timeThr.stop();
-                                System.out.println("RunTime:" + time / 1000.0);
-                            }
-                        }';
-
-        // เก็บโค้ด ที่อยู่ในเมธอด main
-        $code_in_main = $this->get_code_in_main($code);
-
-        // นำโค้ดที่อยู่ในเมธอด main ใส่ในเทรดการรัน
-        $pos_add_code = strpos($str_check_code, "long memNow") - 1;
-        $check_code = substr_replace($str_check_code, $code_in_main["code"], $pos_add_code, 0);
-
-        // ตัดโค้ด ที่อยู่ในเมธอด main ออก
-        $code_cut_in_main = str_replace($code_in_main["code"], "", $code);
-
-        // เพิ่มโค้ด สั่งรันเทรด ให้เมธอด main
-        $code_add_in_main = substr_replace($code_cut_in_main, "timeThr.start(); runThr.start();", $code_in_main["begin"], 0);
-
-        // เพิ่มโค้ดที่ใช้เช็คหน่วยความจำ เวลา และลูปไม่รู้จบ
-        $pos_bracket_class = strpos($code_add_in_main, "{");
-        $complet_code = substr_replace($code_add_in_main, $check_code, $pos_bracket_class + 1, 0);
-        return $complet_code;
-    }
-
-    function get_code_in_main($code) {
-        $res = array();
-
-        $pos_main = strpos($code, "main");
-        $code_from_main = substr($code, $pos_main);
-
-        $pos_bracket_main = strpos($code_from_main, "{") + $pos_main;
-        $braket = array();
-
-        for ($i = $pos_bracket_main; $i < strlen($code); $i++) {
-            if ($code[$i] == "{") {
-                array_push($braket, "{");
-            } else if ($code[$i] == "}") {
-                array_pop($braket);
-                if (empty($braket)) {
-                    $res["begin"] = $pos_bracket_main + 1;
-                    $res["length"] = $i - $pos_bracket_main - 1;
-                    $res["code"] = substr($code, $res["begin"], $res["length"]);
-                    return $res;
-                }
-            }
-        }
-        return FALSE;
-    }
-
     function compile_code($folder_code, $file_main) {
         // ค้าหาพาร์ทของไฟล์ที่จะคอมไฟล์
         $dir = getcwd();
@@ -606,64 +493,160 @@ class CompileJavaController extends Controller
         exec($dir_code.$file_bat);
     }
 
-    function run_code($folder_code, $file_main, $input_file) {
+    function run_code($input_file,$folder_ans,$mode,$exam_id,$class_name) {
+        // กำหนดเวลาในการรันไว้ 5 วินาที
+        $ruutimeIn = 5000;
+        // ถ้าเป็นการสอบ
+        if($mode == "exam") {
+            // คิวรี่ runtime ของข้อสอบ
+            $exam = Exam::find($exam_id);
+            $ruutimeIn = $exam->time_limit*1000;
+        }
+
+        $amount_input = 1;
+        if($input_file){
+            // อ่านไฟล์ input
+            $handle = fopen("$input_file", "r");
+            $input = trim(fread($handle, filesize("$input_file")));
+            fclose($handle);
+
+            // แบ่ง input ด้วยเครื่องหมาย ",,"
+            $input_split = explode(",,",$input);
+            $amount_input = sizeof($input_split);
+
+            // เขียนไฟล์อินพุตใหม่ ตามจำนวนอินพุต
+            for($i = 0;$i<$amount_input;$i++){
+                $new_input_file = 'input'.$i;
+                $handle = fopen("$folder_ans/$new_input_file.txt", 'w') or die('Cannot open file:  ' . $new_input_file);
+                fwrite($handle, $input_split[$i]);
+                fclose($handle);
+            }
+        }
+
+        // แปลงรูปแบบที่อยู่ของโฟลเดอร์ข้อสอบที่ส่ง
         $dir = getcwd();
         $dir_split = explode("\\",$dir);
-
-        // พาร์ทของข้อสอบ
-        $dir_exam = "";
+        $dir_code = "";
+        $dir_in_check_code = "";
         for($i = 0;$i<sizeof($dir_split)-1;$i++){
-            $dir_exam = $dir_exam.$dir_split[$i]."\\";
+            $dir_code = $dir_code.$dir_split[$i]."\\";
+            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."\\\\";
         }
-        $dir_split = explode("/",$folder_code);
+        $dir_split = explode("/",$folder_ans);
         for($i = 1;$i<sizeof($dir_split);$i++){
-            $dir_exam = $dir_exam.$dir_split[$i]."\\";
+            $dir_code = $dir_code.$dir_split[$i]."\\";
+            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."\\\\";
         }
-        $cmd = "cd $dir_exam";
 
+        $code_checker = 'import java.io.BufferedReader;
+        import java.io.IOException;
+        import java.io.InputStreamReader;
+        public class wepp_check {
 
-        // สร้างไฟล์ .bat สำหรับการรัน
-        $file_bat = 'run.bat';
-        $input_data = "";
-        $openfile = fopen("$folder_code/$file_bat", 'w');
-        if ($input_file) {
-//            // เปิดไฟล์อินพุทของข้อสอบ
-//            $handle = fopen($input_file, "r");
-//            $input_data = fread($handle, filesize($input_file));
-//            fclose($handle);
-//
-//            // ตัดตัวเลขกำหนดจำนวนลูปออก
-//            $input_spilt = explode("\n",$input_data);
-//            $pos_count_loop = strpos($input_data,$input_spilt[0]);
-//            $input_data = substr_replace($input_data,"",$pos_count_loop,strlen($input_spilt[0]));
-//
-//            // เขียนไฟล์อินพุตใหม่ ที่ไม่มีเลขจำนวนลูป
-//            $new_input_file = 'input.txt';
-//            $open_file_input = fopen("$folder_code/$new_input_file", 'w');
-//            fwrite($open_file_input,$input_data);
-//            fclose($open_file_input);
-
-            // พาร์ทของ input file
-            $dir_input = "";
-            $dir_split = explode("\\",$dir);
-            for($i = 0;$i<sizeof($dir_split)-1;$i++){
-                $dir_input = $dir_input.$dir_split[$i]."\\";
+            static TimerThread timeThr = new TimerThread();
+            static RunThread runThr = new RunThread();
+    
+            public static void main(String[] args){
+                timeThr.start();
+                runThr.start();
             }
-            $dir_split = explode("/",$input_file);
-            for($i = 1;$i<sizeof($dir_split)-1;$i++){
-                $dir_input = $dir_input.$dir_split[$i]."\\";
+    
+            static class TimerThread extends Thread {
+                public void run() {
+                    try {
+                        sleep('.$ruutimeIn.');
+                        runThr.stop();
+                        System.out.println("OverTime");
+                        System.exit(0);
+                    } catch (InterruptedException e) {
+                    }
+                }
             }
-            $dir_input = $dir_input.$dir_split[sizeof($dir_split)-1];
+    
+            static class RunThread extends Thread{
+                public void run() {
+                    long start = System.currentTimeMillis();
+                    Runtime runtime = Runtime.getRuntime();
+                    runtime.gc();
+                    long mem = runtime.totalMemory() - runtime.freeMemory();
+                    
+                    for(int i=0;i<'.$amount_input.';i++){
+                        try{
+                            String cmd = "'.$dir_in_check_code.'run_ans_"+(i)+".bat";
+        
+                            Runtime r = Runtime.getRuntime();
+                            Process pr = r.exec(cmd);
+        
+                            BufferedReader stdInput = new BufferedReader(
+                                    new InputStreamReader( pr.getInputStream() ));
+        
+                            String s ;
+                            int count = 0;
+					        while ((s = stdInput.readLine()) != null) {
+						        if(count >=4)
+						        {
+							        System.out.println(s);
+						        }
+						        count++;
+					        }
+                        }catch(IOException ex){
+                            System.out.println (ex.toString());
+                        }
+                    }
+    
+                    long memNow = runtime.totalMemory() - runtime.freeMemory();
+                    memNow = memNow - mem;
+                    System.out.println("UsedMem:" + memNow/1024.0);
+                    long time = System.currentTimeMillis() - start;
+                    timeThr.stop();
+                    System.out.println("RunTime:" + time / 1000.0);
+                }
+            }
+        }';
 
-            fwrite($openfile, $cmd . " \n java $file_main < " . $dir_input);
-//            fwrite($openfile, $cmd . " \n java $file_main < " . $dir_exam.$new_input_file);
+        // เขียนไฟล์สำหรับเช็คเวลา
+        $file = 'wepp_check';
+        $handle = fopen("$folder_ans/$file.java", 'w') or die('Cannot open file:  ' . $file);
+        fwrite($handle, $code_checker);
+        fclose($handle);
+
+        // เขียนไฟล์ bat เพื่อคอมไพล์ ไฟล์ wepp_check
+        $compile_file_check = "cd ".$dir_code." \n javac wepp_check.java";
+        $file = 'compile_check';
+        $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+        fwrite($handle, $compile_file_check);
+        fclose($handle);
+
+        // เขียนไฟล์ bat เพื่อรันไฟล์ wepp_check
+        $run_file_check = "cd ".$dir_code." \n java wepp_check";
+        $file = 'run_check';
+        $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+        fwrite($handle, $run_file_check);
+        fclose($handle);
+
+        // เขียนไฟล์ bat เพื่อรันไฟล์ที่ส่ง
+        $run_file_ans = "";
+        if($input_file){
+            for($i = 0 ; $i < $amount_input ; $i++){
+                $run_file_ans = "cd ".$dir_code." \n java $class_name < ".$dir_code."input".$i.".txt";
+
+                $file = 'run_ans_'.$i;
+                $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+                fwrite($handle, $run_file_ans);
+                fclose($handle);
+            }
         } else {
-            fwrite($openfile, $cmd . " \n java $file_main");
-        }
-        fclose($openfile);
+            $run_file_ans = "cd ".$dir_code." \n java $class_name";
 
+            $file = 'run_ans_0';
+            $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+            fwrite($handle, $run_file_ans);
+            fclose($handle);
+        }
+
+        exec($dir_code."compile_check.bat");
         $lines_run = array();
-        exec($dir_exam.$file_bat, $lines_run);
+        exec($dir_code."run_check.bat",$lines_run);
         return $lines_run;
     }
 
@@ -705,6 +688,7 @@ class CompileJavaController extends Controller
             return array("status" => "w", "res_run" => $run['res_run'], "time" => $run['time'], "mem" => $run['mem']);
         }
     }
+
     function check_correct_ans_sh($lines_run, $sheet_id) {
         $sheet = Sheet::find($sheet_id);
         $run = $this->prepare_result($lines_run);
@@ -940,7 +924,7 @@ class CompileJavaController extends Controller
 
         // ลูปลบไฟล์ที่นามสกุลไม่ใช่ .java และ Main.java
         foreach ($files as $f) {
-            if (!strpos($f, '.java') || $f == 'Main.java') {
+            if (!strpos($f, '.java') || $f == 'wepp_check.java' || $f == 'wepp_main.java') {
                 @unlink("$folder_ans/$f");
             }
         }

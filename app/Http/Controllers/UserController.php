@@ -20,28 +20,41 @@ class UserController extends Controller
 {
     public function loginAdmin(Request $request)
     {
+        session_start();
         $admin = Admin::where('username',$request->username)
             ->where('password',$request->password)
             ->first();
         if ($admin === NULL) {
             return response()->json(['error' => 'Error msg'], 209);
         }else{
-            Session::set('weppAdmin',$admin);
+//            Session::set('weppAdmin',$admin);
+            $_SESSION['weppAdmin'] = $admin;
         }
     }
 
     public function findAdmin()
     {
-        if(Session::has('weppAdmin')){
-            $admin = Session::get('weppAdmin');
-            return response()->json($admin);
+        session_start();
+//        if(Session::has('weppAdmin')){
+//            $admin = Session::get('weppAdmin');
+//            return response()->json($admin);
+//        } else {
+//            return 500;
+//        }
+
+        if(isset($_SESSION['weppAdmin'])){
+//            return 200;
+            return $_SESSION['weppAdmin'];
         } else {
             return 500;
         }
     }
 
     public function adminLogout(){
-        Session::forget('weppAdmin');
+//        Session::forget('weppAdmin');
+
+        session_start();
+        unset($_SESSION['weppAdmin']);
     }
 
     public function loggedIn(){
@@ -206,7 +219,7 @@ class UserController extends Controller
         session_start();
         unset($_SESSION['ssoUserData']);
 
-        header( "location: http://localhost/WEPP2/public/" );
+        header( "location: http://localhost/WEPP/public/" );
         exit(0);
     }
 

@@ -89,7 +89,11 @@
 
                         {{--<!-- Input -->--}}
                         <div class="form-group">
-                            <label class="col-md-2 control-label">Input </label>
+                            <label class="col-md-2 control-label">Input
+                                <a data-toggle="popover" data-placement="right" data-trigger="hover" data-container="body" title="คำชี้แจง" data-content="ในกรณีที่ต้องการให้โปรแกรมทำงานมากกว่าหนึ่งรอบ ให้แบ่งชุดอินพุทแต่ละรอบด้วยเครื่องหมาย ',,'">
+                                    <i class="fa fa-lg fa-question-circle" aria-hidden="true"></i>
+                                </a>
+                            </label>
                             <div class="col-md-offset-0 col-md-9 col-xs-offset-1 col-xs-11">
                                 <div class="radio">
                                     <div class="col-md-4">
@@ -407,6 +411,8 @@
             $("#sheet_chevron").attr('class','fa2 fa-chevron-down');
             $('#demo_sheet').attr('class', 'collapse in');
             $('#side_shared_sheet').attr('class', 'active');
+
+            $('[data-toggle="popover"]').popover();
         });
 
         _quiz_id = 1;

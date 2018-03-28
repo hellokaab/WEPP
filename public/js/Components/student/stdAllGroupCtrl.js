@@ -20,9 +20,9 @@ app.controller('stdAllGroupCtrl', ['$scope', '$window', function ($scope, $windo
             var checkJoin = checkJoinGroup($scope.user.id,group.id);
             if(checkJoin){
                 if($scope.user.user_type === 't'){
-                    window.location.href = url+"teacher-group-other-in-"+$scope.groupID;
+                    window.location.href = url+"teacher-group-other-in-"+group.id;
                 } else if ($scope.user.user_type === 's'){
-                    window.location.href = url+"student-group-in-"+$scope.groupID;
+                    window.location.href = url+"student-group-in-"+group.id;
                 }
             } else {
                 $scope.groupID = group.id;

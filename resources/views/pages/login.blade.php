@@ -7,6 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="_token" content="{{ csrf_token() }}"/>
+    <title>เข้าสู่ระบบ - Software for worksheet and examination programming practice</title>
+    <link rel="icon" href="{!! asset('img/rmuti.ico') !!}"/>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/myCustom.css" rel="stylesheet" type="text/css">
     <script src="js/jquery-3.2.1.js"></script>
