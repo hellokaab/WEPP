@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ExamExaming;
 use App\Examing;
 use App\ExamRandom;
+use App\JoinGroup;
 use App\PathExam;
 use App\QueueExam;
 use App\ResExam;
@@ -380,6 +381,39 @@ class ExamingController extends Controller
         $examing = Examing::find($request->id);
         $examing->hide_history = $request->hide_history;
         $examing->save();
+    }
+
+    public function checkPermissionEditExaming(Request $request){
+        $exam = Examing::where('id',$request->examing_id)
+            ->where('user_id',$request->user_id)
+            ->first();
+        if ($exam === NULL) {
+            return 404;
+        }
+    }
+
+    public function checkPermissionDoingExaming(Request $request){
+        $examing = Examing::find($request->examing_id);
+        $join_group = JoinGroup::where('group_id',$examing->group_id)
+            ->where('user_id',$request->user_id)
+            ->first();
+        if ($join_group === NULL) {
+            return 404;
+        } else {
+            if($join_group->status != 's'){
+                return 404;
+            }
+        }
+    }
+
+    public function checkPermissionBoardExaming(Request $request){
+        $examing = Examing::find($request->examing_id);
+        $join_group = JoinGroup::where('group_id',$examing->group_id)
+            ->where('user_id',$request->user_id)
+            ->first();
+        if ($join_group === NULL) {
+            return 404;
+        }
     }
 
     function makeFolder($path,$folder) {

@@ -72,6 +72,7 @@ app.controller('teaAddSheetCtrl', ['$scope', '$window', function ($scope, $windo
         if ($scope.completeSheetName) {
             $scope.completeNoDuplicate = findSheetByName($scope.sheetName, $('#sheet_group').val(), user.id);
         }
+        $scope.completeSelectSheetgroup = $('#sheet_group').val() > '0' ? true : false ;
         $scope.completeTrialContent = $('#sheet_trial').Editor("getText").length > 0;
         $scope.completeInputMode = $scope.inputMode === 'no_input' ? true :
             $scope.inputMode === 'key_input' ? ($scope.input === '' ? false : true) :
@@ -85,6 +86,7 @@ app.controller('teaAddSheetCtrl', ['$scope', '$window', function ($scope, $windo
 
         if ($scope.completeSheetName
             && $scope.completeNoDuplicate
+            && $scope.completeSelectSheetgroup
             && $scope.completeTrialContent
             && $scope.completeInputMode
             && $scope.completeOutputMode
@@ -204,6 +206,11 @@ app.controller('teaAddSheetCtrl', ['$scope', '$window', function ($scope, $windo
             if (!$scope.completeTrialContent) {
                 $('#notice_sheet_trial').html('* กรุณาระบุรายละเอียดของการทดลอง').show();
                 $('.Editor-editor').focus();
+            }
+
+            if (!$scope.completeSelectSheetgroup) {
+                $('#notice_sheet_group').html('* กรุณาเลือกกลุ่มใบงาน').show();
+                $('#sheet_group').focus();
             }
 
             if (!$scope.completeSheetName) {

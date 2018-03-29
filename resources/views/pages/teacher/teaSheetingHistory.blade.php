@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','ประวัติการสั่งงาน')
 @section('content')
     <script src="js/Components/teacher/teaSheetingHistoryCtrl.js"></script>
     <div ng-controller="teaSheetingHistoryCtrl" style="display: none" id="sheet_history_div">
@@ -120,6 +121,11 @@
         </div>
     </div>
     <script>
+        if(user.user_type != 't'){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         $(document).ready(function () {
             $('#sheet_history_div').css('display','block');
             $("#side_sheeting").removeAttr('class');

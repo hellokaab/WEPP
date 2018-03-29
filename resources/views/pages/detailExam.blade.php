@@ -86,10 +86,6 @@
                                             <span class="badge badge-default" id="fullScore">100</span>
                                             - คะแนนเต็ม
                                         </a>
-                                        <a class="list-group-item">
-                                            <span class="badge badge-default" id="imperfect">50</span>
-                                            - คำตอบถูกต้องบางส่วน (% ของคะแนนเต็ม)
-                                        </a>
                                     </div>
                                 </div>
                             </div>

@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','ใบงานที่แบ่งปันกับฉัน')
 @section('content')
     <script src="js/Components/teacher/teaShareSheetCtrl.js"></script>
     <div ng-controller="teaShareSheetCtrl" style="display: none" id="share_sheet_div">
@@ -234,6 +235,11 @@
         </div>
     </div>
     <script>
+        if(user.user_type != 't'){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         $(document).ready(function () {
             $('#share_sheet_div').css('display', 'block');
             $("#side_sheet_store").removeAttr('class');

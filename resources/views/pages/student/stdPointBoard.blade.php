@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','คะแนนข้อสอบ')
 @section('content')
     <script src="js/Components/student/stdPointBoardCtrl.js"></script>
     <script>
@@ -271,6 +272,22 @@
         </div>
     </div>
     <script>
+        var page_permission = $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: {
+                Accept: "application/json"
+            },
+            url: url + 'permission-examing-board',
+            data:{ examing_id : examingID, user_id : user.id},
+            async: false,
+        }).responseJSON;
+
+        if(page_permission == 404){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         $(document).ready(function () {
             $('#point_board_div').css('display', 'block');
             if(user.user_type === 's') {

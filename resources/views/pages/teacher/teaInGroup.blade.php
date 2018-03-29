@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title', 'กลุ่มเรียนของฉัน')
 @section('content')
     <script src="js/Components/teacher/teaInGroupCtrl.js"></script>
     <script>
@@ -26,11 +27,16 @@
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
-                                <th style="width: 20%">ชื่อการสอบ</th>
-                                <th style="width: 20%;text-align: center">เริ่มต้น</th>
-                                <th style="width: 20%;text-align: center">สิ้นสุด</th>
-                                <th style="width: 23%;text-align: center">ซ่อน/แสดง</th>
-                                <th style="width: 17%;text-align: center"></th>
+                                {{--<th style="width: 20%">ชื่อการสอบ</th>--}}
+                                {{--<th style="width: 20%;text-align: center">เริ่มต้น</th>--}}
+                                {{--<th style="width: 20%;text-align: center">สิ้นสุด</th>--}}
+                                {{--<th style="width: 23%;text-align: center">ซ่อน/แสดง</th>--}}
+                                {{--<th style="width: 17%;text-align: center"></th>--}}
+                                <th>ชื่อการสอบ</th>
+                                <th style="text-align: center">เริ่มต้น</th>
+                                <th style="text-align: center">สิ้นสุด</th>
+                                <th style="text-align: center">ซ่อน/แสดง</th>
+                                <th style="text-align: center"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -54,11 +60,15 @@
                                     <button class="btn btn-sm btn-outline-warning" title="แก้ไข" style="cursor:pointer" ng-click="editExaming(e)">
                                         <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
                                     </button>
-                                    &nbsp;&nbsp;
+                                    &nbsp;
                                     <button class="btn btn-sm btn-outline-purple" title="score board" style="cursor:pointer" ng-click="viewScore(e)">
                                         <i class="fa fa-trophy fa-lg" aria-hidden="true"></i>
                                     </button>
-                                    &nbsp;&nbsp;
+                                    &nbsp;
+                                    <button class="btn btn-sm btn-outline-primary" title="สรุปผลคะแนน" style="cursor:pointer" ng-click="viewPoint(e)">
+                                        <i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
+                                    </button>
+                                    &nbsp;
                                     <button class="btn btn-sm btn-outline-danger" title="ลบ" style="cursor:pointer" ng-click="deleteData(e,'ex')">
                                         <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                     </button>
@@ -83,11 +93,16 @@
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
-                                <th style="width: 20%">ชื่อการสอบ</th>
-                                <th style="width: 20%;text-align: center">เริ่มต้น</th>
-                                <th style="width: 20%;text-align: center">สิ้นสุด</th>
-                                <th style="width: 23%;text-align: center">การเข้าถึงประวัติการสอบ</th>
-                                <th style="width: 17%;text-align: center"></th>
+                                {{--<th style="width: 20%">ชื่อการสอบ</th>--}}
+                                {{--<th style="width: 20%;text-align: center">เริ่มต้น</th>--}}
+                                {{--<th style="width: 20%;text-align: center">สิ้นสุด</th>--}}
+                                {{--<th style="width: 23%;text-align: center">การเข้าถึงประวัติการสอบ</th>--}}
+                                {{--<th style="width: 17%;text-align: center"></th>--}}
+                                <th >ชื่อการสอบ</th>
+                                <th style="text-align: center">เริ่มต้น</th>
+                                <th style="text-align: center">สิ้นสุด</th>
+                                <th style="text-align: center">การเข้าถึงประวัติการสอบ</th>
+                                <th style="text-align: center"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -111,11 +126,15 @@
                                     <button class="btn btn-sm btn-outline-warning" title="แก้ไข" style="cursor:pointer" ng-click="editExaming(e)">
                                         <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
                                     </button>
-                                    &nbsp;&nbsp;
+                                    &nbsp;
+                                    <button class="btn btn-sm btn-outline-purple" title="score board" style="cursor:pointer" ng-click="viewScore(e)">
+                                        <i class="fa fa-trophy fa-lg" aria-hidden="true"></i>
+                                    </button>
+                                    &nbsp;
                                     <button class="btn btn-sm btn-outline-primary" title="สรุปผลคะแนน" style="cursor:pointer" ng-click="viewPoint(e)">
                                         <i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
                                     </button>
-                                    &nbsp;&nbsp;
+                                    &nbsp;
                                     <button class="btn btn-sm btn-outline-danger" title="ลบ" style="cursor:pointer" ng-click="deleteData(e,'ex')">
                                         <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                     </button>
@@ -132,6 +151,63 @@
                         </table>
                         <br>
                         <br>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-md-12 col-xs-12" style="padding: 0px">
+                        <label style="text-decoration:underline;font-size: 18px;padding-top: 5px">ใบงาน</label><button class="btn btn-sm btn-outline-success" href="" ng-click="openSheeting()" style="float: right"><i class="fa fa-plus"> </i> สั่งงาน</button>
+                    </div>
+                    <div class="col-md-12 table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>ชื่อใบงาน</th>
+                                <th style="text-align: center">เริ่มต้น</th>
+                                <th style="text-align: center">สิ้นสุด</th>
+                                <th style="text-align: center">ซ่อน/แสดง</th>
+                                <th style="text-align: center"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="st in sheeting" >
+                                <td><%st.sheeting_name%></td>
+                                <td style="text-align: center"><%st.start_date_time%></td>
+                                <td style="text-align: center"><%st.end_date_time%></td>
+                                <td>
+                                    <div class="radio inline-form-control">
+                                        <div class="col-md-6" style="text-align: center">
+                                            <input type="radio" name="hide_sheeting_<%st.id%>" id="hide_sh_<%st.id%>" value="0" ng-click="changeHidden(st,'hs')">
+                                            <label for="hide_sh_<%st.id%>" style="padding-left: 2px">ซ่อน</label>
+                                        </div>
+                                        <div class="col-md-6" style="text-align: center">
+                                            <input type="radio" name="hide_sheeting_<%st.id%>" id="show_sh_<%st.id%>" value="1" ng-click="changeHidden(st,'ss')">
+                                            <label for="show_sh_<%st.id%>" style="padding-left: 2px">แสดง</label>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="text-align: center">
+                                    <button class="btn btn-sm btn-outline-warning" title="แก้ไข" style="cursor:pointer" ng-click="editSheeting(st)">
+                                        <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+                                    </button>
+                                    &nbsp;&nbsp;
+                                    <button class="btn btn-sm btn-outline-primary" title="สรุปผลคะแนน" style="cursor:pointer" ng-click="viewSheetPoint(st)">
+                                        <i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
+                                    </button>
+                                    &nbsp;&nbsp;
+                                    <button class="btn btn-sm btn-outline-danger" title="ลบ" style="cursor:pointer" ng-click="deleteData(st,'sh')">
+                                        <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr ng-hide="sheeting.length > 0">
+                                <td>ไม่พอข้อมูล</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -518,6 +594,22 @@
         </div>
     </div>
     <script>
+        var page_permission = $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: {
+                Accept: "application/json"
+            },
+            url: url + 'permission-group-teacher',
+            data:{ group_id : groupId, user_id : user.id},
+            async: false,
+        }).responseJSON;
+
+        if(page_permission == 404){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         $(document).ready(function () {
             $('#tea_in_group_div').css('display', 'block');
             $("#side_group").removeAttr('class');

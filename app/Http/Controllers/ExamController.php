@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exam;
 use App\ExamGroup;
+use App\Examing;
 use App\Keyword;
 use App\ShareExam;
 use App\User;
@@ -339,6 +340,24 @@ class ExamController extends Controller
         $content = fread($contentFile,filesize("$request->exam_data"));
 
         return response()->json($content);
+    }
+
+    public function checkPermissionEditExam(Request $request){
+        $exam = Exam::where('id',$request->exam_id)
+            ->where('user_id',$request->user_id)
+            ->first();
+        if ($exam === NULL) {
+            return 404;
+        }
+    }
+
+    public function checkPermissionCopyExam(Request $request){
+        $exam = ShareExam::where('exam_id',$request->exam_id)
+            ->where('user_id',$request->user_id)
+            ->first();
+        if ($exam === NULL) {
+            return 404;
+        }
     }
 
     public function rrmdir($path) {

@@ -156,7 +156,8 @@ app.controller('stdInGroupCtrl', ['$scope', '$window', function ($scope, $window
             num = 0;
 
             examInScoreboard.forEach(function(exam) {
-                head += '<th class="hidden-print hidden-xs hidden-sm" style="text-align: center"><a href="#" onclick="return viewDetailExam('+exam.exam_id+')">' + exam.exam_name + '</a></th>';
+                // head += '<th class="hidden-print hidden-xs hidden-sm" style="text-align: center"><a href="#" onclick="return viewDetailExam('+exam.exam_id+')">' + exam.exam_name + '</a></th>';
+                head += '<th class="hidden-print hidden-xs hidden-sm" style="text-align: center">' + exam.exam_name + '</th>';
                 num++;
             });
 

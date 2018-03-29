@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','เปิดสอบ')
 @section('content')
     <script src="js/Components/teacher/teaAddExamingCtrl.js"></script>
     <div ng-controller="teaAddExamingCtrl" style="display: none" id="add_examing_div">
@@ -243,6 +244,11 @@
         <div id="dtBox"></div>
     </div>
     <script>
+        if(user.user_type != 't'){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         $(document).ready(function () {
             $('#add_examing_div').css('display','block');
             $("#side_examing").removeAttr('class');

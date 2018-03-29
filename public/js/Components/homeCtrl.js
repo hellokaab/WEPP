@@ -28,6 +28,7 @@ app.controller('homeCtrl', ['$scope', '$window', function ($scope, $window) {
             }
         });
 
+        var tab = 'm';
         changeTitle();
         $('.fc-prev-button').on('click',function () {
             changeTitle();
@@ -38,15 +39,24 @@ app.controller('homeCtrl', ['$scope', '$window', function ($scope, $window) {
         });
 
         $('.fc-month-button').on('click',function () {
-            changeTitle();
+            if(tab != 'm'){
+                changeTitle();
+                tab = 'm'
+            }
         });
 
         $('.fc-agendaWeek-button').on('click',function () {
-            changeTitle();
+            if(tab != 'w'){
+                changeTitle();
+                tab = 'w'
+            }
         });
 
         $('.fc-agendaDay-button').on('click',function () {
-            changeTitle();
+            if(tab != 'd'){
+                changeTitle();
+                tab = 'd'
+            }
         });
 
         $('.fc-today-button').on('click',function () {

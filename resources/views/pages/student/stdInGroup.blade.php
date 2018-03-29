@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','กลุ่มเรียนที่เข้าร่วม')
 @section('content')
     <script src="js/Components/student/stdInGroupCtrl.js"></script>
     <script>
@@ -62,6 +63,10 @@
                                     <button class="btn btn-sm btn-outline-purple" title="score board" style="cursor:pointer" ng-click="viewScore(e)">
                                         <i class="fa fa-trophy fa-lg" aria-hidden="true"></i>
                                     </button>
+                                    &nbsp;
+                                    <button class="btn btn-sm btn-outline-primary" title="สรุปผลคะแนน" style="cursor:pointer" ng-click="viewPoint(e)">
+                                        <i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
+                                    </button>
                                 </td>
                             </tr>
                             <tr ng-hide="examingComing.length > 0">
@@ -101,6 +106,10 @@
                                     </button>
                                 </td>
                                 <td style="text-align: center" ng-show="myPermissionsInGroup.status === 'a' || myPermissionsInGroup.status === 'as'">
+                                    <button class="btn btn-sm btn-outline-purple" title="score board" style="cursor:pointer" ng-click="viewScore(e)">
+                                        <i class="fa fa-trophy fa-lg" aria-hidden="true"></i>
+                                    </button>
+                                    &nbsp;
                                     <button class="btn btn-sm btn-outline-primary" title="สรุปผลคะแนน" style="cursor:pointer" ng-click="viewPoint(e)">
                                         <i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i> สรุปผลคะแนน
                                     </button>
@@ -363,6 +372,22 @@
         </div>
     </div>
     <script>
+        var page_permission = $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: {
+                Accept: "application/json"
+            },
+            url: url + 'permission-group-student',
+            data:{ group_id : groupID, user_id : user.id},
+            async: false,
+        }).responseJSON;
+
+        if(page_permission == 404){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         $(document).ready(function () {
             $('#in_group_div').css('display', 'block');
             if(user.user_type === 's') {

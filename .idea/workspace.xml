@@ -2,31 +2,56 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1162cdf-4c01-4bcd-a30f-2c806ed8e778" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/rmuti.ico" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CompileCController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CompileCController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CompileCppController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CompileCppController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CompileCsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CompileCsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CompileJavaController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CompileJavaController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Components/student/stdAllGroupCtrl.js" afterPath="$PROJECT_DIR$/public/js/Components/student/stdAllGroupCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ExamController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExamController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ExamingController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExamingController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/GroupController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/GroupController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SheetController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SheetController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SheetingController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SheetingController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Components/detailExamCtrl.js" afterPath="$PROJECT_DIR$/public/js/Components/detailExamCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Components/homeCtrl.js" afterPath="$PROJECT_DIR$/public/js/Components/homeCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Components/student/stdInGroupCtrl.js" afterPath="$PROJECT_DIR$/public/js/Components/student/stdInGroupCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Components/teacher/teaAddExamCtrl.js" afterPath="$PROJECT_DIR$/public/js/Components/teacher/teaAddExamCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Components/teacher/teaAddSheetCtrl.js" afterPath="$PROJECT_DIR$/public/js/Components/teacher/teaAddSheetCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Components/teacher/teaCopyExamCtrl.js" afterPath="$PROJECT_DIR$/public/js/Components/teacher/teaCopyExamCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Components/teacher/teaCopySheetCtrl.js" afterPath="$PROJECT_DIR$/public/js/Components/teacher/teaCopySheetCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/Components/teacher/teaInGroupCtrl.js" afterPath="$PROJECT_DIR$/public/js/Components/teacher/teaInGroupCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/ajaxCtrl.js" afterPath="$PROJECT_DIR$/public/js/ajaxCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/makeData.php" afterPath="$PROJECT_DIR$/public/makeData.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/adminSite.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/adminSite.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/userSite.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/userSite.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/detailExam.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/detailExam.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/detailSheet.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/detailSheet.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/login.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/login.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/home.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/home.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/profile.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/profile.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/student/stdAllGroup.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/student/stdAllGroup.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/student/stdInGroup.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/student/stdInGroup.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/student/stdMyGroup.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/student/stdMyGroup.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/student/stdPointBoard.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/student/stdPointBoard.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/student/stdSheetBoard.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/student/stdSheetBoard.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/student/stdViewExam.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/student/stdViewExam.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/student/stdViewSheet.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/student/stdViewSheet.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaAddExam.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaAddExam.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaAddExaming.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaAddExaming.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaAddSheet.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaAddSheet.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaAddSheeting.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaAddSheeting.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaCopyExam.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaCopyExam.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaCopySheet.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaCopySheet.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaEditExam.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaEditExam.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaEditExaming.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaEditExaming.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaEditSheet.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaEditSheet.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaEditSheeting.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaEditSheeting.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaExamingHistory.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaExamingHistory.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaInGroup.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaInGroup.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaMyExam.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaMyExam.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaMyGroup.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaMyGroup.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaMySheet.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaMySheet.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaPointBoard.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaPointBoard.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaShareExam.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaShareExam.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaShareSheet.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaShareSheet.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaSheetBoard.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaSheetBoard.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/teacher/teaSheetingHistory.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/teacher/teaSheetingHistory.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,73 +62,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="userSite.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/layouts/userSite.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="44" column="10" lean-forward="false" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
-              <folding>
-                <marker date="1522230347509" expanded="true" signature="422:436" ph="..." />
-                <marker date="1522230347509" expanded="true" signature="464:476" ph="..." />
-                <marker date="1522230347509" expanded="true" signature="582:606" ph="..." />
-                <marker date="1522230347509" expanded="true" signature="631:661" ph="..." />
-                <marker date="1522230347509" expanded="true" signature="2647:2663" ph="..." />
-                <marker date="1522230347509" expanded="true" signature="2701:2717" ph="..." />
-                <marker date="1522230347509" expanded="true" signature="5431:5451" ph="..." />
-                <marker date="1522230347509" expanded="true" signature="5463:5481" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="side_nav.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/layouts/side_nav.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="7" column="56" lean-forward="true" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
-              <folding>
-                <marker date="1522230231832" expanded="true" signature="1632:1646" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="2434:2458" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="2575:2602" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="3410:3435" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="3552:3581" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="4380:4406" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="4525:4552" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="4673:4701" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="5517:5545" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="5661:5693" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="6512:6541" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="6658:6691" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="7510:7536" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="7658:7683" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="7911:7939" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="8171:8199" ph="..." />
-                <marker date="1522230231832" expanded="true" signature="8738:8747" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="adminSite.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/layouts/adminSite.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="29" column="8" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
-              <folding>
-                <marker date="1522229737800" expanded="true" signature="422:436" ph="..." />
-                <marker date="1522229737800" expanded="true" signature="464:476" ph="..." />
-                <marker date="1522229737800" expanded="true" signature="582:606" ph="..." />
-                <marker date="1522229737800" expanded="true" signature="1622:1638" ph="..." />
-                <marker date="1522229737800" expanded="true" signature="1676:1692" ph="..." />
-                <marker date="1522229737800" expanded="true" signature="2345:2365" ph="..." />
-                <marker date="1522229737800" expanded="true" signature="2377:2395" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -114,31 +73,31 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>f</find>
-      <find>For D</find>
-      <find>uploadExamFile</find>
-      <find>run_</find>
-      <find>prepare_result</find>
-      <find>popover</find>
-      <find>fail_modal</find>
-      <find>@yield</find>
-      <find>r</find>
-      <find>re</find>
-      <find>relo</find>
-      <find>reload</find>
-      <find>user-check-user</find>
-      <find>adminLogOut</find>
-      <find>user-logout-admin</find>
-      <find>adminLogout</find>
-      <find>loginAdmin</find>
-      <find>user-login-admin</find>
-      <find>user-logout-user</find>
-      <find>userLogOut</find>
+      <find>locatio</find>
+      <find>location</find>
+      <find>location.</find>
+      <find>location.h</find>
+      <find>location.hre</find>
+      <find>location.href</find>
+      <find>teacher-exam-my</find>
+      <find>completeSelectExamGroup</find>
       <find>checkUser</find>
-      <find>user-find-admin</find>
-      <find>&lt;title&gt;</find>
-      <find>cl</find>
-      <find>c</find>
+      <find>user-check-user</find>
+      <find>copyEx</find>
+      <find>@section('page-title'</find>
+      <find>checkPermissionEditExam</find>
+      <find>add_check_code</find>
+      <find>check_comment</find>
+      <find>findSheetingByUserID</find>
+      <find>teacher-sheeting-add</find>
+      <find>openExaming</find>
+      <find>changeHidden</find>
+      <find>editSheeting</find>
+      <find>viewSheetPoint</find>
+      <find>viewPoint</find>
+      <find>teacher-board-sheet</find>
+      <find>findSheetingByGroupID</find>
+      <find>find</find>
       <find>F</find>
       <find>Fo</find>
       <find>For</find>
@@ -171,57 +130,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ExamController.php" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaShareExamCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaMySheetCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaAddExamingCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaAddSheetingCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaExamingHistoryCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaInGroupCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaAddExamCtrl.js" />
-        <option value="$PROJECT_DIR$/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaAddSheetCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaCopyExamCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaCopySheetCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaEditExamCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaEditExamingCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaEditSheetCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaEditSheetingCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaPointBoardCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaShareSheetCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaSheetBoardCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaSheetingHistoryCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/profileCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/student/stdInGroupCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/student/stdMyGroupCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/student/stdPointBoardCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/student/stdSheetBoardCtrl.js" />
-        <option value="$PROJECT_DIR$/public/js/Components/student/stdViewSheetCtrl.js" />
-        <option value="$PROJECT_DIR$/resources/views/pages/student/stdViewSheet.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CompileCController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CompileCppController.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaSheetBoard.blade.php" />
-        <option value="$PROJECT_DIR$/public/js/Components/student/stdAllGroupCtrl.js" />
-        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaAddExam.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaAddSheet.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaCopyExam.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaCopySheet.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaEditExam.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaEditSheet.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CompileJavaController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CompileCsController.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/student/stdViewExam.blade.php" />
-        <option value="$PROJECT_DIR$/public/js/Components/student/stdViewExamCtrl.js" />
-        <option value="$PROJECT_DIR$/resources/views/pages/login.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/detailExam.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/detailSheet.blade.php" />
-        <option value="$PROJECT_DIR$/public/makeData.php" />
-        <option value="$PROJECT_DIR$/public/js/ajaxCtrl.js" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
-        <option value="$PROJECT_DIR$/resources/views/pages/profile.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/adminSite.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/side_nav.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaMyExamCtrl.js" />
+        <option value="$PROJECT_DIR$/resources/views/pages/home.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaMyExam.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaCopyExamCtrl.js" />
+        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaAddExamCtrl.js" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaEditExam.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ExamController.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaShareExam.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/Components/homeCtrl.js" />
         <option value="$PROJECT_DIR$/resources/views/layouts/userSite.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaMySheet.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaShareSheet.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaAddSheet.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaCopyExam.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaAddExam.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaCopySheetCtrl.js" />
+        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaAddSheetCtrl.js" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaCopySheet.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/SheetController.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaEditSheet.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaMyGroup.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/student/stdMyGroup.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/student/stdAllGroup.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/GroupController.php" />
+        <option value="$PROJECT_DIR$/public/makeData.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaAddExaming.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaAddSheeting.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaExamingHistory.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaSheetingHistory.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/detailExam.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/Components/detailExamCtrl.js" />
+        <option value="$PROJECT_DIR$/public/js/Components/student/stdInGroupCtrl.js" />
+        <option value="$PROJECT_DIR$/resources/views/pages/student/stdInGroup.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaEditExaming.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaEditSheeting.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/student/stdViewExam.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CompileCController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CompileCppController.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/student/stdViewSheet.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaPointBoard.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaSheetBoard.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/student/stdPointBoard.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ExamingController.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/student/stdSheetBoard.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/public/js/ajaxCtrl.js" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/SheetingController.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/teacher/teaInGroup.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/Components/teacher/teaInGroupCtrl.js" />
       </list>
     </option>
   </component>
@@ -261,8 +220,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -586,7 +545,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../jcp2" />
+    <property name="last_opened_file_path" value="D:/Project/Backup/02032561(old wepp)" />
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
@@ -725,30 +684,31 @@
       <workItem from="1522136110214" duration="5776000" />
       <workItem from="1522149097083" duration="2176000" />
       <workItem from="1522217317239" duration="8398000" />
-      <workItem from="1522229400777" duration="1015000" />
+      <workItem from="1522229400777" duration="2166000" />
+      <workItem from="1522246969274" duration="12356000" />
+      <workItem from="1522302803982" duration="10928000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="332060000" />
+    <option name="totallyTimeSpent" value="356495000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18986385" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19591528" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -770,417 +730,626 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/js/Components/teacher/teaMySheetCtrl.js" />
-    <entry file="file://$PROJECT_DIR$/public/js/Components/teacher/teaPointBoardCtrl.js" />
-    <entry file="file://$PROJECT_DIR$/public/js/Components/teacher/teaShareExamCtrl.js" />
-    <entry file="file://$PROJECT_DIR$/public/js/Components/teacher/teaShareSheetCtrl.js" />
-    <entry file="file://$PROJECT_DIR$/public/js/Components/teacher/teaSheetingHistoryCtrl.js" />
-    <entry file="file://$PROJECT_DIR$/public/js/Components/profileCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" column="40" lean-forward="false" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Components/student/stdInGroupCtrl.js" />
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/student/stdInGroup.blade.php" />
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/student/stdMyGroup.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Components/student/stdMyGroupCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="55" lean-forward="false" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Components/student/stdPointBoardCtrl.js" />
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/student/stdPointBoard.blade.php" />
-    <entry file="file://$PROJECT_DIR$/public/js/Components/student/stdSheetBoardCtrl.js" />
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/student/stdSheetBoard.blade.php" />
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/testProject/CompileCController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ExamingController.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1">
-          <caret line="228" column="34" lean-forward="false" selection-start-line="228" selection-start-column="20" selection-end-line="228" selection-end-column="34" />
-          <folding>
-            <marker date="1519981904496" expanded="true" signature="6859:7530" ph="SELECT e.exa... exams" />
-            <marker date="1519981904496" expanded="true" signature="7022:7468" ph="SELECT ex.*,... exam_examings" />
-            <marker date="1519981904496" expanded="true" signature="7170:7298" ph="SELECT * FRO... res_exams" />
-            <marker date="1519981904496" expanded="true" signature="7730:8423" ph="SELECT ex.ex... exams" />
-            <marker date="1519981904496" expanded="true" signature="7860:8355" ph="SELECT er.*,... exam_randoms" />
-            <marker date="1519981904496" expanded="true" signature="8010:8151" ph="SELECT * FRO... res_exams" />
-            <marker date="1519981904496" expanded="true" signature="11468:11934" ph="SELECT res_e... exam_examings" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7680">
-          <caret line="393" column="82" lean-forward="false" selection-start-line="393" selection-start-column="68" selection-end-line="393" selection-end-column="82" />
+          <caret line="195" column="29" lean-forward="false" selection-start-line="195" selection-start-column="20" selection-end-line="195" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Components/student/stdViewSheetCtrl.js">
+    <entry file="file://$PROJECT_DIR$/storage/framework/views/165a5a40bdd2cfc35c2512c41713271051464101.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-960">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="198">
+          <caret line="73" column="17" lean-forward="false" selection-start-line="73" selection-start-column="17" selection-end-line="73" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CompileCController.php">
+    <entry file="file://$PROJECT_DIR$/storage/framework/views/91ec3a1274b47aa3d6885998ba84865142f3c182.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9220">
-          <caret line="473" column="9" lean-forward="false" selection-start-line="455" selection-start-column="8" selection-end-line="473" selection-end-column="9" />
+        <state relative-caret-position="218">
+          <caret line="66" column="40" lean-forward="false" selection-start-line="66" selection-start-column="24" selection-end-line="66" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/userSite.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-80">
+          <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
           <folding>
-            <marker date="1521625444510" expanded="true" signature="13395:16231" ph="..." />
-            <marker date="1521625444510" expanded="true" signature="13428:16231" ph="..." />
-            <marker date="1521625444510" expanded="true" signature="13456:16231" ph="..." />
-            <marker date="1521625444510" expanded="true" signature="13487:16231" ph="..." />
-            <marker date="1521625444510" expanded="true" signature="13519:16231" ph="..." />
-            <marker date="1521625444510" expanded="true" signature="13552:16231" ph="..." />
-            <marker date="1521625444510" expanded="true" signature="13583:16231" ph="..." />
-            <marker date="1521625444510" expanded="true" signature="13615:16231" ph="..." />
-            <marker date="1521625444510" expanded="true" signature="13629:13720" ph="..." />
-            <marker date="1521625444510" expanded="true" signature="13629:14071" ph="..." />
-            <marker date="1521625444510" expanded="true" signature="13629:16088" ph="..." />
-            <marker date="1521625444510" expanded="true" signature="13629:16231" ph="..." />
-            <marker date="1521625444510" expanded="true" signature="25731:26170" ph="SELECT statu... *" />
-            <marker date="1521625444510" expanded="true" signature="25786:25843" ph="SELECT * FRO... path_exams" />
+            <marker date="1522253713109" expanded="true" signature="422:436" ph="..." />
+            <marker date="1522253713109" expanded="true" signature="460:472" ph="..." />
+            <marker date="1522253713109" expanded="true" signature="574:598" ph="..." />
+            <marker date="1522253713109" expanded="true" signature="623:653" ph="..." />
+            <marker date="1522253713109" expanded="true" signature="2639:2655" ph="..." />
+            <marker date="1522253713109" expanded="true" signature="2693:2709" ph="..." />
+            <marker date="1522253713109" expanded="true" signature="5423:5443" ph="..." />
+            <marker date="1522253713109" expanded="true" signature="5455:5473" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaShareExam.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" column="44" lean-forward="false" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaShareSheet.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="241" column="0" lean-forward="false" selection-start-line="241" selection-start-column="0" selection-end-line="241" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="39" lean-forward="false" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Components/homeCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="44" column="13" lean-forward="false" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaMySheet.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="365" column="8" lean-forward="false" selection-start-line="365" selection-start-column="8" selection-end-line="368" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaAddExam.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="56" column="79" lean-forward="false" selection-start-line="56" selection-start-column="79" selection-end-line="56" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Components/teacher/teaAddExamCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1537">
+          <caret line="294" column="32" lean-forward="false" selection-start-line="294" selection-start-column="32" selection-end-line="294" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Components/teacher/teaCopySheetCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-735">
+          <caret line="117" column="64" lean-forward="false" selection-start-line="117" selection-start-column="64" selection-end-line="117" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Components/teacher/teaAddSheetCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2298">
+          <caret line="213" column="13" lean-forward="false" selection-start-line="213" selection-start-column="13" selection-end-line="213" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaAddSheet.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7171">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaCopyExam.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="401" column="9" lean-forward="true" selection-start-line="387" selection-start-column="8" selection-end-line="401" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaCopySheet.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaMyGroup.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="41" />
+          <folding>
+            <marker date="1522258673454" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522258673454" expanded="true" signature="38:50" ph="..." />
+            <marker date="1522258673454" expanded="true" signature="80:89" ph="..." />
+            <marker date="1522258673454" expanded="true" signature="341:354" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/student/stdMyGroup.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="41" lean-forward="true" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaEditSheet.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="491" column="9" lean-forward="false" selection-start-line="477" selection-start-column="8" selection-end-line="491" selection-end-column="9" />
+          <folding>
+            <marker date="1522258672565" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522258672565" expanded="true" signature="38:50" ph="..." />
+            <marker date="1522258672565" expanded="true" signature="74:83" ph="..." />
+            <marker date="1522258672565" expanded="true" signature="192:200" ph="..." />
+            <marker date="1522258672565" expanded="true" signature="713:726" ph="..." />
+            <marker date="1522258672565" expanded="true" signature="814:839" ph="..." />
+            <marker date="1522258672565" expanded="true" signature="7962:7976" ph="..." />
+            <marker date="1522258672565" expanded="true" signature="10842:10856" ph="..." />
+            <marker date="1522258672565" expanded="true" signature="32569:32607" ph="..." />
+            <marker date="1522258672565" expanded="true" signature="32670:32708" ph="..." />
+            <marker date="1522258672565" expanded="true" signature="33106:33119" ph="..." />
+            <marker date="1522258672565" expanded="true" signature="33860:33873" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SheetController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6560">
+          <caret line="337" column="4" lean-forward="false" selection-start-line="337" selection-start-column="4" selection-end-line="344" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Components/teacher/teaAddExamingCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/student/stdAllGroup.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-141">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="42" />
+          <folding>
+            <marker date="1522258673039" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522258673039" expanded="true" signature="38:50" ph="..." />
+            <marker date="1522258673039" expanded="true" signature="81:90" ph="..." />
+            <marker date="1522258673039" expanded="true" signature="353:366" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaExamingHistory.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="173" column="8" lean-forward="false" selection-start-line="173" selection-start-column="8" selection-end-line="173" selection-end-column="8" />
+          <folding>
+            <marker date="1522305443007" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522305443007" expanded="true" signature="38:70" ph="..." />
+            <marker date="1522305443007" expanded="true" signature="81:90" ph="..." />
+            <marker date="1522305443007" expanded="true" signature="368:381" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaAddExaming.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="246" column="8" lean-forward="false" selection-start-line="246" selection-start-column="8" selection-end-line="249" selection-end-column="9" />
+          <folding>
+            <marker date="1522305105490" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522305105490" expanded="true" signature="38:60" ph="..." />
+            <marker date="1522305105490" expanded="true" signature="71:80" ph="..." />
+            <marker date="1522305105490" expanded="true" signature="349:362" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaSheetingHistory.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaShareSheet.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaPointBoard.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Components/teacher/teaSheetBoardCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaSheetBoard.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="41" lean-forward="true" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/student/stdViewSheet.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2260">
-          <caret line="113" column="40" lean-forward="false" selection-start-line="113" selection-start-column="40" selection-end-line="113" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CompileCppController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14260">
-          <caret line="725" column="9" lean-forward="false" selection-start-line="725" selection-start-column="9" selection-end-line="725" selection-end-column="9" />
+        <state relative-caret-position="313">
+          <caret line="127" column="8" lean-forward="false" selection-start-line="127" selection-start-column="8" selection-end-line="127" selection-end-column="8" />
           <folding>
-            <marker date="1521625804340" expanded="true" signature="11326:11449" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="11351:11449" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="11371:11449" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="11394:11449" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="11418:11449" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="11443:11449" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="17938:20774" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="17971:20774" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="17999:20774" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="18030:20774" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="18062:20774" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="18095:20774" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="18126:20774" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="18158:20774" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="20631:20774" ph="..." />
-            <marker date="1521625804340" expanded="true" signature="30425:30864" ph="SELECT statu... *" />
-            <marker date="1521625804340" expanded="true" signature="30480:30537" ph="SELECT * FRO... path_exams" />
+            <marker date="1522305656150" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522305656150" expanded="true" signature="38:70" ph="..." />
+            <marker date="1522305656150" expanded="true" signature="81:90" ph="..." />
+            <marker date="1522305656150" expanded="true" signature="371:384" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaAddExam.blade.php">
+    <entry file="file://$PROJECT_DIR$/public/js/Components/detailExamCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9900">
-          <caret line="495" column="51" lean-forward="false" selection-start-line="495" selection-start-column="12" selection-end-line="495" selection-end-column="51" />
+        <state relative-caret-position="140">
+          <caret line="7" column="49" lean-forward="false" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaAddSheet.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/detailExam.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7780">
-          <caret line="389" column="51" lean-forward="false" selection-start-line="389" selection-start-column="51" selection-end-line="389" selection-end-column="51" />
+        <state relative-caret-position="1740">
+          <caret line="87" column="44" lean-forward="false" selection-start-line="87" selection-start-column="44" selection-end-line="87" selection-end-column="44" />
+          <folding>
+            <marker date="1522305927574" expanded="true" signature="422:436" ph="..." />
+            <marker date="1522305927574" expanded="true" signature="571:595" ph="..." />
+            <marker date="1522305927574" expanded="true" signature="1593:1609" ph="..." />
+            <marker date="1522305927574" expanded="true" signature="1756:1763" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaCopyExam.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaAddSheeting.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10000">
-          <caret line="500" column="51" lean-forward="false" selection-start-line="500" selection-start-column="51" selection-end-line="500" selection-end-column="51" />
+        <state relative-caret-position="300">
+          <caret line="166" column="52" lean-forward="true" selection-start-line="166" selection-start-column="52" selection-end-line="166" selection-end-column="52" />
+          <folding>
+            <marker date="1522305105655" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522305105655" expanded="true" signature="38:60" ph="..." />
+            <marker date="1522305105655" expanded="true" signature="71:80" ph="..." />
+            <marker date="1522305105655" expanded="true" signature="352:365" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaCopySheet.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaMyExam.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8280">
-          <caret line="414" column="51" lean-forward="false" selection-start-line="414" selection-start-column="51" selection-end-line="414" selection-end-column="51" />
+        <state relative-caret-position="67">
+          <caret line="346" column="18" lean-forward="true" selection-start-line="346" selection-start-column="18" selection-end-line="346" selection-end-column="18" />
+          <folding>
+            <marker date="1522258672930" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522258672930" expanded="true" signature="38:65" ph="..." />
+            <marker date="1522258672930" expanded="true" signature="76:85" ph="..." />
+            <marker date="1522258672930" expanded="true" signature="342:355" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/Components/student/stdInGroupCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="159" column="96" lean-forward="false" selection-start-line="159" selection-start-column="96" selection-end-line="159" selection-end-column="96" />
+          <folding>
+            <marker date="1522306175875" expanded="true" signature="6757:6775" ph="..." />
+            <marker date="1522306175875" expanded="true" signature="6950:6968" ph="..." />
+            <marker date="1522306175875" expanded="true" signature="7244:7262" ph="..." />
+            <marker date="1522306175875" expanded="true" signature="8050:8087" ph="..." />
+            <marker date="1522306175875" expanded="true" signature="8266:8303" ph="..." />
+            <marker date="1522306175875" expanded="true" signature="8627:8664" ph="..." />
+            <marker date="1522306175875" expanded="true" signature="8843:8880" ph="..." />
+            <marker date="1522306175875" expanded="true" signature="9059:9096" ph="..." />
+            <marker date="1522306175875" expanded="true" signature="9275:9312" ph="..." />
+            <marker date="1522306175875" expanded="true" signature="9602:9620" ph="..." />
+            <marker date="1522306175875" expanded="true" signature="9861:9879" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ExamController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="344" column="4" lean-forward="false" selection-start-line="344" selection-start-column="4" selection-end-line="351" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaEditExam.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11520">
-          <caret line="576" column="51" lean-forward="false" selection-start-line="576" selection-start-column="51" selection-end-line="576" selection-end-column="51" />
+        <state relative-caret-position="287">
+          <caret line="469" column="39" lean-forward="false" selection-start-line="469" selection-start-column="39" selection-end-line="469" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaEditSheet.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaEditExaming.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
-          <caret line="490" column="51" lean-forward="false" selection-start-line="490" selection-start-column="51" selection-end-line="490" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CompileCsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6540">
-          <caret line="339" column="25" lean-forward="false" selection-start-line="339" selection-start-column="25" selection-end-line="339" selection-end-column="25" />
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="40" />
           <folding>
-            <marker date="1522141515739" expanded="true" signature="31561:32000" ph="SELECT statu... *" />
-            <marker date="1522141515739" expanded="true" signature="31616:31673" ph="SELECT * FRO... path_exams" />
+            <marker date="1522307789584" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522307789584" expanded="true" signature="38:68" ph="..." />
+            <marker date="1522307789584" expanded="true" signature="79:88" ph="..." />
+            <marker date="1522307789584" expanded="true" signature="201:211" ph="..." />
+            <marker date="1522307789584" expanded="true" signature="493:506" ph="..." />
+            <marker date="1522307789584" expanded="true" signature="597:629" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CompileJavaController.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CompileCppController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5240">
-          <caret line="274" column="38" lean-forward="false" selection-start-line="274" selection-start-column="38" selection-end-line="274" selection-end-column="38" />
+        <state relative-caret-position="-10715">
+          <caret line="486" column="68" lean-forward="true" selection-start-line="486" selection-start-column="68" selection-end-line="486" selection-end-column="68" />
           <folding>
-            <marker date="1522141515655" expanded="true" signature="34238:34677" ph="SELECT statu... *" />
-            <marker date="1522141515655" expanded="true" signature="34293:34350" ph="SELECT * FRO... path_exams" />
+            <marker date="1522309759191" expanded="true" signature="13400:16238" ph="..." />
+            <marker date="1522309759191" expanded="true" signature="13433:16238" ph="..." />
+            <marker date="1522309759191" expanded="true" signature="13461:16238" ph="..." />
+            <marker date="1522309759191" expanded="true" signature="13492:16238" ph="..." />
+            <marker date="1522309759191" expanded="true" signature="13524:16238" ph="..." />
+            <marker date="1522309759191" expanded="true" signature="13557:16238" ph="..." />
+            <marker date="1522309759191" expanded="true" signature="13588:16238" ph="..." />
+            <marker date="1522309759191" expanded="true" signature="13620:16238" ph="..." />
+            <marker date="1522309759191" expanded="true" signature="25889:26328" ph="SELECT statu... *" />
+            <marker date="1522309759191" expanded="true" signature="25944:26001" ph="SELECT * FRO... path_exams" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CompileCController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3661">
+          <caret line="312" column="30" lean-forward="false" selection-start-line="312" selection-start-column="30" selection-end-line="312" selection-end-column="30" />
+          <folding>
+            <marker date="1522309563085" expanded="true" signature="13395:16233" ph="..." />
+            <marker date="1522309563085" expanded="true" signature="13428:16233" ph="..." />
+            <marker date="1522309563085" expanded="true" signature="13456:16233" ph="..." />
+            <marker date="1522309563085" expanded="true" signature="13487:16233" ph="..." />
+            <marker date="1522309563085" expanded="true" signature="13519:16233" ph="..." />
+            <marker date="1522309563085" expanded="true" signature="13552:16233" ph="..." />
+            <marker date="1522309563085" expanded="true" signature="13583:16233" ph="..." />
+            <marker date="1522309563085" expanded="true" signature="13615:16233" ph="..." />
+            <marker date="1522309563085" expanded="true" signature="25733:26172" ph="SELECT statu... *" />
+            <marker date="1522309563085" expanded="true" signature="25788:25845" ph="SELECT * FRO... path_exams" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/student/stdViewSheet.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="250" column="10" lean-forward="true" selection-start-line="250" selection-start-column="10" selection-end-line="250" selection-end-column="10" />
+          <folding>
+            <marker date="1522310303570" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522310303570" expanded="true" signature="38:60" ph="..." />
+            <marker date="1522310303570" expanded="true" signature="71:80" ph="..." />
+            <marker date="1522310303570" expanded="true" signature="192:203" ph="..." />
+            <marker date="1522310303570" expanded="true" signature="468:481" ph="..." />
+            <marker date="1522310303570" expanded="true" signature="600:625" ph="..." />
+            <marker date="1522310303570" expanded="true" signature="716:743" ph="..." />
+            <marker date="1522310303570" expanded="true" signature="842:889" ph="..." />
+            <marker date="1522310303570" expanded="true" signature="1012:1065" ph="..." />
+            <marker date="1522310303570" expanded="true" signature="12303:12317" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pages/student/stdViewExam.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4800">
-          <caret line="240" column="51" lean-forward="false" selection-start-line="240" selection-start-column="51" selection-end-line="240" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Components/student/stdViewExamCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9520">
-          <caret line="476" column="24" lean-forward="false" selection-start-line="476" selection-start-column="24" selection-end-line="476" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/detailExam.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="44" lean-forward="false" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
+        <state relative-caret-position="20">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="33" />
           <folding>
-            <marker date="1522218177562" expanded="true" signature="422:436" ph="..." />
-            <marker date="1522218177562" expanded="true" signature="571:595" ph="..." />
-            <marker date="1522218177562" expanded="true" signature="1593:1609" ph="..." />
-            <marker date="1522218177562" expanded="true" signature="1756:1763" ph="..." />
+            <marker date="1522308480085" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522308480085" expanded="true" signature="38:61" ph="..." />
+            <marker date="1522308480085" expanded="true" signature="72:81" ph="..." />
+            <marker date="1522308480085" expanded="true" signature="191:201" ph="..." />
+            <marker date="1522308480085" expanded="true" signature="461:474" ph="..." />
+            <marker date="1522308480085" expanded="true" signature="593:618" ph="..." />
+            <marker date="1522308480085" expanded="true" signature="709:736" ph="..." />
+            <marker date="1522308480085" expanded="true" signature="835:881" ph="..." />
+            <marker date="1522308480085" expanded="true" signature="1004:1056" ph="..." />
+            <marker date="1522308480085" expanded="true" signature="11480:11494" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/detailSheet.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaEditSheeting.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="6" selection-end-column="44" />
+        <state relative-caret-position="-12">
+          <caret line="158" column="22" lean-forward="true" selection-start-line="158" selection-start-column="22" selection-end-line="158" selection-end-column="22" />
           <folding>
-            <marker date="1522218177663" expanded="true" signature="422:436" ph="..." />
-            <marker date="1522218177663" expanded="true" signature="570:594" ph="..." />
-            <marker date="1522218177663" expanded="true" signature="1592:1608" ph="..." />
-            <marker date="1522218177663" expanded="true" signature="1757:1765" ph="..." />
+            <marker date="1522308005259" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522308005259" expanded="true" signature="38:68" ph="..." />
+            <marker date="1522308005259" expanded="true" signature="79:88" ph="..." />
+            <marker date="1522308005259" expanded="true" signature="203:214" ph="..." />
+            <marker date="1522308005259" expanded="true" signature="504:517" ph="..." />
+            <marker date="1522308005259" expanded="true" signature="612:645" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/login.blade.php">
+    <entry file="file://$PROJECT_DIR$/public/makeData.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-300">
-          <caret line="9" column="84" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="84" />
+        <state relative-caret-position="360">
+          <caret line="18" column="29" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/GroupController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="163" column="22" lean-forward="false" selection-start-line="163" selection-start-column="22" selection-end-line="163" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/student/stdSheetBoard.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="285" column="58" lean-forward="false" selection-start-line="285" selection-start-column="58" selection-end-line="285" selection-end-column="58" />
           <folding>
-            <marker date="1522217750612" expanded="true" signature="327:341" ph="..." />
-            <marker date="1522217750612" expanded="true" signature="470:494" ph="..." />
-            <marker date="1522217750612" expanded="true" signature="993:1010" ph="..." />
+            <marker date="1522312079458" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522312079458" expanded="true" signature="38:63" ph="..." />
+            <marker date="1522312079458" expanded="true" signature="74:83" ph="..." />
+            <marker date="1522312079458" expanded="true" signature="196:207" ph="..." />
+            <marker date="1522312079458" expanded="true" signature="994:1007" ph="..." />
+            <marker date="1522312079458" expanded="true" signature="1126:1151" ph="..." />
+            <marker date="1522312079458" expanded="true" signature="1242:1269" ph="..." />
+            <marker date="1522312079458" expanded="true" signature="1368:1415" ph="..." />
+            <marker date="1522312079458" expanded="true" signature="1530:1583" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/student/stdAllGroup.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/student/stdInGroup.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="54" lean-forward="false" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="54" />
+        <state relative-caret-position="410">
+          <caret line="390" column="39" lean-forward="false" selection-start-line="390" selection-start-column="39" selection-end-line="390" selection-end-column="39" />
           <folding>
-            <marker date="1519981904928" expanded="true" signature="9:27" ph="..." />
-            <marker date="1519981904928" expanded="true" signature="38:47" ph="..." />
-            <marker date="1519981904928" expanded="true" signature="310:323" ph="..." />
+            <element signature="e#2110#2128#0#HTML" expanded="true" />
+            <element signature="e#2181#2218#0#HTML" expanded="true" />
+            <element signature="e#2269#2306#0#HTML" expanded="true" />
+            <element signature="e#3774#3780#0#HTML" expanded="true" />
+            <element signature="e#6162#6168#0#HTML" expanded="true" />
+            <element signature="e#6977#6983#0#HTML" expanded="true" />
+            <marker date="1522307263268" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522307263268" expanded="true" signature="38:74" ph="..." />
+            <marker date="1522307263268" expanded="true" signature="85:94" ph="..." />
+            <marker date="1522307263268" expanded="true" signature="201:209" ph="..." />
+            <marker date="1522307263268" expanded="true" signature="758:771" ph="..." />
+            <marker date="1522307263268" expanded="true" signature="890:915" ph="..." />
+            <marker date="1522307263268" expanded="true" signature="1006:1033" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/navigation.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaPointBoard.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
-          <caret line="53" column="30" lean-forward="false" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/profile.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="36" />
           <folding>
-            <marker date="1522229737930" expanded="true" signature="9:27" ph="..." />
-            <marker date="1522229737930" expanded="true" signature="42:54" ph="..." />
-            <marker date="1522229737930" expanded="true" signature="93:102" ph="..." />
+            <marker date="1522310707700" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522310707700" expanded="true" signature="38:64" ph="..." />
+            <marker date="1522310707700" expanded="true" signature="75:84" ph="..." />
+            <marker date="1522310707700" expanded="true" signature="196:206" ph="..." />
+            <marker date="1522310707700" expanded="true" signature="1452:1465" ph="..." />
+            <marker date="1522310707700" expanded="true" signature="1556:1588" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Components/loginCtrl.js">
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaSheetBoard.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="44" column="44" lean-forward="false" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
+        <state relative-caret-position="20">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="35" />
+          <folding>
+            <marker date="1522311065845" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522311065845" expanded="true" signature="38:63" ph="..." />
+            <marker date="1522311065845" expanded="true" signature="74:83" ph="..." />
+            <marker date="1522311065845" expanded="true" signature="196:207" ph="..." />
+            <marker date="1522311065845" expanded="true" signature="994:1007" ph="..." />
+            <marker date="1522311065845" expanded="true" signature="1102:1135" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/student/stdPointBoard.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="280" column="48" lean-forward="false" selection-start-line="280" selection-start-column="43" selection-end-line="280" selection-end-column="48" />
+          <folding>
+            <marker date="1522311849527" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522311849527" expanded="true" signature="38:64" ph="..." />
+            <marker date="1522311849527" expanded="true" signature="75:84" ph="..." />
+            <marker date="1522311849527" expanded="true" signature="196:206" ph="..." />
+            <marker date="1522311849527" expanded="true" signature="1452:1465" ph="..." />
+            <marker date="1522311849527" expanded="true" signature="1584:1609" ph="..." />
+            <marker date="1522311849527" expanded="true" signature="1700:1727" ph="..." />
+            <marker date="1522311849527" expanded="true" signature="1826:1872" ph="..." />
+            <marker date="1522311849527" expanded="true" signature="1987:2039" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ExamingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="415" column="9" lean-forward="false" selection-start-line="415" selection-start-column="9" selection-end-line="415" selection-end-column="9" />
+          <folding>
+            <marker date="1522312013113" expanded="true" signature="6878:7549" ph="SELECT e.exa... exams" />
+            <marker date="1522312013113" expanded="true" signature="7041:7487" ph="SELECT ex.*,... exam_examings" />
+            <marker date="1522312013113" expanded="true" signature="7189:7317" ph="SELECT * FRO... res_exams" />
+            <marker date="1522312013113" expanded="true" signature="7749:8442" ph="SELECT ex.ex... exams" />
+            <marker date="1522312013113" expanded="true" signature="7879:8374" ph="SELECT er.*,... exam_randoms" />
+            <marker date="1522312013113" expanded="true" signature="8029:8170" ph="SELECT * FRO... res_exams" />
+            <marker date="1522312013113" expanded="true" signature="11487:11953" ph="SELECT res_e... exam_examings" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SheetingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="69" column="5" lean-forward="false" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+          <folding>
+            <element signature="e#40#58#0#PHP" expanded="true" />
+            <marker date="1522313426417" expanded="true" signature="4695:5378" ph="SELECT w.she... sheets" />
+            <marker date="1522313426417" expanded="true" signature="4860:5315" ph="SELECT st.*,... sheet_sheetings" />
+            <marker date="1522313426417" expanded="true" signature="5010:5140" ph="SELECT * FRO... res_sheets" />
+            <marker date="1522313426417" expanded="true" signature="10269:11423" ph="SELECT * FRO... user_id" />
+            <marker date="1522313426417" expanded="true" signature="10317:10706" ph="SELECT join_... join_groups" />
+            <marker date="1522313426417" expanded="true" signature="10787:11363" ph="SELECT re.id... res_sheets" />
+            <marker date="1522313426417" expanded="true" signature="10997:11193" ph="SELECT res_q... res_quizzes" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="171" column="32" lean-forward="false" selection-start-line="171" selection-start-column="13" selection-end-line="171" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/ajaxCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="35" />
+        <state relative-caret-position="329">
+          <caret line="1772" column="46" lean-forward="false" selection-start-line="1772" selection-start-column="46" selection-end-line="1772" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/Components/student/stdAllGroupCtrl.js">
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/teacher/teaInGroup.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="14" column="76" lean-forward="true" selection-start-line="14" selection-start-column="76" selection-end-line="14" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/makeData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="46" lean-forward="true" selection-start-line="12" selection-start-column="46" selection-end-line="12" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/side_nav.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="56" lean-forward="true" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
+        <state relative-caret-position="287">
+          <caret line="192" column="150" lean-forward="false" selection-start-line="192" selection-start-column="136" selection-end-line="192" selection-end-column="150" />
           <folding>
-            <marker date="1522230231832" expanded="true" signature="1632:1646" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="2434:2458" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="2575:2602" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="3410:3435" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="3552:3581" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="4380:4406" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="4525:4552" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="4673:4701" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="5517:5545" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="5661:5693" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="6512:6541" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="6658:6691" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="7510:7536" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="7658:7683" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="7911:7939" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="8171:8199" ph="..." />
-            <marker date="1522230231832" expanded="true" signature="8738:8747" ph="..." />
+            <element signature="e#10820#10840#0#HTML" expanded="true" />
+            <element signature="e#11202#11228#0#HTML" expanded="true" />
+            <element signature="e#11279#11305#0#HTML" expanded="true" />
+            <element signature="e#11355#11381#0#HTML" expanded="true" />
+            <element signature="e#11433#11459#0#HTML" expanded="true" />
+            <element signature="e#11732#11758#0#HTML" expanded="true" />
+            <element signature="e#11823#11849#0#HTML" expanded="true" />
+            <element signature="e#12932#12958#0#HTML" expanded="true" />
+            <element signature="e#13300#13306#0#HTML" expanded="true" />
+            <element signature="e#13410#13432#0#HTML" expanded="true" />
+            <element signature="e#13749#13771#0#HTML" expanded="true" />
+            <marker date="1522313426060" expanded="true" signature="9:27" ph="..." />
+            <marker date="1522313426060" expanded="true" signature="38:70" ph="..." />
+            <marker date="1522313426060" expanded="true" signature="81:90" ph="..." />
+            <marker date="1522313426060" expanded="true" signature="197:205" ph="..." />
+            <marker date="1522313426060" expanded="true" signature="417:430" ph="..." />
+            <marker date="1522313426060" expanded="true" signature="483:508" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/adminSite.blade.php">
+    <entry file="file://$PROJECT_DIR$/public/js/Components/teacher/teaInGroupCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="29" column="8" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
+        <state relative-caret-position="680">
+          <caret line="34" column="9" lean-forward="false" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
           <folding>
-            <marker date="1522229737800" expanded="true" signature="422:436" ph="..." />
-            <marker date="1522229737800" expanded="true" signature="464:476" ph="..." />
-            <marker date="1522229737800" expanded="true" signature="582:606" ph="..." />
-            <marker date="1522229737800" expanded="true" signature="1622:1638" ph="..." />
-            <marker date="1522229737800" expanded="true" signature="1676:1692" ph="..." />
-            <marker date="1522229737800" expanded="true" signature="2345:2365" ph="..." />
-            <marker date="1522229737800" expanded="true" signature="2377:2395" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/userSite.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="44" column="10" lean-forward="false" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
-          <folding>
-            <marker date="1522230347509" expanded="true" signature="422:436" ph="..." />
-            <marker date="1522230347509" expanded="true" signature="464:476" ph="..." />
-            <marker date="1522230347509" expanded="true" signature="582:606" ph="..." />
-            <marker date="1522230347509" expanded="true" signature="631:661" ph="..." />
-            <marker date="1522230347509" expanded="true" signature="2647:2663" ph="..." />
-            <marker date="1522230347509" expanded="true" signature="2701:2717" ph="..." />
-            <marker date="1522230347509" expanded="true" signature="5431:5451" ph="..." />
-            <marker date="1522230347509" expanded="true" signature="5463:5481" ph="..." />
+            <marker date="1522313718770" expanded="true" signature="17798:17816" ph="..." />
+            <marker date="1522313718770" expanded="true" signature="18158:18176" ph="..." />
+            <marker date="1522313718770" expanded="true" signature="18964:19001" ph="..." />
+            <marker date="1522313718770" expanded="true" signature="19180:19217" ph="..." />
+            <marker date="1522313718770" expanded="true" signature="19541:19578" ph="..." />
+            <marker date="1522313718770" expanded="true" signature="19757:19794" ph="..." />
+            <marker date="1522313718770" expanded="true" signature="19973:20010" ph="..." />
+            <marker date="1522313718770" expanded="true" signature="20189:20226" ph="..." />
+            <marker date="1522313718770" expanded="true" signature="20516:20534" ph="..." />
+            <marker date="1522313718770" expanded="true" signature="20775:20793" ph="..." />
           </folding>
         </state>
       </provider>

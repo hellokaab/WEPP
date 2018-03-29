@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','คะแนนใบงาน')
 @section('content')
     <script src="js/Components/student/stdSheetBoardCtrl.js"></script>
     <script>
@@ -275,8 +276,40 @@
         </div>
     </div>
     <script>
+        var page_permission = $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: {
+                Accept: "application/json"
+            },
+            url: url + 'permission-sheeting-board',
+            data:{ sheeting_id : sheetingID, user_id : user.id},
+            async: false,
+        }).responseJSON;
+
+        if(page_permission == 404){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         $(document).ready(function () {
             $('#sheet_board_div').css('display', 'block');
+            if(user.user_type === 's') {
+                $("#side_std_group").removeAttr('class');
+                $('#side_std_group').attr('class', 'active');
+                $("#std_group_chevron").removeAttr('class');
+                $("#std_group_chevron").attr('class', 'fa2 fa-chevron-down');
+                $('#demo_std_group').attr('class', 'collapse in');
+                $('#side_std_myGroup').attr('class', 'active');
+            } else  if(user.user_type === 't'){
+                $('#group_div').css('display', 'block');
+                $("#side_group").removeAttr('class');
+                $('#side_group').attr('class', 'active');
+                $("#group_chevron").removeAttr('class');
+                $("#group_chevron").attr('class','fa2 fa-chevron-down');
+                $('#demo_group').attr('class', 'collapse in');
+                $('#side_join_group').attr('class', 'active');
+            }
         });
     </script>
 @endsection

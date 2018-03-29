@@ -1,5 +1,5 @@
 @extends('layouts.userSite')
-{{--@section('page-title')ข้อมูลส่วนตัว@endsection--}}
+@section('page-title','ข้อมูลส่วนตัว')
 @section('content')
     <script src="js/Components/profileCtrl.js"></script>
     <style>

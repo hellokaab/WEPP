@@ -335,6 +335,24 @@ class SheetController extends Controller
         return response()->json($sheet);
     }
 
+    public function checkPermissionEditSheet(Request $request){
+        $exam = Sheet::where('id',$request->sheet_id)
+            ->where('user_id',$request->user_id)
+            ->first();
+        if ($exam === NULL) {
+            return 404;
+        }
+    }
+
+    public function checkPermissionCopySheet(Request $request){
+        $exam = ShareSheet::where('sheet_id',$request->sheet_id)
+            ->where('user_id',$request->user_id)
+            ->first();
+        if ($exam === NULL) {
+            return 404;
+        }
+    }
+
     public function rrmdir($path) {
         // Open the source directory to read in files
         try {

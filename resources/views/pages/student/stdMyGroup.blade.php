@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','กลุ่มเรียนที่เข้าร่วม')
 @section('content')
     <script src="js/Components/student/stdMyGroupCtrl.js"></script>
     <div ng-controller="stdMyGroupCtrl" style="display: none" id="std_my_group_div">

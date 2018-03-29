@@ -87,6 +87,7 @@ app.controller('teaCopySheetCtrl', ['$scope', '$window', function ($scope, $wind
     //----------------------------------------------------------------------
     $scope.copySheet = function () {
         $('#notice_sheet_name').hide();
+        $('#notice_sheet_group').hide();
         $('#notice_sheet_trial').hide();
         $('#notice_sheet_txt_input').hide();
         $('#notice_sheet_file_input').hide();
@@ -114,7 +115,7 @@ app.controller('teaCopySheetCtrl', ['$scope', '$window', function ($scope, $wind
         if ($scope.completeSheetName) {
             $scope.completeNoDuplicate = findSheetByName($scope.sheetName, $('#sheet_group').val(), user.id);
         }
-        $scope.completeSelectSheetgroup = $('#sheet_group').val() === '0' ? false : true ;
+        $scope.completeSelectSheetgroup = $('#sheet_group').val() > '0' ? true : false ;
         $scope.completeTrialContent = $('#sheet_trial').Editor("getText").length > 0;
         $scope.completeInputMode = $scope.inputMode === 'no_input' ? true :
             $scope.inputMode === 'key_input' ? ($scope.input === '' ? false : true) :

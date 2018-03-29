@@ -6,7 +6,6 @@ app.controller('detailExamCtrl', ['$scope', '$window', function ($scope, $window
     $('#examMemLimit').html($scope.exam.memory_size);
 
     $('#fullScore').html($scope.exam.full_score);
-    $('#imperfect').html($scope.exam.accep_imperfect);
     $('#cutWrongAnswer').html($scope.exam.cut_wrongans);
     $('#cutComplieError').html($scope.exam.cut_comerror);
     $('#cutOverMem').html($scope.exam.cut_overmemory);

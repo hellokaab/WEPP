@@ -5,6 +5,7 @@ app.controller('teaInGroupCtrl', ['$scope', '$window', function ($scope, $window
     $scope.groupData = findGroupDataByID($scope.groupID);
     $scope.examingComing = findExamingItsComing($scope.groupData.id);
     $scope.examingEnding = findExamingItsEnding($scope.groupData.id);
+    $scope.sheeting = findSheetingByGroupID($scope.groupData.id);
     $scope.memberList = findMemberGroup($scope.groupData.id);
     $scope.selectRow = "10";
 
@@ -22,6 +23,14 @@ app.controller('teaInGroupCtrl', ['$scope', '$window', function ($scope, $window
                 document.getElementById("hide_hi_"+$scope.examingEnding[i].id).checked = true;
             } else {
                 document.getElementById("show_hi_"+$scope.examingEnding[i].id).checked = true;
+            }
+        }
+
+        for(i=0;i<$scope.sheeting.length;i++){
+            if($scope.sheeting[i].hide_sheeting === "0"){
+                document.getElementById("hide_sh_"+$scope.sheeting[i].id).checked = true;
+            } else {
+                document.getElementById("show_sh_"+$scope.sheeting[i].id).checked = true;
             }
         }
     });
@@ -185,6 +194,10 @@ app.controller('teaInGroupCtrl', ['$scope', '$window', function ($scope, $window
     //----------------------------------------------------------------------
     $scope.openExaming = function() {
         window.location.href = url+"teacher-examing-add";
+    };
+    //----------------------------------------------------------------------
+    $scope.openSheeting = function() {
+        window.location.href = url+"teacher-sheeting-add";
     };
     //----------------------------------------------------------------------
     $scope.changeHidden = function(obj,mode) {
@@ -368,6 +381,11 @@ app.controller('teaInGroupCtrl', ['$scope', '$window', function ($scope, $window
     //----------------------------------------------------------------------
     $scope.viewPoint = function (data) {
         window.open(url+'teacher-board-exam-'+data.id, '_blank');
+        window.focus();
+    }
+    //----------------------------------------------------------------------
+    $scope.viewSheetPoint = function (data) {
+        window.open(url+'teacher-board-sheet-'+data.id, '_blank');
         window.focus();
     }
     //----------------------------------------------------------------------

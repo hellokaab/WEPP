@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','คะแนนใบงาน')
 @section('content')
     <script src="js/Components/teacher/teaSheetBoardCtrl.js"></script>
     <script>
@@ -253,8 +254,30 @@
         </div>
     </div>
     <script>
+        var page_permission = $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: {
+                Accept: "application/json"
+            },
+            url: url + 'permission-sheeting-edit',
+            data:{ sheeting_id : sheetingID, user_id : user.id},
+            async: false,
+        }).responseJSON;
+
+        if(page_permission == 404){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         $(document).ready(function () {
             $('#sheet_board_div').css('display', 'block');
+            $("#side_sheeting").removeAttr('class');
+            $('#side_sheeting').attr('class', 'active');
+            $("#sheeting_chevron").removeAttr('class');
+            $("#sheeting_chevron").attr('class','fa2 fa-chevron-down');
+            $('#demo_sheeting').attr('class', 'collapse in');
+            $('#side_history_sheeting').attr('class', 'active');
         });
     </script>
 @endsection

@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','หน้าหลัก')
 @section('content')
     <script src="js/Components/homeCtrl.js"></script>
     <div ng-controller="homeCtrl" style="display: none" id="home_div">
