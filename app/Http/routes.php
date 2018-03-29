@@ -485,6 +485,8 @@ Route::get('/sheeting-find-sheeting-name', 'SheetingController@findSheetingByNam
 
 Route::get('/sheeting-find-sheeting-uid', 'SheetingController@findSheetingByUserID');
 
+Route::get('/sheeting-find-sheeting-gid', 'SheetingController@findSheetingByGroupID');
+
 Route::get('/sheeting-find-sheetsheeting-stid', 'SheetingController@findSheetSheetingBySheetingID');
 
 Route::get('/sheeting-find-sheetsheeting-view', 'SheetingController@findSheetSheetingInViewSheet');
@@ -524,3 +526,29 @@ Route::get('/sheeting-check-queue-sheet','SheetingController@checkQueueSh');
 Route::get('/sheeting-send-quiz','SheetingController@sendQuiz');
 
 Route::post('/uploadSheetFile/{STID}/{SID}/{UID}','SheetingController@uploadSheetFile');
+
+//--------------------------- Page Permission ---------------------------
+
+Route::get('/permission-exam-edit','ExamController@checkPermissionEditExam');
+
+Route::get('/permission-exam-copy','ExamController@checkPermissionCopyExam');
+
+Route::get('/permission-sheet-edit','SheetController@checkPermissionEditSheet');
+
+Route::get('/permission-sheet-copy','SheetController@checkPermissionCopySheet');
+
+Route::get('/permission-group-teacher','GroupController@checkPermissionGroupTeacher');
+
+Route::get('/permission-group-student','GroupController@checkPermissionGroupStudent');
+
+Route::get('/permission-examing-edit','ExamingController@checkPermissionEditExaming');
+
+Route::get('/permission-examing-doing','ExamingController@checkPermissionDoingExaming');
+
+Route::get('/permission-examing-board','ExamingController@checkPermissionBoardExaming');
+
+Route::get('/permission-sheeting-edit','SheetingController@checkPermissionEditSheeting');
+
+Route::get('/permission-sheeting-doing','SheetingController@checkPermissionDoingSheeting');
+
+Route::get('/permission-sheeting-board','SheetingController@checkPermissionBoardSheeting');

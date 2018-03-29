@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','สั่งงาน')
 @section('content')
     <script src="js/Components/teacher/teaAddSheetingCtrl.js"></script>
     <div ng-controller="teaAddSheetingCtrl" style="display: none" id="add_sheeting_div">
@@ -156,6 +157,11 @@
         <div id="dtBox"></div>
     </div>
     <script>
+        if(user.user_type != 't'){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         $(document).ready(function () {
             $('#add_sheeting_div').css('display','block');
             $("#side_sheeting").removeAttr('class');

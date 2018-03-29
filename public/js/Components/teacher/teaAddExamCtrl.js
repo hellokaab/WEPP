@@ -123,6 +123,7 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
         $('#notice_exam_file_output').hide();
         $('#notice_exam_txt_input').hide();
         $('#notice_exam_file_input').hide();
+        $('#notice_exam_group').hide();
         $('#notice_exam_content').hide();
         $('#notice_exam_name').hide();
 
@@ -130,6 +131,7 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
         if ($scope.completeExamName) {
             $scope.completeNoDuplicate = findExamByName($scope.examName, $('#ddl_group').val(), user.id);
         }
+        $scope.completeSelectExamGroup = $('#ddl_group').val() > '0' ? true : false;
         $scope.completeExamContent = $('#exam_content').Editor("getText").length > 0;
         $scope.completeInputMode = $scope.inputMode === 'no_input' ? true :
             $scope.inputMode === 'key_input' ? ($scope.input === '' ? false : true) :
@@ -142,6 +144,7 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
 
         if ($scope.completeExamName
             && $scope.completeNoDuplicate
+            && $scope.completeSelectExamGroup
             && $scope.completeExamContent
             && $scope.completeInputMode
             && $scope.completeOutputMode
@@ -287,6 +290,11 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
             if (!$scope.completeExamContent) {
                 $('#notice_exam_content').html('* กรุณาระบุรายละเอียดของข้อสอบ').show();
                 $('.Editor-editor').focus();
+            }
+
+            if (!$scope.completeSelectExamGroup) {
+                $('#notice_exam_group').html('* กรุณาเลือกกลุ่มข้อสอบ').show();
+                $('[ng-model=groupID]').focus();
             }
 
             if (!$scope.completeExamName) {

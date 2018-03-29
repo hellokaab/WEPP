@@ -180,7 +180,7 @@ app.controller('teaCopyExamCtrl', ['$scope', '$window', function ($scope, $windo
             }
 
         }
-        $scope.completeSelectExamGroup = $('#ddl_group').val() === '0' ? false : true;
+        $scope.completeSelectExamGroup = $('#ddl_group').val() > '0' ? true : false;
         $scope.completeExamContent = $('#exam_content').Editor("getText").length > 0;
         $scope.completeInputMode = $scope.inputMode === 'no_input' ? true :
             $scope.inputMode === 'key_input' ? ($scope.input === '' ? false : true) :

@@ -274,119 +274,6 @@ class CompileCppController extends Controller
         return response()->json($status);
     }
 
-    function check_comment($code){
-        if(strpos($code,'//')){
-            return false;
-        }
-        if(strpos($code,'/*')){
-            return false;
-        }
-        return true;
-    }
-
-    function add_check_code($code,$exam_id,$mode) {
-        // กำหนดเวลาในการรันไว้ 5 วินาที
-        $ruutimeIn = 5;
-        // ถ้าเป็นการสอบ
-        if($mode == "exam") {
-            // คิวรี่ runtime ของข้อสอบ
-            $exam = Exam::find($exam_id);
-            $ruutimeIn = $exam->time_limit;
-        }
-
-        $resmodifile = '#include <time.h>
-    #include <process.h>
-    #include <io.h>
-    #include <fcntl.h>
-    #include <stdlib.h>
-    #include <windows.h>
-    ' . $code;
-        $ismoethan = FALSE;
-        $beforvoid = FALSE;
-        $seemain = FALSE;
-        $inputbegintime = FALSE;
-        $couflybird = 0;
-        for ($i = 8; $i < strlen($resmodifile); $i++) {
-            if ($resmodifile[$i - 6] == "#" && $resmodifile[$i - 5] == "d" && $resmodifile[$i - 4] == "e" && $resmodifile[$i - 3] == "f" && $resmodifile[$i - 2] == "i" && $resmodifile[$i - 1] == "n" && $resmodifile[$i] == "e") {
-                $ismoethan = TRUE;
-                while (TRUE) {
-                    $i++;
-                    if (ord($resmodifile[$i]) == 13 || ord($resmodifile[$i]) == 10) {
-                        break;
-                    }
-                }
-            }
-            if (!$seemain && $resmodifile[$i] == ">" && !$beforvoid || $ismoethan) {
-                if (!$ismoethan) {
-                    $ismoethan = TRUE;
-                } else {
-
-                    if ($resmodifile[$i] != " " && $resmodifile[$i] == "#" && ord($resmodifile[$i]) != 13 && ord($resmodifile[$i]) != 10) {
-                        $ismoethan = FALSE;
-                    } elseif ($resmodifile[$i] != " " && $resmodifile[$i] != "#" && ord($resmodifile[$i]) != 13 && ord($resmodifile[$i]) != 10) {
-//echo "<br/>res[i] =|" . ord($resmodifile[$i]) . "|blakc";
-                        $resmodifile = substr_replace($resmodifile, '
-                static void error(char *action)
-                {
-                fprintf(stderr, "Error %s: %d\n", action, GetLastError());
-                exit(EXIT_FAILURE);
-                }
-                void loop1(void *param)
-                {
-                int i=0;
-                for(i=0;i<'.$ruutimeIn.';i++)
-                {
-                Sleep(1000);
-                }
-                exit(0);}
-                '
-                            , $i, 0);
-                        $beforvoid = TRUE;
-                        $ismoethan = FALSE;
-                    }
-                }
-            }
-            if ($beforvoid && $resmodifile[$i - 3] == "m" && $resmodifile[$i - 2] == "a" && $resmodifile[$i - 1] == "i" && $resmodifile[$i] == "n" && !$seemain) {
-                $seemain = TRUE;
-            }
-            if ($seemain && $resmodifile[$i] == "{" && !$inputbegintime) {
-                $i++;
-                $resmodifile = substr_replace($resmodifile, '
-            HANDLE loop_thread[1];
-                loop_thread[0] = (HANDLE) _beginthread( loop1,0,NULL);
-                 if (loop_thread[0] == INVALID_HANDLE_VALUE)
-                    error("creating read thread");
-                    clock_t begin, end;
-                    double time_spent;
-                    begin = clock();'
-                    . '', $i, 0);
-                $inputbegintime = TRUE;
-                $couflybird++;
-            }
-            if ($inputbegintime && $resmodifile[$i - 5] == "r" && $resmodifile[$i - 4] == "e" && $resmodifile[$i - 3] == "t" && $resmodifile[$i - 2] == "u" && $resmodifile[$i - 1] == "r" && $resmodifile[$i] == "n") {
-                $resmodifile = substr_replace($resmodifile, ' '
-                    . ' end = clock();'
-                    . 'time_spent = (double)(end - begin) / CLOCKS_PER_SEC;printf("###%f",time_spent); ', ($i - 5), 0);
-                break;
-            }
-            if ($inputbegintime && $resmodifile[$i] == "{") {
-                $couflybird++;
-            }
-            if ($inputbegintime && $resmodifile[$i] == "}") {
-                $couflybird--;
-                if ($couflybird <= 0) {
-                    $resmodifile = substr_replace($resmodifile, ''
-                        . 'end = clock();'
-                        . 'time_spent = (double)(end - begin) / CLOCKS_PER_SEC;printf("###%f",time_spent);'
-                        . 'exit(0);', $i, 0);
-                    break;
-                }
-            }
-        }
-
-        return $resmodifile;
-    }
-
     function compile_code($folder_code) {
         // ดึงข้อมูลโค้ดจากไฟล์ที่ส่ง
         $files = scandir($folder_code);
@@ -541,7 +428,7 @@ class CompileCppController extends Controller
                         i++;
                 	}
 
-                    end = clock();time_spent = (double)(end - begin) / CLOCKS_PER_SEC;printf("RunTime:%f",time_spent); return 0;
+                    end = clock();time_spent = (double)(end - begin) / CLOCKS_PER_SEC;printf("\nRunTime:%f",time_spent); return 0;
             }';
 
         // เขียนไฟล์สำหรับเช็คเวลา

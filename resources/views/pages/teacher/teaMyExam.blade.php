@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','ข้อสอบของฉัน')
 @section('content')
     <script src="js/Components/teacher/teaMyExamCtrl.js"></script>
     <div ng-controller="teaMyExamCtrl" style="display: none" id="my_exam_div">
@@ -347,6 +348,11 @@
         </div>
     </div>
     <script>
+        if(user.user_type != 't'){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         $(document).ready(function () {
             $('#my_exam_div').css('display', 'block');
             $("#side_exam_store").removeAttr('class');

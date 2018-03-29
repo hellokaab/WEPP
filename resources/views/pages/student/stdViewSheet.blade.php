@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','ทำใบงาน')
 @section('content')
     <script src="js/Components/student/stdViewSheetCtrl.js"></script>
     <script>
@@ -249,6 +250,21 @@
         </div>
     </div>
     <script>
+        var page_permission = $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: {
+                Accept: "application/json"
+            },
+            url: url + 'permission-sheeting-doing',
+            data:{ sheeting_id : sheetingID, user_id : user.id},
+            async: false,
+        }).responseJSON;
+
+        if(page_permission == 404){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
         var sheet_path = "";
         var second = 0;
         var timer;

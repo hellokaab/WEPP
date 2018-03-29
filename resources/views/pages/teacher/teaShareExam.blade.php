@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','ข้อสอบที่แบ่งปันกับฉัน')
 @section('content')
     <script src="js/Components/teacher/teaShareExamCtrl.js"></script>
     <div ng-controller="teaShareExamCtrl" style="display: none" id="exam_div">
@@ -216,6 +217,11 @@
         </div>
     </div>
     <script>
+        if(user.user_type != 't'){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         $(document).ready(function () {
             $('#exam_div').css('display', 'block');
             $("#side_exam_store").removeAttr('class');

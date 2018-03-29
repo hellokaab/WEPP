@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\JoinGroup;
 use App\QueueSheet;
 use App\Quiz;
 use App\ResQuiz;
@@ -56,6 +57,14 @@ class SheetingController extends Controller
             ->orderBy('start_date_time','ASC')
             ->orderBy('end_date_time','ASC')
             ->orderBy('sheeting_name','ASC')
+            ->get();
+        return response()->json($sheeting);
+    }
+
+    public function findSheetingByGroupID(Request $request){
+        $sheeting = Sheeting::where('group_id',$request->group_id)
+            ->orderBy('start_date_time','ASC')
+            ->orderBy('end_date_time','ASC')
             ->get();
         return response()->json($sheeting);
     }
@@ -298,6 +307,39 @@ class SheetingController extends Controller
         $resQuiz = ResQuiz::find($request->id);
         $resQuiz->score = $request->score;
         $resQuiz->save();
+    }
+
+    public function checkPermissionEditSheeting(Request $request){
+        $exam = Sheeting::where('id',$request->sheeting_id)
+            ->where('user_id',$request->user_id)
+            ->first();
+        if ($exam === NULL) {
+            return 404;
+        }
+    }
+
+    public function checkPermissionDoingSheeting(Request $request){
+        $sheeting = Sheeting::find($request->sheeting_id);
+        $join_group = JoinGroup::where('group_id',$sheeting->group_id)
+            ->where('user_id',$request->user_id)
+            ->first();
+        if ($join_group === NULL) {
+            return 404;
+        } else {
+            if($join_group->status != 's'){
+                return 404;
+            }
+        }
+    }
+
+    public function checkPermissionBoardSheeting(Request $request){
+        $sheeting = Sheeting::find($request->sheeting_id);
+        $join_group = JoinGroup::where('group_id',$sheeting->group_id)
+            ->where('user_id',$request->user_id)
+            ->first();
+        if ($join_group === NULL) {
+            return 404;
+        }
     }
 
     public function rrmdir($path) {

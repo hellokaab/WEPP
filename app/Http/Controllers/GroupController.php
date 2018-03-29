@@ -151,4 +151,22 @@ class GroupController extends Controller
         return response()->json($joinGroup);
     }
 
+    public function checkPermissionGroupTeacher(Request $request){
+        $exam = Group::where('id',$request->group_id)
+            ->where('user_id',$request->user_id)
+            ->first();
+        if ($exam === NULL) {
+            return 404;
+        }
+    }
+
+    public function checkPermissionGroupStudent(Request $request){
+        $exam = JoinGroup::where('group_id',$request->group_id)
+            ->where('user_id',$request->user_id)
+            ->first();
+        if ($exam === NULL) {
+            return 404;
+        }
+    }
+
 }

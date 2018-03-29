@@ -429,7 +429,7 @@ class CompileCController extends Controller
                         i++;
                 	}
 
-                    end = clock();time_spent = (double)(end - begin) / CLOCKS_PER_SEC;printf("RunTime:%f",time_spent); return 0;
+                    end = clock();time_spent = (double)(end - begin) / CLOCKS_PER_SEC;printf("\nRunTime:%f",time_spent); return 0;
             }';
 
         // เขียนไฟล์สำหรับเช็คเวลา

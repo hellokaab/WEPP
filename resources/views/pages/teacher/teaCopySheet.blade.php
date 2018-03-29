@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','คัดลอกใบงาน')
 @section('content')
     <script src="js/Components/teacher/teaCopySheetCtrl.js"></script>
     <script>
@@ -51,6 +52,8 @@
                                     <option style="display: none" value="0">กรุณาเลือก</option>
                                     <option ng-repeat="s in mySheetGroup" value="<%s.id%>"><%s.sheet_group_name%></option>
                                 </select>
+                                <div class="notice" id="notice_sheet_group" style="display: none">กรุณาเลือกกลุ่มใบงาน</div>
+                                <div class="notice" ng-hide="mySheetGroup.length > 0">ไม่พบข้อมูลกลุ่มข้อสอบ กรุณาสร้างกลุ่มใบงาน</div>
                             </div>
                         </div>
 
@@ -398,6 +401,21 @@
         </div>
     </div>
     <script>
+        var page_permission = $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: {
+                Accept: "application/json"
+            },
+            url: url + 'permission-sheet-copy',
+            data:{ sheet_id : sheetID, user_id : user.id},
+            async: false,
+        }).responseJSON;
+
+        if(page_permission == 404){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
         var pathSheet = "";
         var input_path = "";
         var output_path = "";

@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','เพิ่มใบงาน')
 @section('content')
     <script src="js/Components/teacher/teaAddSheetCtrl.js"></script>
     <script>
@@ -51,6 +52,8 @@
                                     <option style="display: none"></option>
                                     <option ng-repeat="s in mySheetGroup" value="<%s.id%>"><%s.sheet_group_name%></option>
                                 </select>
+                                <div class="notice" id="notice_sheet_group" style="display: none">กรุณาเลือกกลุ่มใบงาน</div>
+                                <div class="notice" ng-hide="mySheetGroup.length > 0">ไม่พบข้อมูลกลุ่มข้อสอบ กรุณาสร้างกลุ่มใบงาน</div>
                             </div>
                         </div>
 
@@ -373,6 +376,11 @@
         </div>
     </div>
     <script>
+        if(user.user_type != 't'){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         var pathSheet = "";
         var input_path = "";
         var output_path = "";

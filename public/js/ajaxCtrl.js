@@ -1763,6 +1763,20 @@ function deleteSheeting(STID) {
     });
 }
 
+function findSheetingByGroupID(GID) {
+    var sheeting = $.ajax({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            Accept: "application/json"
+        },
+        url:url + '/sheeting-find-sheeting-gid',
+        data:{group_id:GID},
+        async: false
+    }).responseJSON;
+    return sheeting;
+}
+
 function findSheetSheetingBySheetingID(STID) {
     var sheetSheeting =  $.ajax({
         contentType: "application/json; charset=utf-8",

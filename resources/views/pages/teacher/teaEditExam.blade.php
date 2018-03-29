@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','แก้ไขข้อสอบ')
 @section('content')
     <script src="js/Components/teacher/teaEditExamCtrl.js"></script>
     <script>
@@ -460,6 +461,22 @@
         </div>
     </div>
     <script>
+        var page_permission = $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: {
+                Accept: "application/json"
+            },
+            url: url + 'permission-exam-edit',
+            data:{ exam_id : examID, user_id : user.id},
+            async: false,
+        }).responseJSON;
+
+        if(page_permission == 404){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         var pathExam = "";
         var input_path = "";
         var output_path = "";

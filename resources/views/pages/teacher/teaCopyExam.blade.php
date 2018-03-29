@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','คัดลอกข้อสอบ')
 @section('content')
     <script src="js/Components/teacher/teaCopyExamCtrl.js"></script>
     <script>
@@ -52,8 +53,8 @@
                                     <option value="0">กรุณาเลือก</option>
                                     <option ng-repeat="g in myExamGroup" value="<%g.id%>"><%g.exam_group_name%></option>
                                 </select>
-                                <div class="notice" id="notice_exam_group" style="display: none">กรุณาเลือกกลุ่มข้อสอบ
-                                </div>
+                                <div class="notice" id="notice_exam_group" style="display: none">กรุณาเลือกกลุ่มข้อสอบ</div>
+                                <div class="notice" ng-hide="myExamGroup.length > 0">ไม่พบข้อมูลกลุ่มข้อสอบ กรุณาสร้างกลุ่มข้อสอบ</div>
                             </div>
                         </div>
 
@@ -384,6 +385,22 @@
         </div>
     </div>
     <script>
+        var page_permission = $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: {
+                Accept: "application/json"
+            },
+            url: url + 'permission-exam-copy',
+            data:{ exam_id : examID, user_id : user.id},
+            async: false,
+        }).responseJSON;
+
+        if(page_permission == 404){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         var pathExam = "";
         var input_path = "";
         var output_path = "";

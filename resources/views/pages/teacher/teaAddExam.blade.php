@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','เพิ่มข้อสอบ')
 @section('content')
     <script src="js/Components/teacher/teaAddExamCtrl.js"></script>
     <script>
@@ -52,6 +53,8 @@
                                     <option style="display: none"></option>
                                     <option ng-repeat="g in myExamGroup" value="<%g.id%>"><%g.exam_group_name%></option>
                                 </select>
+                                <div class="notice" id="notice_exam_group" style="display: none">กรุณาเลือกกลุ่มข้อสอบ</div>
+                                <div class="notice" ng-hide="myExamGroup.length > 0">ไม่พบข้อมูลกลุ่มข้อสอบ กรุณาสร้างกลุ่มข้อสอบ</div>
                             </div>
                         </div>
 
@@ -378,6 +381,11 @@
         </div>
     </div>
     <script>
+        if(user.user_type != 't'){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         var pathExam = "";
         var input_path = "";
         var output_path = "";

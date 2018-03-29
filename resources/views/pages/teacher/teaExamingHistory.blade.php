@@ -1,4 +1,5 @@
 @extends('layouts.userSite')
+@section('page-title','ประวัติการเปิดสอบ')
 @section('content')
     <script src="js/Components/teacher/teaExamingHistoryCtrl.js"></script>
     <div ng-controller="teaExamingHistoryCtrl" style="display: none" id="exam_history_div">
@@ -166,6 +167,11 @@
         </div>
     </div>
     <script>
+        if(user.user_type != 't'){
+            alert("คุณไม่สามารเข้าใช้งานหน้านี้ได้");
+            window.location.href = url+'home';
+        }
+
         $(document).ready(function () {
             $('#exam_history_div').css('display','block');
             $("#side_examing").removeAttr('class');
