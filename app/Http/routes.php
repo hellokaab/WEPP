@@ -20,6 +20,10 @@ Route::get('/admin-list-teacher', function () {
     return view('pages/admin/teaList');
 });
 
+Route::get('/admin-list-personnel', function () {
+    return view('pages/admin/psnList');
+});
+
 Route::get('/admin-list-student', function () {
     return view('pages/admin/stdList');
 });
@@ -241,6 +245,8 @@ Route::get('/user-find-teacher-all', 'UserController@findAllTeacher');
 
 Route::get('/user-find-student-all', 'UserController@findAllStudent');
 
+Route::get('/user-find-personnel-all', 'UserController@findAllPersonnel');
+
 Route::get('/user-find-user-id', 'UserController@findUserByID');
 
 Route::get('/user-find-event','UserController@findMyEvent' );
@@ -249,7 +255,13 @@ Route::get('/user-delete-teacher', 'UserController@deleteTeacher');
 
 Route::get('/user-delete-student', 'UserController@deleteStudent');
 
+Route::get('/user-delete-personnel', 'UserController@deletePersonnel');
+
 Route::get('/user-check-user','UserController@checkUser' );
+
+Route::get('/user-will-delete-teacher','UserController@teacherWillBeDelete' );
+
+Route::get('/user-will-delete-student','UserController@studentWillBeDelete' );
 
 //--------------------------- GroupController ---------------------------
 

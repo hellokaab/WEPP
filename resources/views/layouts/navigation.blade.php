@@ -103,7 +103,7 @@
             <li class="hidden">
                 <a href="#page-top"></a>
             </li>
-            <li id="nav_home" ng-show="user.user_type === 't' || user.user_type === 's' " style="display: none">
+            <li id="nav_home" ng-show="user.user_type === 't' || user.user_type === 's' || user.user_type === 'o'" style="display: none">
                 <a  href="{{ url('/home')}}"><i class="fa2 fa-home fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;หน้าหลัก</a>
             </li>
             <li id="nav_profile" ng-show="user.user_type != 'a'" style="display: none">
@@ -141,7 +141,7 @@
                     </li>
                 </ul>
             </div>
-            <li id="nav_group" ng-show="user.user_type === 't' || user.user_type === 's'" style="display: none">
+            <li id="nav_group" ng-show="user.user_type === 't' || user.user_type === 's' || user.user_type === 'o'" style="display: none">
                 <a href="" data-target="#nav_memu_group" data-toggle="collapse" role="presentation" class="collapsed">
                     <i class="fa2 fa-users fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;กลุ่มเรียน
                     <i id="nav_group_chevron" class="fa2 fa-chevron-left" style="float: right"></i>
@@ -158,10 +158,10 @@
                     <li role="presentation" ng-show="user.user_type === 't'">
                         <a href="{{ url('/teacher-group-join')}}">&emsp;&emsp;&nbsp;&nbsp;&nbsp;กลุ่มเรียนที่ฉันเข้าร่วม</a>
                     </li>
-                    <li role="presentation" ng-show="user.user_type === 's'">
+                    <li role="presentation" ng-show="user.user_type === 's' || user.user_type === 'o'">
                         <a href="{{ url('/student-group-all')}}">&emsp;&emsp;&nbsp;&nbsp;&nbsp;กลุ่มเรียนทั้งหมด</a>
                     </li>
-                    <li role="presentation" ng-show="user.user_type === 's'">
+                    <li role="presentation" ng-show="user.user_type === 's' || user.user_type === 'o'">
                         <a href="{{ url('/student-group-my')}}">&emsp;&emsp;&nbsp;&nbsp;&nbsp;กลุ่มเรียนของฉัน</a>
                     </li>
                 </ul>
@@ -201,13 +201,16 @@
             <li id="nav_tea_list" ng-show="user.user_type === 'a'" style="display: none">
                 <a href="{{ url('/admin-list-teacher') }}"><i class="fa2 fa-users fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;รายชื่ออาจารย์ในระบบ</a>
             </li>
+            <li id="nav_tea_list" ng-show="user.user_type === 'a'" style="display: none">
+                <a href="{{ url('/admin-list-personnel') }}"><i class="fa2 fa-users fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;รายชื่อเจ้าหน้าที่ในระบบ</a>
+            </li>
             <li id="nav_std_list" ng-show="user.user_type === 'a'" style="display: none">
                 <a href="{{ url('/admin-list-student') }}"><i class="fa2 fa-users fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;รายชื่อนักศึกษาในระบบ</a>
             </li>
             <li id="nav_admin_logout" ng-show="user.user_type === 'a'" style="display: none">
                 <a href="#" ng-click="adminLogOut()"><i class="fa2 fa-sign-out fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;ออกจากระบบ</a>
             </li>
-            <li id="nav_user_logout" ng-show="user.user_type === 't' || user.user_type === 's' " style="display: none">
+            <li id="nav_user_logout" ng-show="user.user_type === 't' || user.user_type === 's' || user.user_type === 'o'" style="display: none">
                 <a href="#" ng-click="userLogOut()"><i class="fa2 fa-sign-out fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;ออกจากระบบ</a>
             </li>
             <li role="presentation" class="dropdown" id="for-full-screen" style="display: none">

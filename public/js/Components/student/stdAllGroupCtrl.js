@@ -2,7 +2,7 @@ app.controller('stdAllGroupCtrl', ['$scope', '$window', function ($scope, $windo
     $scope.user = $window.user;
     if($window.user.user_type === 't'){
         keepHistory($window.user.id,"teacher-group-all",dtJsToDtDB(new Date()));
-    } else if ($window.user.user_type === 's'){
+    } else if ($window.user.user_type === 's' || $window.user.user_type === 'o'){
         keepHistory($window.user.id,"student-group-all",dtJsToDtDB(new Date()));
     }
 
@@ -21,7 +21,7 @@ app.controller('stdAllGroupCtrl', ['$scope', '$window', function ($scope, $windo
             if(checkJoin){
                 if($scope.user.user_type === 't'){
                     window.location.href = url+"teacher-group-other-in-"+group.id;
-                } else if ($scope.user.user_type === 's'){
+                } else if ($scope.user.user_type === 's' || $scope.user.user_type === 'o'){
                     window.location.href = url+"student-group-in-"+group.id;
                 }
             } else {
@@ -46,13 +46,13 @@ app.controller('stdAllGroupCtrl', ['$scope', '$window', function ($scope, $windo
             });
 
             var status = "";
-            $scope.user.user_type === 't' ? status = "a" : status = "s";
+            $scope.user.user_type === 't' ? status = "a" : ( $scope.user.user_type === 'o' ? status = "ao" : status = "s");
 
             setTimeout(function () {
                 createJoinGroup($scope.user.id,$scope.groupID,status);
                 if($scope.user.user_type === 't'){
                     window.location.href = url+"teacher-group-other-in-"+$scope.groupID;
-                } else if ($scope.user.user_type === 's'){
+                } else if ($scope.user.user_type === 's' || $scope.user.user_type === 'o'){
                     window.location.href = url+"student-group-in-"+$scope.groupID;
                 }
             }, 100);

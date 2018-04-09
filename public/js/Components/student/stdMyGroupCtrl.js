@@ -2,7 +2,7 @@ app.controller('stdMyGroupCtrl', ['$scope', '$window', function ($scope, $window
     $scope.user = $window.user;
     if($window.user.user_type === 't'){
         keepHistory($window.user.id,"teacher-group-join",dtJsToDtDB(new Date()));
-    } else if ($window.user.user_type === 's'){
+    } else if ($window.user.user_type === 's' || $window.user.user_type === 'o'){
         keepHistory($window.user.id,"student-group-my",dtJsToDtDB(new Date()));
     }
 

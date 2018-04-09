@@ -133,6 +133,8 @@ app.controller('teaInGroupCtrl', ['$scope', '$window', function ($scope, $window
         }
         if($scope.dataInGroup.status === 'a'){
             data.status = 'a';
+        } else if ($scope.dataInGroup.status === 'ao'){
+            data.status = 'ao';
         } else {
             if($("#view_ex")[0].checked == false && $("#view_sh")[0].checked == false && $("#edit_ex")[0].checked == false && $("#edit_sh")[0].checked == false){
                 data.status = 's';

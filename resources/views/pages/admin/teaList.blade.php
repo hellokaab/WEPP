@@ -1,4 +1,5 @@
 @extends('layouts.adminSite')
+@section('page-title','รายชื่ออาจารย์ในระบบ')
 @section('content')
     <script src="js/Components/admin/teaListCtrl.js"></script>
     <div ng-controller="teaListCtrl" style="display: none" id="tea_list_div">
@@ -85,7 +86,7 @@
                         <br>
                         <input style="margin-left: 10%; width: 80%" type="text" class="form-control text-center"
                                ng-model="teacherName" disabled/>
-                        <div style="padding-top: 3%; text-align: center">(ข้อมูลทุกอย่างที่เกี่ยวข้องกับผู้ใช้นี้จะถูกลบไปด้วย)
+                        <div id="delete_msg" style="padding-top: 3%; text-align: center">(ข้อมูลทุกอย่างที่เกี่ยวข้องกับผู้ใช้นี้จะถูกลบไปด้วย)
                         </div>
                         <br>
                         <div class="modal-footer">

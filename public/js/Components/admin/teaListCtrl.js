@@ -5,6 +5,7 @@ app.controller('teaListCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.selectRow = '10';
     //----------------------------------------------------------------------
     $scope.deleteTeacher = function (data) {
+        checkTeacherWillBeDelete(data.id);
         $scope.teacherName = data.prefix+data.fname_th+" "+data.lname_th;
         $scope.userID = data.id;
         $('#delete_teacher_modal').modal({backdrop: 'static'});
@@ -22,4 +23,26 @@ app.controller('teaListCtrl', ['$scope', '$window', function ($scope, $window) {
     $('#okSuccess').on('click',function () {
         location.reload();
     });
+    //----------------------------------------------------------------------
+    function checkTeacherWillBeDelete(UID) {
+        var willDelete = teacherWillBeDelete(UID);
+        var delete_msg = "";
+        if(willDelete.ex || willDelete.sh || willDelete.em || willDelete.st){
+            delete_msg += "(ข้อมูล ";
+            if(willDelete.ex){
+                delete_msg += "ข้อสอบ,";
+            }
+            if(willDelete.sh){
+                delete_msg += "ใบงาน,";
+            }
+            if(willDelete.ex){
+                delete_msg += "การเปิดสอบ,";
+            }
+            if(willDelete.sh){
+                delete_msg += "การสั่งงาน,";
+            }
+            delete_msg = delete_msg.substring(0,delete_msg.length-1)+" ของผู้ใช้นี้จะถูกลบไปด้วย)";
+            $("#delete_msg").html(delete_msg);
+        }
+    }
 }]);

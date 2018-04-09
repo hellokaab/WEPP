@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Admin;
+use App\Exam;
 use App\Examing;
 use App\ResExam;
 use App\ResSheet;
+use App\Sheet;
 use App\Sheeting;
 use App\User;
 use App\WebHistory;
@@ -219,7 +221,8 @@ class UserController extends Controller
         session_start();
         unset($_SESSION['ssoUserData']);
 
-        header( "location: http://localhost/WEPP/public/" );
+//        header( "location: http://localhost/WEPP/public/" );
+        header( "location: http://localhost:8000" );
         exit(0);
     }
 
@@ -261,6 +264,14 @@ class UserController extends Controller
         return response()->json($student);
     }
 
+    public function findAllPersonnel(){
+        $personnel = User::where('user_type','o')
+            ->orderBy('fname_th', 'asc')
+            ->orderBy('lname_th', 'asc')
+            ->get();
+        return response()->json($personnel);
+    }
+
     public function deleteTeacher(Request $request){
         $user = User::find($request->user_id);
         $userFolder = $user->id."_".$user->fname_en."_".$user->lname_en;
@@ -297,6 +308,65 @@ class UserController extends Controller
                 ."/Sheet_".$result_sheet->sheet_id."/".$userFolder);
         }
         $user->delete();
+    }
+
+    public function deletePersonnel(Request $request){
+        $user = User::find($request->user_id);
+        $user->delete();
+    }
+
+    public function teacherWillBeDelete(Request $request){
+        $exam = Exam::where('user_id',$request->user_id)->first();
+        if ($exam === NULL) {
+            $check_exam = false;
+        } else {
+            $check_exam = true;
+        }
+
+        $sheet = Sheet::where('user_id',$request->user_id)->first();
+        if ($sheet === NULL) {
+            $check_sheet = false;
+        } else {
+            $check_sheet = true;
+        }
+
+        $examing = Examing::where('user_id',$request->user_id)->first();
+        if ($examing === NULL) {
+            $check_examing = false;
+        } else {
+            $check_examing = true;
+        }
+
+        $sheeting = Sheeting::where('user_id',$request->user_id)->first();
+        if ($sheeting === NULL) {
+            $check_sheeting = false;
+        } else {
+            $check_sheeting = true;
+        }
+
+        $deleted = array('ex' => $check_exam,'sh' => $check_sheet,'em' => $check_examing,'st' => $check_sheeting);
+        return response()->json($deleted);
+
+    }
+
+    public function studentWillBeDelete(Request $request){
+        $res_exam = ResExam::where('user_id',$request->user_id)->first();
+        if ($res_exam === NULL) {
+            $check_exam = false;
+        } else {
+            $check_exam = true;
+        }
+
+        $res_sheet = ResSheet::where('user_id',$request->user_id)->first();
+        if ($res_sheet === NULL) {
+            $check_sheet = false;
+        } else {
+            $check_sheet = true;
+        }
+
+        $deleted = array('re' => $check_exam,'rs' => $check_sheet);
+        return response()->json($deleted);
+
     }
 
     public function rrmdir($path) {
@@ -351,7 +421,7 @@ class UserController extends Controller
                 }
             }
 
-        } else if ($request->user_type === 's'){
+        } else if ($request->user_type === 's' || $request->user_type === 'o'){
             $examing = DB::select('SELECT CONCAT(examing_name,"(",group_name,")") as event_name,start_date_time,end_date_time,CONCAT("E") AS type 
                                    FROM (
                                       SELECT a.group_id,b.group_name 
