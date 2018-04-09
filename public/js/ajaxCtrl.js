@@ -78,6 +78,19 @@ function findAllStudent() {
     return students;
 }
 
+function findAllPersonnel() {
+    var teachers = $.ajax({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            Accept: "application/json"
+        },
+        url: url + 'user-find-personnel-all',
+        async: false,
+    }).responseJSON;
+    return teachers;
+}
+
 function deleteTeacher(UID) {
     $.ajax({
         contentType: "application/json; charset=utf-8",
@@ -123,6 +136,32 @@ function deleteStudent(UID) {
                 } else {
                     $('#delete_student_part').waitMe('hide');
                     $('#delete_student_modal').modal('hide');
+                    $('#unsuccess_modal').modal({backdrop: 'static'});
+                }
+            }
+        }
+    });
+}
+
+function deletePersonnel(UID) {
+    $.ajax({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            Accept: "application/json"
+        },
+        url: url + 'user-delete-personnel',
+        data: { user_id : UID},
+        async: false,
+        complete: function (xhr) {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    $('#delete_personnel_part').waitMe('hide');
+                    $('#delete_personnel_modal').modal('hide');
+                    $('#success_modal').modal({backdrop: 'static'});
+                } else {
+                    $('#delete_personnel_part').waitMe('hide');
+                    $('#delete_personnel_modal').modal('hide');
                     $('#unsuccess_modal').modal({backdrop: 'static'});
                 }
             }
@@ -342,7 +381,7 @@ function exitGroup(UID,GID,UT) {
         complete: function (xhr) {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
-                    if(UT === 's'){
+                    if(UT === 's' || UT === 'o'){
                         window.location.href = url+'student-group-all';
                     }else if(UT === 't'){
                         window.location.href = url+'teacher-group-all';
@@ -2003,4 +2042,36 @@ function editQuizScore(RQID,score){
         async: false,
     }).responseJSON;
     return editQuizScore;
+}
+
+function teacherWillBeDelete(UID) {
+    var teaDelete = $.ajax({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            Accept: "application/json"
+        },
+        url: url + 'user-will-delete-teacher',
+        data:{
+            user_id:UID
+        },
+        async: false,
+    }).responseJSON;
+    return teaDelete;
+}
+
+function studentWillBeDelete(UID) {
+    var stdDelete = $.ajax({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            Accept: "application/json"
+        },
+        url: url + 'user-will-delete-student',
+        data:{
+            user_id:UID
+        },
+        async: false,
+    }).responseJSON;
+    return stdDelete;
 }

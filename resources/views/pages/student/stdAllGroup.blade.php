@@ -112,7 +112,7 @@
     <script>
         $(document).ready(function () {
             $('#std_group_div').css('display', 'block');
-            if(user.user_type === 's'){
+            if(user.user_type === 's' || user.user_type === 'o'){
                 $("#side_std_group").removeAttr('class');
                 $('#side_std_group').attr('class', 'active');
                 $("#std_group_chevron").removeAttr('class');

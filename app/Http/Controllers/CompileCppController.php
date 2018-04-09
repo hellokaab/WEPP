@@ -229,7 +229,7 @@ class CompileCppController extends Controller
         $this->compile_code($folder_ans);
 
         // ตรวจสอบการคอมไพล์(มีไฟล์ wepp_ans.exe ไหม)
-        if (file_exists("$folder_ans/wepp_ans.exe")) {
+        if (file_exists("$folder_ans/wepp_ans")) {
             $input_file = "";
             // คิวรี่ ไฟล์อินพุทของข้อสอบ
             if($request->mode == "exam") {
@@ -252,7 +252,7 @@ class CompileCppController extends Controller
             }
 
             // เครียร์ไฟล์ขยะ (*.exe, *.bat)
-//            $this->clearFolderAns($folder_ans);
+            $this->clearFolderAns($folder_ans);
 
             // อัพเดตสถานะการส่ง เป็นสถานะที่เช็คได้
             if($request->mode == "exam"){
@@ -279,26 +279,27 @@ class CompileCppController extends Controller
         $files = scandir($folder_code);
         $file = $files[2];
 
-        exec("Taskkill /IM wepp_ex.exe /F");
+        exec("pkill wepp_ans");
 
         // ค้าหาพาร์ทของไฟล์ที่จะคอมไฟล์
         $dir = getcwd();
-        $dir_split = explode("\\",$dir);
+        $dir_split = explode("/",$dir);
         $dir_code = "";
         for($i = 0;$i<sizeof($dir_split)-1;$i++){
-            $dir_code = $dir_code.$dir_split[$i]."\\";
+            $dir_code = $dir_code.$dir_split[$i]."/";
         }
         $dir_split = explode("/",$folder_code);
         for($i = 1;$i<sizeof($dir_split);$i++){
-            $dir_code = $dir_code.$dir_split[$i]."\\";
+            $dir_code = $dir_code.$dir_split[$i]."/";
         }
         $cmd = "cd $dir_code";
 
-        // สร้างไฟล์ .bat สำหรับการคอมไพล์
-        $file_bat = 'compile_ans.bat';
+        // สร้างไฟล์ shell script สำหรับการคอมไพล์
+        $file_bat = 'compile_ans.sh';
         $openfile = fopen("$folder_code/$file_bat", 'w');
-        fwrite($openfile, $cmd . " \n g++ ".$file." -o wepp_ans");
+        fwrite($openfile, "#!/bin/bash \n ".$cmd . " \n g++ ".$file." -o wepp_ans");
         fclose($openfile);
+        chmod("$folder_code/$file_bat", 0777);
 
         exec($dir_code.$file_bat);
     }
@@ -335,100 +336,107 @@ class CompileCppController extends Controller
 
         // แปลงรูปแบบที่อยู่ของโฟลเดอร์ข้อสอบที่ส่ง
         $dir = getcwd();
-        $dir_split = explode("\\",$dir);
+        $dir_split = explode("/",$dir);
         $dir_code = "";
         $dir_in_check_code = "";
         for($i = 0;$i<sizeof($dir_split)-1;$i++){
-            $dir_code = $dir_code.$dir_split[$i]."\\";
-            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."\\\\";
+            $dir_code = $dir_code.$dir_split[$i]."/";
+            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."/";
         }
         $dir_split = explode("/",$folder_ans);
         for($i = 1;$i<sizeof($dir_split);$i++){
-            $dir_code = $dir_code.$dir_split[$i]."\\";
-            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."\\\\";
+            $dir_code = $dir_code.$dir_split[$i]."/";
+            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."/";
         }
 
-        $code_checker = '#include <time.h>
-            #include <process.h>
-            #include <io.h>
-            #include <fcntl.h>
-            #include <stdlib.h>
-            #include <windows.h>
+        $code_checker = '
             #include <stdio.h>
+            #include <stdlib.h>
+            #include <pthread.h>
             #include <string.h>
+            #include <unistd.h>
             
+            char *strrev(char *str)
+            {
+                char *p1, *p2;
 
-            static void error(char *action)
-            {
-                fprintf(stderr, "Error %s: %d\n", action, GetLastError());
-                exit(EXIT_FAILURE);
-            }
-            void loop1(void *param)
-            {
-                int i=0;
-                for(i=0;i<'.$ruutimeIn.';i++)
+                if (! str || ! *str)
+                return str;
+                for (p1 = str, p2 = str + strlen(str) - 1; p2 > p1; ++p1, --p2)
                 {
-                    Sleep(1000);
+                    *p1 ^= *p2;
+                    *p2 ^= *p1;
+                    *p1 ^= *p2;
                 }
-                printf("OverTime\n");
-                (void)system("'.$dir_in_check_code.'kill.bat");
-                exit(0);
+                  return str;
             }
+            
+            void *timeThr(void * u)
+            {
+              int i;
+              for(i = 0; i < '.$ruutimeIn.'; i++){
+                sleep(1);
+              }
+               printf("Overtime\n");
+              (void)system("'.$dir_in_check_code.'kill.sh");
+              exit(0);
+            }
+            
+    
             main()
             {
-                HANDLE loop_thread[1];
-                loop_thread[0] = (HANDLE) _beginthread( loop1,0,NULL);
-                 if (loop_thread[0] == INVALID_HANDLE_VALUE)
-                    error("creating read thread");
-                    clock_t begin, end;
-                    double time_spent;
-                    begin = clock();
-                    
-                    FILE *fp;
-                    char path[1035];
-                    int count = 0;
-                    
-                    char ch[300] = "'.$dir_in_check_code.'";
-                	char ch2[9] = "run_ans_";
-                	char ch3[5] = ".bat";
-                	char ch4[300] = "\0";
-                	
-                	int i = 0;
-                	while(i < '.$amount_input.'){
-                		char ch4[300] = "\0";
-                		strcpy(ch4, ch);
-                		strcat(ch4, ch2);
-                		int index = 0;
-                		char iToChar[10] = "\0";
-                		int j = i;
-                		while(j >= 10){
-                			iToChar[index++] = (j % 10)+\'0\';
-                			j /= 10 ;
-                		}
-                		iToChar[index++] = j+\'0\';
-                		strrev(iToChar);
-                		strcat(ch4, iToChar);
-                		strcat(ch4, ch3);
-
-                        fp = popen(ch4, "r");
-                        if (fp == NULL) {
-                          printf("Failed to run command\n" );
-                          exit(1);
-                        }
-
-                        count = 0;
-                        while (fgets(path, sizeof(path)-1, fp) != NULL) {
-                            if(count >= 4 ){                               
-                                printf("%s", path);
-                            }
-                            count++;
-                        }
+                pthread_t tid;
+                pthread_create(&tid,NULL,&timeThr,NULL);
                 
-                        pclose(fp);
-                        i++;
+                clock_t begin, end;
+                double time_spent;
+                begin = clock();
+                    
+                FILE *fp;
+                char path[1035];
+                int count = 0;
+                    
+                char ch[300] = "'.$dir_in_check_code.'";
+                char ch2[9] = "run_ans_";
+                char ch3[4] = ".sh";
+                char ch4[300] = "\0";
+                	
+                int i = 0;
+                while(i < '.$amount_input.'){
+                	char ch4[300] = "\0";
+                	strcpy(ch4, ch);
+                	strcat(ch4, ch2);
+                	int index = 0;
+                	char iToChar[10] = "\0";
+                	int j = i;
+                	while(j >= 10){
+                		iToChar[index++] = (j % 10)+\'0\';
+                		j /= 10 ;
                 	}
+                	iToChar[index++] = j+\'0\';
+                	strrev(iToChar);
+                	strcat(ch4, iToChar);
+                	strcat(ch4, ch3);
 
-                    end = clock();time_spent = (double)(end - begin) / CLOCKS_PER_SEC;printf("\nRunTime:%f",time_spent); return 0;
+                    fp = popen(ch4, "r");
+                    if (fp == NULL) {
+                        printf("Failed to run command\n" );
+                        exit(1);
+                    }
+
+                    count = 0;
+                    while (fgets(path, sizeof(path)-1, fp) != NULL) {
+                        if(count >= 0 ){                               
+                            printf("%s\n", path);
+                        }
+                        count++;
+                    }
+                
+                    pclose(fp);
+                    i++;
+                }
+
+                end = clock();time_spent = (double)(end - begin) / CLOCKS_PER_SEC;printf("RunTime:%f",time_spent); return 0;
             }';
 
         // เขียนไฟล์สำหรับเช็คเวลา
@@ -437,50 +445,55 @@ class CompileCppController extends Controller
         fwrite($handle, $code_checker);
         fclose($handle);
 
-        // เขียนไฟล์ bat เพื่อคอมไพล์ ไฟล์ wepp_check
-        $compile_file_check = "cd ".$dir_code." \n g++ wepp_check.cpp -o wepp_check";
+        // เขียนไฟล์ sh เพื่อคอมไพล์ ไฟล์ wepp_check
+        $compile_file_check = "#!/bin/bash \n cd ".$dir_code." \n g++ -pthread wepp_check.cpp -o wepp_check";
         $file = 'compile_check';
-        $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+        $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $compile_file_check);
         fclose($handle);
+        chmod("$folder_ans/$file.sh", 0777);
 
-        // เขียนไฟล์ bat เพื่อรันไฟล์ wepp_check
-        $run_file_check = "cd ".$dir_code." \n wepp_check";
+        // เขียนไฟล์ sh เพื่อรันไฟล์ wepp_check
+        $run_file_check = "#!/bin/bash \n cd ".$dir_code." \n ./wepp_check";
         $file = 'run_check';
-        $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+        $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $run_file_check);
         fclose($handle);
+        chmod("$folder_ans/$file.sh", 0777);
 
-        // เขียนไฟล์ bat เพื่อรันไฟล์ wepp_ans
+        // เขียนไฟล์ sh เพื่อรันไฟล์ wepp_ans
         $run_file_ans = "";
         if($input_file){
             for($i = 0 ; $i < $amount_input ; $i++){
-                $run_file_ans = "cd ".$dir_code." \n wepp_ans < ".$dir_code."input".$i.".txt";
+                $run_file_ans = "#!/bin/bash \n  cd ".$dir_code." \n ./wepp_ans < ".$dir_code."input".$i.".txt";
 
                 $file = 'run_ans_'.$i;
-                $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+                $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
                 fwrite($handle, $run_file_ans);
                 fclose($handle);
+                chmod("$folder_ans/$file.sh", 0777);
             }
         } else {
-            $run_file_ans = "cd ".$dir_code." \n wepp_ans";
+            $run_file_ans = "#!/bin/bash \n  cd ".$dir_code." \n ./wepp_ans";
 
             $file = 'run_ans_0';
-            $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+            $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
             fwrite($handle, $run_file_ans);
             fclose($handle);
+            chmod("$folder_ans/$file.sh", 0777);
         }
 
-        // เขียนไฟล์ bat เพื่อปิด wepp_ans ที่รันค้างอยู่
-        $kill_file_ans = "Taskkill /IM wepp_ans.exe /F";
+        // เขียนไฟล์ sh เพื่อปิด wepp_ans ที่รันค้างอยู่
+        $kill_file_ans = "#!/bin/bash \n pkill wepp_ans";
         $file = 'kill';
-        $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+        $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $kill_file_ans);
         fclose($handle);
+        chmod("$folder_ans/$file.sh", 0777);
 
-        exec($dir_code."compile_check.bat");
+        exec($dir_code."compile_check.sh");
         $lines_run = array();
-        exec($dir_code."run_check.bat",$lines_run);
+        exec($dir_code."run_check.sh",$lines_run);
         return $lines_run;
     }
 
@@ -569,7 +582,7 @@ class CompileCppController extends Controller
         $iTime = $iOverTime = -1;
         $res_run = '';
 
-        for ($i = 4; $i < count($lines_run); $i++) {
+        for ($i = 0; $i < count($lines_run); $i++) {
             $line = $lines_run[$i];
             if (strpos($line, "RunTime:") > -1) {
                 $iTime = $i;
@@ -582,7 +595,7 @@ class CompileCppController extends Controller
             return "OverTime";
         } else if ($iTime > -1) {
 
-            $ar_res_run = array_slice($lines_run, 4, $iTime - 4);
+            $ar_res_run = array_slice($lines_run, 0, $iTime - 0);
             $i = 0;
             foreach ($ar_res_run as $val) {
                 $ar_res_run[$i] = iconv(mb_detect_encoding($val), "utf-8", $val);

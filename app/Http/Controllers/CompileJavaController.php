@@ -320,7 +320,7 @@ class CompileJavaController extends Controller
 
                 // รันโค้ดที่ส่ง
                 $lines_run = $this->run_code($input_file,$folder_ans,$request->mode,$request->exam_id,$class_name_main);
-//                return response()->json($lines_run);
+                //return response()->json($lines_run);
 
                 // ตรวจสอบคำตอบ
                 $checker = "";
@@ -473,22 +473,23 @@ class CompileJavaController extends Controller
     function compile_code($folder_code, $file_main) {
         // ค้าหาพาร์ทของไฟล์ที่จะคอมไฟล์
         $dir = getcwd();
-        $dir_split = explode("\\",$dir);
+        $dir_split = explode("/",$dir);
         $dir_code = "";
         for($i = 0;$i<sizeof($dir_split)-1;$i++){
-            $dir_code = $dir_code.$dir_split[$i]."\\";
+            $dir_code = $dir_code.$dir_split[$i]."/";
         }
         $dir_split = explode("/",$folder_code);
         for($i = 1;$i<sizeof($dir_split);$i++){
-            $dir_code = $dir_code.$dir_split[$i]."\\";
+            $dir_code = $dir_code.$dir_split[$i]."/";
         }
         $cmd = "cd $dir_code";
 
-        // สร้างไฟล์ .bat สำหรับการคอมไพล์
-        $file_bat = 'compile.bat';
+        // สร้างไฟล์ sh สำหรับการคอมไพล์
+        $file_bat = 'compile.sh';
         $openfile = fopen("$folder_code/$file_bat", 'w');
-        fwrite($openfile, $cmd . " \n javac -encoding UTF8 $file_main.java");
+        fwrite($openfile, "#!/bin/bash \n ".$cmd . " \n javac -encoding UTF8 $file_main.java");
         fclose($openfile);
+        chmod("$folder_code/$file_bat", 0777);
 
         exec($dir_code.$file_bat);
     }
@@ -525,17 +526,17 @@ class CompileJavaController extends Controller
 
         // แปลงรูปแบบที่อยู่ของโฟลเดอร์ข้อสอบที่ส่ง
         $dir = getcwd();
-        $dir_split = explode("\\",$dir);
+        $dir_split = explode("/",$dir);
         $dir_code = "";
         $dir_in_check_code = "";
         for($i = 0;$i<sizeof($dir_split)-1;$i++){
-            $dir_code = $dir_code.$dir_split[$i]."\\";
-            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."\\\\";
+            $dir_code = $dir_code.$dir_split[$i]."/";
+            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."/";
         }
         $dir_split = explode("/",$folder_ans);
         for($i = 1;$i<sizeof($dir_split);$i++){
-            $dir_code = $dir_code.$dir_split[$i]."\\";
-            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."\\\\";
+            $dir_code = $dir_code.$dir_split[$i]."/";
+            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."/";
         }
 
         $code_checker = 'import java.io.BufferedReader;
@@ -572,7 +573,7 @@ class CompileJavaController extends Controller
                     
                     for(int i=0;i<'.$amount_input.';i++){
                         try{
-                            String cmd = "'.$dir_in_check_code.'run_ans_"+(i)+".bat";
+                            String cmd = "'.$dir_in_check_code.'run_ans_"+(i)+".sh";
         
                             Runtime r = Runtime.getRuntime();
                             Process pr = r.exec(cmd);
@@ -583,7 +584,7 @@ class CompileJavaController extends Controller
                             String s ;
                             int count = 0;
 					        while ((s = stdInput.readLine()) != null) {
-						        if(count >=4)
+						        if(count >=0)
 						        {
 							        System.out.println(s);
 						        }
@@ -610,43 +611,47 @@ class CompileJavaController extends Controller
         fwrite($handle, $code_checker);
         fclose($handle);
 
-        // เขียนไฟล์ bat เพื่อคอมไพล์ ไฟล์ wepp_check
-        $compile_file_check = "cd ".$dir_code." \n javac wepp_check.java";
+        // เขียนไฟล์ sh เพื่อคอมไพล์ ไฟล์ wepp_check
+        $compile_file_check = "#!/bin/bash \n cd ".$dir_code." \n javac wepp_check.java";
         $file = 'compile_check';
-        $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+        $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $compile_file_check);
         fclose($handle);
+        chmod("$folder_ans/$file.sh", 0777);
 
-        // เขียนไฟล์ bat เพื่อรันไฟล์ wepp_check
-        $run_file_check = "cd ".$dir_code." \n java wepp_check";
+        // เขียนไฟล์ sh เพื่อรันไฟล์ wepp_check
+        $run_file_check = "#!/bin/bash \n cd ".$dir_code." \n java wepp_check";
         $file = 'run_check';
-        $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+        $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $run_file_check);
         fclose($handle);
+        chmod("$folder_ans/$file.sh", 0777);
 
-        // เขียนไฟล์ bat เพื่อรันไฟล์ที่ส่ง
+        // เขียนไฟล์ sh เพื่อรันไฟล์ที่ส่ง
         $run_file_ans = "";
         if($input_file){
             for($i = 0 ; $i < $amount_input ; $i++){
-                $run_file_ans = "cd ".$dir_code." \n java $class_name < ".$dir_code."input".$i.".txt";
+                $run_file_ans = "#!/bin/bash \n cd ".$dir_code." \n java $class_name < ".$dir_code."input".$i.".txt";
 
                 $file = 'run_ans_'.$i;
-                $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+                $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
                 fwrite($handle, $run_file_ans);
                 fclose($handle);
+                chmod("$folder_ans/$file.sh", 0777);
             }
         } else {
-            $run_file_ans = "cd ".$dir_code." \n java $class_name";
+            $run_file_ans = "#!/bin/bash \n cd ".$dir_code." \n java $class_name";
 
             $file = 'run_ans_0';
-            $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+            $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
             fwrite($handle, $run_file_ans);
             fclose($handle);
+            chmod("$folder_ans/$file.sh", 0777);
         }
 
-        exec($dir_code."compile_check.bat");
+        exec($dir_code."compile_check.sh");
         $lines_run = array();
-        exec($dir_code."run_check.bat",$lines_run);
+        exec($dir_code."run_check.sh",$lines_run);
         return $lines_run;
     }
 
@@ -729,7 +734,7 @@ class CompileJavaController extends Controller
         $iMem = $iTime = $iOverTime = -1;
         $res_run = '';
 
-        for ($i = 4; $i < count($lines_run); $i++) {
+        for ($i = 0; $i < count($lines_run); $i++) {
             $line = $lines_run[$i];
             if (strpos($line, "UsedMem:") > -1) {
                 $iMem = $i;
@@ -744,7 +749,7 @@ class CompileJavaController extends Controller
             return "OverTime";
         } else if ($iMem > -1 && $iTime > -1) {
 
-            $ar_res_run = array_slice($lines_run, 4, $iMem - 4);
+            $ar_res_run = array_slice($lines_run, 0, $iMem - 0);
             $i = 0;
             foreach ($ar_res_run as $val) {
                 $ar_res_run[$i] = iconv(mb_detect_encoding($val), "utf-8", $val);

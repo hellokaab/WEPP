@@ -1,18 +1,18 @@
 <?php
     session_start();
-    $user = array(
-        "personalId" => "0425361073012",
-        "prename" => "นาย",
-        "cn" => "Sukjai",
-        "firstNameThai" => "สุขใจ",
-        "sn" => "Sabeydee",
-        "lastNameThai" => "สบายดี",
-        "studentId" => "",
-        "faculty" => "คณะวิศวกรรมศาสตร์และสถาปัตยกรรมศาสตร์",
-        "program" => "สาขาวิชาวิศวกรรมคอมพิวเตอร์",
-        "mail" => "pongpan.kho@rmuti.ac.th",
-        "gidNumber" => "2500"
-    );
+//    $user = array(
+//        "personalId" => "0425361073012",
+//        "prename" => "นาย",
+//        "cn" => "Sukjai",
+//        "firstNameThai" => "สุขใจ",
+//        "sn" => "Sabeydee",
+//        "lastNameThai" => "สบายดี",
+//        "studentId" => "",
+//        "faculty" => "คณะวิศวกรรมศาสตร์และสถาปัตยกรรมศาสตร์",
+//        "program" => "สาขาวิชาวิศวกรรมคอมพิวเตอร์",
+//        "mail" => "pongpan.kho@rmuti.ac.th",
+//        "gidNumber" => "2500"
+//    );
 
 //    $user = array(
 //        "personalId" => "0425361073013",
@@ -70,21 +70,22 @@
 //        "gidNumber" => "4500"
 //    );
 
-//    $user = array(
-//        "personalId" => "0425361073115",
-//        "prename" => "นาย",
-//        "cn" => "Sukjai",
-//        "firstNameThai" => "สุขใจ",
-//        "sn" => "Sabeydee",
-//        "lastNameThai" => "สบายดี",
-//        "studentId" => "",
-//        "faculty" => "คณะวิศวกรรมศาสตร์และสถาปัตยกรรมศาสตร์",
-//        "program" => "สาขาวิชาวิศวกรรมคอมพิวเตอร์",
-//        "mail" => "pongpan.kho@rmuti.ac.th",
-//        "gidNumber" => "3000"
-//    );
+    $user = array(
+        "personalId" => "0425361073115",
+        "prename" => "นาย",
+        "cn" => "Hello",
+        "firstNameThai" => "ฮัลโหล",
+        "sn" => "Wayangngai",
+        "lastNameThai" => "ว่ายังไง",
+        "studentId" => "",
+        "faculty" => "คณะวิศวกรรมศาสตร์และสถาปัตยกรรมศาสตร์",
+        "program" => "สาขาวิชาวิศวกรรมคอมพิวเตอร์",
+        "mail" => "pongpan.kho@rmuti.ac.th",
+        "gidNumber" => "3000"
+    );
 
     $_SESSION['ssoUserData'] = $user;
-    header( "location: http://localhost/WEPP/public/user-login-user" );
+    header( "location: http://localhost:8000/user-login-user" );
+//    header( "location: http://localhost/WEPP/public/user-login-user" );
     exit(0);
 ?>

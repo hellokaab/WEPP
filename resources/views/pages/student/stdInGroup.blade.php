@@ -59,7 +59,7 @@
                                         <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> เข้าสอบ
                                     </button>
                                 </td>
-                                <td style="text-align: center" ng-show="myPermissionsInGroup.status === 'a' || myPermissionsInGroup.status === 'as'">
+                                <td style="text-align: center" ng-show="myPermissionsInGroup.status === 'a' || myPermissionsInGroup.status === 'as' || myPermissionsInGroup.status === 'ao'">
                                     <button class="btn btn-sm btn-outline-purple" title="score board" style="cursor:pointer" ng-click="viewScore(e)">
                                         <i class="fa fa-trophy fa-lg" aria-hidden="true"></i>
                                     </button>
@@ -105,7 +105,7 @@
                                         <i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
                                     </button>
                                 </td>
-                                <td style="text-align: center" ng-show="myPermissionsInGroup.status === 'a' || myPermissionsInGroup.status === 'as'">
+                                <td style="text-align: center" ng-show="myPermissionsInGroup.status === 'a' || myPermissionsInGroup.status === 'as' || myPermissionsInGroup.status === 'ao'">
                                     <button class="btn btn-sm btn-outline-purple" title="score board" style="cursor:pointer" ng-click="viewScore(e)">
                                         <i class="fa fa-trophy fa-lg" aria-hidden="true"></i>
                                     </button>
@@ -155,7 +155,7 @@
                                         <i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
                                     </button>
                                 </td>
-                                <td style="text-align: center" ng-show="myPermissionsInGroup.status === 'a' || myPermissionsInGroup.status === 'as'">
+                                <td style="text-align: center" ng-show="myPermissionsInGroup.status === 'a' || myPermissionsInGroup.status === 'as' || myPermissionsInGroup.status === 'ao'">
                                     <button class="btn btn-sm btn-outline-primary" title="สรุปผลคะแนน" style="cursor:pointer" ng-click="viewSheetPoint(st)">
                                         <i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i> สรุปผลคะแนน
                                     </button>
@@ -390,7 +390,7 @@
 
         $(document).ready(function () {
             $('#in_group_div').css('display', 'block');
-            if(user.user_type === 's') {
+            if(user.user_type === 's' || user.user_type === 'o') {
                 $("#side_std_group").removeAttr('class');
                 $('#side_std_group').attr('class', 'active');
                 $("#std_group_chevron").removeAttr('class');

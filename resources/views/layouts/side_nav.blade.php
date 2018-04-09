@@ -40,12 +40,12 @@
                     วันที่ 10 มิถุนายน 2560
                 </a>
             </li>
-            <li1 ng-show="user.user_type === 't' || user.user_type === 's' ">
+            <li1 ng-show="user.user_type === 't' || user.user_type === 's' || user.user_type === 'o'">
                 <a id="side_home" href="{{ url('/home') }}"><i class="fa2 fa-home fa-lg" aria-hidden="true" style="color: #db2828"></i>&nbsp;&nbsp;หน้าหลัก</a>
             </li1>
             <li2 ng-show="user.user_type === 't'">
                 <a data-target="#demo_exam" data-toggle="collapse" role="presentation" id="side_exam_store" href="" class="collapsed">
-                    <i class="fa2 fa-database fa-lg" aria-hidden="true" style="color: #f2711c"></i>&nbsp;&nbsp;คลังข้อสอบ<i id="exam_chevron" class="fa2 fa-chevron-left" style="padding-left: 118px"></i>
+                    <i class="fa2 fa-database fa-lg" aria-hidden="true" style="color: #f2711c"></i>&nbsp;&nbsp;คลังข้อสอบ<i id="exam_chevron" class="fa2 fa-chevron-left" style="float: right;padding-top: 13px;padding-right: 10px"></i> {{--padding-left: 118px--}}
                 </a>
             </li2>
             <div class="collapse" id="demo_exam">
@@ -58,7 +58,7 @@
             </div>
             <li3 ng-show="user.user_type === 't'">
                 <a data-target="#demo_sheet" data-toggle="collapse" role="presentation" id="side_sheet_store" href="" class="collapsed">
-                    <i class="fa2 fa-archive fa-lg" aria-hidden="true" style="color: #fbbd08"></i>&nbsp;&nbsp;คลังใบงาน <i id="sheet_chevron" class="fa2 fa-chevron-left" style="padding-left: 117px"></i>
+                    <i class="fa2 fa-archive fa-lg" aria-hidden="true" style="color: #fbbd08"></i>&nbsp;&nbsp;คลังใบงาน <i id="sheet_chevron" class="fa2 fa-chevron-left" style="float: right;padding-top: 13px;padding-right: 10px"></i> {{--padding-left: 117px--}}
                 </a>
             </li3>
             <div class="collapse" id="demo_sheet">
@@ -71,7 +71,7 @@
             </div>
             <li4 ng-show="user.user_type === 't'">
                 <a data-target="#demo_group" data-toggle="collapse" role="presentation" id="side_group" href="" class="collapsed">
-                    <i class="fa2 fa-users fa-lg" aria-hidden="true" style="color: #21ba45"></i>&nbsp;&nbsp;กลุ่มเรียน<i id="group_chevron" class="fa2 fa-chevron-left" style="padding-left: 128px"></i>
+                    <i class="fa2 fa-users fa-lg" aria-hidden="true" style="color: #21ba45"></i>&nbsp;&nbsp;กลุ่มเรียน<i id="group_chevron" class="fa2 fa-chevron-left" style="float: right;padding-top: 13px;padding-right: 10px"></i> {{--padding-left: 128px--}}
                 </a>
             </li4>
             <div class="collapse" id="demo_group">
@@ -85,7 +85,7 @@
             </div>
             <li5 ng-show="user.user_type === 't'">
                 <a data-target="#demo_examing" data-toggle="collapse" role="presentation" id="side_examing" href="" class="collapsed">
-                    <i class="fa2 fa-cog fa-lg" aria-hidden="true" style="color: #2185d0"></i>&nbsp;&nbsp;จัดการการสอบ<i id="examing_chevron" class="fa2 fa-chevron-left" style="padding-left: 100px"></i>
+                    <i class="fa2 fa-cog fa-lg" aria-hidden="true" style="color: #2185d0"></i>&nbsp;&nbsp;จัดการการสอบ<i id="examing_chevron" class="fa2 fa-chevron-left" style="float: right;padding-top: 13px;padding-right: 10px"></i> {{--padding-left: 100px--}}
                 </a>
             </li5>
             <div class="collapse" id="demo_examing">
@@ -98,7 +98,7 @@
             </div>
             <li6 ng-show="user.user_type === 't'">
                 <a data-target="#demo_sheeting" data-toggle="collapse" role="presentation" id="side_sheeting" href="" class="collapsed">
-                    <i class="fa2 fa-cogs fa-lg" aria-hidden="true" style="color: #6435c9"></i>&nbsp;&nbsp;จัดการการสั่งงาน<i id="sheeting_chevron" class="fa2 fa-chevron-left" style="padding-left: 85px"></i>
+                    <i class="fa2 fa-cogs fa-lg" aria-hidden="true" style="color: #6435c9"></i>&nbsp;&nbsp;จัดการการสั่งงาน<i id="sheeting_chevron" class="fa2 fa-chevron-left" style="float: right;padding-top: 13px;padding-right: 10px"></i> {{--padding-left: 85px--}}
                 </a>
             </li6>
             <div class="collapse" id="demo_sheeting">
@@ -109,9 +109,9 @@
                     </li6>
                 </ul>
             </div>
-            <li5 ng-show="user.user_type === 's'">
+            <li5 ng-show="user.user_type === 's' || user.user_type === 'o'">
                 <a data-target="#demo_std_group" data-toggle="collapse" role="presentation" id="side_std_group" href="" class="collapsed">
-                    <i class="fa2 fa-users fa-lg" aria-hidden="true" style="color: #2185d0"></i>&nbsp;&nbsp;กลุ่มเรียน<i id="std_group_chevron" class="fa2 fa-chevron-left" style="padding-left: 129px"></i>
+                    <i class="fa2 fa-users fa-lg" aria-hidden="true" style="color: #2185d0"></i>&nbsp;&nbsp;กลุ่มเรียน<i id="std_group_chevron" class="fa2 fa-chevron-left" style="float: right;padding-top: 13px;padding-right: 10px"></i> {{--padding-left: 129px--}}
                 </a>
             </li5>
             <div class="collapse" id="demo_std_group">
@@ -126,8 +126,11 @@
                 <a id="side_teaList" href="{{ url('/admin-list-teacher') }}"><i class="fa2 fa-users fa-lg" aria-hidden="true" style="color: #f2711c"></i>&nbsp;&nbsp;รายชื่ออาจารย์ในระบบ</a>
             </li2>
             <li3 ng-show="user.user_type === 'a'">
-                <a id="side_stdList" href="{{ url('/admin-list-student') }}"><i class="fa2 fa-users fa-lg" aria-hidden="true" style="color: #fbbd08"></i>&nbsp;&nbsp;รายชื่อนักศึกษาในระบบ</a>
+                <a id="side_pnsList" href="{{ url('/admin-list-personnel') }}"><i class="fa2 fa-users fa-lg" aria-hidden="true" style="color: #fbbd08"></i>&nbsp;&nbsp;รายชื่อเจ้าหน้าที่ในระบบ</a>
             </li3>
+            <li4 ng-show="user.user_type === 'a'">
+                <a id="side_stdList" href="{{ url('/admin-list-student') }}"><i class="fa2 fa-users fa-lg" aria-hidden="true" style="color: #21ba45"></i>&nbsp;&nbsp;รายชื่อนักศึกษาในระบบ</a>
+            </li4>
         </ul>
     </div>
 

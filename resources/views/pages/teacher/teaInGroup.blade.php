@@ -262,6 +262,7 @@
                                 <td ng-show="m.status === 's'">นักศึกษา</td>
                                 <td ng-show="m.status === 'a'">อาจารย์ผู้ช่วยสอน</td>
                                 <td ng-show="m.status === 'as'">ผู้ช่วยสอน</td>
+                                <td ng-show="m.status === 'ao'">เจ้าหน้าที่ผู้ช่วยสอน</td>
                                 <td style="text-align: center">
                                     <button class="btn btn-sm btn-outline-primary" title="รายละเอียด" style="cursor:pointer" ng-click="showProfile(m)">
                                         <i class="fa fa-address-card fa-lg" aria-hidden="true"></i>

@@ -181,7 +181,7 @@
                                     <div class="col-md-12">
                                         <ul class="nav nav-tabs hidden-xs hidden-sm" id="tab_test">
                                             <li class="active"><a id="li_o" style="background-color: #f77335;font-weight: 700" data-toggle="tab" href="" ng-click="changeTab('o')">All (<%pathExam.length%>)</a></li>
-                                            <li><a id="li_a" style="font-weight: 700" data-toggle="tab" href="" ng-click="changeTab('a')">Imperfect (<%resexam.sum_accep%>)</a></li>
+                                            <li><a id="li_a" style="font-weight: 700" data-toggle="tab" href="" ng-click="changeTab('a')">Accept (<%resexam.sum_accep%>)</a></li>
                                             <li><a id="li_i" style="font-weight: 700" data-toggle="tab" href="" ng-click="changeTab('i')">Imperfect (<%resexam.sum_imp%>)</a></li>
                                             <li><a id="li_w" style="font-weight: 700" data-toggle="tab" href="" ng-click="changeTab('w')">Wrong answer (<%resexam.sum_wrong%>)</a></li>
                                             <li><a id="li_c" style="font-weight: 700" data-toggle="tab" href="" ng-click="changeTab('c')">Compile error (<%resexam.sum_comerror%>)</a></li>
@@ -211,7 +211,7 @@
                                                     </div>
                                                     <div class="row" id="detail_<%p.id%>" style="display: none;">
                                                         <div style="margin-bottom: 10px">
-                                                            <div class="col-md-3"></div>
+                                                            <div class="col-md-3"><b>ประเภทไฟล์: </b> <% p.file_type %></div>
                                                             <div class="col-md-3"><b>เวลาที่ใช้: </b> <% p.time == null  ? '-' : p.time %> วินาที</div>
                                                             <div class="col-md-3"><b>หน่วยความจำที่ใช้: </b> <% p.memory == null ? '-' : p.memory %> KB</div>
                                                         </div>
@@ -290,7 +290,7 @@
 
         $(document).ready(function () {
             $('#point_board_div').css('display', 'block');
-            if(user.user_type === 's') {
+            if(user.user_type === 's'|| user.user_type === 'o') {
                 $("#side_std_group").removeAttr('class');
                 $('#side_std_group').attr('class', 'active');
                 $("#std_group_chevron").removeAttr('class');

@@ -346,11 +346,11 @@ class CompileCsController extends Controller
             $folder_ans = $resSheet->path;
         }
 
-        // ตรวจสอบว่ามีไฟล์ .bat หรือเปล่า
+        // ตรวจสอบว่ามีไฟล์ .sh หรือเปล่า
         $files = scandir($folder_ans);
         $bat = false;
         foreach ($files as $f) {
-            if (strpos($f, '.bat')) {
+            if (strpos($f, '.sh')) {
                 $bat = true;
             }
         }
@@ -450,26 +450,28 @@ class CompileCsController extends Controller
     }
 
     function create_bat($folder_code,$file_main,$str_file){
-        exec("Taskkill /IM wepp_ans.exe /F");
+//        exec("Taskkill /IM wepp_ans.exe /F");
+        exec("pkill wepp_ans");
 
         // ค้าหาพาร์ทของไฟล์ที่จะคอมไฟล์
         $dir = getcwd();
-        $dir_split = explode("\\",$dir);
+        $dir_split = explode("/",$dir);
         $dir_code = "";
         for($i = 0;$i<sizeof($dir_split)-1;$i++){
-            $dir_code = $dir_code.$dir_split[$i]."\\";
+            $dir_code = $dir_code.$dir_split[$i]."/";
         }
         $dir_split = explode("/",$folder_code);
         for($i = 1;$i<sizeof($dir_split);$i++){
-            $dir_code = $dir_code.$dir_split[$i].'\\';
+            $dir_code = $dir_code.$dir_split[$i].'/';
         }
         $cmd = "cd $dir_code";
 
-        // สร้างไฟล์ .bat สำหรับการคอมไพล์
-        $file_bat = 'compile.bat';
+        // สร้างไฟล์ sh สำหรับการคอมไพล์
+        $file_bat = 'compile.sh';
         $openfile = fopen("$folder_code/$file_bat", 'w');
-        fwrite($openfile, $cmd . " \n csc -t:exe -out:wepp_ans.exe $file_main ".$str_file."");
+        fwrite($openfile, "#!/bin/bash \n ".$cmd . " \n csc -t:exe -out:wepp_ans.exe $file_main ".$str_file."");
         fclose($openfile);
+        chmod("$folder_code/$file_bat", 0777);
 
         exec($dir_code.$file_bat);
         return $dir_code.$file_bat;
@@ -511,17 +513,17 @@ class CompileCsController extends Controller
 
         // แปลงรูปแบบที่อยู่ของโฟลเดอร์ข้อสอบที่ส่ง
         $dir = getcwd();
-        $dir_split = explode("\\",$dir);
+        $dir_split = explode("/",$dir);
         $dir_code = "";
         $dir_in_check_code = "";
         for($i = 0;$i<sizeof($dir_split)-1;$i++){
-            $dir_code = $dir_code.$dir_split[$i]."\\";
-            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."\\\\";
+            $dir_code = $dir_code.$dir_split[$i]."/";
+            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."/";
         }
         $dir_split = explode("/",$folder_ans);
         for($i = 1;$i<sizeof($dir_split);$i++){
-            $dir_code = $dir_code.$dir_split[$i]."\\";
-            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."\\\\";
+            $dir_code = $dir_code.$dir_split[$i]."/";
+            $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."/";
         }
 
         $code_checker = 'using System;
@@ -549,7 +551,7 @@ class CompileCsController extends Controller
 			    {
                     var proc = new Process {
                         StartInfo = new ProcessStartInfo {
-                            FileName = "'.$dir_in_check_code.'run_ans_"+i+".bat",
+                            FileName = "'.$dir_in_check_code.'run_ans_"+i+".sh",
                             Arguments = "command line arguments to your executable",
                             UseShellExecute = false,
                             RedirectStandardOutput = true,
@@ -561,7 +563,7 @@ class CompileCsController extends Controller
                     int count = 0;
                     while (!proc.StandardOutput.EndOfStream) {
                         string line = proc.StandardOutput.ReadLine();
-                        if(count >= 4){
+                        if(count >= 0){
                             Console.WriteLine("{0}",line);
                         }
                         count++;
@@ -588,43 +590,48 @@ class CompileCsController extends Controller
         fwrite($handle, $code_checker);
         fclose($handle);
 
-        // เขียนไฟล์ bat เพื่อคอมไพล์ ไฟล์ wepp_check
-        $compile_file_check = "cd ".$dir_code." \n csc wepp_check.cs";
+        // เขียนไฟล์ sh เพื่อคอมไพล์ ไฟล์ wepp_check
+        $compile_file_check = "#!/bin/bash \n cd ".$dir_code." \n csc wepp_check.cs";
         $file = 'compile_check';
-        $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+        $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $compile_file_check);
         fclose($handle);
+        chmod("$folder_ans/$file.sh", 0777);
 
-        // เขียนไฟล์ bat เพื่อรันไฟล์ wepp_check
-        $run_file_check = "cd ".$dir_code." \n wepp_check";
+
+        // เขียนไฟล์ sh เพื่อรันไฟล์ wepp_check
+        $run_file_check = "#!/bin/bash \n cd ".$dir_code." \n mono wepp_check.exe";
         $file = 'run_check';
-        $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+        $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $run_file_check);
         fclose($handle);
+        chmod("$folder_ans/$file.sh", 0777);
 
-        // เขียนไฟล์ bat เพื่อรันไฟล์ wepp_ans
+        // เขียนไฟล์ sh เพื่อรันไฟล์ wepp_ans
         $run_file_ans = "";
         if($input_file){
             for($i = 0 ; $i < $amount_input ; $i++){
-                $run_file_ans = "cd ".$dir_code." \n wepp_ans < ".$dir_code."input".$i.".txt";
+                $run_file_ans = "#!/bin/bash \n cd ".$dir_code." \n mono wepp_ans.exe < ".$dir_code."input".$i.".txt";
 
                 $file = 'run_ans_'.$i;
-                $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+                $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
                 fwrite($handle, $run_file_ans);
                 fclose($handle);
+                chmod("$folder_ans/$file.sh", 0777);
             }
         } else {
-            $run_file_ans = "cd ".$dir_code." \n wepp_ans";
+            $run_file_ans = "#!/bin/bash \n cd ".$dir_code." \n mono wepp_ans.exe";
 
             $file = 'run_ans_0';
-            $handle = fopen("$folder_ans/$file.bat", 'w') or die('Cannot open file:  ' . $file);
+            $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
             fwrite($handle, $run_file_ans);
             fclose($handle);
+            chmod("$folder_ans/$file.sh", 0777);
         }
 
-        exec($dir_code."compile_check.bat");
+        exec($dir_code."compile_check.sh");
         $lines_run = array();
-        exec($dir_code."run_check.bat",$lines_run);
+        exec($dir_code."run_check.sh",$lines_run);
         return $lines_run;
     }
 
@@ -703,7 +710,7 @@ class CompileCsController extends Controller
         $iMem = $iTime = $iOverTime = -1;
         $res_run = '';
 
-        for ($i = 4; $i < count($lines_run); $i++) {
+        for ($i = 0; $i < count($lines_run); $i++) {
             $line = $lines_run[$i];
             if (strpos($line, "UsedMem:") > -1) {
                 $iMem = $i;
@@ -718,7 +725,7 @@ class CompileCsController extends Controller
             return "OverTime";
         } else if ($iMem > -1 && $iTime > -1) {
 
-            $ar_res_run = array_slice($lines_run, 4, $iMem - 4);
+            $ar_res_run = array_slice($lines_run, 0, $iMem - 0);
             $i = 0;
             foreach ($ar_res_run as $val) {
                 $ar_res_run[$i] = iconv(mb_detect_encoding($val), "utf-8", $val);

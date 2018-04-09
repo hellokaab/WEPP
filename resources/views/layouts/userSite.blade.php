@@ -64,7 +64,7 @@
             }else if(user.user_type == 's') {
                 type = "นักศึกษา";
             }else {
-                type = "บุคลากร";
+                type = "เจ้าหน้าที่";
             }
             var name = "คุณ "+user.fname_th+" "+user.lname_th+' ('+type+')';
         }
@@ -72,7 +72,8 @@
     <script>
         /*Gobal Function*/
         function dtJsToDtDB(date) {
-            date = date.toLocaleString();
+            var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+            date = date.toLocaleString('th-TH');
             dt = date.split(' ');
             d = dt[0].split('/');
             r = (d[2] - 543) + '-' + d[1] + '-' + d[0] + ' ' + dt[1];

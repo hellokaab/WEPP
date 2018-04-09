@@ -1,12 +1,12 @@
 @extends('layouts.adminSite')
-@section('page-title','รายชื่อนักศึกษาที่ในระบบ')
+@section('page-title','รายชื่อเจ้าหน้าที่ในระบบ')
 @section('content')
-    <script src="js/Components/admin/stdListCtrl.js"></script>
-    <div ng-controller="stdListCtrl" style="display: none" id="std_list_div">
+    <script src="js/Components/admin/psnListCtrl.js"></script>
+    <div ng-controller="psnListCtrl" style="display: none" id="pns_list_div">
         <div class="col-md-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <b style="color: #555">รายชื่อนักศึกษาในระบบ</b>
+                    <b style="color: #555">รายชื่อเจ้าหน้าที่ในระบบ</b>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -33,36 +33,34 @@
                             <label class="col-md-2 col-xs-2 control-label" style="margin-top: 14px">แถว</label>
                         </div>
                     </div>
-                    <br>
+                        <br>
                     <div class="col-md-12 table-responsive">
                         <table class="table table-striped table-hover">
                             <thead>
-                            <tr>
-                                <th>รหัสนักศึกษา</th>
-                                <th>ชื่อ - นามสกุล</th>
-                                <th>คณะ</th>
-                                <th>สาขาวิชา</th>
-                                <th></th>
-                            </tr>
+                                <tr>
+                                    <th style="width: 25%">ชื่อ - นามสกุล</th>
+                                    <th style="width: 30%">คณะ</th>
+                                    <th style="width: 25%">สาขาวิชา</th>
+                                    <th style="width: 20%"></th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr ng-show="students.length > 0" dir-paginate="s in students|filter:query|itemsPerPage:selectRow">
-                                <td><%s.stu_id%></td>
-                                <td><%s.prefix%><%s.fname_th%> <%s.lname_th%></td>
-                                <td><%s.faculty%></td>
-                                <td><%s.department%></td>
-                                <td style="text-align: center">
-                                    <button class="btn btn-sm btn-outline-danger" title="ลบออกจากระบบ" ng-click="deleteStudent(s)">
-                                        <i class="fa fa-trash fa-lg" aria-hidden="true"></i> ลบออกจากระบบ
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr ng-hide="students.length > 0">
-                                <td>ไม่พบข้อมูล</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                                <tr ng-show="personnel.length > 0" dir-paginate="p in personnel|filter:search|itemsPerPage:selectRow">
+                                    <td><%p.prefix%><%p.fname_th%> <%p.lname_th%></td>
+                                    <td><%p.faculty%></td>
+                                    <td><%p.department%></td>
+                                    <td style="text-align: center">
+                                        <button class="btn btn-sm btn-outline-danger" title="ลบออกจากระบบ" ng-click="deletePersonnel(p)">
+                                            <i class="fa fa-trash fa-lg" aria-hidden="true"></i> ลบออกจากระบบ
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr ng-hide="personnel.length > 0">
+                                    <td>ไม่พบข้อมูล</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>
                         <dir-pagination-controls
@@ -75,11 +73,11 @@
             </div>
         </div>
 
-        <!-- Delete Student Modal -->
-        <div class="modal fade" id="delete_student_modal" role="dialog">
+        <!-- Delete Personnel Modal -->
+        <div class="modal fade" id="delete_personnel_modal" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="panel panel-danger" id="delete_student_part" style="margin-bottom: 0">
+                    <div class="panel panel-danger" id="delete_personnel_part" style="margin-bottom: 0">
                         <div class="panel-heading">
                             <h3 class="panel-title" style="color: #fff">ยืนยันการทำรายการ</h3>
                         </div>
@@ -87,8 +85,8 @@
                         <div style="padding-top: 7%; text-align: center">คุณต้องการลบผู้ใช้งานนี้หรือไม่</div>
                         <br>
                         <input style="margin-left: 10%; width: 80%" type="text" class="form-control text-center"
-                               ng-model="studentName" disabled/>
-                        <div id="delete_msg" style="padding-top: 3%; text-align: center">(ข้อมูลทุกอย่างที่เกี่ยวข้องกับผู้ใช้นี้จะถูกลบไปด้วย)
+                               ng-model="personnelName" disabled/>
+                        <div style="padding-top: 3%; text-align: center">(ข้อมูลทุกอย่างที่เกี่ยวข้องกับผู้ใช้นี้จะถูกลบไปด้วย)
                         </div>
                         <br>
                         <div class="modal-footer">
@@ -102,8 +100,8 @@
     </div>
     <script>
         $(document).ready(function () {
-            $('#std_list_div').css('display', 'block');
-            $('#side_stdList').attr('class','active');
+            $('#pns_list_div').css('display', 'block');
+            $('#side_pnsList').attr('class','active');
         });
     </script>
 @endsection

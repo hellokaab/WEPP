@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="_token" content="{{ csrf_token() }}"/>
-    {{--<title>@yield('page-title') - Software for worksheet and examination programming practice</title>--}}
+    <title>@yield('page-title') - Software for worksheet and examination programming practice</title>
     <link rel="icon" href="{!! asset('img/rmuti.ico') !!}"/>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/side_nav.css" rel="stylesheet">
