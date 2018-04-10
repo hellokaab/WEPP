@@ -21,9 +21,15 @@
                 <div class="panel-body">
                     <br>
                     <div class="col-md-12 col-xs-12" style="padding: 0px">
-                        <label style="text-decoration:underline;font-size: 18px;padding-top: 5px">การสอบ</label><button class="btn btn-sm btn-outline-success" href="" ng-click="openExaming()" style="float: right"><i class="fa fa-plus"> </i> เปิดสอบ</button>
+                        <label id="head_exam" style="cursor: pointer" data-target="#demo_group_exam" data-toggle="collapse" role="presentation">
+                            <b><i id="symbol_exam" class="fa2 fa-chevron-down"></i></b>
+                            {{--&nbsp;--}}
+                            <b style="text-decoration:underline;font-size: 18px;padding-top: 5px">การสอบ</b>
+                        </label>
+                        <button class="btn btn-sm btn-outline-success" href="" ng-click="openExaming()" style="float: right">
+                            <i class="fa fa-plus"> </i> เปิดสอบ</button>
                     </div>
-                    <div class="col-md-12 table-responsive">
+                    <div class="col-md-12 table-responsive collapse in" id="demo_group_exam">
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
@@ -86,10 +92,15 @@
                     </div>
                     <br>
                     <br>
+                    <br>
                     <div class="col-md-12 col-xs-12" style="padding: 0px">
-                        <label style="text-decoration:underline;font-size: 18px;padding-top: 5px">ประวัติการเปิดสอบ</label>
+                        <label id="head_history" style="cursor: pointer" data-target="#demo_group_history" data-toggle="collapse" role="presentation">
+                            <b><i id="symbol_history" class="fa2 fa-chevron-down"></i></b>
+                            {{--&nbsp;--}}
+                            <b style="text-decoration:underline;font-size: 18px;padding-top: 5px">ประวัติการเปิดสอบ</b>
+                        </label>
                     </div>
-                    <div class="col-md-12 table-responsive">
+                    <div class="col-md-12 table-responsive collapse in" id="demo_group_history">
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
@@ -154,10 +165,16 @@
                     </div>
                     <br>
                     <br>
+                    <br>
                     <div class="col-md-12 col-xs-12" style="padding: 0px">
-                        <label style="text-decoration:underline;font-size: 18px;padding-top: 5px">ใบงาน</label><button class="btn btn-sm btn-outline-success" href="" ng-click="openSheeting()" style="float: right"><i class="fa fa-plus"> </i> สั่งงาน</button>
+                        <label id="head_sheet" style="cursor: pointer" data-target="#demo_group_sheet" data-toggle="collapse" role="presentation">
+                            <b><i id="symbol_sheet" class="fa2 fa-chevron-down"></i></b>
+                            {{--&nbsp;--}}
+                            <b style="text-decoration:underline;font-size: 18px;padding-top: 5px">ใบงาน</b>
+                        </label>
+                        <button class="btn btn-sm btn-outline-success" href="" ng-click="openSheeting()" style="float: right"><i class="fa fa-plus"> </i> สั่งงาน</button>
                     </div>
-                    <div class="col-md-12 table-responsive">
+                    <div class="col-md-12 table-responsive collapse in" id="demo_group_sheet">
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
@@ -625,5 +642,38 @@
             window.open(url+'detail-exam-' + exam_id, '', 'scrollbars=1, width=1000, height=600');
             return false;
         }
+
+        $("#head_exam").on('click',function () {
+            if($("#head_exam")[0].className == "collapsed"){
+                $("#symbol_exam").removeAttr('class');
+                $("#symbol_exam").attr('class','fa2 fa-chevron-down');
+            } else {
+                $("#symbol_exam").removeAttr('class');
+                $("#symbol_exam").attr('class','fa2 fa-chevron-right');
+
+            }
+        });
+
+        $("#head_history").on('click',function () {
+            if($("#head_history")[0].className == "collapsed"){
+                $("#symbol_history").removeAttr('class');
+                $("#symbol_history").attr('class','fa2 fa-chevron-down');
+            } else {
+                $("#symbol_history").removeAttr('class');
+                $("#symbol_history").attr('class','fa2 fa-chevron-right');
+
+            }
+        });
+
+        $("#head_sheet").on('click',function () {
+            if($("#head_sheet")[0].className == "collapsed"){
+                $("#symbol_sheet").removeAttr('class');
+                $("#symbol_sheet").attr('class','fa2 fa-chevron-down');
+            } else {
+                $("#symbol_sheet").removeAttr('class');
+                $("#symbol_sheet").attr('class','fa2 fa-chevron-right');
+
+            }
+        });
     </script>
 @endsection
