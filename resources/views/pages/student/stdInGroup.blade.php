@@ -38,8 +38,12 @@
                         ออกจากกลุ่ม</button>
                 </div>
                 <div class="panel-body">
-                    <label style="text-decoration:underline;font-size: 18px;padding-top: 5px">การสอบ</label>
-                    <div class="col-md-12 table-responsive">
+                    <label id="head_exam" style="cursor: pointer" data-target="#demo_group_exam" data-toggle="collapse" role="presentation">
+                        <b><i id="symbol_exam" class="fa2 fa-chevron-down"></i></b>
+                        {{--&nbsp;--}}
+                        <b style="text-decoration:underline;font-size: 18px;padding-top: 5px">การสอบ</b>
+                    </label>
+                    <div class="col-md-12 table-responsive collapse in" id="demo_group_exam">
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
@@ -80,8 +84,13 @@
                     </div>
                     <br>
                     <br>
-                    <label style="text-decoration:underline;font-size: 18px;padding-top: 5px">ประวัติการสอบ</label>
-                    <div class="col-md-12 table-responsive">
+                    <br>
+                    <label id="head_history" style="cursor: pointer" data-target="#demo_group_history" data-toggle="collapse" role="presentation">
+                        <b><i id="symbol_history" class="fa2 fa-chevron-down"></i></b>
+                        {{--&nbsp;--}}
+                        <b style="text-decoration:underline;font-size: 18px;padding-top: 5px">ประวัติการเปิดสอบ</b>
+                    </label>
+                    <div class="col-md-12 table-responsive collapse in" id="demo_group_history">
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
@@ -126,8 +135,13 @@
                     </div>
                     <br>
                     <br>
-                    <label style="text-decoration:underline;font-size: 18px;padding-top: 5px">ใบงาน</label>
-                    <div class="col-md-12 table-responsive">
+                    <br>
+                    <label id="head_sheet" style="cursor: pointer" data-target="#demo_group_sheet" data-toggle="collapse" role="presentation">
+                        <b><i id="symbol_sheet" class="fa2 fa-chevron-down"></i></b>
+                        {{--&nbsp;--}}
+                        <b style="text-decoration:underline;font-size: 18px;padding-top: 5px">ใบงาน</b>
+                    </label>
+                    <div class="col-md-12 table-responsive collapse in" id="demo_group_sheet">
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
@@ -412,5 +426,38 @@
             window.open(url+'detail-exam-' + exam_id, '', 'scrollbars=1, width=1000, height=600');
             return false;
         }
+
+        $("#head_exam").on('click',function () {
+            if($("#head_exam")[0].className == "collapsed"){
+                $("#symbol_exam").removeAttr('class');
+                $("#symbol_exam").attr('class','fa2 fa-chevron-down');
+            } else {
+                $("#symbol_exam").removeAttr('class');
+                $("#symbol_exam").attr('class','fa2 fa-chevron-right');
+
+            }
+        });
+
+        $("#head_history").on('click',function () {
+            if($("#head_history")[0].className == "collapsed"){
+                $("#symbol_history").removeAttr('class');
+                $("#symbol_history").attr('class','fa2 fa-chevron-down');
+            } else {
+                $("#symbol_history").removeAttr('class');
+                $("#symbol_history").attr('class','fa2 fa-chevron-right');
+
+            }
+        });
+
+        $("#head_sheet").on('click',function () {
+            if($("#head_sheet")[0].className == "collapsed"){
+                $("#symbol_sheet").removeAttr('class');
+                $("#symbol_sheet").attr('class','fa2 fa-chevron-down');
+            } else {
+                $("#symbol_sheet").removeAttr('class');
+                $("#symbol_sheet").attr('class','fa2 fa-chevron-right');
+
+            }
+        });
     </script>
 @endsection

@@ -221,8 +221,8 @@ class UserController extends Controller
         session_start();
         unset($_SESSION['ssoUserData']);
 
-//        header( "location: http://localhost/WEPP/public/" );
-        header( "location: http://localhost:8000" );
+        header( "location: http://localhost/WEPP/public/" );
+//        header( "location: http://localhost:8000" );
         exit(0);
     }
 
