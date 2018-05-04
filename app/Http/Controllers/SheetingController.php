@@ -309,6 +309,12 @@ class SheetingController extends Controller
         $resQuiz->save();
     }
 
+    public function changeHiddenSheeting(Request $request){
+        $sheeting = Sheeting::find($request->id);
+        $sheeting->hide_sheeting = $request->hide_sheeting;
+        $sheeting->save();
+    }
+
     public function checkPermissionEditSheeting(Request $request){
         $exam = Sheeting::where('id',$request->sheeting_id)
             ->where('user_id',$request->user_id)

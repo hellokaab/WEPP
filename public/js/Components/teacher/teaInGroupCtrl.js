@@ -269,7 +269,7 @@ app.controller('teaInGroupCtrl', ['$scope', '$window', function ($scope, $window
             };
             link = 'sheeting-change-hidden';
 
-        } else if(mode === 'ss'){
+        } else if($scope.changeMode === 'ss'){
             var data = {
                 id        : $scope.changeID,
                 hide_sheeting: "1",

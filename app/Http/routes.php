@@ -535,6 +535,8 @@ Route::get('/sheeting-delete-queue-sheet', 'SheetingController@deleteFirstQueueS
 
 Route::get('/sheeting-check-queue-sheet','SheetingController@checkQueueSh');
 
+Route::get('/sheeting-change-hidden','SheetingController@changeHiddenSheeting');
+
 Route::get('/sheeting-send-quiz','SheetingController@sendQuiz');
 
 Route::post('/uploadSheetFile/{STID}/{SID}/{UID}','SheetingController@uploadSheetFile');
