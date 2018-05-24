@@ -43,6 +43,8 @@ app.controller('teaListCtrl', ['$scope', '$window', function ($scope, $window) {
             }
             delete_msg = delete_msg.substring(0,delete_msg.length-1)+" ของผู้ใช้นี้จะถูกลบไปด้วย)";
             $("#delete_msg").html(delete_msg);
+        }else {
+            $("#delete_msg").html(delete_msg);
         }
     }
 }]);

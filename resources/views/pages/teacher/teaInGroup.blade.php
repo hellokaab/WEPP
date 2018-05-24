@@ -26,8 +26,12 @@
                             {{--&nbsp;--}}
                             <b style="text-decoration:underline;font-size: 18px;padding-top: 5px">การสอบ</b>
                         </label>
+<<<<<<< HEAD
                         <button class="btn btn-sm btn-outline-success" href="" ng-click="openExaming()" style="float: right">
                             <i class="fa fa-plus"> </i> เปิดสอบ</button>
+=======
+                        <button class="btn btn-sm btn-outline-success" href="" ng-click="openExaming()" style="float: right"><i class="fa fa-plus"> </i> เปิดสอบ</button>
+>>>>>>> test
                     </div>
                     <div class="col-md-12 table-responsive collapse in" id="demo_group_exam">
                         <table class="table table-hover table-striped">
