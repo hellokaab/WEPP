@@ -221,14 +221,10 @@ class UserController extends Controller
         session_start();
         unset($_SESSION['ssoUserData']);
 
-<<<<<<< HEAD
-        header( "location: http://localhost/WEPP/public/" );
-//        header( "location: http://localhost:8000" );
-=======
 //        header( "location: http://localhost/WEPP/public/" );
 //        header( "location: http://localhost:8000" );
         header( "location: http://it.ea.rmuti.ac.th/wepp" );
->>>>>>> test
+
         exit(0);
     }
 

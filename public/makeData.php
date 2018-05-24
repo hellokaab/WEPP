@@ -83,12 +83,6 @@
 //        "mail" => "pongpan.kho@rmuti.ac.th",
 //        "gidNumber" => "3000"
 //    );
-<<<<<<< HEAD
-
-    $_SESSION['ssoUserData'] = $user;
-//    header( "location: http://localhost:8000/user-login-user" );
-    header( "location: http://localhost/WEPP/public/user-login-user" );
-=======
 
     $user = array(
         "personalId" => "1103701635487",
@@ -108,6 +102,6 @@
     header( "location: http://it.ea.rmuti.ac.th/wepp/user-login-user" );
 //    header( "location: http://localhost:8000/user-login-user" );
 //    header( "location: http://localhost/WEPP/public/user-login-user" );
->>>>>>> test
+
     exit(0);
 ?>

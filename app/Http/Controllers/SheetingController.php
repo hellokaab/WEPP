@@ -314,11 +314,7 @@ class SheetingController extends Controller
         $sheeting->hide_sheeting = $request->hide_sheeting;
         $sheeting->save();
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> test
     public function checkPermissionEditSheeting(Request $request){
         $exam = Sheeting::where('id',$request->sheeting_id)
             ->where('user_id',$request->user_id)
