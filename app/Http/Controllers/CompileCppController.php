@@ -427,7 +427,7 @@ class CompileCppController extends Controller
                     count = 0;
                     while (fgets(path, sizeof(path)-1, fp) != NULL) {
                         if(count >= 0 ){                               
-                            printf("%s\n", path);
+                            printf("%s", path);
                         }
                         count++;
                     }

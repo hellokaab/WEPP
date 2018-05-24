@@ -106,7 +106,7 @@
 
                         {{--Allow Send Late--}}
                         <div class="form-group">
-                            <label class="col-md-2 control-label">อนุญาติให้ส่งเกินเวลา</label>
+                            <label class="col-md-2 control-label">อนุญาตให้ส่งเกินเวลา</label>
                             <div class="col-md-8">
                                 <div class="radio">
                                     <div class="col-md-2">

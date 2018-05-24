@@ -83,9 +83,31 @@
 //        "mail" => "pongpan.kho@rmuti.ac.th",
 //        "gidNumber" => "3000"
 //    );
+<<<<<<< HEAD
 
     $_SESSION['ssoUserData'] = $user;
 //    header( "location: http://localhost:8000/user-login-user" );
     header( "location: http://localhost/WEPP/public/user-login-user" );
+=======
+
+    $user = array(
+        "personalId" => "1103701635487",
+        "prename" => "นาย",
+        "cn" => "Hello",
+        "firstNameThai" => "ฮัลโหล",
+        "sn" => "Wayangngai",
+        "lastNameThai" => "ว่ายังไง",
+        "studentId" => "561733022123-0",
+        "faculty" => "คณะวิศวกรรมศาสตร์และสถาปัตยกรรมศาสตร์",
+        "program" => "สาขาวิชาวิศวกรรมคอมพิวเตอร์",
+        "mail" => "pongpan.kho@rmuti.ac.th",
+        "gidNumber" => "4500"
+    );
+
+    $_SESSION['ssoUserData'] = $user;
+    header( "location: http://it.ea.rmuti.ac.th/wepp/user-login-user" );
+//    header( "location: http://localhost:8000/user-login-user" );
+//    header( "location: http://localhost/WEPP/public/user-login-user" );
+>>>>>>> test
     exit(0);
 ?>
