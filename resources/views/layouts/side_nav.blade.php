@@ -109,17 +109,17 @@
                     </li6>
                 </ul>
             </div>
-            <li5 ng-show="user.user_type === 's' || user.user_type === 'o'">
+            <li3 ng-show="user.user_type === 's' || user.user_type === 'o'">
                 <a data-target="#demo_std_group" data-toggle="collapse" role="presentation" id="side_std_group" href="" class="collapsed">
-                    <i class="fa2 fa-users fa-lg" aria-hidden="true" style="color: #2185d0"></i>&nbsp;&nbsp;กลุ่มเรียน<i id="std_group_chevron" class="fa2 fa-chevron-left" style="float: right;padding-top: 13px;padding-right: 10px"></i> {{--padding-left: 129px--}}
+                    <i class="fa2 fa-users fa-lg" aria-hidden="true" style="color: #fbbd08"></i>&nbsp;&nbsp;กลุ่มเรียน<i id="std_group_chevron" class="fa2 fa-chevron-left" style="float: right;padding-top: 13px;padding-right: 10px"></i> {{--padding-left: 129px--}}
                 </a>
-            </li5>
+            </li3>
             <div class="collapse" id="demo_std_group">
                 <ul class="list-unstyled main-menu" id="_menu_std_group" z="user-managed=">
-                    <li5 role="presentation">
+                    <li3 role="presentation">
                         <a id="side_std_allGroup" href="{{ url('/student-group-all')}}">&nbsp;&#09;&nbsp;&#09;&nbsp;&#09;&nbsp;กลุ่มเรียนทั้งหมด</a>
                         <a id="side_std_myGroup" href="{{ url('/student-group-my')}}">&nbsp;&#09;&nbsp;&#09;&nbsp;&#09;&nbsp;กลุ่มเรียนของฉัน</a>
-                    </li5>
+                    </li3>
                 </ul>
             </div>
             <li2 ng-show="user.user_type === 'a'">
@@ -131,6 +131,31 @@
             <li4 ng-show="user.user_type === 'a'">
                 <a id="side_stdList" href="{{ url('/admin-list-student') }}"><i class="fa2 fa-users fa-lg" aria-hidden="true" style="color: #21ba45"></i>&nbsp;&nbsp;รายชื่อนักศึกษาในระบบ</a>
             </li4>
+            <li7 ng-show="user.user_type === 't'">
+                <a data-target="#demo_manual_teacher" data-toggle="collapse" role="presentation" id="side_manual_teacher" href="" class="collapsed">
+                    <i class="fa2 fa-book fa-lg" aria-hidden="true" style="color: #653e17"></i>&nbsp;&nbsp;คู่มือการใช้งาน<i id="manual_teacher_chevron" class="fa2 fa-chevron-left" style="float: right;padding-top: 13px;padding-right: 10px"></i> {{--padding-left: 85px--}}
+                </a>
+            </li7>
+            <div class="collapse" id="demo_manual_teacher">
+                <ul class="list-unstyled main-menu" id="_menu_manual_teacher" z="user-managed=">
+                    <li7 role="presentation">
+                        <a id="side_manual_teacher" href="{{ url('/user-manual-teacher')}}">&nbsp;&#09;&nbsp;&#09;&nbsp;&#09;&nbsp;คู่มือสำหรับอาจารย์</a>
+                    </li7>
+                </ul>
+            </div>
+            <li5 ng-show="user.user_type === 's' || user.user_type === 'o'">
+                <a data-target="#demo_manual_student" data-toggle="collapse" role="presentation" id="side_manual_student" href="" class="collapsed">
+                    <i class="fa2 fa-book fa-lg" aria-hidden="true" style="color: #2185d0"></i>&nbsp;&nbsp;คู่มือการใช้งาน<i id="manual_student_chevron" class="fa2 fa-chevron-left" style="float: right;padding-top: 13px;padding-right: 10px"></i> {{--padding-left: 85px--}}
+                </a>
+            </li5>
+            <div class="collapse" id="demo_manual_student">
+                <ul class="list-unstyled main-menu" id="_menu_manual_student" z="user-managed=">
+                    <li5 role="presentation">
+                        <a ng-show="user.user_type === 'o'" id="side_manual_other" href="{{ url('/user-manual-other')}}">&nbsp;&#09;&nbsp;&#09;&nbsp;&#09;&nbsp;คู่มือสำหรับเจ้าหน้าที่</a>
+                        <a ng-show="user.user_type === 's'" id="side_manual_student" href="{{ url('/user-manual-student')}}">&nbsp;&#09;&nbsp;&#09;&nbsp;&#09;&nbsp;คู่มือสำหรับนักศึกษา</a>
+                    </li5>
+                </ul>
+            </div>
         </ul>
     </div>
 
@@ -225,6 +250,32 @@
             $("#side_std_group").removeAttr('class');
             $("#std_group_chevron").removeAttr('class');
             $("#std_group_chevron").attr('class','fa2 fa-chevron-left');
+
+        }
+    });
+
+    $("#side_manual_teacher").on('click',function () {
+        if($("#side_manual_teacher")[0].className == "collapsed"){
+            $("#manual_teacher_chevron").removeAttr('class');
+            $("#manual_teacher_chevron").attr('class','fa2 fa-chevron-down');
+            $("#side_manual_teacher").attr('class','active');
+        } else {
+            $("#side_manual_teacher").removeAttr('class');
+            $("#manual_teacher_chevron").removeAttr('class');
+            $("#manual_teacher_chevron").attr('class','fa2 fa-chevron-left');
+
+        }
+    });
+
+    $("#side_manual_student").on('click',function () {
+        if($("#side_manual_student")[0].className == "collapsed"){
+            $("#manual_student_chevron").removeAttr('class');
+            $("#manual_student_chevron").attr('class','fa2 fa-chevron-down');
+            $("#side_manual_student").attr('class','active');
+        } else {
+            $("#side_manual_student").removeAttr('class');
+            $("#manual_student_chevron").removeAttr('class');
+            $("#manual_student_chevron").attr('class','fa2 fa-chevron-left');
 
         }
     });

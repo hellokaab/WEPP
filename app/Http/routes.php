@@ -263,6 +263,12 @@ Route::get('/user-will-delete-teacher','UserController@teacherWillBeDelete' );
 
 Route::get('/user-will-delete-student','UserController@studentWillBeDelete' );
 
+Route::get('/user-manual-teacher','UserController@downloadManualTeacher' );
+
+Route::get('/user-manual-student','UserController@downloadManualStudent' );
+
+Route::get('/user-manual-other','UserController@downloadManualOther' );
+
 //--------------------------- GroupController ---------------------------
 
 Route::get('/group-add-group', 'GroupController@addGroup');

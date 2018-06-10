@@ -25,7 +25,7 @@
             <ol class="breadcrumb">
                 <li><a href="{{ url('/home')}}">หน้าหลัก</a></li>
                 <li>กลุ่มเรียน</li>
-                <li ng-if="user.user_type ==='s'"><a href="{{ url('/student-group-my')}}">กลุ่มเรียนของฉัน</a></li>
+                <li ng-if="user.user_type ==='s' || user.user_type ==='o'"><a href="{{ url('/student-group-my')}}">กลุ่มเรียนของฉัน</a></li>
                 <li ng-if="user.user_type ==='t'"><a href="{{ url('/teacher-group-join')}}">กลุ่มเรียนที่ฉันเข้าร่วม</a></li>
                 <li class="active"><%groupData.group_name%> (<%groupData.creater%>)</li>
             </ol>
@@ -120,8 +120,7 @@
                                     </button>
                                     &nbsp;
                                     <button class="btn btn-sm btn-outline-primary" title="สรุปผลคะแนน" style="cursor:pointer" ng-click="viewPoint(e)">
-                                        <i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i> สรุปผลคะแนน
-                                    </button>
+                                        <i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>                                    </button>
                                 </td>
                             </tr>
                             <tr ng-hide="examingEnding.length > 0">
@@ -171,7 +170,7 @@
                                 </td>
                                 <td style="text-align: center" ng-show="myPermissionsInGroup.status === 'a' || myPermissionsInGroup.status === 'as' || myPermissionsInGroup.status === 'ao'">
                                     <button class="btn btn-sm btn-outline-primary" title="สรุปผลคะแนน" style="cursor:pointer" ng-click="viewSheetPoint(st)">
-                                        <i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i> สรุปผลคะแนน
+                                        <i class="fa fa-bar-chart fa-lg" aria-hidden="true"></i>
                                     </button>
                                 </td>
                             </tr>
