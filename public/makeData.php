@@ -85,23 +85,65 @@
 //    );
 
     $user = array(
-        "personalId" => "1103701635487",
+        "personalId" => "1478523699874",
         "prename" => "นาย",
-        "cn" => "Hello",
-        "firstNameThai" => "ฮัลโหล",
-        "sn" => "Wayangngai",
-        "lastNameThai" => "ว่ายังไง",
-        "studentId" => "561733022123-0",
+        "cn" => "Test",
+        "firstNameThai" => "ทดสอบ",
+        "sn" => "Manual",
+        "lastNameThai" => "เพื่อทำคู่มือ",
+        "studentId" => "",
         "faculty" => "คณะวิศวกรรมศาสตร์และสถาปัตยกรรมศาสตร์",
         "program" => "สาขาวิชาวิศวกรรมคอมพิวเตอร์",
         "mail" => "pongpan.kho@rmuti.ac.th",
-        "gidNumber" => "4500"
+        "gidNumber" => "2500"
     );
 
+//    $user = array(
+//        "personalId" => "1435268479410",
+//        "prename" => "นาย",
+//        "cn" => "Test",
+//        "firstNameThai" => "ทดสอบ2",
+//        "sn" => "Manual",
+//        "lastNameThai" => "เพื่อทำคู่มือ",
+//        "studentId" => "",
+//        "faculty" => "คณะวิศวกรรมศาสตร์และสถาปัตยกรรมศาสตร์",
+//        "program" => "สาขาวิชาวิศวกรรมคอมพิวเตอร์",
+//        "mail" => "pongpan.kho@rmuti.ac.th",
+//        "gidNumber" => "2500"
+//    );
+
+//    $user = array(
+//        "personalId" => "1597538524653",
+//        "prename" => "นาย",
+//        "cn" => "Test",
+//        "firstNameThai" => "ทดสอบ",
+//        "sn" => "Manual",
+//        "lastNameThai" => "เพื่อทำคู่มือ",
+//        "studentId" => "561733022099-9",
+//        "faculty" => "คณะวิศวกรรมศาสตร์และสถาปัตยกรรมศาสตร์",
+//        "program" => "สาขาวิชาวิศวกรรมคอมพิวเตอร์",
+//        "mail" => "pongpan.kho@rmuti.ac.th",
+//        "gidNumber" => "4500"
+//    );
+
+//    $user = array(
+//        "personalId" => "1597538524487",
+//        "prename" => "นาย",
+//        "cn" => "Test",
+//        "firstNameThai" => "ทดสอบ",
+//        "sn" => "Manual",
+//        "lastNameThai" => "เพื่อทำคู่มือ",
+//        "studentId" => "",
+//        "faculty" => "คณะวิศวกรรมศาสตร์และสถาปัตยกรรมศาสตร์",
+//        "program" => "สาขาวิชาวิศวกรรมคอมพิวเตอร์",
+//        "mail" => "pongpan.kho@rmuti.ac.th",
+//        "gidNumber" => "3000"
+//    );
+
     $_SESSION['ssoUserData'] = $user;
-    header( "location: http://it.ea.rmuti.ac.th/wepp/user-login-user" );
+//    header( "location: http://it.ea.rmuti.ac.th/wepp/user-login-user" );
 //    header( "location: http://localhost:8000/user-login-user" );
-//    header( "location: http://localhost/WEPP/public/user-login-user" );
+    header( "location: http://localhost/WEPP/public/user-login-user" );
 
     exit(0);
 ?>

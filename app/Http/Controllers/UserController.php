@@ -12,6 +12,7 @@ use App\Sheeting;
 use App\User;
 use App\WebHistory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use DirectoryIterator;
 
@@ -221,9 +222,9 @@ class UserController extends Controller
         session_start();
         unset($_SESSION['ssoUserData']);
 
-//        header( "location: http://localhost/WEPP/public/" );
+        header( "location: http://localhost/WEPP/public/" );
 //        header( "location: http://localhost:8000" );
-        header( "location: http://it.ea.rmuti.ac.th/wepp" );
+//        header( "location: http://it.ea.rmuti.ac.th/wepp" );
 
         exit(0);
     }
@@ -461,5 +462,38 @@ class UserController extends Controller
             }
         }
         return response()->json($event);
+    }
+
+    public function downloadManualTeacher(){
+
+        $file= public_path(). "/manual/Manual(Teacher).pdf";
+
+        $headers = [
+            'Content-Type' => 'application/pdf',
+        ];
+
+        return response()->download($file, 'คู่มือการใช้งานระบบ(อาจารย์).pdf', $headers);
+    }
+
+    public function downloadManualStudent(){
+
+        $file= public_path(). "/manual/Manual(Student).pdf";
+
+        $headers = [
+            'Content-Type' => 'application/pdf',
+        ];
+
+        return response()->download($file, 'คู่มือการใช้งานระบบ(นักศึกษา).pdf', $headers);
+    }
+
+    public function downloadManualOther(){
+
+        $file= public_path(). "/manual/Manual(Other).pdf";
+
+        $headers = [
+            'Content-Type' => 'application/pdf',
+        ];
+
+        return response()->download($file, 'คู่มือการใช้งานระบบ(เจ้าหน้าที่).pdf', $headers);
     }
 }

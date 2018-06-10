@@ -774,6 +774,35 @@ footer a:hover {
     background: rgba(100, 53, 201, 0.5);
 }
 
+.sidebar-nav li7 {
+    text-indent: 20px;
+    line-height: 40px;
+
+}
+
+.sidebar-nav li7 a {
+    display: block;
+    text-decoration: none;
+    color: #777;
+}
+
+.sidebar-nav li7 a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(101, 62, 23, 0.5);
+}
+
+.sidebar-nav li7 a:active,
+.sidebar-nav li7 a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav li7 a.active{
+    text-decoration: none;
+    color: #fff;
+    background: rgba(101, 62, 23, 0.5);
+}
+
 .breadcrumb {
     padding: 8px 15px;
     margin-bottom: 20px;

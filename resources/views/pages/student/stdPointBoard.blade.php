@@ -59,9 +59,9 @@
             <ol class="breadcrumb">
                 <li><a href="{{ url('/home')}}">หน้าหลัก</a></li>
                 <li>กลุ่มเรียน</li>
-                <li ng-if="user.user_type ==='s'"><a href="{{ url('/student-group-my')}}">กลุ่มเรียนของฉัน</a></li>
+                <li ng-if="user.user_type ==='s' || user.user_type ==='o'"><a href="{{ url('/student-group-my')}}">กลุ่มเรียนของฉัน</a></li>
                 <li ng-if="user.user_type ==='t'"><a href="{{ url('/teacher-group-join')}}">กลุ่มเรียนที่ฉันเข้าร่วม</a></li>
-                <li ng-if="user.user_type ==='s'"><a href="{{ url('/student-group-in-<%examing.group_id%>')}}"><%group.group_name%> (<%group.creater%>)</a></li>
+                <li ng-if="user.user_type ==='s' || user.user_type ==='o'"><a href="{{ url('/student-group-in-<%examing.group_id%>')}}"><%group.group_name%> (<%group.creater%>)</a></li>
                 <li ng-if="user.user_type ==='t'"><a href="{{ url('/teacher-group-other-in-<%examing.group_id%>')}}"><%group.group_name%> (<%group.creater%>)</a></li>
                 <li><%examing.examing_name%></li>
                 <li class="active">สรุปผลคะแนนสอบ</li>

@@ -7,14 +7,14 @@
             <ol class="breadcrumb">
                 <li><a href="{{ url('/home')}}">หน้าหลัก</a></li>
                 <li>กลุ่มเรียน</li>
-                <li class="active" ng-if="user.user_type ==='s'">กลุ่มเรียนของฉัน</li>
+                <li class="active" ng-if="user.user_type ==='s' || user.user_type ==='o'">กลุ่มเรียนของฉัน</li>
                 <li class="active" ng-if="user.user_type ==='t'">กลุ่มเรียนที่ฉันเข้าร่วม</li>
             </ol>
         </div>
         <div class="col-md-12 col-xs-12">
             <div class="panel panel-default ">
                 <div class="panel-heading">
-                    <b ng-if="user.user_type ==='s'">กลุ่มเรียนของฉัน</b>
+                    <b ng-if="user.user_type ==='s' || user.user_type ==='o'">กลุ่มเรียนของฉัน</b>
                     <b ng-if="user.user_type ==='t'">กลุ่มเรียนที่ฉันเข้าร่วม</b>
                 </div>
                 <div class="panel-body">
@@ -54,7 +54,7 @@
                             </thead>
                             <tbody>
                             <tr ng-show="myJoinGroup.length > 0" dir-paginate="g in myJoinGroup|orderBy:[sortG,sortC]|filter:search|itemsPerPage:selectRow">
-                                <td ng-if="user.user_type ==='s'"><a href="{{ url('/student-group-in-<%g.group_id%>')}}"><%g.group_name%></a></td>
+                                <td ng-if="user.user_type ==='s' || user.user_type ==='o'"><a href="{{ url('/student-group-in-<%g.group_id%>')}}"><%g.group_name%></a></td>
                                 <td ng-if="user.user_type ==='t'"><a href="{{ url('/teacher-group-other-in-<%g.group_id%>')}}"><%g.group_name%></a></td>
                                 <td><%g.creater%></td>
                                 <td>
