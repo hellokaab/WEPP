@@ -37,7 +37,8 @@ app.controller('teaSheetBoardCtrl', ['$scope', '$window', function ($scope, $win
             $scope.thisSheet = findSheetByID($('#select_sheet_id').val());
             $scope.quizThisSheet = findQuizBySID($scope.thisSheet.id);
             $scope.sumScoreQuiz = sumFullScoreQuizInSheet();
-            $scope.dataInSheetBoard = dataInSheetBoard($scope.sheeting.group_id,$scope.thisSheet.id,$scope.sheetingID)
+            $scope.dataInSheetBoard = dataInSheetBoard($scope.sheeting.group_id,$scope.thisSheet.id,$scope.sheetingID);
+            $scope.$apply();
             $('#table_part').waitMe('hide');
         }, 200);
     });
