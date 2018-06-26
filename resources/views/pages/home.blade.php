@@ -20,7 +20,7 @@
                         <div class="panel-heading" style="height: 100%">
                             <b style="color: #555">ผู้ที่ใช้งานระบบในปัจจุบัน</b>
                         </div>
-                        <div class="panel-body" style="height: 100px">
+                        <div class="panel-body">
                             <ul>
                                 <li ng-repeat="u in userOnline"><a><%u.user_type == 't' ? "อ." : u.prefix%><%u.fname_th%> <%u.lname_th%></a></li>
                             </ul>
