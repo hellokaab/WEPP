@@ -554,6 +554,7 @@ class CompileCController extends Controller
             $handle = fopen("$file_output", "r");
             $output_teacher = trim(fread($handle, filesize("$file_output")));
             fclose($handle);
+//            return array("tea" => $output_teacher, "res"=> $run['res_run']);
 
             // คิดคำตอบเหมือน output กี่เปอร์เซ็นต์
             $percent_equal = $this->check_percentage_ans($this->modify_output($output_teacher), $this->modify_output($run['res_run']), $sheet->case_sensitive);
@@ -609,6 +610,7 @@ class CompileCController extends Controller
     }
 
     function check_percentage_ans($output_teacher, $output_run, $is_case_sensitive) {
+        $check = array();
         $count_check = 0;
         for ($i = 0; ($i < strlen($output_run) || $i < strlen($output_teacher)); $i++ ){
             try {
@@ -617,7 +619,7 @@ class CompileCController extends Controller
                     $output_run[$i] = strtolower($output_run[$i]);
                     $output_teacher[$i] = strtolower($output_teacher[$i]);
                 }
-                if (($output_teacher[$i]) && ($output_run[$i])) {
+                if (isset($output_teacher[$i]) && isset($output_run[$i])) {
                     if ($output_teacher[$i] == $output_run[$i]) {
                         $count_check++;
                     }

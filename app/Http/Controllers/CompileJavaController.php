@@ -772,7 +772,7 @@ class CompileJavaController extends Controller
                     $output_run[$i] = strtolower($output_run[$i]);
                     $output_teacher[$i] = strtolower($output_teacher[$i]);
                 }
-                if (($output_teacher[$i]) && ($output_run[$i])) {
+                if (isset($output_teacher[$i]) && isset($output_run[$i])) {
                     if ($output_teacher[$i] == $output_run[$i]) {
                         $count_check++;
                     }
