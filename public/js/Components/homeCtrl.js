@@ -7,16 +7,19 @@ app.controller('homeCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.userOnline = user_online;
 
     var event = findMyEvent($scope.user.id,$scope.user.user_type);
+    console.log(event);
     var ppEvent = prepareEventString(event);
+    console.log(ppEvent);
 
     $(document).ready(function () {
         $('#side_home').attr('class','active');
         $('#home_div').show();
 
         $('#calendar').fullCalendar({
+            themeSystem: 'jquery-ui',
             header: { center: 'month,agendaWeek,agendaDay' },
             weekends: true, // will hide Saturdays and Sundays
-            theme: 'standard',
+            // theme: 'standard',
             locale: 'th',
             // contentHeight: 600,
             events: ppEvent,
@@ -24,6 +27,14 @@ app.controller('homeCtrl', ['$scope', '$window', function ($scope, $window) {
             views: {
                 agenda: {
                     eventLimit: 6 // adjust to 6 only for agendaWeek/agendaDay
+                },
+                week: {
+                    columnHeaderFormat:'dd D'// options apply to basicWeek and agendaWeek views
+                }
+            },
+            eventClick: function(eventObj) {
+                if (eventObj.url) {
+                    window.location.href = eventObj.url;
                 }
             }
         });
@@ -80,12 +91,14 @@ app.controller('homeCtrl', ['$scope', '$window', function ($scope, $window) {
     function prepareEventString(event) {
         var arrEvent = new Array();
         event.forEach(function(e) {
+            var link = $scope.user.user_type === 't' ? 'teacher-group-my-in-' : 'student-group-in-';
             var eventData = {
                 title:  e.event_name,
                 start:  prepareDatetimeString(e.start_date_time),
                 end: prepareDatetimeString(e.end_date_time),
                 allDay: false,
-                color: e.type === 'E' ? '#5cb85c' : '#337ab7'
+                color: e.type === 'E' ? '#5cb85c' : '#337ab7',
+                url: url+link+e.group_id
             }
 
             arrEvent.push(eventData);

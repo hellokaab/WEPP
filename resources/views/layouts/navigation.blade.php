@@ -64,27 +64,27 @@
 
         $scope.userLogOut = function () {
 //            ------------- For Product -------------
-            window.location.href = "http://it.ea.rmuti.ac.th/wepp/sso/?slo&redirect=http://it.ea.rmuti.ac.th/wepp";
+//            window.location.href = "http://it.ea.rmuti.ac.th/wepp/sso/?slo&redirect=http://it.ea.rmuti.ac.th/wepp";
 
 //            ------------- For Dev -------------
-//            $.ajax ({
-//                contentType: "application/json; charset=utf-8",
-//                dataType: "json",
-//                headers: {
-//                    Accept: "application/json"
-//                },
-//                url: url + 'user-logout-user',
-//                async: false,
-//                complete: function (xhr) {
-//                    if (xhr.readyState == 4) {
-//                        if (xhr.status == 200) {
-//                            window.location.href = url;
-//                        }else {
-//                            alert('ผิดพลาด');
-//                        }
-//                    }
-//                }
-//            });
+            $.ajax ({
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: {
+                    Accept: "application/json"
+                },
+                url: url + 'user-logout-user',
+                async: false,
+                complete: function (xhr) {
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            window.location.href = url;
+                        }else {
+                            alert('ผิดพลาด');
+                        }
+                    }
+                }
+            });
         }
     });
 </script>
