@@ -50,6 +50,10 @@ Route::get('/detail-sheet-{id}', function ($id) {
     return view('pages/detailSheet', $data);
 });
 
+Route::get('/get-now', function () {
+    return response()->json(date("Y-m-d H:i:s"));
+});
+
 // -------- Teacher --------
 
 Route::get('/teacher-group-my', function () {

@@ -74,6 +74,8 @@ app.controller('teaExamingHistoryCtrl', ['$scope', '$window', function ($scope, 
                             body += '<td style="text-align: center;background-color: ' + (i % 2 === 0 ? '#4FC1E9' : '#3BAFDA') + '" ' + s + '</td>';
                         } else if (res[0].current_status === "m"){
                             body += '<td style="text-align: center;background-color: ' + (i % 2 === 0 ? '#EC87C0' : '#D770AD') + '" ' + s + '</td>';
+                        } else if (res[0].current_status === "q"){
+                            body += '<td style="text-align: center;background-color: ' + (i % 2 === 0 ? '' : '') + '" ' + s + '</td>';
                         }
                     } else {
                         s = 'class="hidden-print hidden-xs hidden-sm">' + 0 + '/' + 0 + '/' + 0 + '/' + 0 + '/' + 0 + '/' + 0;
