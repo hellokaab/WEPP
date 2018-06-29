@@ -13,7 +13,7 @@
 	//
 	//   Automatic replace when browse to http(s)://$host_name/project_dir/sso
 	//
-    $entityId = 'it.ea.rmuti.ac.th/eaquest';
+    $entityId = 'it.ea.rmuti.ac.th/wepp';
 	
 	// = IdP certificate fingerprint =
     $certFingerprint = 'e99bf5f777fa1ec6cf7232420207b7a97a8be8e1';
