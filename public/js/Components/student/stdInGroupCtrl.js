@@ -17,14 +17,15 @@ app.controller('stdInGroupCtrl', ['$scope', '$window', function ($scope, $window
 
     //----------------------------------------------------------------------
     $scope.checkStart = function (examing) {
-        var currentDate = new Date();
+        var currentDate = getNow();
+        currentDate = new Date(dtDBToDtJs(currentDate));
         var examingDate = new Date(dtDBToDtJs(examing.start_date_time));
         // examingDate = new Date(examingDate.valueOf()+ examingDate.getTimezoneOffset() * 60000);
         if(currentDate > examingDate){
             return true;
         }
         return false;
-    }
+    };
     //----------------------------------------------------------------------
     $scope.exitGroup = function () {
         $scope.groupName = $scope.groupData.group_name;
@@ -119,7 +120,7 @@ app.controller('stdInGroupCtrl', ['$scope', '$window', function ($scope, $window
     //----------------------------------------------------------------------
     $scope.checkInTime = function (data) {
         var inTime = false;
-        now = new Date();
+        now = new Date(dtDBToDtJs(getNow()));
         // startTime = dtPickerToDtJs(data.start_date_time);
         startTime = dtDBToDtJs(data.start_date_time);
         startTime = new Date(startTime);

@@ -2075,3 +2075,16 @@ function studentWillBeDelete(UID) {
     }).responseJSON;
     return stdDelete;
 }
+
+function getNow() {
+    var now = $.ajax({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            Accept: "application/json"
+        },
+        url: url + 'get-now',
+        async: false,
+    }).responseJSON;
+    return now;
+}
