@@ -19,89 +19,115 @@ use App\Http\Requests;
 class CompileCppController extends Controller
 {
     public function sendExamCpp(Request $request){
+        $checkConio = TRUE;
         $folder_ans = "";
         $resExamID = "";
         $completeInsRes = false;
         // ถ้าพิมพ์โค้ดส่ง
         if($request->mode === "key") {
             $code = $request->code;
+            // เช็คไลบารี่ conio.h
+            $checkConio = $this->check_conio($code);
+            if ($checkConio) {
+                // สร้างโฟลเดอร์เก็บไฟล์ที่ส่ง
+                $user = User::find($request->UID);
+                $userFolder = $user->stu_id . "_" . $user->fname_en . "_" . $user->lname_en;
+                $examingFolder = "Examing_" . $request->EMID;
+                $examFolder = "Exam_" . $request->EID;
+                $path = "../upload/res_exam/";
+                // สร้างโฟลเดอร์เก็บข้อสอบที่ส่ง
+                $this->makeFolder("../upload/", "res_exam");
+                // สร้างโฟลเดอร์ของการสอบ
+                $this->makeFolder($path, $examingFolder);
+                // สร้างโฟลเดอร์ของข้อสอบในการสอบ
+                $this->makeFolder($path . $examingFolder . "/", $examFolder);
+                // สร้างโฟลเดอร์ของนักเรียนที่ส่งข้อสอบ
+                $this->makeFolder($path . $examingFolder . "/" . $examFolder . "/", $userFolder);
+                $folderName = date('Ymd-His') . "_" . rand(1, 9999);
+                $folder_ans = $path . $examingFolder . "/" . $examFolder . "/" . $userFolder . "/" . $folderName;
+                mkdir($folder_ans, 0777, true);
 
-            // สร้างโฟลเดอร์เก็บไฟล์ที่ส่ง
-            $user = User::find($request->UID);
-            $userFolder = $user->stu_id . "_" . $user->fname_en . "_" . $user->lname_en;
-            $examingFolder = "Examing_" . $request->EMID;
-            $examFolder = "Exam_" . $request->EID;
-            $path = "../upload/res_exam/";
-            // สร้างโฟลเดอร์เก็บข้อสอบที่ส่ง
-            $this->makeFolder("../upload/","res_exam");
-            // สร้างโฟลเดอร์ของการสอบ
-            $this->makeFolder($path, $examingFolder);
-            // สร้างโฟลเดอร์ของข้อสอบในการสอบ
-            $this->makeFolder($path . $examingFolder . "/", $examFolder);
-            // สร้างโฟลเดอร์ของนักเรียนที่ส่งข้อสอบ
-            $this->makeFolder($path . $examingFolder . "/" . $examFolder . "/", $userFolder);
-            $folderName = date('Ymd-His') . "_" . rand(1, 9999);
-            $folder_ans = $path . $examingFolder . "/" . $examFolder . "/" . $userFolder . "/" . $folderName;
-            mkdir($folder_ans, 0777, true);
+                // ตั้งชื่อว่า resexam
+                $file_name = "wepp_res_exam";
+                $file_ans = "$file_name.cpp";
 
-            // ตั้งชื่อว่า resexam
-            $file_name = "wepp_res_exam";
-            $file_ans = "$file_name.cpp";
-
-            // เขียนไฟล์
-            $handle = fopen("$folder_ans/$file_ans", 'w') or die('Cannot open file:  ' . $file_ans);
-            fwrite($handle, $code);
-            fclose($handle);
+                // เขียนไฟล์
+                $handle = fopen("$folder_ans/$file_ans", 'w') or die('Cannot open file:  ' . $file_ans);
+                fwrite($handle, $code);
+                fclose($handle);
+            }
         } else {
             // แต่ถ้าส่งไฟล์โค้ดมา
             $folder_ans = $request->path;
+            $files = scandir($folder_ans);
+            foreach ($files as $f) {
+                // ลูปเช็ค package ทุกไฟล์ที่มีนามสกุล .java
+                if (strpos($f, '.c') && $checkConio) {
+                    $handle = fopen("$folder_ans/$f", "r");
+                    $code_in_file = fread($handle, filesize("$folder_ans/$f"));
+                    fclose($handle);
+                    $checkConio = $this->check_conio($code_in_file);
+                }
+            }
+
+            if(!$checkConio){
+                // ลบไฟล์ที่ถูกส่งมา
+                $files = scandir($folder_ans);
+                foreach ($files as $f) {
+                    @unlink("$folder_ans/$f");
+                }
+                rmdir($folder_ans);
+            }
         }
 
         try{
+            if ($checkConio) {
+                // บันทึกลงฐานข้อมูล ตาราง res_exams
+                $resExam = ResExam::where('examing_id', $request->EMID)
+                    ->where('exam_id', $request->EID)
+                    ->where('user_id', $request->UID)
+                    ->first();
+                if ($resExam === NULL) {
+                    $resExam = new ResExam;
+                    $resExam->examing_id = $request->EMID;
+                    $resExam->exam_id = $request->EID;
+                    $resExam->user_id = $request->UID;
+                    $resExam->current_status = "q";
+                    $resExam->sum_accep = 0;
+                    $resExam->sum_imp = 0;
+                    $resExam->sum_wrong = 0;
+                    $resExam->sum_comerror = 0;
+                    $resExam->sum_overtime = 0;
+                    $resExam->sum_overmem = 0;
+                    $resExam->save();
+                    $insertedId = $resExam->id;
+                    $resExamID = $insertedId;
+                } else {
+                    $resExamID = $resExam->id;
+                }
+                $completeInsRes = true;
 
-            // บันทึกลงฐานข้อมูล ตาราง res_exams
-            $resExam = ResExam::where('examing_id',$request->EMID)
-                ->where('exam_id',$request->EID)
-                ->where('user_id',$request->UID)
-                ->first();
-            if($resExam === NULL){
-                $resExam = new ResExam;
-                $resExam->examing_id = $request->EMID;
-                $resExam->exam_id = $request->EID;
-                $resExam->user_id = $request->UID;
-                $resExam->current_status = "q";
-                $resExam->sum_accep = 0;
-                $resExam->sum_imp = 0;
-                $resExam->sum_wrong = 0;
-                $resExam->sum_comerror = 0;
-                $resExam->sum_overtime = 0;
-                $resExam->sum_overmem = 0;
-                $resExam->save();
-                $insertedId = $resExam->id;
-                $resExamID = $insertedId;
+                // บันทึกลงฐานข้อมูล ตาราง path_exams
+                $pathExam = new PathExam();
+                $pathExam->res_exam_id = $resExamID;
+                $pathExam->path = $folder_ans;
+                $pathExam->status = "q";
+                $pathExam->send_date_time = $request->send_date_time;
+                $pathExam->file_type = "cpp";
+                $pathExam->ip = $_SERVER['REMOTE_ADDR'];
+                $pathExam->save();
+                $insertedId = $pathExam->id;
+                $pathExamID = $insertedId;
+
+                // บันทึกลงฐานข้อมูล queue_exams
+                $Queue = new QueueExam();
+                $Queue->path_exam_id = $pathExamID;
+                $Queue->file_type = "cpp";
+                $Queue->save();
+                return response()->json($pathExamID);
             } else {
-                $resExamID = $resExam->id;
+                return response()->json(['error' => 'Error msg'], 209);
             }
-            $completeInsRes = true;
-
-            // บันทึกลงฐานข้อมูล ตาราง path_exams
-            $pathExam = new PathExam();
-            $pathExam->res_exam_id = $resExamID;
-            $pathExam->path = $folder_ans;
-            $pathExam->status = "q";
-            $pathExam->send_date_time = $request->send_date_time;
-            $pathExam->file_type = "cpp";
-            $pathExam->ip = $_SERVER['REMOTE_ADDR'];
-            $pathExam->save();
-            $insertedId = $pathExam->id;
-            $pathExamID = $insertedId;
-
-            // บันทึกลงฐานข้อมูล queue_exams
-            $Queue = new QueueExam();
-            $Queue->path_exam_id = $pathExamID;
-            $Queue->file_type = "cpp";
-            $Queue->save();
-            return response()->json($pathExamID);
 
         } catch( \Exception $e ){
             if($completeInsRes){
@@ -778,6 +804,16 @@ class CompileCppController extends Controller
                 @unlink("$folder_ans/$f");
             }
         }
+    }
+
+    function check_conio($code) {
+        $code_split = explode("\n",$code);
+        foreach ($code_split as $line) {
+            if (is_int(strpos($line, '#include')) && is_int(strpos($line, 'conio.h'))) {
+                return FALSE;
+            }
+        }
+        return TRUE;
     }
 
     public function rrmdir($path) {

@@ -279,7 +279,7 @@
         });
 
         function getNow() {
-            a = new Date();
+            a = new Date(dtDBToDtJs(getDateNow()));
             b = dtDBToDtJs(examing.end_date_time);
             b = new Date(b);
             total = b.getTime() - a.getTime();
