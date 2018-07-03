@@ -2076,7 +2076,7 @@ function studentWillBeDelete(UID) {
     return stdDelete;
 }
 
-function getNow() {
+function getDateNow() {
     var now = $.ajax({
         contentType: "application/json; charset=utf-8",
         dataType: "json",

@@ -17,7 +17,7 @@ app.controller('stdInGroupCtrl', ['$scope', '$window', function ($scope, $window
 
     //----------------------------------------------------------------------
     $scope.checkStart = function (examing) {
-        var currentDate = getNow();
+        var currentDate = getDateNow();
         currentDate = new Date(dtDBToDtJs(currentDate));
         var examingDate = new Date(dtDBToDtJs(examing.start_date_time));
         // examingDate = new Date(examingDate.valueOf()+ examingDate.getTimezoneOffset() * 60000);
@@ -120,7 +120,7 @@ app.controller('stdInGroupCtrl', ['$scope', '$window', function ($scope, $window
     //----------------------------------------------------------------------
     $scope.checkInTime = function (data) {
         var inTime = false;
-        now = new Date(dtDBToDtJs(getNow()));
+        now = new Date(dtDBToDtJs(getDateNow()));
         // startTime = dtPickerToDtJs(data.start_date_time);
         startTime = dtDBToDtJs(data.start_date_time);
         startTime = new Date(startTime);

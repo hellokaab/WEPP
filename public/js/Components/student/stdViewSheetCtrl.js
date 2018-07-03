@@ -107,82 +107,27 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
     $scope.okSend = function () {
         checked = 0;
         var result = "";
-        if($scope.inputMode === 'key_input'){
-            if($scope.codeSheet.length > 0){
-                data = {
-                    STID : $scope.sheeting.id,
-                    SID : $scope.sheetID,
-                    UID : user.id,
-                    code : $scope.codeSheet,
-                    mode : "key",
-                    send_date_time : dtJsToDtDB(new Date()),
-                    send_late : checkSendLate()
-                };
-                // ถ้าเป็นไฟล์ .c
-                if($scope.selectFileType === "c"){
-                    sendSheetC(data);
-                }
-
-                // ถ้าเป็นไฟล์ .cpp
-                else if($scope.selectFileType === "cpp"){
-                    sendSheetCpp(data);
-                }
-
-                // ถ้าเป็นไฟล์ .java
-                else if($scope.selectFileType === "java"){
-                    sendSheetJava(data);
-                }
-
-                // ถ้าเป็นไฟล์ .cs
-                else if($scope.selectFileType === "cs"){
-                    sendSheetCs(data);
-                }
-                sendQuiz();
-            } else {
-                if($scope.thisStatus != 'a'){
-                    $('#notice_sheet_key_ans').html('* กรุณาใส่โค้ดโปรแกรม').show();
-                } else {
-                    sendQuiz();
-                    $('#detail_sheet_modal').modal('hide');
-                }
-            }
-        } else {
-            if($("#file_ans")[0].files.length > 0){
-                checkFile = checkFileType($("#file_ans")[0].files);
-                if(checkFile){
-                    $window.sheetID = $scope.sheetID;
-                    $('#AnsFileForm').submit();
-
+        check_intime = checkSendLate();
+        if(check_intime.inTime){
+            if($scope.inputMode === 'key_input'){
+                if($scope.codeSheet.length > 0){
                     data = {
-                        path : $window.sheet_path,
                         STID : $scope.sheeting.id,
                         SID : $scope.sheetID,
                         UID : user.id,
-                        mode : "file",
+                        code : $scope.codeSheet,
+                        mode : "key",
                         send_date_time : dtJsToDtDB(new Date()),
-                        send_late : checkSendLate()
+                        send_late : check_intime.late
                     };
-
                     // ถ้าเป็นไฟล์ .c
                     if($scope.selectFileType === "c"){
-                        if(($("#file_ans")[0].files).length > 1){
-                            $('#detail_sheet_part').waitMe('hide');
-                            $('#err_message').html('ไม่อนุญาตให้ส่งไฟล์ .c มากกว่า 1 ไฟล์');
-                            $('#fail_modal').modal('show');
-                        } else {
-                            sendSheetC(data);
-                        }
+                        sendSheetC(data);
                     }
 
                     // ถ้าเป็นไฟล์ .cpp
                     else if($scope.selectFileType === "cpp"){
-                        if(($("#file_ans")[0].files).length > 1){
-                            $('#detail_sheet_part').waitMe('hide');
-                            $('#err_message').html('ไม่อนุญาตให้ส่งไฟล์ .cpp มากกว่า 1 ไฟล์');
-                            $('#fail_modal').modal('show');
-                        } else {
-                            sendSheetCpp(data);
-                        }
+                        sendSheetCpp(data);
                     }
 
                     // ถ้าเป็นไฟล์ .java
@@ -196,26 +141,105 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
                     }
                     sendQuiz();
                 } else {
-                    $('#detail_sheet_part').waitMe('hide');
-                    $('#err_message').html('ประเภทของไฟล์ที่คุณส่ง ไม่ตรงกับประเภทไฟล์ที่ระบุ');
-                    $('#fail_modal').modal('show');
+                    if($scope.thisStatus != 'a'){
+                        $('#notice_sheet_key_ans').html('* กรุณาใส่โค้ดโปรแกรม').show();
+                    } else {
+                        sendQuiz();
+                        $('#detail_sheet_modal').modal('hide');
+                    }
                 }
             } else {
-                $('#notice_sheet_file_ans').html('* กรุณาเลือกไฟล์').show();
+                if($("#file_ans")[0].files.length > 0){
+                    checkFile = checkFileType($("#file_ans")[0].files);
+                    if(checkFile){
+                        $window.sheetID = $scope.sheetID;
+                        $('#AnsFileForm').submit();
+
+                        data = {
+                            path : $window.sheet_path,
+                            STID : $scope.sheeting.id,
+                            SID : $scope.sheetID,
+                            UID : user.id,
+                            mode : "file",
+                            send_date_time : dtJsToDtDB(new Date()),
+                            send_late : check_intime.late
+                        };
+
+                        // ถ้าเป็นไฟล์ .c
+                        if($scope.selectFileType === "c"){
+                            if(($("#file_ans")[0].files).length > 1){
+                                $('#detail_sheet_part').waitMe('hide');
+                                $('#err_message').html('ไม่อนุญาตให้ส่งไฟล์ .c มากกว่า 1 ไฟล์');
+                                $('#fail_modal').modal('show');
+                            } else {
+                                sendSheetC(data);
+                            }
+                        }
+
+                        // ถ้าเป็นไฟล์ .cpp
+                        else if($scope.selectFileType === "cpp"){
+                            if(($("#file_ans")[0].files).length > 1){
+                                $('#detail_sheet_part').waitMe('hide');
+                                $('#err_message').html('ไม่อนุญาตให้ส่งไฟล์ .cpp มากกว่า 1 ไฟล์');
+                                $('#fail_modal').modal('show');
+                            } else {
+                                sendSheetCpp(data);
+                            }
+                        }
+
+                        // ถ้าเป็นไฟล์ .java
+                        else if($scope.selectFileType === "java"){
+                            sendSheetJava(data);
+                        }
+
+                        // ถ้าเป็นไฟล์ .cs
+                        else if($scope.selectFileType === "cs"){
+                            sendSheetCs(data);
+                        }
+                        sendQuiz();
+                    } else {
+                        $('#detail_sheet_part').waitMe('hide');
+                        $('#err_message').html('ประเภทของไฟล์ที่คุณส่ง ไม่ตรงกับประเภทไฟล์ที่ระบุ');
+                        $('#fail_modal').modal('show');
+                    }
+                } else {
+                    $('#notice_sheet_file_ans').html('* กรุณาเลือกไฟล์').show();
+                }
             }
+        } else {
+            $('#detail_sheet_modal').modal('hide');
+            $('#err_message').html('ไม่สามารถส่งใบงานได้ เนื่องจากหมดเวลาทำใบงาน');
+            $('#fail_modal').modal('show');
         }
+
     }
     //----------------------------------------------------------------------
     function checkSendLate() {
-        var sendLate = 0;
-        now = new Date();
+        var sendLate =
+            {
+                inTime : true,
+                late : 0
+            };
+        now = new Date(dtDBToDtJs(getDateNow()));
         // endTime = dtPickerToDtJS($scope.sheeting.end_date_time);
         endTime = dtDBToDtJs($scope.sheeting.end_date_time);
         endTime = new Date(endTime);
         // endTime = new Date(endTime.valueOf()+ endTime.getTimezoneOffset() * 60000);
 
         if(now > endTime){
-            sendLate = 1;
+            if($scope.sheeting.send_late === "0"){
+                sendLate =
+                    {
+                        inTime : false,
+                        late : 0
+                    };
+            } else {
+                sendLate =
+                    {
+                        inTime : true,
+                        late : 1
+                    };
+            }
         }
         return sendLate;
     }
@@ -259,7 +283,7 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
                         $('#detail_sheet_modal').modal('hide');
                     } else if (xhr.status == 209) {
                         $('#detail_sheet_modal').modal('hide');
-                        $('#err_message').html('โค้ดที่ส่งห้ามมี comment');
+                        $('#err_message').html('ไม่สามารถส่งโปรแกรมที่มีไลบารี่ conio.h ได้');
                         $('#fail_modal').modal('show');
                     } else {
                         $('#detail_sheet_modal').modal('hide');
@@ -292,7 +316,7 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
                         $('#detail_sheet_modal').modal('hide');
                     } else if (xhr.status == 209) {
                         $('#detail_sheet_modal').modal('hide');
-                        $('#err_message').html('โค้ดที่ส่งห้ามมี comment');
+                        $('#err_message').html('ไม่สามารถส่งโปรแกรมที่มีไลบารี่ conio.h ได้');
                         $('#fail_modal').modal('show');
                     } else {
                         $('#detail_sheet_modal').modal('hide');

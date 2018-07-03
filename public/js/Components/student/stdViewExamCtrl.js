@@ -189,7 +189,7 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
                         $('#detail_exam_modal').modal('hide');
                     } else if (xhr.status == 209) {
                         $('#detail_exam_modal').modal('hide');
-                        $('#err_message').html('โค้ดที่ส่งห้ามมี comment');
+                        $('#err_message').html('ไม่สามารถส่งโปรแกรมที่มีไลบารี่ conio.h ได้');
                         $('#fail_modal').modal('show');
                     } else {
                         $('#detail_exam_modal').modal('hide');
@@ -222,7 +222,7 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
                         $('#detail_exam_modal').modal('hide');
                     } else if (xhr.status == 209) {
                         $('#detail_exam_modal').modal('hide');
-                        $('#err_message').html('โค้ดที่ส่งห้ามมี comment');
+                        $('#err_message').html('ไม่สามารถส่งโปรแกรมที่มีไลบารี่ conio.h ได้');
                         $('#fail_modal').modal('show');
                     } else {
                         $('#detail_exam_modal').modal('hide');
