@@ -27,17 +27,50 @@
         }
     });
 
+    $(function() {
+        var nowDateTime=new Date("<?=date("m/d/Y H:i:s")?>");
+        var d=nowDateTime.getTime();
+        var mkHour,mkMinute,mkSecond;
+        setInterval(function(){
+            d=parseInt(d)+1000;
+            var nowDateTime=new Date(d);
+            mkHour=new String(nowDateTime.getHours());
+            if(mkHour.length==1){
+                mkHour="0"+mkHour;
+            }
+            mkMinute=new String(nowDateTime.getMinutes());
+            if(mkMinute.length==1){
+                mkMinute="0"+mkMinute;
+            }
+            mkSecond=new String(nowDateTime.getSeconds());
+            if(mkSecond.length==1){
+                mkSecond="0"+mkSecond;
+            }
+            var runDateTime=mkHour+":"+mkMinute+":"+mkSecond;
+            $("#css_time_run").html(runDateTime);
+        },1000);
+
+    });
     app.controller("sideNavCtrl", function($scope) {
         $scope.user = user;
     });
+
+
 </script>
 <div id="wrapper" class="toggled" ng-controller="sideNavCtrl">
     <!-- Sidebar -->
     <div id="sidebar-wrapper" style="display: none">
         <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#" id="a_today">
+            <li class="sidebar-brand" style="margin-left: 20px">
+                <a href="#" id="a_today" >
                     วันที่ 10 มิถุนายน 2560
+                </a>
+            </li>
+            <li class="sidebar-brand2" >
+                <a href="#" id="time" style="line-height:0%;margin-left: 60px;font-size: 18px">
+                    <div id="css_time_run">
+                        <?=date("H:i:s")?>
+                    </div>
                 </a>
             </li>
             <li1 ng-show="user.user_type === 't' || user.user_type === 's' || user.user_type === 'o'">
