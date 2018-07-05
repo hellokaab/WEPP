@@ -152,8 +152,19 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-7" style="padding-top: 10px">
-                                        <b>สถานะการส่งคำตอบ : </b><b id="status_sheet">ผ่าน</b>
+                                        {{--<b>สถานะการส่งคำตอบ : </b><b id="status_sheet">ผ่าน</b>--}}
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <b>สถานะการส่งคำตอบ : </b><b id="status_sheet">ผ่าน</b>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <b>เวลาที่ส่ง : </b><z id="send_time_sheet">ผ่าน</z>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <br class="hidden-xs hidden-sm">
                                     <br class="hidden-md hidden-lg">
                                     <div class="col-md-5">
                                         <div class="form-horizontal" role="form">

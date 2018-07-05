@@ -110,7 +110,7 @@
                                 <div class="col-md-12">
                                     <div class="col-md-12">
                                         <br>
-                                        {{--<i ng-show="selectFileType == 'c' || selectFileType == 'cpp'" style="color: red">* โปรแกรมที่ส่งห้ามมี comment</i>--}}
+                                        <i ng-show="selectFileType == 'c' || selectFileType == 'cpp'" style="color: red">* โปรแกรมที่ส่งห้ามใช้ไลบารี่ conio.h</i>
                                         {{--<i ng-show="selectFileType == 'java'" style="color: red">* ไม่ควรตั้งชื่อคลาสเป็น Main</i>--}}
                                         <i ng-show="selectFileType == 'java'" style="color: red">* โปรแกรมที่ส่งต้องเป็น default package เท่านั้น</i>
                                         <i ng-show="selectFileType == 'cs'" style="color: red">* โปรแกรมที่ส่งห้ามมี namespace</i>
