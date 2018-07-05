@@ -146,82 +146,108 @@ class CompileCController extends Controller
     }
 
     public function sendSheetC(Request $request){
+        $checkConio = TRUE;
         $folder_ans = "";
         $resSheetID = "";
         $completeInsRes = false;
         // ถ้าพิมพ์โค้ดส่ง
         if($request->mode === "key") {
             $code = $request->code;
+            // เช็คไลบารี่ conio.h
+            $checkConio = $this->check_conio($code);
+            if ($checkConio) {
+                // สร้างโฟลเดอร์เก็บไฟล์ที่ส่ง
+                $user = User::find($request->UID);
+                $userFolder = $user->stu_id . "_" . $user->fname_en . "_" . $user->lname_en;
+                $sheetingFolder = "Sheeting_" . $request->STID;
+                $sheetFolder = "Sheet_" . $request->SID;
+                $path = "../upload/res_sheet/";
+                // สร้างโฟลเดอร์เก็บใบงานที่ส่ง
+                $this->makeFolder("../upload/", "res_sheet");
+                // สร้างโฟลเดอร์ของการสั่งงาน
+                $this->makeFolder($path, $sheetingFolder);
+                // สร้างโฟลเดอร์ของใบงานในการสั่งงาน
+                $this->makeFolder($path . $sheetingFolder . "/", $sheetFolder);
+                // สร้างโฟลเดอร์ของนักเรียนที่ส่งใบงาน
+                $this->makeFolder($path . $sheetingFolder . "/" . $sheetFolder . "/", $userFolder);
+                $folderName = date('Ymd-His') . "_" . rand(1, 9999);
+                $folder_ans = $path . $sheetingFolder . "/" . $sheetFolder . "/" . $userFolder . "/" . $folderName;
+                mkdir($folder_ans, 0777, true);
 
-            // สร้างโฟลเดอร์เก็บไฟล์ที่ส่ง
-            $user = User::find($request->UID);
-            $userFolder = $user->stu_id . "_" . $user->fname_en . "_" . $user->lname_en;
-            $sheetingFolder = "Sheeting_" . $request->STID;
-            $sheetFolder = "Sheet_" . $request->SID;
-            $path = "../upload/res_sheet/";
-            // สร้างโฟลเดอร์เก็บใบงานที่ส่ง
-            $this->makeFolder("../upload/","res_sheet");
-            // สร้างโฟลเดอร์ของการสั่งงาน
-            $this->makeFolder($path, $sheetingFolder);
-            // สร้างโฟลเดอร์ของใบงานในการสั่งงาน
-            $this->makeFolder($path . $sheetingFolder . "/", $sheetFolder);
-            // สร้างโฟลเดอร์ของนักเรียนที่ส่งใบงาน
-            $this->makeFolder($path . $sheetingFolder . "/" . $sheetFolder . "/", $userFolder);
-            $folderName = date('Ymd-His') . "_" . rand(1, 9999);
-            $folder_ans = $path . $sheetingFolder . "/" . $sheetFolder . "/" . $userFolder . "/" . $folderName;
-            mkdir($folder_ans, 0777, true);
+                // ตั้งชื่อว่า ressheet
+                $file_name = "ressheet";
+                $file_ans = "$file_name.c";
 
-            // ตั้งชื่อว่า ressheet
-            $file_name = "ressheet";
-            $file_ans = "$file_name.c";
-
-            // เขียนไฟล์
-            $handle = fopen("$folder_ans/$file_ans", 'w') or die('Cannot open file:  ' . $file_ans);
-            fwrite($handle, $code);
-            fclose($handle);
+                // เขียนไฟล์
+                $handle = fopen("$folder_ans/$file_ans", 'w') or die('Cannot open file:  ' . $file_ans);
+                fwrite($handle, $code);
+                fclose($handle);
+            }
         } else {
             // แต่ถ้าส่งไฟล์โค้ดมา
             $folder_ans = $request->path;
+            $files = scandir($folder_ans);
+            foreach ($files as $f) {
+                // ลูปเช็ค package ทุกไฟล์ที่มีนามสกุล .java
+                if (strpos($f, '.c') && $checkConio) {
+                    $handle = fopen("$folder_ans/$f", "r");
+                    $code_in_file = fread($handle, filesize("$folder_ans/$f"));
+                    fclose($handle);
+                    $checkConio = $this->check_conio($code_in_file);
+                }
+            }
+
+            if(!$checkConio){
+                // ลบไฟล์ที่ถูกส่งมา
+                $files = scandir($folder_ans);
+                foreach ($files as $f) {
+                    @unlink("$folder_ans/$f");
+                }
+                rmdir($folder_ans);
+            }
         }
 
         try{
-            // บันทึกลงฐานข้อมูล ตาราง res_sheets
-            $resSheet = ResSheet::where('sheeting_id', $request->STID)
-                ->where('sheet_id', $request->SID)
-                ->where('user_id', $request->UID)
-                ->first();
-            if ($resSheet === NULL) {
-                $resSheet = new ResSheet;
-                $resSheet->sheeting_id = $request->STID;
-                $resSheet->sheet_id = $request->SID;
-                $resSheet->user_id = $request->UID;
-                $resSheet->file_type = "c";
-                $resSheet->current_status = "q";
-                $resSheet->send_late = $request->send_late;
-                $resSheet->path = $folder_ans;
-                $resSheet->send_date_time = $request->send_date_time;
-                $resSheet->save();
-                $insertedId = $resSheet->id;
-                $resSheetID = $insertedId;
+            if ($checkConio) {
+                // บันทึกลงฐานข้อมูล ตาราง res_sheets
+                $resSheet = ResSheet::where('sheeting_id', $request->STID)
+                    ->where('sheet_id', $request->SID)
+                    ->where('user_id', $request->UID)
+                    ->first();
+                if ($resSheet === NULL) {
+                    $resSheet = new ResSheet;
+                    $resSheet->sheeting_id = $request->STID;
+                    $resSheet->sheet_id = $request->SID;
+                    $resSheet->user_id = $request->UID;
+                    $resSheet->file_type = "c";
+                    $resSheet->current_status = "q";
+                    $resSheet->send_late = $request->send_late;
+                    $resSheet->path = $folder_ans;
+                    $resSheet->send_date_time = $request->send_date_time;
+                    $resSheet->save();
+                    $insertedId = $resSheet->id;
+                    $resSheetID = $insertedId;
+                } else {
+                    $this->rrmdir($resSheet->path);
+                    $resSheetID = $resSheet->id;
+                    $resSheet->current_status = "q";
+                    $resSheet->file_type = "c";
+                    $resSheet->send_late = $request->send_late;
+                    $resSheet->path = $folder_ans;
+                    $resSheet->send_date_time = $request->send_date_time;
+                    $resSheet->save();
+                }
+                $completeInsRes = true;
+
+                // บันทึกลงฐานข้อมูล ready_queue_shes
+                $readyQueue = new QueueSheet;
+                $readyQueue->res_sheet_id = $resSheetID;
+                $readyQueue->file_type = "c";
+                $readyQueue->save();
+                return response()->json($resSheetID);
             } else {
-                $this->rrmdir($resSheet->path);
-                $resSheetID = $resSheet->id;
-                $resSheet->current_status = "q";
-                $resSheet->file_type = "c";
-                $resSheet->send_late = $request->send_late;
-                $resSheet->path = $folder_ans;
-                $resSheet->send_date_time = $request->send_date_time;
-                $resSheet->save();
+                return response()->json(['error' => 'Error msg'], 209);
             }
-            $completeInsRes = true;
-
-            // บันทึกลงฐานข้อมูล ready_queue_shes
-            $readyQueue = new QueueSheet;
-            $readyQueue->res_sheet_id = $resSheetID;
-            $readyQueue->file_type = "c";
-            $readyQueue->save();
-            return response()->json($resSheetID);
-
         } catch( \Exception $e ){
             if($completeInsRes){
                 $delResExam = ResSheet::find($resSheetID);

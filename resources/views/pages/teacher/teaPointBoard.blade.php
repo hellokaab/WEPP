@@ -210,6 +210,7 @@
                                                             <div class="col-md-3"><b>ประเภทไฟล์: </b> <% p.file_type %></div>
                                                             <div class="col-md-3"><b>เวลาที่ใช้: </b> <% p.time == null  ? '-' : p.time %> วินาที</div>
                                                             <div class="col-md-3"><b>หน่วยความจำที่ใช้: </b> <% p.memory == null ? '-' : p.memory %> KB</div>
+                                                            <div class="col-md-3"><b>ip เครื่องที่ส่ง: </b> <% p.ip %></div>
                                                         </div>
                                                         <br class="hidden-xs hidden-sm">
                                                         <br class="hidden-xs hidden-sm">

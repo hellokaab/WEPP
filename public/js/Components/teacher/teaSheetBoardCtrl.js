@@ -56,6 +56,7 @@ app.controller('teaSheetBoardCtrl', ['$scope', '$window', function ($scope, $win
             $("#stdCode").html(data.stu_id);
 
             $scope.resSheet = findResSheetByID(data.res_sheet_id);
+            console.log($scope.resSheet);
 
             $('#std_score').val($scope.resSheet.score);
             $scope.currentTrialScore = $scope.resSheet.score;
@@ -98,6 +99,7 @@ app.controller('teaSheetBoardCtrl', ['$scope', '$window', function ($scope, $win
                                                         $scope.resSheet.current_status==='6'?'PP----':
                                                             $scope.resSheet.current_status==='5'?'P-----' : '-');
 
+            $('#send_time_sheet').html($scope.resSheet.send_date_time);
             $('#res_sheet_part').waitMe('hide');
         }, 200);
     }
