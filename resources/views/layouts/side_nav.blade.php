@@ -67,7 +67,7 @@
                 </a>
             </li>
             <li class="sidebar-brand2" >
-                <a href="#" id="time" style="line-height:0%;margin-left: 60px;font-size: 18px">
+                <a href="#" style="line-height:0%;margin-left: 60px;font-size: 18px">
                     <div id="css_time_run">
                         <?=date("H:i:s")?>
                     </div>
