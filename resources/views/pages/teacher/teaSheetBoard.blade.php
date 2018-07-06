@@ -160,12 +160,20 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="row">
-                                                <b>เวลาที่ส่ง : </b><z id="send_time_sheet">ผ่าน</z>
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <b>เวลาที่ส่ง : </b><z id="send_time_sheet">ผ่าน</z>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <b>ip เครื่องที่ส่ง : </b><z id="send_ip">ผ่าน</z>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <br class="hidden-xs hidden-sm">
-                                    <br class="hidden-md hidden-lg">
+                                    <br>
                                     <div class="col-md-5">
                                         <div class="form-horizontal" role="form">
                                             <div class="form-group" style="margin-bottom: 0">

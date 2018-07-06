@@ -224,6 +224,7 @@ class CompileCController extends Controller
                     $resSheet->send_late = $request->send_late;
                     $resSheet->path = $folder_ans;
                     $resSheet->send_date_time = $request->send_date_time;
+                    $resSheet->ip = $_SERVER['REMOTE_ADDR'];
                     $resSheet->save();
                     $insertedId = $resSheet->id;
                     $resSheetID = $insertedId;
@@ -234,6 +235,7 @@ class CompileCController extends Controller
                     $resSheet->file_type = "c";
                     $resSheet->send_late = $request->send_late;
                     $resSheet->path = $folder_ans;
+                    $resSheet->ip = $_SERVER['REMOTE_ADDR'];
                     $resSheet->send_date_time = $request->send_date_time;
                     $resSheet->save();
                 }

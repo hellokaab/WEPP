@@ -228,6 +228,7 @@ class CompileJavaController extends Controller
                     $resSheet->send_late = $request->send_late;
                     $resSheet->path = $folder_ans;
                     $resSheet->send_date_time = $request->send_date_time;
+                    $resSheet->ip = $_SERVER['REMOTE_ADDR'];
                     $resSheet->save();
                     $insertedId = $resSheet->id;
                     $resSheetID = $insertedId;
@@ -239,6 +240,7 @@ class CompileJavaController extends Controller
                     $resSheet->send_late = $request->send_late;
                     $resSheet->path = $folder_ans;
                     $resSheet->send_date_time = $request->send_date_time;
+                    $resSheet->ip = $_SERVER['REMOTE_ADDR'];
                     $resSheet->save();
                 }
                 $completeInsRes = true;
