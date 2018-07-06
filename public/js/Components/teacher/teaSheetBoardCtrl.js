@@ -100,6 +100,7 @@ app.controller('teaSheetBoardCtrl', ['$scope', '$window', function ($scope, $win
                                                             $scope.resSheet.current_status==='5'?'P-----' : '-');
 
             $('#send_time_sheet').html($scope.resSheet.send_date_time);
+            $('#send_ip').html($scope.resSheet.ip);
             $('#res_sheet_part').waitMe('hide');
         }, 200);
     }

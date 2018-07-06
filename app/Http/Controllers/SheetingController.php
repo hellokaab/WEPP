@@ -288,7 +288,8 @@ class SheetingController extends Controller
 	                            ON re.id = sq.res_sheet_id
                                 WHERE re.sheeting_id = ?
                             AND re.sheet_id = ?) as b 
-                            ON a.user_id = b.user_id', [$request->group_id,$request->sheeting_id,$request->sheet_id]);
+                            ON a.user_id = b.user_id
+                            ORDER BY stu_id', [$request->group_id,$request->sheeting_id,$request->sheet_id]);
         return response()->json($data);
     }
 
