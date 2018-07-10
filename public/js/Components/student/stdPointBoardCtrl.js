@@ -48,7 +48,7 @@ app.controller('stdPointBoardCtrl', ['$scope', '$window', function ($scope, $win
                 $scope.pathExam.forEach(function(pathRes) {
                     pathRes.code = getCode(pathRes.path);
                     pathRes.teaOutput = (readFileEx(exam)).output;
-                    pathRes.readResrun = readFileResRun(pathRes.res_run);
+                    pathRes.readResrun = pathRes.res_run === null ? "" : readFileResRun(pathRes.res_run);
                 });
 
                 $('#resExam_part').waitMe('hide');
@@ -117,7 +117,7 @@ app.controller('stdPointBoardCtrl', ['$scope', '$window', function ($scope, $win
                 code+=codes;
             });
             $('#code_' + data.id).html(escapeHtml(code));
-            $('#tea_output_' + data.id).html('<span class="hljs-right">'+data.teaOutput+'</span>');
+            $('#tea_output_' + data.id).html('<span class="hljs-right">'+data.teaOutput+'</span>'+'<br><br><br>'+'<span class="hljs-lengt">ความยาวข้อความทั้งหมด : '+data.teaOutput.length+' ตัวอักษร'+'</span>');
             $('#resrun_' + data.id).html(changColor(data.readResrun,data.teaOutput));
 
             $('mycode').each(function(i, block) {
@@ -151,21 +151,22 @@ app.controller('stdPointBoardCtrl', ['$scope', '$window', function ($scope, $win
         try{
             for(i=0;i<resrun.length || i<teaOuput.length;i++){
                 if(teaOuput[i] === resrun[i]){
-                    str+=resrun[i];
                     if(insertMyCut){
                         str+="myCut"+resrun[i];
                         insertMyCut = false;
+                    } else {
+                        str+=resrun[i];
                     }
                 }else {
                     if(insertMyCut){
                         if(i > resrun.length-1){
-                            str+="_";
+                            str+="";
                         }else {
                             str+=resrun[i];
                         }
                     } else {
                         if(i > resrun.length-1){
-                            str+="myCut"+"_";
+                            str+="myCut"+"";
                         }else {
                             str+="myCut"+resrun[i];
                         }
@@ -186,6 +187,7 @@ app.controller('stdPointBoardCtrl', ['$scope', '$window', function ($scope, $win
                 strAfterChange += '<span class="hljs-wrong">'+arrayStr[i]+'</span>';
             }
         }
+        strAfterChange +='<br><br><br>'+'<span class="hljs-lengt">'+'ความยาวข้อความทั้งหมด : '+resrun.length+' ตัวอักษร'+'</span>';
         return strAfterChange;
     }
 }]);
