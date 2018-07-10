@@ -171,6 +171,9 @@
                                 <div class="notice" id="notice_sheet_txt_output" style="display: none">กรุณาระบุ Output
                                     ของใบงาน
                                 </div>
+                                <div class="notice">
+                                    Output แต่ละบรรทัดไม่ต้องมีช่องว่างปิดท้าย
+                                </div>
                             </div>
                         </div>
 
