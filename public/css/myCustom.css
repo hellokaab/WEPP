@@ -872,6 +872,11 @@ mycode {
 .hljs-wrong {
     color: #e06c75;
 }
+
+.hljs-lengt {
+    color: #e7e340;
+}
+
 .sidebar-brand2 {
  height: 30px;
 }

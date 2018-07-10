@@ -237,6 +237,7 @@ class CompileCController extends Controller
                     $resSheet->path = $folder_ans;
                     $resSheet->ip = $_SERVER['REMOTE_ADDR'];
                     $resSheet->send_date_time = $request->send_date_time;
+                    $resSheet->res_run = NULL;
                     $resSheet->save();
                 }
                 $completeInsRes = true;
