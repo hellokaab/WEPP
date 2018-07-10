@@ -70,9 +70,9 @@ app.controller('stdSheetBoardCtrl', ['$scope', '$window', function ($scope, $win
                 $('#std_code').html(escapeHtml(code));
 
                 var teaOutput = readFileSh($scope.thisSheet).output;
-                $('#tea_output').html('<span class="hljs-right">'+teaOutput+'</span>');
+                $('#tea_output').html('<span class="hljs-right">'+teaOutput+'</span>'+'<br><br><br>'+'<span class="hljs-lengt">ความยาวข้อความทั้งหมด : '+teaOutput.length+' ตัวอักษร'+'</span>');
 
-                var readResrun = readFileResRun($scope.resSheet.res_run);
+                var readResrun = $scope.resSheet.res_run === null ? "" : readFileResRun($scope.resSheet.res_run);
                 $('#resrun').html(changColor(readResrun,teaOutput));
 
                 $('mycode').each(function(i, block) {
@@ -124,16 +124,25 @@ app.controller('stdSheetBoardCtrl', ['$scope', '$window', function ($scope, $win
         try{
             for(i=0;i<resrun.length || i<teaOuput.length;i++){
                 if(teaOuput[i] === resrun[i]){
-                    str+=resrun[i];
                     if(insertMyCut){
                         str+="myCut"+resrun[i];
                         insertMyCut = false;
+                    } else {
+                        str+=resrun[i];
                     }
                 }else {
                     if(insertMyCut){
-                        str+=resrun[i];
+                        if(i > resrun.length-1){
+                            str+="";
+                        }else {
+                            str+=resrun[i];
+                        }
                     } else {
-                        str+="myCut"+resrun[i];
+                        if(i > resrun.length-1){
+                            str+="myCut"+"";
+                        }else {
+                            str+="myCut"+resrun[i];
+                        }
                         insertMyCut = true;
                     }
                 }
@@ -151,8 +160,8 @@ app.controller('stdSheetBoardCtrl', ['$scope', '$window', function ($scope, $win
                 strAfterChange += '<span class="hljs-wrong">'+arrayStr[i]+'</span>';
             }
         }
+        strAfterChange +='<br><br><br>'+'<span class="hljs-lengt">'+'ความยาวข้อความทั้งหมด : '+resrun.length+' ตัวอักษร'+'</span>';
         return strAfterChange;
-    }
     //----------------------------------------------------------------------
     $scope.editTrialScore = function () {
         $('#notice_std_score').hide();
