@@ -302,9 +302,9 @@ class CompileCController extends Controller
             // ตรวจสอบคำตอบ
             $checker = "";
             if($request->mode == "exam") {
-                $checker = $this->check_correct_ans_ex($lines_run, $request->exam_id,$folder_ans);
+                $checker = $this->check_correct_ans_ex($lines_run, $request->exam_id);
             } else if($request->mode == "sheet") {
-                $checker = $this->check_correct_ans_sh($lines_run, $request->sheet_id,$folder_ans);
+                $checker = $this->check_correct_ans_sh($lines_run, $request->sheet_id);
             }
 //            return response()->json($checker);
 
@@ -366,12 +366,12 @@ class CompileCController extends Controller
 
     function run_code($input_file,$folder_ans,$mode,$exam_id) {
         // กำหนดเวลาในการรันไว้ 5 วินาที
-        $ruutimeIn = 5;
+        $ruutimeIn = 5000;
         // ถ้าเป็นการสอบ
         if($mode == "exam") {
             // คิวรี่ runtime ของข้อสอบ
             $exam = Exam::find($exam_id);
-            $ruutimeIn = $exam->time_limit;
+            $ruutimeIn = $exam->time_limit*1000;
         }
 
         $amount_input = 1;
@@ -409,103 +409,80 @@ class CompileCController extends Controller
             $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."/";
         }
 
-        $code_checker = '
-            #include <stdio.h>
-            #include <stdlib.h>
-            #include <pthread.h>
-            #include <string.h>
-            
-            char *strrev(char *str)
-            {
-                char *p1, *p2;
+        $code_checker = 'import java.io.BufferedReader;
+        import java.io.IOException;
+        import java.io.InputStreamReader;
+        public class wepp_check {
 
-                if (! str || ! *str)
-                return str;
-                for (p1 = str, p2 = str + strlen(str) - 1; p2 > p1; ++p1, --p2)
-                {
-                    *p1 ^= *p2;
-                    *p2 ^= *p1;
-                    *p1 ^= *p2;
-                }
-                  return str;
-            }
-            
-            void *timeThr(void * u)
-            {
-              int i;
-              for(i = 0; i < '.$ruutimeIn.'; i++){
-                sleep(1);
-              }
-               printf("Overtime\n");
-              (void)system("'.$dir_in_check_code.'kill.sh");
-              exit(0);
-            }
-            
+            static TimerThread timeThr = new TimerThread();
+            static RunThread runThr = new RunThread();
     
-            main()
-            {
-                pthread_t tid;
-                pthread_create(&tid,NULL,&timeThr,NULL);
-                
-                clock_t begin, end;
-                double time_spent;
-                begin = clock();
-                    
-                FILE *fp;
-                char path[1035];
-                int count = 0;
-                    
-                char ch[300] = "'.$dir_in_check_code.'";
-                char ch2[9] = "run_ans_";
-                char ch3[4] = ".sh";
-                char ch4[300] = "\0";
-                	
-                int i = 0;
-                while(i < '.$amount_input.'){
-                	char ch4[300] = "\0";
-                	strcpy(ch4, ch);
-                	strcat(ch4, ch2);
-                	int index = 0;
-                	char iToChar[10] = "\0";
-                	int j = i;
-                	while(j >= 10){
-                		iToChar[index++] = (j % 10)+\'0\';
-                		j /= 10 ;
-                	}
-                	iToChar[index++] = j+\'0\';
-                	strrev(iToChar);
-                	strcat(ch4, iToChar);
-                	strcat(ch4, ch3);
-
-                    fp = popen(ch4, "r");
-                    if (fp == NULL) {
-                        printf("Failed to run command\n" );
-                        exit(1);
+            public static void main(String[] args){
+                timeThr.start();
+                runThr.start();
+            }
+    
+            static class TimerThread extends Thread {
+                public void run() {
+                    try {
+                        sleep('.$ruutimeIn.');
+                        runThr.stop();
+                        System.out.println("OverTime");                      
+                        System.exit(0);
+                    } catch (InterruptedException e) {
                     }
-
-                    count = 0;
-                    while (fgets(path, sizeof(path)-1, fp) != NULL) {
-                        if(count >= 0 ){                               
-                            printf("%s", path);
-                        }
-                        count++;
-                    }
-                
-                    pclose(fp);
-                    i++;
                 }
-
-                end = clock();time_spent = (double)(end - begin) / CLOCKS_PER_SEC;printf("\nRunTime:%f",time_spent); return 0;
-            }';
+            }
+    
+            static class RunThread extends Thread{
+                public void run() {
+                    long start = System.currentTimeMillis();
+                    Runtime runtime = Runtime.getRuntime();
+                    runtime.gc();
+                    long mem = runtime.totalMemory() - runtime.freeMemory();
+                    
+                    for(int i=0;i<'.$amount_input.';i++){
+                        try{
+                            String cmd = "'.$dir_in_check_code.'run_ans_"+(i)+".sh";
+        
+                            Runtime r = Runtime.getRuntime();
+                            Process pr = r.exec(cmd);
+        
+                            BufferedReader stdInput = new BufferedReader(
+                                    new InputStreamReader( pr.getInputStream() ));
+        
+                            String s ;
+                            int count = 0;
+					        while ((s = stdInput.readLine()) != null) {
+						        if(count >=0)
+						        {
+							        System.out.println(s);
+						        }
+						        count++;
+					        }
+                        }catch(IOException ex){
+                            System.out.println (ex.toString());
+                        }
+                    }
+    
+                    long memNow = runtime.totalMemory() - runtime.freeMemory();
+                    memNow = memNow - mem;
+                    System.out.println("UsedMem:" + memNow/1024.0);
+                    long time = System.currentTimeMillis() - start;
+                    timeThr.stop();
+                    System.out.println("RunTime:" + time / 1000.0);
+                }
+            }
+        }';
 
         // เขียนไฟล์สำหรับเช็คเวลา
         $file = 'wepp_check';
-        $handle = fopen("$folder_ans/$file.c", 'w') or die('Cannot open file:  ' . $file);
+        $handle = fopen("$folder_ans/$file.java", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $code_checker);
         fclose($handle);
 
         // เขียนไฟล์ sh เพื่อคอมไพล์ ไฟล์ wepp_check
-        $compile_file_check = "#!/bin/bash \n cd ".$dir_code." \n gcc -pthread wepp_check.c -o wepp_check";
+        $compile_file_check = "#!/bin/bash \n cd ".$dir_code." \n javac wepp_check.java";
         $file = 'compile_check';
         $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $compile_file_check);
@@ -513,7 +490,7 @@ class CompileCController extends Controller
         chmod("$folder_ans/$file.sh", 0777);
 
         // เขียนไฟล์ sh เพื่อรันไฟล์ wepp_check
-        $run_file_check = "#!/bin/bash \n cd ".$dir_code." \n ./wepp_check";
+        $run_file_check = "#!/bin/bash \n cd ".$dir_code." \n java wepp_check";
         $file = 'run_check';
         $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $run_file_check);
@@ -557,9 +534,10 @@ class CompileCController extends Controller
 
     }
 
-    function check_correct_ans_ex($lines_run, $exam_id,$folder_ans){
+    function check_correct_ans_ex($lines_run, $exam_id) {
         $exam = Exam::find($exam_id);
-        $run = $this->prepare_result($lines_run,$folder_ans);
+        $run = $this->prepare_result($lines_run);
+
         if ($run == 'OverTime') {
             return array("status" => "t", "res_run" => 'Over time', "time" => 0, "mem" => 0);
         } else if ($run['mem'] > $exam->memory_size) {
@@ -572,7 +550,6 @@ class CompileCController extends Controller
             $handle = fopen("$file_output", "r");
             $output_teacher = trim(fread($handle, filesize("$file_output")));
             fclose($handle);
-//            return array("tea" => $output_teacher, "res"=> $run['res_run']);
 
             // คิดคำตอบเหมือน output กี่เปอร์เซ็นต์
             $percent_equal = $this->check_percentage_ans($this->modify_output($output_teacher), $this->modify_output($run['res_run']), $exam->case_sensitive);
@@ -596,10 +573,9 @@ class CompileCController extends Controller
         }
     }
 
-    function check_correct_ans_sh($lines_run, $sheet_id,$folder_ans){
+    function check_correct_ans_sh($lines_run, $sheet_id) {
         $sheet = Sheet::find($sheet_id);
-        $run = $this->prepare_result($lines_run,$folder_ans);
-
+        $run = $this->prepare_result($lines_run);
 
         if ($run == 'OverTime') {
             return array("status" => "t", "res_run" => 'Over time', "time" => 0, "mem" => 0);
@@ -610,7 +586,6 @@ class CompileCController extends Controller
             $handle = fopen("$file_output", "r");
             $output_teacher = trim(fread($handle, filesize("$file_output")));
             fclose($handle);
-//            return array("tea" => $output_teacher, "res"=> $run['res_run']);
 
             // คิดคำตอบเหมือน output กี่เปอร์เซ็นต์
             $percent_equal = $this->check_percentage_ans($this->modify_output($output_teacher), $this->modify_output($run['res_run']), $sheet->case_sensitive);
@@ -634,14 +609,15 @@ class CompileCController extends Controller
         }
     }
 
-    function prepare_result($lines_run,$folder_ans){
-        $mem = $this->calculate_memory($folder_ans);
-        $iTime = $iOverTime = -1;
+    function prepare_result($lines_run) {
+        $iMem = $iTime = $iOverTime = -1;
         $res_run = '';
 
         for ($i = 0; $i < count($lines_run); $i++) {
             $line = $lines_run[$i];
-            if (strpos($line, "RunTime:") > -1) {
+            if (strpos($line, "UsedMem:") > -1) {
+                $iMem = $i;
+            } else if (strpos($line, "RunTime:") > -1) {
                 $iTime = $i;
             } else if (strpos($line, "OverTime") > -1) {
                 $iOverTime = $i;
@@ -650,15 +626,16 @@ class CompileCController extends Controller
 
         if ($iOverTime > -1) {
             return "OverTime";
-        } else if ($iTime > -1) {
+        } else if ($iMem > -1 && $iTime > -1) {
 
-            $ar_res_run = array_slice($lines_run, 0, $iTime - 0);
+            $ar_res_run = array_slice($lines_run, 0, $iMem - 0);
             $i = 0;
             foreach ($ar_res_run as $val) {
                 $ar_res_run[$i] = iconv(mb_detect_encoding($val), "utf-8", $val);
                 $res_run .= $ar_res_run[$i++]."\n";
             }
 
+            $mem = substr($lines_run[$iMem], 8);
             $time = substr($lines_run[$iTime], 8);
 
             return array('res_run' => trim($res_run), 'mem' => $mem, 'time' => $time);
@@ -857,7 +834,7 @@ class CompileCController extends Controller
 
         // ลูปลบไฟล์ที่นามสกุลไม่ใช่ .c
         foreach ($files as $f) {
-            if (!strpos($f, '.c') || $f == 'wepp_check.c') {
+            if (!strpos($f, '.c') || strpos($f, '.class')) {
                 @unlink("$folder_ans/$f");
             }
         }
