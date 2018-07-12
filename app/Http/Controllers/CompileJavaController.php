@@ -303,9 +303,7 @@ class CompileJavaController extends Controller
             $main_code = fread($myfile, filesize("$folder_ans/$file_main"));
             fclose($myfile);
 
-            // แก้ชื่อคลาสเป็น wepp_ans
             $class_name_main = $this->get_class_name($main_code);
-
 
             // คอมไพล์โค้ดที่ส่ง
             $this->compile_code($folder_ans, $class_name_main);
