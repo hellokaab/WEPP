@@ -327,7 +327,7 @@ class ExamingController extends Controller
     public function readFileResRun(Request $request){
         $file_resrun = $request->path;
         $handle = fopen("$file_resrun", "r");
-        $resrun = trim(fread($handle, filesize("$file_resrun")));
+        $resrun = filesize("$file_resrun") > 0 ? trim(fread($handle, filesize("$file_resrun"))) : "";
         fclose($handle);
         $resrun = $this->modify_output($resrun);
         return response()->json($resrun);

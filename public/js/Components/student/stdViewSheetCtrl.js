@@ -93,6 +93,7 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
         ($scope.resQuiz).forEach(function(res) {
             $('#quizAns_'+res.quiz_id).val(res.quiz_ans);
         });
+        $scope.$apply();
         $('#detail_sheet_part').waitMe('hide');
 
     });
