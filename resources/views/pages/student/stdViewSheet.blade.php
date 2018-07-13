@@ -96,7 +96,7 @@
                                             <div class="col-md-12">
                                                 <h5><b>ทฤษฎีที่เกี่ยวข้อง</b></h5>
                                                 <ul>
-                                                    <li ng-repeat="th in theory">&nbsp;&nbsp;<%th%></li>
+                                                    <li ng-repeat="th in theory track by $index">&nbsp;&nbsp;<%th%></li>
                                                 </ul>
                                             </div>
                                         </div>
