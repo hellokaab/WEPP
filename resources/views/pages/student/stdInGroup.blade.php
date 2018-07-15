@@ -160,7 +160,7 @@
                                 <td ng-show="st.send_late === '1'" style="text-align: center">อนุญาต</td>
                                 <td style="text-align: center" ng-show="myPermissionsInGroup.status === 's'">
                                     <button id="btn_sheeting_<%st.id%>" class="btn btn-sm btn-outline-success"
-                                            ng-click="admitSheeting(st)"> {{--ng-if="checkInTime(st) || checkSendLate(st)"--}}
+                                            ng-click="admitSheeting(st)" > {{--ng-if="checkInTime(st) || checkSendLate(st)"--}}
                                         <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> เข้าทำใบงาน
                                     </button>
                                     &nbsp;
