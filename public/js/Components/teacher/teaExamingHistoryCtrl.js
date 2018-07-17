@@ -2,7 +2,9 @@ app.controller('teaExamingHistoryCtrl', ['$scope', '$window', function ($scope, 
     $scope.user = $window.user;
     keepHistory($window.user.id,"teacher-examing-history",dtJsToDtDB(new Date()));
     $scope.groups = findMyGroup($scope.user.id);
-    $scope.examings = findExamingByUserID($scope.user.id);
+    //$scope.examings = findExamingByUserID($scope.user.id);
+    $scope.examings = "";
+
 
     // Set Default
     $scope.groupID = "0";
@@ -94,5 +96,9 @@ app.controller('teaExamingHistoryCtrl', ['$scope', '$window', function ($scope, 
     $scope.viewPoint = function (data) {
         window.open(url+'teacher-board-exam-'+data.id, '_blank');
         window.focus();
+    }
+    //----------------------------------------------------------------------
+    $scope.groupChange = function () {
+        $scope.examings = findExamingsByUserIDAndGroup($scope.user.id,$scope.groupID);
     }
 }]);

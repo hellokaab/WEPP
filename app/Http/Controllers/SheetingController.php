@@ -271,6 +271,13 @@ class SheetingController extends Controller
 
     }
 
+    public function findSheetingByUserIDAndGroup(Request $request){
+        $sheeting = Sheeting::where('user_id',$request->user_id)
+            ->where('group_id',$request->group_id)
+            ->get();
+        return response()->json($sheeting);
+    }
+
     public function dataInSheetBoard(Request $request)
     {
         $data = DB::select('SELECT * FROM (

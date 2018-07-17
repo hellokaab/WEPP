@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">กลุ่มเรียน: </label>
                             <div class="col-md-5">
-                                <select class="form-control" ng-model="groupID">
+                                <select class="form-control" ng-model="groupID" ng-change="groupChange()">
                                     <option value="0">กรุณาเลือก</option>
                                     <option ng-repeat="g in groups" value="<%g.id%>"><%g.group_name%></option>
                                 </select>
@@ -66,7 +66,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-show="groupID == sh.group_id" dir-paginate="sh in sheeting|filter:search|itemsPerPage:selectRow">
+                            <tr dir-paginate="sh in sheeting|filter:search|itemsPerPage:selectRow">
                                 <td><%sh.sheeting_name%></td>
                                 <td style="text-align: center"><%sh.start_date_time%></td>
                                 <td style="text-align: center"><%sh.end_date_time%></td>
