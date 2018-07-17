@@ -73,6 +73,13 @@ class ExamingController extends Controller
         return response()->json($examExaming);
     }
 
+    public function findExamingsByUserIDAndGroup(Request $request){
+        $examing = Examing::where('user_id',$request->user_id)
+            ->where('group_id',$request->group_id)
+            ->get();
+        return response()->json($examing);
+    }
+
     public function findExamingByID(Request $request){
         $examing = Examing::find($request->id);
         return response()->json($examing);

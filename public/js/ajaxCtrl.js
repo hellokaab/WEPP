@@ -906,6 +906,19 @@ function findExamingByNameAndGroup(name,GID) {
     });
     return checked;
 }
+function findExamingsByUserIDAndGroup(UID,GID) {
+    var examing = $.ajax({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            Accept: "application/json"
+        },
+        url:url + 'examing-find-examing-uid-gid',
+        data:{user_id:UID,group_id:GID},
+        async: false,
+    }).responseJSON;
+    return examing;
+}
 
 function createExaming(data) {
     var createExamingSuccess = false;
@@ -2087,4 +2100,17 @@ function getDateNow() {
         async: false,
     }).responseJSON;
     return now;
+}
+function findSheetingByUserIDAndGroup(UID,GID) {
+    var sheeting = $.ajax({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            Accept: "application/json"
+        },
+        url:url + 'sheeting-find-sheeting-uid-gid',
+        data:{user_id:UID,group_id:GID},
+        async: false,
+    }).responseJSON;
+    return sheeting;
 }

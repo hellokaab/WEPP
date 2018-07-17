@@ -361,6 +361,8 @@ Route::get('/examing-find-examing-id', 'ExamingController@findExamingByID');
 
 Route::get('/examing-find-examing-uid', 'ExamingController@findExamingByUserID');
 
+Route::get('/examing-find-examing-uid-gid', 'ExamingController@findExamingsByUserIDAndGroup');
+
 Route::get('/examing-find-examing-teacher-come', 'ExamingController@findExamingItsComing');
 
 Route::get('/examing-find-examing-student-come', 'ExamingController@findSTDExamingItsComing');
@@ -509,6 +511,8 @@ Route::get('/sheeting-find-sheeting-uid', 'SheetingController@findSheetingByUser
 
 Route::get('/sheeting-find-sheeting-gid', 'SheetingController@findSheetingByGroupID');
 
+Route::get('/sheeting-find-sheeting-uid-gid', 'SheetingController@findSheetingByUserIDAndGroup');
+
 Route::get('/sheeting-find-sheetsheeting-stid', 'SheetingController@findSheetSheetingBySheetingID');
 
 Route::get('/sheeting-find-sheetsheeting-view', 'SheetingController@findSheetSheetingInViewSheet');
@@ -550,6 +554,8 @@ Route::get('/sheeting-change-hidden','SheetingController@changeHiddenSheeting');
 Route::get('/sheeting-send-quiz','SheetingController@sendQuiz');
 
 Route::post('/uploadSheetFile/{STID}/{SID}/{UID}','SheetingController@uploadSheetFile');
+
+
 
 //--------------------------- Page Permission ---------------------------
 

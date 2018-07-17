@@ -2,7 +2,10 @@ app.controller('teaSheetingHistoryCtrl', ['$scope', '$window', function ($scope,
     $scope.user = $window.user;
     keepHistory($window.user.id,"teacher-sheeting-history",dtJsToDtDB(new Date()));
     $scope.groups = findMyGroup($scope.user.id);
-    $scope.sheeting = findSheetingByUserID($scope.user.id);
+    // $scope.sheeting = findSheetingByUserID($scope.user.id);
+    $scope.sheeting = "";
+
+    //console.log($scope.sheeting);
 
     // Set Default
     $scope.groupID = "0";
@@ -35,4 +38,8 @@ app.controller('teaSheetingHistoryCtrl', ['$scope', '$window', function ($scope,
     $('#okSuccess').on('click',function () {
         window.location.href = url+'teacher-examing-history';
     });
+    //----------------------------------------------------------------------
+    $scope.groupChange = function () {
+        $scope.sheeting = findSheetingByUserIDAndGroup($scope.user.id,$scope.groupID);
+    } 
 }]);
