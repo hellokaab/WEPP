@@ -16,6 +16,7 @@
     <script src="js/angular.min.js"></script>
     <script src="app/app.js"></script>
     <script src="js/dirPagination.js"></script>
+    <script src="js/ajaxCtrl.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script>
         var url = '{{ URL::asset('/') }}';
@@ -172,6 +173,24 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-success" ng-click="okLogin()">ตกลง</button>
                         <button type="button" class="btn btn-outline-default" data-dismiss="modal">ยกเลิก</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fail Modal -->
+    <div id="fail_modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="panel panel-danger" style="margin-bottom: 0">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">ข้อผิดพลาด</h3>
+                    </div>
+                    <div style="padding-top: 7%; text-align: center" id="err_message">โค้ดที่ส่งไม่ใช่ Default package กรุณาแก้ไข package ของโค้ด</div>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">ตกลง</button>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,14 @@ app.controller("loginCtrl", function($scope) {
         // window.location.href = "http://it.ea.rmuti.ac.th/wepp/sso/?sso&redirect=http://it.ea.rmuti.ac.th/wepp/user-login-user";
 
         // ------------- For Dev -------------
+        // if(checkAdmin() != 500){
+        //     window.location.href = url + "makeData.php";
+        // } else {
+        //     $('#err_message').html('ขออภัย ขณะนี้กำลังปิดปรับปรุงระบบ');
+        //     $('#fail_modal').modal('show');
+        // }
         window.location.href = url + "makeData.php";
+
     };
 
     $scope.AdminLogin = function () {

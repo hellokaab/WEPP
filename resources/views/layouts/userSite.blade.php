@@ -63,6 +63,7 @@
         });
     </script>
     <script>
+        // ------------- For Product -------------
         var user = checkUser();
         if(user == 404){
             window.location.href = url;
@@ -77,6 +78,26 @@
             }
             var name = "คุณ "+user.fname_th+" "+user.lname_th+' ('+type+')';
         }
+
+        // ------------- For Dev -------------
+//        if(checkAdmin() != 500){
+//            var user = checkUser();
+//            if(user == 404){
+//                window.location.href = url;
+//            } else {
+//                var type="";
+//                if (user.user_type == 't'){
+//                    type = "อาจารย์";
+//                }else if(user.user_type == 's') {
+//                    type = "นักศึกษา";
+//                }else {
+//                    type = "เจ้าหน้าที่";
+//                }
+//                var name = "คุณ "+user.fname_th+" "+user.lname_th+' ('+type+')';
+//            }
+//        } else {
+//            window.location.href = url;
+//        }
     </script>
     <script>
         /*Gobal Function*/
