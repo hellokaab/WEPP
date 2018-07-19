@@ -46,7 +46,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-show="students.length > 0" dir-paginate="s in students|filter:query|itemsPerPage:selectRow">
+                            <tr ng-show="students.length > 0" dir-paginate="s in students|filter:search|itemsPerPage:selectRow">
                                 <td><%s.stu_id%></td>
                                 <td><%s.prefix%><%s.fname_th%> <%s.lname_th%></td>
                                 <td><%s.faculty%></td>

@@ -165,14 +165,14 @@ class SheetingController extends Controller
             $files = scandir($folder_ans);
             foreach ($files as $f) {
                 // ลูปหาไฟล์นามสกุล.java ที่ไม่ใช่ Main.java
-                if (strpos($f, '.java') && $f != 'Main.java') {
+                if (strpos($f, '.java') && $f != 'Main.java' && $f != 'wepp_check.java') {
                     $handle = fopen("$folder_ans/$f", "r");
                     $codeInFile = fread($handle, filesize("$folder_ans/$f"));
                     array_push($code, $codeInFile);
                     fclose($handle);
                 }
 
-                else if (strpos($f, '.c') && $f != 'ex.c' && $f != 'ex.cpp' && $f != 'Main.cs') {
+                else if (strpos($f, '.c') && $f != 'ex.c' && $f != 'ex.cpp' && $f != 'Main.cs' && !strpos($f, '.class')) {
                     $handle = fopen("$folder_ans/$f", "r");
                     $codeInFile = fread($handle, filesize("$folder_ans/$f"));
                     array_push($code, $codeInFile);
