@@ -46,11 +46,11 @@
                                     s.current_status==='c'?'คอมไพล์ไม่ผ่าน':
                                     s.current_status==='Q'?'กำลังรอคิวตรวจ...':
                                     s.current_status==='P'?'กำลังตรวจ...':
-                                    s.current_status==='9'?'PPPPP-':
-                                    s.current_status==='8'?'PPPP--':
-                                    s.current_status==='7'?'PPP---':
-                                    s.current_status==='6'?'PP----':
-                                    s.current_status==='5'?'P-----' : '-'
+                                    s.current_status==='9'?'ถูกต้องบางส่วน(90%)':
+                                    s.current_status==='8'?'ถูกต้องบางส่วน(80%)':
+                                    s.current_status==='7'?'ถูกต้องบางส่วน(70%)':
+                                    s.current_status==='6'?'ถูกต้องบางส่วน(60%)':
+                                    s.current_status==='5'?'ถูกต้องบางส่วน(50%)' : '-'
                                     %></td>
                                 <td style="width: 20%">
                                     <button class="btn btn-outline-primary btn-sm" ng-click="startSheet(s)">
