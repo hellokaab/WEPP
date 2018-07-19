@@ -200,11 +200,11 @@
                                                             (p.status === 'm') ? 'ความจำเกินกำหนด' :
                                                             (p.status === 't') ? 'เวลาเกินกำหนด' :
                                                             (p.status === 'c') ? 'คอมไพล์ไม่ผ่าน' :
-                                                            (p.status === '9') ? 'PPPPP-' :
-                                                            (p.status === '8') ? 'PPPP--' :
-                                                            (p.status === '7') ? 'PPP---' :
-                                                            (p.status === '6') ? 'PP----' :
-                                                            (p.status === '5') ? 'P-----' : 'ไม่ทราบสถานะ'%>
+                                                            (p.status === '9') ? 'ถูกต้องบางส่วน(90%)' :
+                                                            (p.status === '8') ? 'ถูกต้องบางส่วน(80%)' :
+                                                            (p.status === '7') ? 'ถูกต้องบางส่วน(70%)' :
+                                                            (p.status === '6') ? 'ถูกต้องบางส่วน(60%)' :
+                                                            (p.status === '5') ? 'ถูกต้องบางส่วน(50%)' : 'ไม่ทราบสถานะ'%>
                                                         </div>
                                                         <div class="col-md-3"><b>เวลาส่ง: </b> <% p.send_date_time%> </div>
                                                         <div class="col-md-3"><a href="#res_list_<%p.id%>" ng-click="viewCode(p)">รายละเอียด <span class="caret"></span></a></div>

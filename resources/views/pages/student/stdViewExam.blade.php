@@ -47,11 +47,11 @@
                                     e.current_status==='c'?'คอมไพล์ไม่ผ่าน':
                                     e.current_status==='Q'?'กำลังรอคิวตรวจ...':
                                     e.current_status==='P'?'กำลังตรวจ...':
-                                    e.current_status==='9'?'PPPPP-':
-                                    e.current_status==='8'?'PPPP--':
-                                    e.current_status==='7'?'PPP---':
-                                    e.current_status==='6'?'PP----':
-                                    e.current_status==='5'?'P-----' : '-'
+                                    e.current_status==='9'?'ถูกต้องบางส่วน(90%)':
+                                    e.current_status==='8'?'ถูกต้องบางส่วน(80%)':
+                                    e.current_status==='7'?'ถูกต้องบางส่วน(70%)':
+                                    e.current_status==='6'?'ถูกต้องบางส่วน(60%)':
+                                    e.current_status==='5'?'ถูกต้องบางส่วน(50%)' : '-'
                                     %></td>
                                 <td style="width: 20%">
                                     <button ng-show="e.current_status != 'a'" class="btn btn-outline-success btn-sm" ng-click="startExam(e)">

@@ -92,11 +92,11 @@ app.controller('teaSheetBoardCtrl', ['$scope', '$window', function ($scope, $win
                                 $scope.resSheet.current_status==='c'?'คอมไพล์ไม่ผ่าน':
                                     $scope.resSheet.current_status==='Q'?'กำลังรอคิวตรวจ...':
                                         $scope.resSheet.current_status==='P'?'กำลังตรวจ...':
-                                            $scope.resSheet.current_status==='9'?'PPPPP-':
-                                                $scope.resSheet.current_status==='8'?'PPPP--':
-                                                    $scope.resSheet.current_status==='7'?'PPP---':
-                                                        $scope.resSheet.current_status==='6'?'PP----':
-                                                            $scope.resSheet.current_status==='5'?'P-----' : '-');
+                                            $scope.resSheet.current_status==='9'?'ถูกต้องบางส่วน(90%)':
+                                                $scope.resSheet.current_status==='8'?'ถูกต้องบางส่วน(80%)':
+                                                    $scope.resSheet.current_status==='7'?'ถูกต้องบางส่วน(70%)':
+                                                        $scope.resSheet.current_status==='6'?'ถูกต้องบางส่วน(60%)':
+                                                            $scope.resSheet.current_status==='5'?'ถูกต้องบางส่วน(50%)' : '-');
 
             $('#send_time_sheet').html($scope.resSheet.send_date_time);
             $('#send_ip').html($scope.resSheet.ip);
