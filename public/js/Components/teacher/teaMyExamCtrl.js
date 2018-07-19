@@ -191,4 +191,8 @@ app.controller('teaMyExamCtrl', ['$scope', '$window', function ($scope, $window)
     $('#okSuccess').on('click',function () {
         location.reload();
     });
+    //----------------------------------------------------------------------
+    $scope.copyExam = function (data) {
+        window.location.href = url+"teacher-exam-copy-"+data.id;
+    };
 }]);

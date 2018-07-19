@@ -99,7 +99,7 @@
                                         <i class="fa fa-tasks fa-lg" aria-hidden="true"></i>
                                     </button>
                                     &nbsp;
-                                    <button class="btn btn-sm btn-outline-success" title="คัดลอกข้อสอบ" style="cursor:pointer"
+                                    <button class="btn btn-sm btn-outline-success" title="คัดลอกใบงาน" style="cursor:pointer"
                                             ng-click="copySheet(s)">
                                         <i class="fa fa-clone fa-lg" aria-hidden="true"></i>
                                     </button>

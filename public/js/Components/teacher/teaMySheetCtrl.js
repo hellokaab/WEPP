@@ -198,4 +198,8 @@ app.controller('teaMySheetCtrl', ['$scope', '$window', function ($scope, $window
     $('#okSuccess').on('click',function () {
         location.reload();
     });
+    //----------------------------------------------------------------------
+    $scope.copySheet = function (data) {
+        window.location.href = url+"teacher-sheet-copy-"+data.id;
+    };
 }]);
