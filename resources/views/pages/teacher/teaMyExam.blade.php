@@ -111,6 +111,11 @@
                                         <i class="fa fa-tasks fa-lg" aria-hidden="true"></i>
                                     </button>
                                     &nbsp;
+                                    <button class="btn btn-sm btn-outline-success" title="คัดลอกข้อสอบ" style="cursor:pointer"
+                                            ng-click="copyExam(e)">
+                                        <i class="fa fa-clone fa-lg" aria-hidden="true"></i>
+                                    </button>
+                                    &nbsp;
                                     <button class="btn btn-sm btn-outline-warning btn-sm" title="แก้ไขข้อสอบ" style="cursor:pointer" ng-click="gotoEditExam(e)">
                                         <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
                                     </button>
