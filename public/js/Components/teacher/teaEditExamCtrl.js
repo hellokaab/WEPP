@@ -274,7 +274,7 @@ app.controller('teaEditExamCtrl', ['$scope', '$window', function ($scope, $windo
         $('#notice_exam_name').hide();
         $scope.completeExamName = $scope.examName.length > 0;
         if ($scope.completeExamName) {
-            if ($scope.examName === $scope.examData.exam_name) {
+            if ($scope.examName === $scope.examData.exam_name && $('#ddl_group').val() === $scope.examData.exam_group_id) {
                 $scope.completeNoDuplicate = true;
             } else {
                 $scope.completeNoDuplicate = findExamByName($scope.examName ,$('#ddl_group').val() ,user.id);
