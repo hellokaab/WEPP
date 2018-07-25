@@ -51,7 +51,7 @@
                             <div class="col-md-4">
                                 <select class="form-control" id="ddl_group" ng-model="groupID">
                                     <option value="0">กรุณาเลือก</option>
-                                    <option ng-repeat="g in myExamGroup" value="<%g.id%>"><%g.exam_group_name%></option>
+                                    <option ng-repeat="g in myExamGroup" ng-hide="g.id == examData.exam_group_id" value="<%g.id%>"><%g.exam_group_name%></option>
                                 </select>
                                 <div class="notice" id="notice_exam_group" style="display: none">กรุณาเลือกกลุ่มข้อสอบ</div>
                                 <div class="notice" ng-hide="myExamGroup.length > 0">ไม่พบข้อมูลกลุ่มข้อสอบ กรุณาสร้างกลุ่มข้อสอบ</div>

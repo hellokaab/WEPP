@@ -17,6 +17,7 @@ app.controller('teaEditSheetCtrl', ['$scope', '$window', function ($scope, $wind
     // Sheet name
     $scope.sheetName = $scope.sheetData.sheet_name;
 
+
     $(document).ready(function () {
         // Sheet group
         $('#sheet_group').val($scope.sheetData.sheet_group_id);
@@ -111,7 +112,7 @@ app.controller('teaEditSheetCtrl', ['$scope', '$window', function ($scope, $wind
 
         $scope.completeSheetName = $scope.sheetName.length > 0;
         if ($scope.completeSheetName) {
-            if ($scope.sheetName === $scope.sheetData.sheet_name) {
+            if ($scope.sheetName === $scope.sheetData.sheet_name && $('#sheet_group').val() === $scope.sheetData.sheet_group_id) {
                 $scope.completeNoDuplicate = true;
             }else {
                 $scope.completeNoDuplicate = findSheetByName($scope.sheetName, $('#sheet_group').val(), user.id);

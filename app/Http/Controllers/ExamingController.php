@@ -347,18 +347,18 @@ class ExamingController extends Controller
         $files = scandir($folder_ans);
         foreach ($files as $f) {
             // ลูปหาไฟล์นามสกุล.java ที่ไม่ใช่ Main.java
-            if (strpos($f, '.java') && $f != 'Main.java' && $f != 'wepp_check.java') {
+            if (strpos($f, '.java') && $f != 'wepp_main.java' && $f != 'wepp_check.java') {
                 $handle = fopen("$folder_ans/$f", "r");
                 $codeInFile = fread($handle, filesize("$folder_ans/$f"));
-                array_push($code, $codeInFile);
+                array_push($code, mb_convert_encoding($codeInFile, "UTF-8"));
                 fclose($handle);
             }
 
 //            else if (strpos($f, '.c') && $f != 'ex.c' && $f != 'ex.cpp') {
-            else if (strpos($f, '.c') && $f != 'ex.c' && $f != 'ex.cpp' && $f != 'Main.cs' && !strpos($f, '.class')) {
+            else if (strpos($f, '.c') && $f != 'ex.c' && $f != 'ex.cpp' && $f != 'wepp_main.cs' && !strpos($f, '.class')) {
                 $handle = fopen("$folder_ans/$f", "r");
                 $codeInFile = fread($handle, filesize("$folder_ans/$f"));
-                array_push($code, $codeInFile);
+                array_push($code, mb_convert_encoding($codeInFile, "UTF-8"));
                 fclose($handle);
             }
 
