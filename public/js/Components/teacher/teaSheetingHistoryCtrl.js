@@ -41,5 +41,10 @@ app.controller('teaSheetingHistoryCtrl', ['$scope', '$window', function ($scope,
     //----------------------------------------------------------------------
     $scope.groupChange = function () {
         $scope.sheeting = findSheetingByUserIDAndGroup($scope.user.id,$scope.groupID);
-    } 
+    }
+    //----------------------------------------------------------------------
+    $scope.exportSheetScore = function () {
+        window.open("js/Components/ExportSheetScore.php?group_id=" + $scope.groupID);
+    }
+
 }]);
