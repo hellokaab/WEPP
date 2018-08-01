@@ -101,4 +101,8 @@ app.controller('teaExamingHistoryCtrl', ['$scope', '$window', function ($scope, 
     $scope.groupChange = function () {
         $scope.examings = findExamingsByUserIDAndGroup($scope.user.id,$scope.groupID);
     }
+    //----------------------------------------------------------------------
+    $scope.exportExamScore = function () {
+        window.open("js/Components/ExportExamScore.php?group_id=" + $scope.groupID);
+    }
 }]);

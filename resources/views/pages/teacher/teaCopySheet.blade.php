@@ -50,7 +50,7 @@
                             <div class="col-md-4">
                                 <select class="form-control" id="sheet_group">
                                     <option style="display: none" value="0">กรุณาเลือก</option>
-                                    <option ng-repeat="s in mySheetGroup" ng-hide="s.id == sheetData.sheet_group_id" value="<%s.id%>"><%s.sheet_group_name%></option>
+                                    <option ng-repeat="s in mySheetGroup" value="<%s.id%>"><%s.sheet_group_name%></option>
                                 </select>
                                 <div class="notice" id="notice_sheet_group" style="display: none">กรุณาเลือกกลุ่มใบงาน</div>
                                 <div class="notice" ng-hide="mySheetGroup.length > 0">ไม่พบข้อมูลกลุ่มข้อสอบ กรุณาสร้างกลุ่มใบงาน</div>

@@ -94,6 +94,9 @@
                                 boundary-links="true" >
                         </dir-pagination-controls>
                     </div>
+                    <div class="col-md-12 col-xs-12 text-center" ng-show="groupID != 0 && sheeting.length > 0">
+                        <button class="btn btn-outline-success" style="cursor:pointer" ng-click="exportSheetScore()">ส่งออกคะแนนใบงานทั้งกลุ่ม</button>
+                    </div>
                 </div>
             </div>
         </div>
