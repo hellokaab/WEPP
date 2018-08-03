@@ -194,7 +194,7 @@
                                                 <div class="col-md-12" ng-repeat="p in pathExam" ng-show="checkTab(p)">
                                                     <div class="row" id="res_list_<%p.id%>" style="margin-bottom: 10px">
                                                         <div class="col-md-3"><b>ส่งครั้งที่: </b> <%$index + 1%> </div>
-                                                        <div class="col-md-3"><b>สถานะ: </b> <%(p.status === 'q') ? 'ค้างคิวตรวจ' :
+                                                        <div class="col-md-3"><b>สถานะ: </b> <%(p.status === 'q') ? 'การส่งผิดพลาด' :
                                                             (p.status === 'a') ? 'ผ่าน' :
                                                             (p.status === 'w') ? 'คำตอบผิด' :
                                                             (p.status === 'm') ? 'ความจำเกินกำหนด' :

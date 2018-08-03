@@ -38,7 +38,7 @@
                             <tr ng-repeat="s in sheetSheeting">
                                 <td style="width: 10%"><%$index + 1%></td>
                                 <td style="width: 40%"><%s.sheet_name%></td>
-                                <td style="width: 30%"><%  s.current_status==='q'?'ค้างคิวตรวจ':
+                                <td style="width: 30%"><%  s.current_status==='q'?'การส่งผิดพลาด(กรุณาส่งใหม่)':
                                     s.current_status==='a'?'ผ่าน':
                                     s.current_status==='w'?'คำตอบผิด':
                                     s.current_status==='m'?'ความจำเกินกำหนด':

@@ -39,7 +39,7 @@
                             <tr ng-repeat="e in examExaming">
                                 <td style="width: 10%"><%$index + 1%></td>
                                 <td style="width: 40%"><%e.exam_name%></td>
-                                <td style="width: 30%"><%e.current_status==='q'?'ค้างคิวตรวจ':
+                                <td style="width: 30%"><%e.current_status==='q'?'การส่งผิดพลาด(กรุณาส่งใหม่)':
                                     e.current_status==='a'?'ผ่าน':
                                     e.current_status==='w'?'คำตอบผิด':
                                     e.current_status==='m'?'ความจำเกินกำหนด':
