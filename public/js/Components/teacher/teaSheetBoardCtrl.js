@@ -84,7 +84,7 @@ app.controller('teaSheetBoardCtrl', ['$scope', '$window', function ($scope, $win
             });
 
             $scope.resSheet.current_status==='a'? $("#status_sheet").css('color','green'): $("#status_sheet").css('color','red');
-            $("#status_sheet").html($scope.resSheet.current_status==='q'?'ค้างคิวตรวจ':
+            $("#status_sheet").html($scope.resSheet.current_status==='q'?'การส่งผิดพลาด':
                 $scope.resSheet.current_status==='a'?'ผ่าน':
                     $scope.resSheet.current_status==='w'?'คำตอบผิด':
                         $scope.resSheet.current_status==='m'?'ความจำเกินกำหนด':
