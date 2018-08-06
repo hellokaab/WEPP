@@ -7,6 +7,7 @@ app.controller('teaAddExamingCtrl', ['$scope', '$window', function ($scope, $win
 
     // Set Default
     $scope.openExamName = '';
+    $scope.description = '';
     $scope.userGroupID = '0';
     $scope.amountExam = '0';
     $scope.examingMode = 'n';
@@ -115,6 +116,7 @@ app.controller('teaAddExamingCtrl', ['$scope', '$window', function ($scope, $win
             data = {
                 user_id: $scope.user.id,
                 examing_name: $scope.openExamName,
+                description: $scope.description,
                 group_id: $scope.userGroupID,
                 exam: $scope.selectExam,
                 examing_mode: $scope.examingMode,

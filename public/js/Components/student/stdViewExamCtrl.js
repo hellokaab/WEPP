@@ -3,6 +3,8 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
     keepHistory($window.user.id,"student-examing-doing-"+$window.examingID,dtJsToDtDB(new Date()));
 
     $scope.examing = $window.examing;
+    $scope.examing.description = $scope.examing.description.split("\n");
+    console.log($scope.examing);
     $scope.groupData = findGroupDataByID($scope.examing.group_id);
     $scope.inputMode = 'key_input'
     $scope.allowedFileType = $scope.examing.allowed_file_type.split(",");

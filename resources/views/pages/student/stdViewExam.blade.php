@@ -91,6 +91,14 @@
                                     <br>
                                 </div>
                                 <div class="col-md-12">
+                                    {{--<label class="control-label">คำอธิบายการสอบ</label><br>--}}
+                                    <div class="col-md-3"><b>คำอธิบายการสอบ</b></div><br>
+                                    <div class="col-md-12">
+                                        <z ng-repeat="dt in examing.description track by $index" style="color: red">&nbsp;&nbsp;&nbsp;<%dt%><br></z>
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
                                     <div class="col-md-3"><b>Time limit: </b><span id="exam_time">NaN</span> Seconds</div>
                                     <div class="col-md-3"><b>Memory limit: </b><span id="exam_memory">NaN</span> KB</div>
                                 </div>
