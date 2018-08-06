@@ -928,8 +928,9 @@ function createExaming(data) {
         headers: {
             Accept: "application/json"
         },
+        type:'POST',
         url: url + 'examing-add-examing',
-        data: data,
+        data: JSON.stringify(data),
         async: false,
         complete: function (xhr) {
             if (xhr.readyState == 4) {
@@ -1016,8 +1017,9 @@ function updateExaming(data) {
         headers: {
             Accept: "application/json"
         },
+        type: 'POST',
         url: url + 'examing-edit-examing',
-        data: data,
+        data: JSON.stringify(data),
         async: false,
         complete: function (xhr) {
             if (xhr.readyState == 4) {

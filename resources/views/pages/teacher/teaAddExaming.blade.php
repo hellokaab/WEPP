@@ -26,6 +26,14 @@
                             </div>
                         </div>
 
+                        {{--Examing Description--}}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">คำอธิบายการสอบ</label>
+                            <div class="col-md-5">
+                                <textarea class="form-control io_textarea" ng-model="description" rows="5"></textarea>
+                            </div>
+                        </div>
+
                         {{--Select Group--}}
                         <div class="form-group">
                             <label class="col-md-2 control-label">กลุ่มเรียน <b class="danger">*</b></label>

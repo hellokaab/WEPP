@@ -45,6 +45,7 @@ class ExamingController extends Controller
         $examing->allowed_file_type = $request->allowed_file_type;
         $examing->hide_examing = $request->hide_examing;
         $examing->hide_history = $request->hide_history;
+        $examing->description = $request->description;
         $examing->save();
 
         return response()->json($examing);
@@ -98,6 +99,7 @@ class ExamingController extends Controller
         $examing->allowed_file_type = $request->allowed_file_type;
         $examing->hide_examing = $request->hide_examing;
         $examing->hide_history = $request->hide_history;
+        $examing->description = $request->description;
         $examing->save();
     }
 

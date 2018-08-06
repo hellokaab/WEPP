@@ -385,13 +385,13 @@ Route::get('/examing-find-data-scoreboard', 'ExamingController@dataInScoreboard'
 
 Route::get('/examing-find-history-exam', 'ExamingController@findMySendExamHistory');
 
-Route::get('/examing-add-examing', 'ExamingController@createExaming');
+Route::post('/examing-add-examing', 'ExamingController@createExaming');
 
 Route::get('/examing-add-examexaming', 'ExamingController@createExamExaming');
 
 Route::get('/examing-add-random', 'ExamingController@addRandomExam');
 
-Route::get('/examing-edit-examing', 'ExamingController@editExaming');
+Route::post('/examing-edit-examing', 'ExamingController@editExaming');
 
 Route::get('/examing-edit-examexaming', 'ExamingController@editExamExaming');
 

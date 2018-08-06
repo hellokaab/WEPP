@@ -9,6 +9,7 @@ app.controller('teaEditExamingCtrl', ['$scope', '$window', function ($scope, $wi
 
     // Initial values of this examing
     $scope.openExamName = $scope.examing.examing_name;
+    $scope.description = $scope.examing.description;
     $scope.userGroupID = $scope.examing.group_id;
     $scope.examingMode = $scope.examing.examing_mode;
     $scope.examingPassword = $scope.examing.examing_pass;
@@ -149,6 +150,7 @@ app.controller('teaEditExamingCtrl', ['$scope', '$window', function ($scope, $wi
             data = {
                 id: $scope.examing.id,
                 examing_name: $scope.openExamName,
+                description: $scope.description,
                 group_id: $scope.userGroupID,
                 exam: $scope.selectExam,
                 examing_mode: $scope.examingMode,
