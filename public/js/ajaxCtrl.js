@@ -1720,7 +1720,7 @@ function findSheetingByNameAndGroup(name,GID) {
             Accept: "application/json"
         },
         url:url + 'sheeting-find-sheeting-name',
-        data:{sheeting_name:name,sheet_group_id:GID},
+        data:{sheeting_name:name,group_id:GID},
         async: false,
         complete: function (xhr) {
             if (xhr.readyState == 4) {

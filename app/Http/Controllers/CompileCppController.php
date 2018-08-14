@@ -93,6 +93,7 @@ class CompileCppController extends Controller
                     $resExam->exam_id = $request->EID;
                     $resExam->user_id = $request->UID;
                     $resExam->current_status = "q";
+                    $resExam->score = 0;
                     $resExam->sum_accep = 0;
                     $resExam->sum_imp = 0;
                     $resExam->sum_wrong = 0;
@@ -221,6 +222,7 @@ class CompileCppController extends Controller
                     $resSheet->user_id = $request->UID;
                     $resSheet->file_type = "cpp";
                     $resSheet->current_status = "q";
+                    $resSheet->score = 0;
                     $resSheet->send_late = $request->send_late;
                     $resSheet->path = $folder_ans;
                     $resSheet->send_date_time = $request->send_date_time;

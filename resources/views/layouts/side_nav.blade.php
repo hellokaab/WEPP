@@ -189,6 +189,12 @@
                     </li5>
                 </ul>
             </div>
+            {{--<li4 ng-show="user.user_type === 's'">--}}
+                {{--<a target="_blank" rel="noopener noreferrer" href="https://goo.gl/forms/UyNHJuP53cm6cvvb2"><i class="fa2 fa-comments fa-lg" aria-hidden="true" style="color: #21ba45"></i>&nbsp;&nbsp;แบบประเมินความพึงพอใจ</a>--}}
+            {{--</li4>--}}
+            {{--<li4 ng-show="user.user_type === 't'">--}}
+                {{--<a target="_blank" rel="noopener noreferrer" href="https://goo.gl/forms/asckiNmphYOJjGmh2"><i class="fa2 fa-comments fa-lg" aria-hidden="true" style="color: #21ba45"></i>&nbsp;&nbsp;แบบประเมินความพึงพอใจ</a>--}}
+            {{--</li4>--}}
         </ul>
     </div>
 

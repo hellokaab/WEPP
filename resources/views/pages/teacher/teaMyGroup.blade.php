@@ -180,7 +180,7 @@
                         <br>
                         <input style="margin-left: 10%; width: 80%" type="text" class="form-control text-center"
                                ng-model="groupNameDelete" disabled/>
-                        <div style="padding-top: 3%; text-align: center">(ข้อมูลทุกอย่างที่เกี่ยวข้องกับกลุ่มเรียนนี้จะถูกลบไปด้วย)
+                        <div style="padding-top: 3%; text-align: center">(ข้อมูลการสอบ และการสั่งงานของกลุ่มเรียนนี้จะถูกลบไปด้วย)
                         </div>
                         <br>
                         <div class="modal-footer">
