@@ -28,6 +28,7 @@ app.controller('teaEditSheetingCtrl', ['$scope', '$window', function ($scope, $w
 
     $(document).ready(function () {
         $('[ng-model=userGroupID]').val($scope.userGroupID);
+        $('[ng-model=userGroupID]')[0].removeChild($('[ng-model=userGroupID]')[0].firstChild);
     });
 
     var deleteSheetSheeting = new Array();
@@ -96,7 +97,9 @@ app.controller('teaEditSheetingCtrl', ['$scope', '$window', function ($scope, $w
         completeUserGroup = $scope.userGroupID > 0;
         completeNoDuplicate = true;
         if(completeSheetName){
-            if($scope.openSheetName != $scope.sheeting.sheeting_name){
+            if($scope.openSheetName === $scope.sheeting.sheeting_name && $scope.userGroupID == $scope.sheeting.group_id){
+                completeNoDuplicate = true;
+            } else {
                 completeNoDuplicate = findSheetingByNameAndGroup($scope.openSheetName,$scope.userGroupID);
             }
         }

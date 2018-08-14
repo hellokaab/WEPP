@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Examing;
 use App\Group;
 use App\JoinGroup;
+use App\Sheeting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use DirectoryIterator;
 
 use App\Http\Requests;
 
@@ -59,6 +62,18 @@ class GroupController extends Controller
     }
 
     public function deleteGroup(Request $request){
+        $examings = Examing::where('group_id',$request->id)->get();
+        foreach ($examings as $examing) {
+            $examingFolder = "Examing_".$examing->id;
+            $this->rrmdir("../upload/res_exam/".$examingFolder);
+        }
+//
+        $sheetings = Sheeting::where('group_id',$request->id)->get();
+        foreach ($sheetings as $sheeting) {
+            $sheetingFolder = "Sheeting_".$sheeting->id;
+            $this->rrmdir("../upload/res_sheet/".$sheetingFolder);
+        }
+
         $section = Group::find($request->id);
         $section->delete();
     }
@@ -167,6 +182,21 @@ class GroupController extends Controller
         if ($exam === NULL) {
             return 404;
         }
+    }
+
+    public function rrmdir($path) {
+        // Open the source directory to read in files
+        try {
+            $i = new DirectoryIterator($path);
+            foreach ($i as $f) {
+                if ($f->isFile()) {
+                    unlink($f->getRealPath());
+                } else if (!$f->isDot() && $f->isDir()) {
+                    $this->rrmdir($f->getRealPath());
+                }
+            }
+            rmdir($path);
+        } catch(\Exception $e ){}
     }
 
 }

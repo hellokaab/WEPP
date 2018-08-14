@@ -1,5 +1,9 @@
 app.controller('homeCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
+    console.log(new Date());
+    console.log(dtJsToDtDB(new Date()));
+    console.log(getDateNow());
+    console.log(dtDBToDtJs(getDateNow()));
 
     var current_time = new Date();
     keepHistory($window.user.id,"home",dtJsToDtDB(current_time));
@@ -7,9 +11,7 @@ app.controller('homeCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.userOnline = user_online;
 
     var event = findMyEvent($scope.user.id,$scope.user.user_type);
-    console.log(event);
     var ppEvent = prepareEventString(event);
-    console.log(ppEvent);
 
     $(document).ready(function () {
         $('#side_home').attr('class','active');

@@ -36,7 +36,7 @@
                             <label class="col-md-2 control-label">กลุ่มเรียน <b class="danger">*</b></label>
                             <div class="col-md-5">
                                 <select class="form-control" ng-model="userGroupID">
-                                    <option value="0">กรุณาเลือก</option>
+                                    <option style="display: none"></option>
                                     <option ng-repeat="g in myGroups" value="<%g.id%>"><%g.group_name%></option>
                                 </select>
                                 <div class="notice" id="notice_sheeting_usr_grp" style="display: none">กรุณาระบุกลุ่มเรียน</div>

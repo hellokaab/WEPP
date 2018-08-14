@@ -39,6 +39,7 @@ app.controller('teaEditExamingCtrl', ['$scope', '$window', function ($scope, $wi
     $(document).ready(function () {
         $('[ng-model=userGroupID]').val($scope.userGroupID);
         $('[ng-model=amountExam]').val($scope.amountExam);
+        $('[ng-model=userGroupID]')[0].removeChild($('[ng-model=userGroupID]')[0].firstChild);
     });
 
     var allowed_file_type = "";
@@ -113,7 +114,9 @@ app.controller('teaEditExamingCtrl', ['$scope', '$window', function ($scope, $wi
         completeUserGroup = $scope.userGroupID > 0;
         completeNoDuplicate = true;
         if(completeExamName){
-            if ($scope.openExamName != $scope.examing.examing_name){
+            if ($scope.openExamName === $scope.examing.examing_name && $scope.userGroupID == $scope.examing.group_id){
+                completeNoDuplicate = true;
+            } else {
                 completeNoDuplicate = findExamingByNameAndGroup($scope.openExamName,$scope.userGroupId);
             }
 
