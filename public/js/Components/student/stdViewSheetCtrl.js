@@ -425,9 +425,10 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
                             compileAndRunCs(pathSheetID);
                         }
                     } else { // ถ้าไม่ใช่คนแรก
-                        // รอตรวจนานเกิน 9 วินาที
-                        if (count > 2) {
+                        // รอตรวจนานเกิน 6 วินาที
+                        if (count > 5) {
                             deleteFirstQueue();
+                            checkOrderSh(pathSheetID);
                             count = 0;
                         }
                     }
@@ -435,7 +436,7 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
                     if (!checked) {
                         setTimeout(function () {
                             checkOrderSh(pathSheetID);
-                        }, 3000);
+                        }, 1000);
                     }
                 }
             }
@@ -461,7 +462,7 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
                     if (xhr.status == 200) {
                         $scope.sheetSheeting[$scope.CurrentIndex].current_status = xhr.responseJSON;
                         $scope.$apply();
-                        deleteFirstQueue();
+                        deleteMyQueue(pathSheetID);
                     }
                 }
             }
@@ -487,7 +488,7 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
                     if (xhr.status == 200) {
                         $scope.sheetSheeting[$scope.CurrentIndex].current_status = xhr.responseJSON;
                         $scope.$apply();
-                        deleteFirstQueue();
+                        deleteMyQueue(pathSheetID);
                     }
                 }
             }
@@ -513,7 +514,7 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
                     if (xhr.status == 200) {
                         $scope.sheetSheeting[$scope.CurrentIndex].current_status = xhr.responseJSON;
                         $scope.$apply();
-                        deleteFirstQueue();
+                        deleteMyQueue(pathSheetID);
                     }
                 }
             }
@@ -555,7 +556,7 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
                     if (xhr.status == 200) {
                         $scope.sheetSheeting[$scope.CurrentIndex].current_status = xhr.responseJSON;
                         $scope.$apply();
-                        deleteFirstQueue();
+                        deleteMyQueue(pathSheetID);
                     }
                 }
             }
@@ -570,6 +571,19 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
                 Accept: "application/json"
             },
             url: url + 'sheeting-delete-queue-sheet',
+            async: false,
+        })
+    }
+    //----------------------------------------------------------------------
+    function deleteMyQueue(RSID) {
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: {
+                Accept: "application/json"
+            },
+            url: url + 'sheeting-delete-my-queue',
+            data:{ res_sheet_id : RSID},
             async: false,
         })
     }

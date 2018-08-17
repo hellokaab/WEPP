@@ -44,7 +44,7 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
         if ($.isNumeric($scope.memLimit) && $scope.memLimit.indexOf('.') < 0 && $scope.memLimit > 0) {
             $scope.completeMemLimit = true;
         } else {
-            $('#notice_exam_limit').html('* กรุณาระบุเฉพาะจำนวนเต็มบวกเท่านั้น').show();
+            $('#notice_exam_limit').html('* กรุณาระบุเฉพาะจำนวนเต็ม และมากกว่า 0 เท่านั้น').show();
         }
     };
     //----------------------------------------------------------------------
@@ -55,7 +55,7 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
         if ($.isNumeric($scope.timeLimit) && $scope.timeLimit > 0) {
             $scope.completeTimeLimit = true;
         } else {
-            $('#notice_exam_limit').html('* กรุณาระบุเวลาในการประมวลผลให้ถูกต้อง').show();
+            $('#notice_exam_limit').html('* กรุณาระบุเวลาในการประมวลให้มากกว่า 0 เท่านั้น').show();
         }
     };
     //----------------------------------------------------------------------
@@ -66,7 +66,7 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
         if ($.isNumeric($scope.fullScore) && $scope.fullScore.indexOf('.') < 0 && $scope.fullScore > 0) {
             $scope.completeFullScore = true;
         } else {
-            $('#notice_exam_score').html('* กรุณาระบุเฉพาะจำนวนเต็มบวกเท่านั้น').show();
+            $('#notice_exam_score').html('* กรุณาระบุเฉพาะจำนวนเต็ม และมากกว่า 0 เท่านั้น').show();
         }
     };
     //----------------------------------------------------------------------
@@ -77,7 +77,7 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
         if ($.isNumeric($scope.cutWrongAnswer)) {
             $scope.completeCutWrongAnswer = true;
         } else {
-            $('#notice_exam_descore').html('* กรุณาระบุการหักคะแนนคำตอบผิดพลาดให้ถูกต้อง').show();
+            $('#notice_exam_descore').html('* กรุณาระบุการหักคะแนนคำตอบผิดพลาดเป็นตัวเลขเท่านั้น').show();
         }
     };
     //----------------------------------------------------------------------
@@ -88,7 +88,7 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
         if ($.isNumeric($scope.cutComplieError)) {
             $scope.completeCutComplieError = true;
         } else {
-            $('#notice_exam_descore').html('* กรุณาระบุการหักคะแนนรูปแบบโค้ดไม่ถูกต้อง ให้ถูกต้อง').show();
+            $('#notice_exam_descore').html('* กรุณาระบุการหักคะแนนรูปแบบโค้ดไม่ถูกต้องเป็นตัวเลขเท่านั้น').show();
         }
     };
     //----------------------------------------------------------------------
@@ -99,7 +99,7 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
         if ($.isNumeric($scope.cutOverMem)) {
             $scope.completeCutOverMem = true;
         } else {
-            $('#notice_exam_descore').html('* กรุณาระบุการหักคะแนนหน่วยความจำเกินให้ถูกต้อง').show();
+            $('#notice_exam_descore').html('* กรุณาระบุการหักคะแนนหน่วยความจำเกินเป็นตัวเลขเท่านั้น').show();
         }
     };
     //----------------------------------------------------------------------
@@ -110,7 +110,7 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
         if ($.isNumeric($scope.cutOverTime)) {
             $scope.completeCutOverTime = true;
         } else {
-            $('#notice_exam_descore').html('* กรุณาระบุการหักคะแนนเวลาประมวณผลเกินให้ถูกต้อง').show();
+            $('#notice_exam_descore').html('* กรุณาระบุการหักคะแนนเวลาประมวณผลเกินเป็นตัวเลขเท่านั้น').show();
         }
     };
     //----------------------------------------------------------------------

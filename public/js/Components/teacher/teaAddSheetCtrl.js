@@ -45,7 +45,7 @@ app.controller('teaAddSheetCtrl', ['$scope', '$window', function ($scope, $windo
         if ($.isNumeric($scope.sheetScore) && $scope.sheetScore.indexOf('.') < 0 && $scope.sheetScore > 0) {
             $scope.completeScoreNumeric = true;
         } else {
-            $('#notice_sheet_score').html('* กรุณาระบุเฉพาะจำนวนเต็มบวกเท่านั้น').show();
+            $('#notice_sheet_score').html('* กรุณาระบุเฉพาะจำนวนเต็ม และมากกว่า 0 เท่านั้น').show();
         }
     };
     //----------------------------------------------------------------------
@@ -163,7 +163,7 @@ app.controller('teaAddSheetCtrl', ['$scope', '$window', function ($scope, $windo
             });
         } else {
             if (!$scope.completeScoreNumeric) {
-                $('#notice_sheet_score').html('* กรุณาระบุเฉพาะจำนวนเต็มบวกเท่านั้น').show();
+                $('#notice_sheet_score').html('* กรุณาระบุเฉพาะจำนวนเต็ม และมากกว่า 0 เท่านั้น').show();
                 $('[ng-model=sheetScore]').focus();
             }
             if (!$scope.completeScore) {
@@ -272,8 +272,8 @@ app.controller('teaAddSheetCtrl', ['$scope', '$window', function ($scope, $windo
                 if(($(this).children().children().children()[3].value).trim().length === 0){
                     $('#notice_quiz_score_'+thisID).html('* กรุณาระบุคะแนนคำถาม').show();
                     checked = false
-                }else if(!$.isNumeric($(this).children().children().children()[3].value)){
-                    $('#notice_quiz_score_'+thisID).html('* กรุณาระบุคะแนนให้ถูกต้อง').show();
+                }else if(!$.isNumeric($(this).children().children().children()[3].value) || $(this).children().children().children()[3].value <= 0){
+                    $('#notice_quiz_score_'+thisID).html('* กรุณาระบุคะแนนเป็นตัวเลข และมากกว่า 0 เท่านั้น').show();
                     checked = false
                 }
             }

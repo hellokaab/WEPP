@@ -131,7 +131,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <br>
-                                        <b>วัตถุประสงค์:</b>
+                                        <b>วัตถุประสงค์</b>
                                         <div id="objective_part">
                                             <textarea class="form-control code_textarea" style="background-color: #fff"
                                                       id="objective" rows="5" disabled></textarea>
@@ -139,7 +139,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <br>
-                                        <b>ทฤษฎีที่เกี่ยวข้อง:</b>
+                                        <b>ทฤษฎีที่เกี่ยวข้อง</b>
                                         <div id="theory_part">
                                             <textarea class="form-control code_textarea" style="background-color: #fff"
                                                       id="theory" rows="5" disabled></textarea>
@@ -149,14 +149,14 @@
                             </div>
                             <div class="col-md-12">
                                 <br>
-                                <b>การทดลอง:</b>
+                                <b>การทดลอง</b>
                                 <div id="sheet_trial"></div>
                             </div>
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <br>
-                                        <b>อินพุท:</b>
+                                        <b>Input</b>
                                         <div id="input_part">
                                             <textarea class="form-control code_textarea" style="background-color: #fff"
                                                       id="sheetInput" rows="10" disabled></textarea>
@@ -164,7 +164,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <br>
-                                        <b>เอาท์พุท:</b>
+                                        <b>Output</b>
                                         <div id="output_part">
                                             <textarea class="form-control code_textarea" style="background-color: #fff"
                                                       id="sheetOutput" rows="10" disabled></textarea>
@@ -190,7 +190,7 @@
                                     <div class="col-md-6">
                                         <br>
                                         <div class="row">
-                                            <div class="col-md-12"><b>หมายเหตุ : </b></div>
+                                            <div class="col-md-12"><b>หมายเหตุ  </b></div>
                                             <div class="col-md-6"><span id="notation"></span></div>
                                         </div>
                                     </div>
@@ -210,14 +210,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <b>คำตอบ :</b>
+                                        <b>คำตอบ </b>
                                         <div>
                                             <input type="text" class="form-control" style="background-color: #fff"
                                                    id="answer_1" value="<%q.quiz_ans%>" disabled>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <b>คะแนน :</b>
+                                        <b>คะแนน </b>
                                         <div>
                                             <input type="text" class="form-control" style="background-color: #fff"
                                                    id="score_1" value="<%q.quiz_score%>" disabled>

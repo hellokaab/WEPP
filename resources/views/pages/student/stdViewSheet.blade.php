@@ -158,7 +158,7 @@
                                                             <div class="row">
                                                                 <div class="form-group">
                                                                     <input type="radio" name="input" id="fileInputChk" value="file_input" ng-model="inputMode">
-                                                                    <label for="fileInputChk">อัพโหลด File</label>
+                                                                    <label for="fileInputChk">อัพโหลดไฟล์</label>
                                                                 </div>
                                                             </div>
                                                         </div>

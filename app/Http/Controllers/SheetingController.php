@@ -199,6 +199,13 @@ class SheetingController extends Controller
         $first->delete();
     }
 
+    public function deleteMyQueueSh(Request $request){
+        $myQueue = QueueSheet::where('res_sheet_id',$request->res_sheet_id)->first();
+        if ($myQueue != NULL) {
+            $myQueue->delete();
+        }
+    }
+
     public function sendQuiz(Request $request){
         $score = 0;
         $quiz = Quiz::find($request->quiz_id);

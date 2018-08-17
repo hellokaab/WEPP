@@ -234,11 +234,11 @@
 
                             <h4 class="text-center" id="examName"></h4>
                             <br>
-                            <div class="col-md-3"><b>Time limit:</b> <span id="examTimeLimit"></span> Seconds</div>
-                            <div class="col-md-3"><b>Memory limit:</b> <span id="examMemLimit"></span> KB</div>
+                            <div class="col-md-3"><b>Time limit : </b> <span id="examTimeLimit"></span> Seconds</div>
+                            <div class="col-md-3"><b>Memory limit : </b> <span id="examMemLimit"></span> KB</div>
                             <div class="col-md-12">
                                 <br>
-                                <b>โจทย์:</b>
+                                <b>โจทย์</b>
                                 <div id="exam_content"></div>
                             </div>
 
@@ -247,7 +247,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <br>
-                                        <b>อินพุท:</b>
+                                        <b>Input</b>
                                         <div id="input_part">
                                             <textarea class="form-control code_textarea" style="background-color: #fff"
                                                       id="examInput" rows="10" disabled></textarea>
@@ -255,7 +255,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <br>
-                                        <b>เอาท์พุท:</b>
+                                        <b>Output</b>
                                         <div id="output_part">
                                             <textarea class="form-control code_textarea" style="background-color: #fff"
                                                       id="examOutput" rows="10" disabled></textarea>
@@ -270,7 +270,7 @@
                                         <br>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <b>เกณฑ์การให้คะแนน:</b>
+                                                <b>เกณฑ์การให้คะแนน</b>
                                                 <div class="list-group">
                                                     <a class="list-group-item">
                                                         <span class="badge badge-default" id="fullScore">100</span>
@@ -281,7 +281,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <b>เกณฑ์การหักคะแนน:</b>
+                                                <b>เกณฑ์การหักคะแนน</b>
                                                 <div class="list-group">
                                                     <a class="list-group-item">
                                                         <span class="badge badge-default" id="cutWrongAnswer">10</span>
@@ -306,7 +306,7 @@
 
                                     <div class="col-md-6">
                                         <br>
-                                        <b>คีย์เวิร์ด:</b>
+                                        <b ng-hide="keywords.length == 0">Keyword</b>
                                         <br>
                                         <br>
                                         <ul id="list_keyword">
@@ -339,8 +339,7 @@
                         <br>
                         <input style="margin-left: 10%; width: 80%" type="text" class="form-control text-center"
                                ng-model="examName" disabled/>
-                        <div style="padding-top: 3%; text-align: center">(ข้อมูลข้อสอบ,คีย์เวิร์ด,ไฟล์ input,ไฟล์ output
-                            จะถูกลบไปด้วย)
+                        <div style="padding-top: 3%; text-align: center">(ข้อมูลข้อสอบ,keyword,input file,output file จะถูกลบไปด้วย)
                         </div>
                         <br>
                         <div class="modal-footer">
