@@ -99,8 +99,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="col-md-3"><b>Time limit: </b><span id="exam_time">NaN</span> Seconds</div>
-                                    <div class="col-md-3"><b>Memory limit: </b><span id="exam_memory">NaN</span> KB</div>
+                                    <div class="col-md-3"><b>Time limit : </b><span id="exam_time">NaN</span> Seconds</div>
+                                    <div class="col-md-3"><b>Memory limit : </b><span id="exam_memory">NaN</span> KB</div>
                                 </div>
                                 <br>
                                 <div class="col-md-12">
@@ -113,7 +113,6 @@
                                         <b>หมายเหตุ: </b>
                                         <i>
                                             <u>Full score</u> <span id="full_score">NaN</span> คะแนน,
-                                            <u>Imperfect score</u> <span id="imper_score">NaN</span> คะแนน,
                                             <u>Wrong answer</u> -<span id="cut_wrongans">NaN</span> คะแนน,
                                             <u>Compile error</u> -<span id="cut_comerror">NaN</span> คะแนน,
                                             <u>Over memory</u> -<span id="cut_overmemory">NaN</span> คะแนน,
@@ -162,7 +161,7 @@
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <input type="radio" name="input" id="fileInputChk" value="file_input" ng-model="inputMode">
-                                                        <label for="fileInputChk">อัพโหลด File</label>
+                                                        <label for="fileInputChk">อัพโหลดไฟล์</label>
                                                     </div>
                                                 </div>
                                             </div>

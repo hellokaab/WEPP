@@ -340,9 +340,10 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
                             compileAndRunCs(pathExamID);
                         }
                     } else { // ถ้าไม่ใช่คนแรก
-                        // รอตรวจนานเกิน 9 วินาที
-                        if (count > 2) {
+                        // รอตรวจนานเกิน 6 วินาที
+                        if (count > 5) {
                             deleteFirstQueue();
+                            checkOrderEx(pathExamID);
                             count = 0;
                         }
                     }
@@ -350,7 +351,7 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
                     if (!checked) {
                         setTimeout(function () {
                             checkOrderEx(pathExamID);
-                        }, 3000);
+                        }, 1000);
                     }
                 }
             }
@@ -377,7 +378,7 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
                         $scope.examExaming[$scope.CurrentIndex].current_status = xhr.responseJSON;
                         $scope.$apply();
 
-                        deleteFirstQueue();
+                        deleteMyQueue(pathExamID);
                     }
                 }
             }
@@ -403,7 +404,7 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
                     if (xhr.status == 200) {
                         $scope.examExaming[$scope.CurrentIndex].current_status = xhr.responseJSON;
                         $scope.$apply();
-                        deleteFirstQueue();
+                        deleteMyQueue(pathExamID);
                     }
                 }
             }
@@ -430,7 +431,7 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
                         $scope.examExaming[$scope.CurrentIndex].current_status = xhr.responseJSON;
                         $scope.$apply();
 
-                        deleteFirstQueue();
+                        deleteMyQueue(pathExamID);
                     }
                 }
             }
@@ -472,7 +473,7 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
                     if (xhr.status == 200) {
                         $scope.examExaming[$scope.CurrentIndex].current_status = xhr.responseJSON;
                         $scope.$apply();
-                        deleteFirstQueue();
+                        deleteMyQueue(pathExamID);
                     }
                 }
             }
@@ -487,6 +488,19 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
                 Accept: "application/json"
             },
             url: url + 'examing-delete-queue-exam',
+            async: false,
+        })
+    }
+    //----------------------------------------------------------------------
+    function deleteMyQueue(PEID) {
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: {
+                Accept: "application/json"
+            },
+            url: url + 'examing-delete-my-queue',
+            data:{ path_exam_id : PEID},
             async: false,
         })
     }

@@ -47,12 +47,21 @@
             box-sizing: border-box;
         }
 
-        .vertical-offset-100 {
-            padding-top: 100px;
+        @media (max-width: 767px) {
+            .vertical-offset-100 {
+                padding-top: 50px;
+            }
+        }
+
+        @media (min-width: 992px){
+            .vertical-offset-100 {
+                padding-top: 150px;
+            }
         }
 
         .vertical-offset-10 {
-            padding-top: 5%;
+            /*padding-top: 5%;*/
+            padding-top: 0%;
         }
 
         .img-responsive {
@@ -119,7 +128,7 @@
     <div class="row vertical-offset-10">
         <div class="col-md-7">
             <div class="center">
-                <img class="img-responsive" src="img/logo.png">
+                <img class="img-responsive" src="img/logo7.png">
             </div>
             <h2 style="text-align: center;margin-top: 25px">ระบบใบงานและการสอบเขียนโปรแกรมคอมพิวเตอร์ภาคปฏิบัติ</h2>
         </div>

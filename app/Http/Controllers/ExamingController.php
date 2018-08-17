@@ -277,6 +277,13 @@ class ExamingController extends Controller
         $first->delete();
     }
 
+    public function deleteMyQueueEx(Request $request){
+        $myQueue = QueueExam::where('path_exam_id',$request->path_exam_id)->first();
+        if ($myQueue != NULL) {
+            $myQueue->delete();
+        }
+    }
+
     public function examInScoreboard(Request $request){
         $examInScoreboard = DB::table('exam_examings')
             ->join('exams', 'exam_examings.exam_id', '=', 'exams.id')

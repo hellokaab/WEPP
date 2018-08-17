@@ -403,6 +403,8 @@ Route::get('/examing-delete-examexaming', 'ExamingController@deleteExamExaming')
 
 Route::get('/examing-delete-queue-exam', 'ExamingController@deleteFirstQueueEx');
 
+Route::get('/examing-delete-my-queue', 'ExamingController@deleteMyQueueEx');
+
 Route::get('/examing-check-ip', 'ExamingController@checkIP');
 
 Route::get('/examing-check-queue-exam','ExamingController@checkQueueEx');
@@ -545,7 +547,9 @@ Route::get('/sheeting-delete-sheeting', 'SheetingController@deleteSheeting');
 
 Route::get('/sheeting-delete-sheetsheeting', 'SheetingController@deleteSheetSheeting');
 
-Route::get('/sheeting-delete-queue-sheet', 'SheetingController@deleteFirstQueueSh');
+Route::get('/sheeting-delete-queue-sheet', 'SheetingController@deleteMyQueueSh');
+
+Route::get('/sheeting-delete-my-queue', 'SheetingController@deleteFirstQueueSh');
 
 Route::get('/sheeting-check-queue-sheet','SheetingController@checkQueueSh');
 
