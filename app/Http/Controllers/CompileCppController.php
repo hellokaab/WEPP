@@ -337,7 +337,7 @@ class CompileCppController extends Controller
         $files = scandir($folder_code);
         $file = $files[2];
 
-        exec("pkill wepp_ans");
+        exec("pkill -x wepp_ans");
 
         // ค้าหาพาร์ทของไฟล์ที่จะคอมไฟล์
         $dir = getcwd();
@@ -518,7 +518,7 @@ class CompileCppController extends Controller
         }
 
         // เขียนไฟล์ sh เพื่อปิด wepp_ans ที่รันค้างอยู่
-        $kill_file_ans = "#!/bin/bash \n pkill wepp_ans";
+        $kill_file_ans = "#!/bin/bash \n pkill -x wepp_ans";
         $file = 'kill';
         $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $kill_file_ans);

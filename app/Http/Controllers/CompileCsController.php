@@ -456,7 +456,7 @@ class CompileCsController extends Controller
 
     function create_bat($folder_code,$file_main,$str_file){
 //        exec("Taskkill /IM wepp_ans.exe /F");
-        exec("pkill wepp_ans");
+        exec("pkill -x wepp_ans");
 
         // ค้าหาพาร์ทของไฟล์ที่จะคอมไฟล์
         $dir = getcwd();
