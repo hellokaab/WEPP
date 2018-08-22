@@ -655,6 +655,7 @@ class CompileJavaController extends Controller
         exec($dir_code."compile_check.sh");
         $lines_run = array();
         exec($dir_code."run_check.sh",$lines_run);
+        exec("pkill -f 'java $class_name'");
         return $lines_run;
     }
 
