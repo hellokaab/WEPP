@@ -27,7 +27,7 @@ class CompileCsController extends Controller
         if($request->mode === "key") {
             $code = $request->code;
             // ตรวจสอบว่ามี namespace หรือเปล่า
-            $no_namespace = $this->check_namespace($code);
+//            $no_namespace = $this->check_namespace($code);
             if($no_namespace){
                 // สร้างโฟลเดอร์เก็บไฟล์ที่ส่ง
                 $user = User::find($request->UID);
@@ -60,16 +60,16 @@ class CompileCsController extends Controller
         } else {
             // แต่ถ้าส่งไฟล์โค้ดมา
             $folder_ans = $request->path;
-            $files = scandir($folder_ans);
-            foreach ($files as $f) {
-                // ลูปเช็คทุกไฟล์ที่มีนามสกุล .cs
-                if (strpos($f, '.cs') && $no_namespace) {
-                    $handle = fopen("$folder_ans/$f", "r");
-                    $code_in_file = fread($handle, filesize("$folder_ans/$f"));
-                    fclose($handle);
-                    $no_namespace = $this->check_namespace($code_in_file);
-                }
-            }
+//            $files = scandir($folder_ans);
+//            foreach ($files as $f) {
+//                // ลูปเช็คทุกไฟล์ที่มีนามสกุล .cs
+//                if (strpos($f, '.cs') && $no_namespace) {
+//                    $handle = fopen("$folder_ans/$f", "r");
+//                    $code_in_file = fread($handle, filesize("$folder_ans/$f"));
+//                    fclose($handle);
+//                    $no_namespace = $this->check_namespace($code_in_file);
+//                }
+//            }
 
             if(!$no_namespace){
                 // ลบไฟล์ที่ถูกส่งมา
@@ -156,7 +156,7 @@ class CompileCsController extends Controller
         if($request->mode === "key") {
             $code = $request->code;
             // ตรวจสอบว่ามี namespace หรือเปล่า
-            $no_namespace = $this->check_namespace($code);
+//            $no_namespace = $this->check_namespace($code);
             if ($no_namespace) {
                 // สร้างโฟลเดอร์เก็บไฟล์ที่ส่ง
                 $user = User::find($request->UID);
@@ -191,16 +191,16 @@ class CompileCsController extends Controller
         } else {
             // แต่ถ้าส่งไฟล์โค้ดมา
             $folder_ans = $request->path;
-            $files = scandir($folder_ans);
-            foreach ($files as $f) {
-                // ลูปเช็คทุกไฟล์ที่มีนามสกุล .cs
-                if (strpos($f, '.cs') && $no_namespace) {
-                    $handle = fopen("$folder_ans/$f", "r");
-                    $code_in_file = fread($handle, filesize("$folder_ans/$f"));
-                    fclose($handle);
-                    $no_namespace = $this->check_namespace($code_in_file);
-                }
-            }
+//            $files = scandir($folder_ans);
+//            foreach ($files as $f) {
+//                // ลูปเช็คทุกไฟล์ที่มีนามสกุล .cs
+//                if (strpos($f, '.cs') && $no_namespace) {
+//                    $handle = fopen("$folder_ans/$f", "r");
+//                    $code_in_file = fread($handle, filesize("$folder_ans/$f"));
+//                    fclose($handle);
+//                    $no_namespace = $this->check_namespace($code_in_file);
+//                }
+//            }
 
             if(!$no_namespace){
                 // ลบไฟล์ที่ถูกส่งมา
@@ -437,10 +437,17 @@ class CompileCsController extends Controller
     }
 
     function get_class_name($code) {
-        $tmp = explode('class', $code);
-        $tmp2 = explode('{', $tmp[1]);
-        $class = trim($tmp2[0]);
-        return $class ? $class : FALSE;
+        if(strpos($code,'class')){
+            $tmp = explode('class', $code);
+            $tmp2 = explode('{', $tmp[1]);
+            $class = trim($tmp2[0]);
+            return $class ? $class : FALSE;
+        } else {
+            $tmp = explode('interface', $code);
+            $tmp2 = explode('{', $tmp[1]);
+            $class = trim($tmp2[0]);
+            return $class ? $class : FALSE;
+        }
     }
 
     function is_main($file) {
