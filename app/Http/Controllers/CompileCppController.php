@@ -61,8 +61,8 @@ class CompileCppController extends Controller
             $folder_ans = $request->path;
             $files = scandir($folder_ans);
             foreach ($files as $f) {
-                // ลูปเช็ค package ทุกไฟล์ที่มีนามสกุล .java
-                if (strpos($f, '.cpp') && $checkConio) {
+                // ลูปเช็ค package ทุกไฟล์ที่มีนามสกุล .cpp และ .h
+                if ((strpos($f, '.cpp') || strpos($f, '.h')) && $checkConio) {
                     $handle = fopen("$folder_ans/$f", "r");
                     $code_in_file = fread($handle, filesize("$folder_ans/$f"));
                     fclose($handle);
@@ -189,8 +189,8 @@ class CompileCppController extends Controller
             $folder_ans = $request->path;
             $files = scandir($folder_ans);
             foreach ($files as $f) {
-                // ลูปเช็ค package ทุกไฟล์ที่มีนามสกุล .java
-                if (strpos($f, '.cpp') && $checkConio) {
+                // ลูปเช็ค package ทุกไฟล์ที่มีนามสกุล .cpp และ .h
+                if ((strpos($f, '.cpp') || strpos($f, '.h')) && $checkConio) {
                     $handle = fopen("$folder_ans/$f", "r");
                     $code_in_file = fread($handle, filesize("$folder_ans/$f"));
                     fclose($handle);
@@ -283,59 +283,167 @@ class CompileCppController extends Controller
             $folder_ans = $resSheet->path;
         }
 
-        // คอมไพล์โค้ดที่ส่ง
-        $this->compile_code($folder_ans);
-
-        // ตรวจสอบการคอมไพล์(มีไฟล์ wepp_ans.exe ไหม)
-        if (file_exists("$folder_ans/wepp_ans")) {
-            $input_file = "";
-            // คิวรี่ ไฟล์อินพุทของข้อสอบ
-            if($request->mode == "exam") {
-                $exam = Exam::find($request->exam_id);
-                $input_file = $exam->exam_input_file;
-            } else if ($request->mode == "sheet"){
-                $sheet = Sheet::find($request->sheet_id);
-                $input_file = $sheet->sheet_input_file;
+        // ตรวจหาเมธอด main() ในโฟลเดอร์ แล้วเก็บ ชื่อไฟล์ที่มีเมธอด main() ใน $file_main
+        $files = scandir($folder_ans);
+        $file_main = null;
+        $str_file = "";
+        foreach ($files as $f) {
+            if (strpos($f, '.cpp')) {
+                // ถ้าในไฟล์นี้ มีเมธอด main()
+                if ($this->is_main("$folder_ans/$f")) {
+                    $file_main = $f;
+                } else {
+                    $str_file = $str_file.$f." ";
+                }
             }
+        }
 
-            // รันโค้ด
-            $lines_run =  $this->run_code($input_file,$folder_ans,$request->mode,$request->exam_id);
+        // ถ้าเจอเมธอด main() ในโฟลเดอร์
+        if ($file_main) {
+            // คอมไพล์โค้ดที่ส่ง
+            $this->compile_code($folder_ans,$file_main,$str_file);
 
-            // ตรวจสอบคำตอบ
-            $checker = "";
-            if($request->mode == "exam") {
-                $checker = $this->check_correct_ans_ex($lines_run, $request->exam_id,$folder_ans);
-            } else if($request->mode == "sheet") {
-                $checker = $this->check_correct_ans_sh($lines_run, $request->sheet_id,$folder_ans);
-            }
+            // ตรวจสอบการคอมไพล์(มีไฟล์ wepp_ans.exe ไหม)
+            if (file_exists("$folder_ans/wepp_ans")) {
+                $input_file = "";
+                // คิวรี่ ไฟล์อินพุทของข้อสอบ
+                if($request->mode == "exam") {
+                    $exam = Exam::find($request->exam_id);
+                    $input_file = $exam->exam_input_file;
+                } else if ($request->mode == "sheet"){
+                    $sheet = Sheet::find($request->sheet_id);
+                    $input_file = $sheet->sheet_input_file;
+                }
 
-            // เครียร์ไฟล์ขยะ (*.exe, *.bat)
-            $this->clearFolderAns($folder_ans);
+                // รันโค้ด
+                $lines_run =  $this->run_code($input_file,$folder_ans,$request->mode,$request->exam_id);
 
-            // อัพเดตสถานะการส่ง เป็นสถานะที่เช็คได้
-            if($request->mode == "exam"){
-                $status = $this->update_resexam($request->pathExamID,$request->exam_id,$checker,$folder_ans);
-            } else if($request->mode == "sheet") {
-                $status = $this->update_resworksheet($request->pathSheetID,$request->sheet_id,$checker,$folder_ans);
+                // ตรวจสอบคำตอบ
+                $checker = "";
+                if($request->mode == "exam") {
+                    $checker = $this->check_correct_ans_ex($lines_run, $request->exam_id,$folder_ans);
+                } else if($request->mode == "sheet") {
+                    $checker = $this->check_correct_ans_sh($lines_run, $request->sheet_id,$folder_ans);
+                }
+
+                // เครียร์ไฟล์ขยะ (*.exe, *.bat)
+                $this->clearFolderAns($folder_ans);
+
+                // อัพเดตสถานะการส่ง เป็นสถานะที่เช็คได้
+                if($request->mode == "exam"){
+                    $status = $this->update_resexam($request->pathExamID,$request->exam_id,$checker,$folder_ans);
+                } else if($request->mode == "sheet") {
+                    $status = $this->update_resworksheet($request->pathSheetID,$request->sheet_id,$checker,$folder_ans);
+                }
+            } else {
+                // ไม่พบไฟล์ weep_ex.exe
+                // อัพเดตสถานะการส่ง เป็น complie error
+                if($request->mode == "exam"){
+                    $checker = array("status" => "c", "res_run" => null, "time" => null, "mem" => null);
+                    $status = $this->update_resexam($request->pathExamID,$request->exam_id,$checker,$folder_ans);
+                } else if($request->mode == "sheet") {
+                    $checker = array("status" => "c", "res_run" => null, "time" => null, "mem" => null);
+                    $status = $this->update_resworksheet($request->pathSheetID,$request->sheet_id,$checker,$folder_ans);
+                }
             }
         } else {
-            // ไม่พบไฟล์ weep_ex.exe
-            // อัพเดตสถานะการส่ง เป็น complie error
-            if($request->mode == "exam"){
-                $checker = array("status" => "c", "res_run" => null, "time" => null, "mem" => null);
-                $status = $this->update_resexam($request->pathExamID,$request->exam_id,$checker,$folder_ans);
+            // ถ้าไม่พบเมธอด main() ในโค้ดที่ส่ง
+            // ตรวจสอบว่า เป็นข้อสอบเขียนคลาส หรือไม่
+            $file_main = "";
+            if($request->mode == "exam") {
+                $exam = Exam::find($request->exam_id);
+                $file_main = $exam->main_code;
             } else if($request->mode == "sheet") {
-                $checker = array("status" => "c", "res_run" => null, "time" => null, "mem" => null);
-                $status = $this->update_resworksheet($request->pathSheetID,$request->sheet_id,$checker,$folder_ans);
+                $sheet = Sheet::find($request->sheet_id);
+                $file_main = $sheet->main_code;
+            }
+
+            if ($file_main) {
+                // อ่านโค้ดในไฟล์
+                $myfile = fopen($file_main, 'r');
+                $origin_code = fread($myfile, filesize($file_main));
+                fclose($myfile);
+
+                // สร้างไฟล์ wepp_main.cpp
+                $file = "wepp_main.cpp";
+                $handle = fopen("$folder_ans/$file", 'w') or die('Cannot open file:  ' . $file);
+                fwrite($handle, $origin_code);
+
+                // คอมไพล์โค้ดที่ส่ง
+                $this->compile_code($folder_ans, $file,$str_file);
+
+                // ตรวจสอบการคอมไพล์(มีไฟล์ wepp_ans.exe ไหม)
+                if (file_exists("$folder_ans/wepp_ans")) {
+                    $input_file = "";
+                    // คิวรี่ ไฟล์อินพุทของข้อสอบ
+                    if($request->mode == "exam") {
+                        $exam = Exam::find($request->exam_id);
+                        $input_file = $exam->exam_input_file;
+                    } else if ($request->mode == "sheet"){
+                        $sheet = Sheet::find($request->sheet_id);
+                        $input_file = $sheet->sheet_input_file;
+                    }
+
+                    // รันโค้ด
+                    $lines_run =  $this->run_code($input_file,$folder_ans,$request->mode,$request->exam_id);
+
+                    // ตรวจสอบคำตอบ
+                    $checker = "";
+                    if($request->mode == "exam") {
+                        $checker = $this->check_correct_ans_ex($lines_run, $request->exam_id,$folder_ans);
+                    } else if($request->mode == "sheet") {
+                        $checker = $this->check_correct_ans_sh($lines_run, $request->sheet_id,$folder_ans);
+                    }
+
+                    // เครียร์ไฟล์ขยะ (*.exe, *.bat)
+                    $this->clearFolderAns($folder_ans);
+
+                    // อัพเดตสถานะการส่ง เป็นสถานะที่เช็คได้
+                    if($request->mode == "exam"){
+                        $status = $this->update_resexam($request->pathExamID,$request->exam_id,$checker,$folder_ans);
+                    } else if($request->mode == "sheet") {
+                        $status = $this->update_resworksheet($request->pathSheetID,$request->sheet_id,$checker,$folder_ans);
+                    }
+                } else {
+                    // ไม่พบไฟล์ weep_ex.exe
+                    // อัพเดตสถานะการส่ง เป็น complie error
+                    if($request->mode == "exam"){
+                        $checker = array("status" => "c", "res_run" => null, "time" => null, "mem" => null);
+                        $status = $this->update_resexam($request->pathExamID,$request->exam_id,$checker,$folder_ans);
+                    } else if($request->mode == "sheet") {
+                        $checker = array("status" => "c", "res_run" => null, "time" => null, "mem" => null);
+                        $status = $this->update_resworksheet($request->pathSheetID,$request->sheet_id,$checker,$folder_ans);
+                    }
+                }
+            } else{
+                // ไม่เจอ method main
+                if($request->mode == "exam"){
+                    $checker = array("status" => "c", "res_run" => null, "time" => null, "mem" => null);
+                    $status = $this->update_resexam($request->pathExamID,$request->exam_id,$checker,$folder_ans);
+                } else if($request->mode == "sheet") {
+                    $checker = array("status" => "c", "res_run" => null, "time" => null, "mem" => null);
+                    $status = $this->update_resworksheet($request->pathSheetID,$request->sheet_id,$checker,$folder_ans);
+                }
             }
         }
         return response()->json($status);
     }
 
-    function compile_code($folder_code) {
+    function is_main($file) {
+        $myfile = fopen($file, 'r') or die('ERROR_CODE : UNABLE_TO_OPEN_FILE');
+        $code = fread($myfile, filesize($file));
+        fclose($myfile);
+
+        if (strpos($code, 'main') != FALSE) {
+            return true;
+        }
+        return false;
+    }
+
+    function compile_code($folder_code,$file_main,$str_file) {
         // ดึงข้อมูลโค้ดจากไฟล์ที่ส่ง
-        $files = scandir($folder_code);
-        $file = $files[2];
+//        $files = scandir($folder_code);
+//        $file = $files[2];
 
         exec("pkill -x wepp_ans");
 
@@ -355,7 +463,7 @@ class CompileCppController extends Controller
         // สร้างไฟล์ shell script สำหรับการคอมไพล์
         $file_bat = 'compile_ans.sh';
         $openfile = fopen("$folder_code/$file_bat", 'w');
-        fwrite($openfile, "#!/bin/bash \n ".$cmd . " \n g++ ".$file." -o wepp_ans");
+        fwrite($openfile, "#!/bin/bash \n ".$cmd . " \n g++ $file_main ".$str_file." -o wepp_ans");
         fclose($openfile);
         chmod("$folder_code/$file_bat", 0777);
 
@@ -803,9 +911,9 @@ class CompileCppController extends Controller
     function clearFolderAns($folder_ans) {
         $files = scandir($folder_ans);
 
-        // ลูปลบไฟล์ที่นามสกุลไม่ใช่ .cpp
+        // ลูปลบไฟล์ที่นามสกุลไม่ใช่ .cpp และ .h
         foreach ($files as $f) {
-            if (!strpos($f, '.cpp') || strpos($f, '.class')) {
+            if (!strpos($f, '.cpp') || strpos($f, '.class') || $f == 'wepp_main.cpp' || !strpos($f, '.h')) {
                 @unlink("$folder_ans/$f");
             }
         }

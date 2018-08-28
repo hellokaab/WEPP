@@ -456,10 +456,17 @@ class CompileJavaController extends Controller
     }
 
     function get_class_name($code) {
-        $tmp = explode('class', $code);
-        $tmp2 = explode('{', $tmp[1]);
-        $class = trim($tmp2[0]);
-        return $class ? $class : FALSE;
+        if(strpos($code,'class')){
+            $tmp = explode('class', $code);
+            $tmp2 = explode('{', $tmp[1]);
+            $class = trim($tmp2[0]);
+            return $class ? $class : FALSE;
+        } else {
+            $tmp = explode('interface', $code);
+            $tmp2 = explode('{', $tmp[1]);
+            $class = trim($tmp2[0]);
+            return $class ? $class : FALSE;
+        }
     }
 
     function is_main($file) {

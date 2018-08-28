@@ -179,13 +179,7 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
 
                         // ถ้าเป็นไฟล์ .cpp
                         else if($scope.selectFileType === "cpp"){
-                            if(($("#file_ans")[0].files).length > 1){
-                                $('#detail_sheet_part').waitMe('hide');
-                                $('#err_message').html('ไม่อนุญาตให้ส่งไฟล์ .cpp มากกว่า 1 ไฟล์');
-                                $('#fail_modal').modal('show');
-                            } else {
-                                sendSheetCpp(data);
-                            }
+                            sendSheetCpp(data);
                         }
 
                         // ถ้าเป็นไฟล์ .java
@@ -257,7 +251,11 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
             if (ext.toLowerCase() === $scope.selectFileType) {
 
             } else {
-                return false;
+                if(ext.toLowerCase() === "h" && $scope.selectFileType === "cpp"){
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
         return true;

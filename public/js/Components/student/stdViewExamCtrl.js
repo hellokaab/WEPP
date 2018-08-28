@@ -124,13 +124,7 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
 
                     // ถ้าเป็นไฟล์ .cpp
                     else if($scope.selectFileType === "cpp"){
-                        if(($("#file_ans")[0].files).length > 1){
-                            $('#detail_exam_part').waitMe('hide');
-                            $('#err_message').html('ไม่อนุญาตให้ส่งไฟล์ .cpp มากกว่า 1 ไฟล์');
-                            $('#fail_modal').modal('show');
-                        } else {
-                            sendExamCpp(data);
-                        }
+                        sendExamCpp(data);
                     }
 
                     // ถ้าเป็นไฟล์ .java
@@ -164,7 +158,11 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
             if (ext.toLowerCase() === $scope.selectFileType) {
 
             } else {
-                return false;
+                if(ext.toLowerCase() === "h" && $scope.selectFileType === "cpp"){
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
         return true;
