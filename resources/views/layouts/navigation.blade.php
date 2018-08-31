@@ -9,13 +9,13 @@
             $("#for-full-screen").css('display','block');
             $("#nav_admin_logout,#nav_tea_list,#nav_std_list,#nav_home,#nav_user_logout").css('display','none');
             $("#nav_group,#nav_profile,#nav_exam,#nav_examing,#nav_sheet,#nav_sheeting").css('display','none');
-            $("#nav_manual_teacher,#nav_manual_student,#nav_manual_other").css('display','none');
+            $("#nav_manual_teacher,#nav_manual_student,#nav_manual_other,#nav_web_history").css('display','none');
         } else {
             document.getElementById("projectName").innerHTML = "WEPP";
             $("#for-full-screen").css('display','none');
             $("#nav_admin_logout,#nav_tea_list,#nav_std_list,#nav_home,#nav_user_logout").css('display','block');
             $("#nav_group,#nav_profile,#nav_exam,#nav_examing,#nav_sheet,#nav_sheeting").css('display','block');
-            $("#nav_manual_teacher,#nav_manual_student,#nav_manual_other").css('display','block');
+            $("#nav_manual_teacher,#nav_manual_student,#nav_manual_other,#nav_web_history").css('display','block');
         }
         document.getElementById('nameUser').innerHTML = name;
     });
@@ -27,13 +27,13 @@
             $("#for-full-screen").css('display','block');
             $("#nav_admin_logout,#nav_tea_list,#nav_std_list,#nav_home,#nav_user_logout").css('display','none');
             $("#nav_group,#nav_profile,#nav_exam,#nav_examing,#nav_sheet,#nav_sheeting").css('display','none');
-            $("#nav_manual_teacher,#nav_manual_student,#nav_manual_other").css('display','none');
+            $("#nav_manual_teacher,#nav_manual_student,#nav_manual_other,#nav_web_history").css('display','none');
         } else {
             document.getElementById("projectName").innerHTML = "WEPP";
             $("#for-full-screen").css('display','none');
             $("#nav_admin_logout,#nav_tea_list,#nav_std_list,#nav_home,#nav_user_logout").css('display','block');
             $("#nav_group,#nav_profile,#nav_exam,#nav_examing,#nav_sheet,#nav_sheeting").css('display','block');
-            $("#nav_manual_teacher,#nav_manual_student,#nav_manual_other").css('display','block');
+            $("#nav_manual_teacher,#nav_manual_student,#nav_manual_other,#nav_web_history").css('display','block');
         }
         document.getElementById('nameUser').innerHTML = name;
     });
@@ -210,6 +210,9 @@
             </li>
             <li id="nav_std_list" ng-show="user.user_type === 'a'" style="display: none">
                 <a href="{{ url('/admin-list-student') }}"><i class="fa2 fa-users fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;รายชื่อนักศึกษาในระบบ</a>
+            </li>
+            <li id="nav_web_history" ng-show="user.user_type === 'a'" style="display: none">
+                <a href="{{ url('/admin-web-history') }}"><i class="fa2 fa-history fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;ประวัติการใช้งานระบบ</a>
             </li>
             <li id="nav_manual_teacher" ng-show="user.user_type === 't'" style="display: none">
                 <a href="{{ url('/user-manual-teacher') }}"><i class="fa2 fa-book fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;คู่มือการใช้งาน</a>

@@ -197,6 +197,20 @@ function findMyEvent(UID,UT) {
     return event;
 }
 
+function findWebHistoryRange(Begin,End) {
+    var his = $.ajax({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            Accept: "application/json"
+        },
+        url: url + 'user-find-web-history',
+        data : { begin_date : Begin,end_date : End},
+        async: false,
+    }).responseJSON;
+    return his;
+}
+
 //--------------------------- GroupController ---------------------------
 
 function findMyGroup(UID) {

@@ -464,6 +464,27 @@ class UserController extends Controller
         return response()->json($event);
     }
 
+    public function findWebHistoryBetween(Request $request){
+        $history = DB::select(' SELECT  u.prefix,
+                                        u.fname_th,
+                                        u.lname_th,
+                                        u.stu_id,
+                                        u.faculty,
+                                        u.department,
+                                        h.page,
+                                        h.ip,
+                                        h.time_stamp,
+                                        IF(u.user_type = "s", "นักศึกษา", IF(u.user_type = "t","อาจารย์","บุคลากร")) AS user_type 
+                                FROM users as u 
+                                INNER JOIN 
+                                    ( SELECT * 
+                                      FROM web_histories 
+                                      WHERE time_stamp BETWEEN ? AND ?
+                                      ORDER BY time_stamp) as h 
+                                ON u.id = h.user_id',[$request->begin_date,$request->end_date]);
+        return response()->json($history);
+    }
+
     public function downloadManualTeacher(){
 
         $file= public_path(). "/manual/Manual(Teacher).pdf";
