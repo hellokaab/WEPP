@@ -28,6 +28,10 @@ Route::get('/admin-list-student', function () {
     return view('pages/admin/stdList');
 });
 
+Route::get('/admin-web-history', function () {
+    return view('pages/admin/webHistory');
+});
+
 Route::get('/home', function () {
     return view('pages/home');
 });
@@ -254,6 +258,8 @@ Route::get('/user-find-personnel-all', 'UserController@findAllPersonnel');
 Route::get('/user-find-user-id', 'UserController@findUserByID');
 
 Route::get('/user-find-event','UserController@findMyEvent' );
+
+Route::get('/user-find-web-history','UserController@findWebHistoryBetween' );
 
 Route::get('/user-delete-teacher', 'UserController@deleteTeacher');
 

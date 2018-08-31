@@ -164,6 +164,9 @@
             <li4 ng-show="user.user_type === 'a'">
                 <a id="side_stdList" href="{{ url('/admin-list-student') }}"><i class="fa2 fa-users fa-lg" aria-hidden="true" style="color: #21ba45"></i>&nbsp;&nbsp;รายชื่อนักศึกษาในระบบ</a>
             </li4>
+            <li5 ng-show="user.user_type === 'a'">
+                <a id="side_webHis" href="{{ url('/admin-web-history') }}"><i class="fa2 fa-history fa-lg" aria-hidden="true" style="color: #2185d0"></i>&nbsp;&nbsp;ประวัติการใช้งานระบบ</a>
+            </li5>
             <li7 ng-show="user.user_type === 't'">
                 <a data-target="#demo_manual_teacher" data-toggle="collapse" role="presentation" id="side_manual_teacher" href="" class="collapsed">
                     <i class="fa2 fa-book fa-lg" aria-hidden="true" style="color: #653e17"></i>&nbsp;&nbsp;คู่มือการใช้งาน<i id="manual_teacher_chevron" class="fa2 fa-chevron-left" style="float: right;padding-top: 13px;padding-right: 10px"></i> {{--padding-left: 85px--}}
