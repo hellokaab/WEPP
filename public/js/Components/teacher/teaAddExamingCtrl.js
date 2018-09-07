@@ -1,6 +1,6 @@
 app.controller('teaAddExamingCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    keepHistory($window.user.id,"teacher-examing-add",dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"teacher-examing-add",getDateNow());
     $scope.myGroups = findMyGroup($scope.user.id);
     $scope.examGroup = findExamGroupSharedToMe($scope.user.id);
     $scope.exams = findAllExamSharedToMe($scope.user.id);
@@ -104,8 +104,8 @@ app.controller('teaAddExamingCtrl', ['$scope', '$window', function ($scope, $win
         }
 
         if (completeExamName && completeUserGroup && completeExam && completeExamingBegin && completeExamingEnd && completeIP && completeNoDuplicate && completeFileType && completeAmount) {
-            dateBegin = new Date(dtPickerToDtJs($('#examingBegin').val()));
-            dateEnd = new Date(dtPickerToDtJs($('#examingEnd').val()));
+            dateBegin = dtPickerToDtDB($('#examingBegin').val());
+            dateEnd = dtPickerToDtDB($('#examingEnd').val());
 
             $('#add_examing_part').waitMe({
                 effect: 'facebook',
@@ -121,8 +121,8 @@ app.controller('teaAddExamingCtrl', ['$scope', '$window', function ($scope, $win
                 exam: $scope.selectExam,
                 examing_mode: $scope.examingMode,
                 amount: $scope.examingMode === 'n' ? $scope.selectExam.length : $scope.amountExam,
-                start_date_time: dtJsToDtDB(dateBegin),
-                end_date_time: dtJsToDtDB(dateEnd),
+                start_date_time: dateBegin,
+                end_date_time: dateEnd,
                 examing_pass: $scope.examingPassword,
                 ip_group: $scope.allowNetwork,
                 allowed_file_type: allowed_file_type,

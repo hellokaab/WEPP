@@ -12,9 +12,9 @@ app.controller('webHistoryCtrl', ['$scope', '$window', function ($scope, $window
         completeHistoryEnd = $('#historyEnd').val().length > 0;
         if(completeHistoryBegin && completeHistoryEnd){
             $scope.completeFind = true;
-            dateBegin = new Date(dtPickerToDtJs($('#historyBegin').val()));
-            dateEnd = new Date(dtPickerToDtJs($('#historyEnd').val()));
-            $scope.history = findWebHistoryRange(dtJsToDtDB(dateBegin),dtJsToDtDB(dateEnd));
+            dateBegin = dtPickerToDtDB($('#historyBegin').val());
+            dateEnd = dtPickerToDtDB($('#historyEnd').val());
+            $scope.history = findWebHistoryRange(dateBegin,dateEnd);
         } else {
             if(!completeHistoryEnd){
                 $('#notice_history_end').html('* กรุณาระบุช่วงเวลาที่ต้องการค้นหาให้ครบ').show();

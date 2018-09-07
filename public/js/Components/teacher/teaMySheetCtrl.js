@@ -1,6 +1,6 @@
 app.controller('teaMySheetCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    keepHistory($window.user.id,"teacher-sheet-my",dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"teacher-sheet-my",getDateNow());
     $scope.sheetGroup = findMySheetGroup($scope.user.id);
 
     $scope.groupID = 0;

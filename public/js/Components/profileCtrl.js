@@ -1,5 +1,5 @@
 app.controller('profileCtrl', ['$scope', '$window', function ($scope, $window) {
-    keepHistory($window.user.id,"profile",dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"profile",getDateNow());
     $scope.prefix = user.prefix;
     $scope.fname = user.fname_th;
     $scope.lname = user.lname_th;

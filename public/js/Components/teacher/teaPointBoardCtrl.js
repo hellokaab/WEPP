@@ -1,5 +1,5 @@
 app.controller('teaPointBoardCtrl', ['$scope', '$window', function ($scope, $window) {
-    keepHistory($window.user.id,"teacher-board-exam-"+$window.examingID,dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"teacher-board-exam-"+$window.examingID,getDateNow());
     $scope.examingID = $window.examingID;
     $scope.examing = findExamingByID($scope.examingID);
     $scope.group = findGroupDataByID($scope.examing.group_id);

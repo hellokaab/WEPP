@@ -6,7 +6,7 @@ app.controller('homeCtrl', ['$scope', '$window', function ($scope, $window) {
     console.log(dtDBToDtJs(getDateNow()));
 
     var current_time = new Date();
-    keepHistory($window.user.id,"home",dtJsToDtDB(current_time));
+    keepHistory($window.user.id,"home",getDateNow());
     var user_online = findWebHistory();
     $scope.userOnline = user_online;
 

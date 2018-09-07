@@ -1,6 +1,6 @@
 app.controller('teaEditExamCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    keepHistory($window.user.id,"teacher-exam-edit-"+$window.examID,dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"teacher-exam-edit-"+$window.examID,getDateNow());
     var newKeywords = new Array();
     $scope.examID = $window.examID;
     $scope.examData = findExamByID($scope.examID);
@@ -13,6 +13,7 @@ app.controller('teaEditExamCtrl', ['$scope', '$window', function ($scope, $windo
     setOldSharedUser();
     $scope.myExamGroup = findMyExamGroup($scope.user.id);
     $('#exam_content').Editor();
+    $("#uploadImageBar").children().attr("accept","image/png,image/jpg,image/gif");
 
     // Exam name
     $scope.examName = $scope.examData.exam_name;

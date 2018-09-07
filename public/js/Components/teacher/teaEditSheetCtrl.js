@@ -1,6 +1,6 @@
 app.controller('teaEditSheetCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    keepHistory($window.user.id,"teacher-sheet-edit-"+$window.sheetID,dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"teacher-sheet-edit-"+$window.sheetID,getDateNow());
     $scope.mySheetGroup = findMySheetGroup($scope.user.id);
     $scope.teacher = findAllTeacher();
 
@@ -13,6 +13,7 @@ app.controller('teaEditSheetCtrl', ['$scope', '$window', function ($scope, $wind
     var sharedUserToDelete = new Array();
     setOldSharedUser();
     $('#sheet_trial').Editor();
+    $("#uploadImageBar").children().attr("accept","image/png,image/jpg,image/gif");
 
     // Sheet name
     $scope.sheetName = $scope.sheetData.sheet_name;

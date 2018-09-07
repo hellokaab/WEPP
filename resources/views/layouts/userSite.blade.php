@@ -104,9 +104,10 @@
         function dtJsToDtDB(date) {
             var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
             date = date.toLocaleString('th-TH');
+            console.log(date);
             dt = date.split(' ');
             d = dt[0].split('/');
-            r = (d[2] - 543) + '-' + d[1] + '-' + d[0] + ' ' + dt[1];
+            r = (d[2]) + '-' + d[1] + '-' + d[0] + ' ' + dt[1];
             return r;
         }
 
@@ -131,6 +132,12 @@
             return jsDt;
         }
 
+        function dtPickerToDtDB(date) {
+            dt = date.split(' ');
+            d = dt[0].split('-');
+            r = (d[2]) + '-' + d[1] + '-' + d[0] + ' ' + (dt[1]+":00");
+            return r;
+        }
 
         var entityMap = {
             "&": "&amp;",

@@ -1,6 +1,6 @@
 app.controller('teaShareSheetCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    keepHistory($window.user.id,"teacher-sheet-share",dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"teacher-sheet-share",getDateNow());
     $scope.sheetGroupSharedToMe = findSheetGroupSharedNotMe($scope.user.id);
     $scope.sheetGroupID = 0;
     $scope.selectRow = '10';
