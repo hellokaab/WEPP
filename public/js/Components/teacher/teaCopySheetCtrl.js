@@ -1,6 +1,6 @@
 app.controller('teaCopySheetCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    keepHistory($window.user.id,"teacher-sheet-copy-"+$window.sheetID,dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"teacher-sheet-copy-"+$window.sheetID,getDateNow());
     $scope.mySheetGroup = findMySheetGroup($scope.user.id);
     $scope.teacher = findAllTeacher();
 
@@ -9,6 +9,7 @@ app.controller('teaCopySheetCtrl', ['$scope', '$window', function ($scope, $wind
     $scope.quizzes = findQuizBySID($window.sheetID);
     $scope.selectTeacher = [];
     $('#sheet_trial').Editor();
+    $("#uploadImageBar").children().attr("accept","image/png,image/jpg,image/gif");
 
     // Sheet name
     $scope.sheetName = $scope.sheetData.sheet_name;

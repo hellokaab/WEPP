@@ -1,6 +1,6 @@
 app.controller('teaShareExamCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    keepHistory($window.user.id,"teacher-exam-share",dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"teacher-exam-share",getDateNow());
     $scope.examGroupSharedToMe = findExamGroupSharedNotMe($scope.user.id);
     $scope.groupID = 0;
     $scope.selectRow = '10';

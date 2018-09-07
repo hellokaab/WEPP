@@ -199,19 +199,10 @@
                 return true;
         }
 
-        function dtPickerToDtJs(date) {
+        function dtPickerToDtDB(date) {
             dt = date.split(' ');
             d = dt[0].split('-');
-            jsDt = d[1] + '/' + d[0] + '/' + d[2] + ' ' + dt[1];
-            return jsDt;
-        }
-
-        function dtJsToDtDB(date) {
-            var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-            date = date.toLocaleString('th-TH');
-            dt = date.split(' ');
-            d = dt[0].split('/');
-            r = (d[2] - 543) + '-' + d[1] + '-' + d[0] + ' ' + dt[1];
+            r = (d[2]) + '-' + d[1] + '-' + d[0] + ' ' + (dt[1]+":00");
             return r;
         }
     </script>

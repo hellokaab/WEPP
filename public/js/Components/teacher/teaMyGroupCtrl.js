@@ -1,6 +1,6 @@
 app.controller('groupCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    keepHistory($window.user.id,"teacher-group-my",dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"teacher-group-my",getDateNow());
     $scope.myGroup = findMyGroup($window.user.id)
 
     $scope.selectRow = '10';

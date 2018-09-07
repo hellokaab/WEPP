@@ -1,11 +1,12 @@
 app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    keepHistory($window.user.id,"teacher-exam-add-"+$window.groupID,dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"teacher-exam-add-"+$window.groupID,getDateNow());
 
     var keywords = new Array();
     $scope.myExamGroup = findMyExamGroup($scope.user.id);
     $scope.teacher = findAllTeacher();
     $('#exam_content').Editor();
+    $("#uploadImageBar").children().attr("accept","image/png,image/jpg,image/gif");
     // Default
     $scope.inputMode = 'no_input';
     $scope.outputMode = 'key_output';

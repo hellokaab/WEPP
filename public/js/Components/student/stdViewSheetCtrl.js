@@ -1,5 +1,5 @@
 app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $window) {
-    keepHistory($window.user.id,"student-sheeting-doing-"+$window.sheetingID,dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"student-sheeting-doing-"+$window.sheetingID,getDateNow());
     $scope.sheeting = $window.sheeting;
     $scope.inputMode = 'key_input';
     $scope.allowedFileType = $scope.sheeting.allowed_file_type.split(",");
@@ -118,7 +118,7 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
                         UID : user.id,
                         code : $scope.codeSheet,
                         mode : "key",
-                        send_date_time : dtJsToDtDB(new Date()),
+                        send_date_time : getDateNow(),
                         send_late : check_intime.late
                     };
                     // ถ้าเป็นไฟล์ .c
@@ -162,7 +162,7 @@ app.controller('stdViewSheetCtrl', ['$scope', '$window', function ($scope, $wind
                             SID : $scope.sheetID,
                             UID : user.id,
                             mode : "file",
-                            send_date_time : dtJsToDtDB(new Date()),
+                            send_date_time : getDateNow(),
                             send_late : check_intime.late
                         };
 

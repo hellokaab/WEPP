@@ -108,7 +108,7 @@
                             </div>
                         </div>
 
-                        <form id="inputFileForm" action="javascript:submitInputForm();" method="post" enctype = "multipart/form-data">
+                        <form id="inputFileForm" onsubmit="return submitInputForm()" method="post" enctype = "multipart/form-data">
                             <div class="form-group" ng-show="inputMode == 'file_input'">
                                 <label class="col-md-2 control-label"></label>
                                 <div class="col-md-4">
@@ -156,7 +156,7 @@
                             </div>
                         </div>
 
-                        <form id="outputFileForm" action="javascript:submitOutputForm();" method="post" enctype = "multipart/form-data">
+                        <form id="outputFileForm" onsubmit="return submitOutputForm()" method="post" enctype = "multipart/form-data">
                             <div class="form-group" ng-show="outputMode == 'file_output'">
                                 <label class="col-md-2 control-label"></label>
                                 <div class="col-md-4">

@@ -1,6 +1,6 @@
 app.controller('teaEditSheetingCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    keepHistory($window.user.id,"teacher-sheeting-edit-"+$window.sheetingID,dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"teacher-sheeting-edit-"+$window.sheetingID,getDateNow());
     var allowed_file_type = "";
     $scope.myGroups = findMyGroup($scope.user.id);
     $scope.sheetGroups = findSheetGroupSharedToMe($scope.user.id);
@@ -116,8 +116,8 @@ app.controller('teaEditSheetingCtrl', ['$scope', '$window', function ($scope, $w
             && completeSheetingEnd
             && completeFileType) {
 
-            dateBegin = new Date(dtPickerToDtJs($('#sheetingBegin').val()));
-            dateEnd = new Date(dtPickerToDtJs($('#sheetingEnd').val()));
+            dateBegin = dtPickerToDtDB($('#sheetingBegin').val());
+            dateEnd = dtPickerToDtDB($('#sheetingEnd').val());
 
             $('#edit_sheeting_part').waitMe({
                 effect: 'facebook',
@@ -138,8 +138,8 @@ app.controller('teaEditSheetingCtrl', ['$scope', '$window', function ($scope, $w
                 sheeting_name: $scope.openSheetName,
                 group_id: $scope.userGroupID,
                 sheet: $scope.selectSheet,
-                start_date_time: dtJsToDtDB(dateBegin),
-                end_date_time: dtJsToDtDB(dateEnd),
+                start_date_time: dateBegin,
+                end_date_time: dateEnd,
                 allowed_file_type: allowed_file_type,
                 send_late : $scope.sendLateMode,
                 hide_sheeting : $scope.hiddenMode,

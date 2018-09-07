@@ -1,9 +1,10 @@
 app.controller('teaAddSheetCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    keepHistory($window.user.id,"teacher-sheet-add-"+$window.groupID,dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"teacher-sheet-add-"+$window.groupID,getDateNow());
     $scope.mySheetGroup = findMySheetGroup($scope.user.id);
     $scope.teacher = findAllTeacher();
     $('#sheet_trial').Editor();
+    $("#uploadImageBar").children().attr("accept","image/png,image/jpg,image/gif");
     var quiz = new Array();
     $scope.inputMode = 'no_input';
     $scope.outputMode = 'key_output';

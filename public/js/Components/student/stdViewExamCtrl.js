@@ -1,6 +1,6 @@
 app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.user = $window.user;
-    keepHistory($window.user.id,"student-examing-doing-"+$window.examingID,dtJsToDtDB(new Date()));
+    keepHistory($window.user.id,"student-examing-doing-"+$window.examingID,getDateNow());
 
     $scope.examing = $window.examing;
     $scope.examing.description = $scope.examing.description.split("\n");
@@ -71,7 +71,7 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
                     UID : $scope.user.id,
                     code : $scope.codeExam,
                     mode : "key",
-                    send_date_time : dtJsToDtDB(new Date())
+                    send_date_time : getDateNow()
                 };
                 // ถ้าเป็นไฟล์ .c
                 if($scope.selectFileType === "c"){
@@ -108,7 +108,7 @@ app.controller('stdViewExamCtrl', ['$scope', '$window', function ($scope, $windo
                         EID : $scope.examID,
                         UID : $scope.user.id,
                         mode : "file",
-                        send_date_time : dtJsToDtDB(new Date())
+                        send_date_time : getDateNow()
                     };
 
                     // ถ้าเป็นไฟล์ .c

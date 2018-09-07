@@ -170,7 +170,7 @@
                                                         <div class="notice" id="notice_sheet_key_ans" style="display: none">กรุณาใส่โค้ดโปรแกรม</div>
                                                     </div>
 
-                                                    <form id="AnsFileForm" action="javascript:submitAnsForm();" method="post" enctype = "multipart/form-data">
+                                                    <form id="AnsFileForm" onsubmit="return submitAnsForm()" method="post" enctype = "multipart/form-data">
                                                         <div class="form-group" ng-show="inputMode == 'file_input'">
                                                             <div class="col-md-4">
                                                                 <input type="file" id="file_ans" class="inline-form-control" name="file_ans[]" multiple="" accept=".<%selectFileType%>">
