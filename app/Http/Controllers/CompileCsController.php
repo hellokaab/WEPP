@@ -538,81 +538,88 @@ class CompileCsController extends Controller
             $dir_in_check_code = $dir_in_check_code.$dir_split[$i]."/";
         }
 
-        $code_checker = 'using System;
-        using System.Management;
-        using System.Threading;
-        using System.Diagnostics;
+        $code_checker = 'import java.io.BufferedReader;
+        import java.io.IOException;
+        import java.io.InputStreamReader;
+        public class wepp_check {
 
-	    class wepp_check{
-
-		    static Thread timeThr = new Thread(new ThreadStart(TimerThread));
-            static Thread runThr = new Thread(new ThreadStart(RunThread));
-
-		    static void TimerThread(){
-			    Thread.Sleep('.$ruutimeIn.');
-			    runThr.Abort();
-			    Console.WriteLine("OverTime");
-			    System.Environment.Exit(0);
-		    }
-
-		    static void RunThread(){
-			    var watch = System.Diagnostics.Stopwatch.StartNew();
-			    long memoryBefore = System.Diagnostics.Process.GetCurrentProcess().PrivateMemorySize64;
-
-                for(int i=0;i<'.$amount_input.';i++)
-			    {
-                    var proc = new Process {
-                        StartInfo = new ProcessStartInfo {
-                            FileName = "'.$dir_in_check_code.'run_ans_"+i+".sh",
-                            Arguments = "command line arguments to your executable",
-                            UseShellExecute = false,
-                            RedirectStandardOutput = true,
-                            CreateNoWindow = true
-                        }
-                    };
+            static TimerThread timeThr = new TimerThread();
+            static RunThread runThr = new RunThread();
     
-                    proc.Start();
-                    int count = 0;
-                    while (!proc.StandardOutput.EndOfStream) {
-                        string line = proc.StandardOutput.ReadLine();
-                        if(count >= 0){
-                            Console.WriteLine("{0}",line);
+            public static void main(String[] args){
+                timeThr.start();
+                runThr.start();
+            }
+    
+            static class TimerThread extends Thread {
+                public void run() {
+                    try {
+                        sleep('.$ruutimeIn.');
+                        runThr.stop();
+                        System.out.println("OverTime");                      
+                        System.exit(0);
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }
+    
+            static class RunThread extends Thread{
+                public void run() {
+                    long start = System.currentTimeMillis();
+                    Runtime runtime = Runtime.getRuntime();
+                    runtime.gc();
+                    long mem = runtime.totalMemory() - runtime.freeMemory();
+                    
+                    for(int i=0;i<'.$amount_input.';i++){
+                        try{
+                            String cmd = "'.$dir_in_check_code.'run_ans_"+(i)+".sh";
+        
+                            Runtime r = Runtime.getRuntime();
+                            Process pr = r.exec(cmd);
+        
+                            BufferedReader stdInput = new BufferedReader(
+                                    new InputStreamReader( pr.getInputStream() ));
+        
+                            String s ;
+                            int count = 0;
+					        while ((s = stdInput.readLine()) != null) {
+						        if(count >=0)
+						        {
+							        System.out.println(s);
+						        }
+						        count++;
+					        }
+                        }catch(IOException ex){
+                            System.out.println (ex.toString());
                         }
-                        count++;
-			        }
-			    }
-
-			    long memoryAfter = System.Diagnostics.Process.GetCurrentProcess().PrivateMemorySize64;
-			    timeThr.Abort();
-			    watch.Stop();
-			    var elapsedMs = watch.ElapsedMilliseconds;
-			    Console.WriteLine("UsedMem:{0}",(memoryAfter-memoryBefore)/1024);
-			    Console.WriteLine("RunTime:{0}",elapsedMs/1000.00);
-		    }
-
-		    public static void Main(string[] args){
-        		timeThr.Start();
-        		runThr.Start();
-		    }
-	    }';
+                    }
+    
+                    long memNow = runtime.totalMemory() - runtime.freeMemory();
+                    memNow = memNow - mem;
+                    System.out.println("UsedMem:" + memNow/1024.0);
+                    long time = System.currentTimeMillis() - start;
+                    timeThr.stop();
+                    System.out.println("RunTime:" + time / 1000.0);
+                }
+            }
+        }';
 
         // เขียนไฟล์สำหรับเช็คเวลา
         $file = 'wepp_check';
-        $handle = fopen("$folder_ans/$file.cs", 'w') or die('Cannot open file:  ' . $file);
+        $handle = fopen("$folder_ans/$file.java", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $code_checker);
         fclose($handle);
 
         // เขียนไฟล์ sh เพื่อคอมไพล์ ไฟล์ wepp_check
-        $compile_file_check = "#!/bin/bash \n cd ".$dir_code." \n csc wepp_check.cs";
+        $compile_file_check = "#!/bin/bash \n cd ".$dir_code." \n javac wepp_check.java";
         $file = 'compile_check';
         $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $compile_file_check);
         fclose($handle);
         chmod("$folder_ans/$file.sh", 0777);
 
-
         // เขียนไฟล์ sh เพื่อรันไฟล์ wepp_check
-        $run_file_check = "#!/bin/bash \n cd ".$dir_code." \n mono wepp_check.exe";
+        $run_file_check = "#!/bin/bash \n cd ".$dir_code." \n java wepp_check";
         $file = 'run_check';
         $handle = fopen("$folder_ans/$file.sh", 'w') or die('Cannot open file:  ' . $file);
         fwrite($handle, $run_file_check);
@@ -917,7 +924,7 @@ class CompileCsController extends Controller
 
         // ลูปลบไฟล์ที่นามสกุลไม่ใช่ .cs และ Main.cs
         foreach ($files as $f) {
-            if (!strpos($f, '.cs') || $f == 'wepp_check.cs' || $f == 'wepp_main.cs') {
+            if (!strpos($f, '.cs') || $f == 'wepp_main.cs') {
                 @unlink("$folder_ans/$f");
             }
         }

@@ -913,7 +913,7 @@ class CompileCppController extends Controller
 
         // ลูปลบไฟล์ที่นามสกุลไม่ใช่ .cpp และ .h
         foreach ($files as $f) {
-            if (!strpos($f, '.cpp') || strpos($f, '.class') || $f == 'wepp_main.cpp' || !strpos($f, '.h')) {
+            if (!(strpos($f, '.cpp') || strpos($f, '.h')) || strpos($f, '.class') || $f == 'wepp_main.cpp') {
                 @unlink("$folder_ans/$f");
             }
         }
