@@ -105,7 +105,7 @@
             </div>
         </div>
 
-        <!-- Delete Modal -->
+        <!-- Delete Examing Modal -->
         <div class="modal fade" id="delete_modal" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -113,10 +113,30 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">ยืนยันการทำรายการ</h3>
                         </div>
-                        <div style="padding-top: 7%; text-align: center">คุณต้องการลบประวัติการเปิดสอบนี้หรือไม่</div>
+                        <div style="padding-top: 7%; text-align: center">คุณต้องการลบการเปิดสอบนี้หรือไม่</div>
                         <br>
                         <input ng-model="examingName" value="" style="margin-left: 10%; width: 80%" type="text" class="form-control text-center"  disabled/>
-                        <div style="padding-top: 3%; text-align: center">(ข้อมูลการสอบ, ไฟล์ที่นักศึกษาส่งในการสอบนี้จะถูกลบไปด้วย)</div>
+                        <div style="padding-top: 3%; text-align: center;color: red">(ข้อมูลการสอบ และไฟล์ที่นักศึกษาส่งในการสอบนี้จะถูกลบไปด้วย)</div>
+                        <br>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" ng-click="confirmDeleteExaming()">ตกลง</button>
+                            <button type="button" class="btn btn-outline-default" data-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Examing Again-->
+        <div class="modal fade" id="delete_again_modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="panel panel-danger" id="delete_again_part" style="margin-bottom: 0">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" style="color: #fff">ยืนยันการลบอีกครั้ง</h3>
+                        </div>
+                        <!-- Form -->
+                        <div style="padding-top: 7%; text-align: center">คุณแน่ใจแล้วที่จะลบการเปิดสอบนี้หรือไม่</div>
                         <br>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-danger" ng-click="okDeleteExaming()">ตกลง</button>

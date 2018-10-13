@@ -329,6 +329,8 @@ Route::get('/exam-find-keyword-eid', 'ExamController@findKeywordByEID');
 
 Route::get('/exam-find-share-not', 'ExamController@findSharedUserNotMe');
 
+Route::get('/exam-find-used', 'ExamController@findExamUsed');
+
 Route::get('/exam-add-group', 'ExamController@addExamGroup');
 
 Route::get('/exam-add-exam', 'ExamController@addExam');
@@ -480,6 +482,8 @@ Route::get('/sheet-find-sheet-share-all', 'SheetController@findAllSheetSharedToM
 Route::get('/sheet-find-quiz-sid', 'SheetController@findQuizBySID');
 
 Route::get('/sheet-find-share-not', 'SheetController@findSheetSharedUserNotMe');
+
+Route::get('/sheet-find-used', 'SheetController@findSheetUsed');
 
 Route::get('/sheet-add-group', 'SheetController@addSheetGroup');
 

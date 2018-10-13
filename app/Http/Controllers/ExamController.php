@@ -360,6 +360,20 @@ class ExamController extends Controller
         }
     }
 
+    public function findExamUsed(Request $request){
+        $examUsed = DB::select('SELECT groups.group_name
+                                FROM groups INNER JOIN (
+                                    SELECT b.group_id
+                                    FROM (
+                                      SELECT examings.group_id,a.examing_id
+                                      FROM examings INNER JOIN (
+	                                    SELECT exam_examings.examing_id 
+                                        FROM exam_examings 
+                                        WHERE exam_examings.exam_id = ? ) AS a ON examings.id = a.examing_id ) AS b
+                                    GROUP BY b.group_id ) AS c ON groups.id = c.group_id', [$request->exam_id]);
+        return response()->json($examUsed);
+    }
+
     public function rrmdir($path) {
         // Open the source directory to read in files
         try {

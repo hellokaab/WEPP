@@ -404,18 +404,28 @@ app.controller('teaInGroupCtrl', ['$scope', '$window', function ($scope, $window
         if($scope.deleteMode === 'ex'){
             $scope.deleteName = data.examing_name;
             $('#message_delete').html('คุณต้องการลบการสอบนี้หรือไม่');
-            $('#message_delete_2').html('(ข้อมูลการสอบ, ไฟล์ที่นักศึกษาส่งในการสอบนี้จะถูกลบไปด้วย)');
+            $('#message_delete_2').html('(ข้อมูลการสอบ และไฟล์ที่นักศึกษาส่งในการสอบนี้จะถูกลบไปด้วย)');
         } else if ($scope.deleteMode === 'sh'){
             $scope.deleteName = data.sheeting_name;
             $('#message_delete').html('คุณต้องการลบการสั่งงานนี้หรือไม่');
-            $('#message_delete_2').html('(ข้อมูลการสั่งงาน, ไฟล์ที่นักศึกษาส่งในการสั่งงานนี้จะถูกลบไปด้วย)');
+            $('#message_delete_2').html('(ข้อมูลการสั่งงาน และไฟล์ที่นักศึกษาส่งในการสั่งงานนี้จะถูกลบไปด้วย)');
         }
         $scope.deleteID = data.id;
         $('#delete_modal').modal({backdrop: 'static'});
     };
     //----------------------------------------------------------------------
+    $scope.confirmDeleteData = function () {
+        if($scope.deleteMode === 'ex'){
+            $('#message_delete_3').html('คุณแน่ใจแล้วที่จะลบการเปิดสอบนี้หรือไม่');
+        } else if ($scope.deleteMode === 'sh'){
+            $('#message_delete_3').html('คุณแน่ใจแล้วที่จะลบการสั่งงานนี้หรือไม่');
+        }
+        $('#delete_modal').modal('hide');
+        $('#delete_again_modal').modal({backdrop: 'static'});
+    };
+    //----------------------------------------------------------------------
     $scope.okDelete = function () {
-        $('#delete_part').waitMe({
+        $('#delete_again_part').waitMe({
             effect: 'facebook',
             bg: 'rgba(255,255,255,0.9)',
             color: '#3bafda'

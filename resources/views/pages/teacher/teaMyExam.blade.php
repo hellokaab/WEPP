@@ -211,10 +211,30 @@
                         <br>
                         <input style="margin-left: 10%; width: 80%" type="text" class="form-control text-center"
                                ng-model="examGroupName" disabled/>
-                        <div style="padding-top: 3%; text-align: center">(ข้อมูลข้อสอบทั้งหมดที่อยู่ในกลุ่มข้อสอบนี้จะถูกลบไปด้วย)</div>
+                        <div style="padding-top: 3%; text-align: center;color: red">(ข้อมูลข้อสอบ และข้อมูลการสอบที่ใช้ข้อสอบในกลุ่มข้อสอบนี้ทั้งหมด จะถูกลบไปด้วย)</div>
                         <br>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger" ng-click="okDeleteExamGroup()">ลบ</button>
+                            <button type="button" class="btn btn-outline-danger" ng-click="confirmDeleteExamGroup()">ลบ</button>
+                            <button type="button" class="btn btn-outline-default" data-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Exam Group Modal Again-->
+        <div class="modal fade" id="delete_exam_group_again_modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="panel panel-danger" id="delete_exam_group_again_part" style="margin-bottom: 0">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" style="color: #fff">ยืนยันการลบอีกครั้ง</h3>
+                        </div>
+                        <!-- Form -->
+                        <div style="padding-top: 7%; text-align: center">คุณแน่ใจแล้วที่จะลบกลุ่มข้อสอบนี้หรือไม่</div>
+                        <br>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" ng-click="okDeleteExamGroup()">ตกลง</button>
                             <button type="button" class="btn btn-outline-default" data-dismiss="modal">ยกเลิก</button>
                         </div>
                     </div>
@@ -339,8 +359,30 @@
                         <br>
                         <input style="margin-left: 10%; width: 80%" type="text" class="form-control text-center"
                                ng-model="examName" disabled/>
-                        <div style="padding-top: 3%; text-align: center">(ข้อมูลข้อสอบ,keyword,input file,output file จะถูกลบไปด้วย)
+                        <div style="padding-top: 3%;text-align: center;color: red" ng-if="examUsed.length > 0">ข้อสอบนี้ถูกใช้ในการสอบของกลุ่มเรียนดังนี้</div>
+                        <div style="text-align: center;color: red" ng-repeat="eu in examUsed"><%eu.group_name%></div>
+                        <div style="padding-top: 3%; text-align: center;color: red">(ข้อมูลข้อสอบ และการทำข้อสอบข้อนี้ของนักศึกษาจะถูกลบไปด้วย)
                         </div>
+                        <br>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" ng-click="confirmDeleteExam()">ตกลง</button>
+                            <button type="button" class="btn btn-outline-default" data-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Exam Group Again-->
+        <div class="modal fade" id="delete_exam_again_modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="panel panel-danger" id="delete_exam_again_part" style="margin-bottom: 0">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" style="color: #fff">ยืนยันการลบอีกครั้ง</h3>
+                        </div>
+                        <!-- Form -->
+                        <div style="padding-top: 7%; text-align: center">คุณแน่ใจแล้วที่จะลบข้อสอบนี้หรือไม่</div>
                         <br>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-danger" ng-click="okDelete()">ตกลง</button>

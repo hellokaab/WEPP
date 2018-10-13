@@ -353,6 +353,20 @@ class SheetController extends Controller
         }
     }
 
+    public function findSheetUsed(Request $request){
+        $sheetUsed = DB::select('SELECT groups.group_name
+                                FROM groups INNER JOIN (
+                                    SELECT b.group_id
+                                    FROM (
+                                      SELECT sheetings.group_id,a.sheeting_id
+                                      FROM sheetings INNER JOIN (
+	                                    SELECT sheet_sheetings.sheeting_id 
+                                        FROM sheet_sheetings 
+                                        WHERE sheet_sheetings.sheet_id = ? ) AS a ON sheetings.id = a.sheeting_id ) AS b
+                                    GROUP BY b.group_id ) AS c ON groups.id = c.group_id', [$request->sheet_id]);
+        return response()->json($sheetUsed);
+    }
+
     public function rrmdir($path) {
         // Open the source directory to read in files
         try {

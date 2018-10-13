@@ -7,6 +7,7 @@ app.controller('teaMySheetCtrl', ['$scope', '$window', function ($scope, $window
     $scope.selectRow = '10';
     $scope.sortS = 'sheet_group_name';
     $scope.sheets = "";
+    $scope.sheetUsed = "";
     $('#sheet_trial').Editor();
     //----------------------------------------------------------------------
     $scope.addSheetGroup = function () {
@@ -92,11 +93,16 @@ app.controller('teaMySheetCtrl', ['$scope', '$window', function ($scope, $window
         $('#delete_sheet_group_modal').modal({backdrop: 'static'});
     };
     //----------------------------------------------------------------------
+    $scope.confirmDeleteSheetGroup = function (data) {
+        $('#delete_sheet_group_modal').modal('hide');
+        $('#delete_sheet_group_again_modal').modal({backdrop: 'static'});
+    };
+    //----------------------------------------------------------------------
     $scope.okDeleteSheetGroup = function () {
         var data = {
             id : $scope.groupID
         };
-        $('#delete_sheet_group_part').waitMe({
+        $('#delete_sheet_group_again_part').waitMe({
             effect: 'facebook',
             bg: 'rgba(255,255,255,0.9)',
             color: '#3bafda'
@@ -171,11 +177,17 @@ app.controller('teaMySheetCtrl', ['$scope', '$window', function ($scope, $window
     $scope.deleteSheet = function (data) {
         $scope.deleteName = data.sheet_name;
         $scope.sheetID = data.id;
+        $scope.sheetUsed = findSheetUsed(data.id);
         $('#delete_sheet_modal').modal({backdrop: 'static'});
     };
     //----------------------------------------------------------------------
+    $scope.confirmDeleteSheet = function () {
+        $('#delete_sheet_modal').modal('hide');
+        $('#delete_sheet_again_modal').modal({backdrop: 'static'});
+    };
+    //----------------------------------------------------------------------
     $scope.okDelete = function () {
-        $('#edit_sheet_part').waitMe({
+        $('#delete_sheet_again_part').waitMe({
             effect: 'facebook',
             bg: 'rgba(255,255,255,0.9)',
             color: '#3bafda'

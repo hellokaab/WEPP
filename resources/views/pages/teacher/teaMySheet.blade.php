@@ -211,10 +211,30 @@
                         <br>
                         <input style="margin-left: 10%; width: 80%" type="text" class="form-control text-center"
                                ng-model="sheetGroupName" disabled/>
-                        <div style="padding-top: 3%; text-align: center">(ข้อมูลใบงานทั้งหมดที่อยู่ในกลุ่มใบงานนี้จะถูกลบไปด้วย)</div>
+                        <div style="padding-top: 3%; text-align: center;color: red">(ข้อมูลใบงาน และข้อมูลการสั่งงานที่ใช้ใบงานในกลุ่มใบงานนี้ทั้งหมด จะถูกลบไปด้วย)</div>
                         <br>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger" ng-click="okDeleteSheetGroup()">ลบ</button>
+                            <button type="button" class="btn btn-outline-danger" ng-click="confirmDeleteSheetGroup()">ลบ</button>
+                            <button type="button" class="btn btn-outline-default" data-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Sheet Group Modal Again-->
+        <div class="modal fade" id="delete_sheet_group_again_modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="panel panel-danger" id="delete_sheet_group_again_part" style="margin-bottom: 0">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" style="color: #fff">ยืนยันการลบอีกครั้ง</h3>
+                        </div>
+                        <!-- Form -->
+                        <div style="padding-top: 7%; text-align: center">คุณแน่ใจแล้วที่จะลบกลุ่มใบงานนี้หรือไม่</div>
+                        <br>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" ng-click="okDeleteSheetGroup()">ตกลง</button>
                             <button type="button" class="btn btn-outline-default" data-dismiss="modal">ยกเลิก</button>
                         </div>
                     </div>
@@ -354,8 +374,30 @@
                         <br>
                         <input style="margin-left: 10%; width: 80%" type="text" class="form-control text-center"
                                ng-model="deleteName" disabled/>
-                        <div style="padding-top: 3%; text-align: center">(ข้อมูลใบงาน,คำถามท้ายการทดลอง,input file,output file จะถูกลบไปด้วย)
+                        <div style="padding-top: 3%;text-align: center;color: red" ng-if="sheetUsed.length > 0">ใบงานนี้ถูกใช้ในการสั่งงานของกลุ่มเรียนดังนี้</div>
+                        <div style="text-align: center;color: red" ng-repeat="su in sheetUsed"><%su.group_name%></div>
+                        <div style="padding-top: 3%; text-align: center;color: red">(ข้อมูลใบงาน และการทำใบงานข้อนี้ของนักศึกษาจะถูกลบไปด้วย)
                         </div>
+                        <br>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" ng-click="confirmDeleteSheet()">ตกลง</button>
+                            <button type="button" class="btn btn-outline-default" data-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Sheet Again-->
+        <div class="modal fade" id="delete_sheet_again_modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="panel panel-danger" id="delete_sheet_again_part" style="margin-bottom: 0">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" style="color: #fff">ยืนยันการลบอีกครั้ง</h3>
+                        </div>
+                        <!-- Form -->
+                        <div style="padding-top: 7%; text-align: center">คุณแน่ใจแล้วที่จะลบใบงานนี้หรือไม่</div>
                         <br>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-danger" ng-click="okDelete()">ตกลง</button>
