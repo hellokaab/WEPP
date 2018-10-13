@@ -20,8 +20,13 @@ app.controller('teaExamingHistoryCtrl', ['$scope', '$window', function ($scope, 
         $('#delete_modal').modal({backdrop: 'static'});
     };
     //----------------------------------------------------------------------
+    $scope.confirmDeleteExaming = function () {
+        $('#delete_modal').modal('hide');
+        $('#delete_again_modal').modal({backdrop: 'static'});
+    };
+    //----------------------------------------------------------------------
     $scope.okDeleteExaming = function () {
-        $('#delete_part').waitMe({
+        $('#delete_again_part').waitMe({
             effect: 'facebook',
             bg: 'rgba(255,255,255,0.9)',
             color: '#3bafda'

@@ -7,6 +7,7 @@ app.controller('teaMyExamCtrl', ['$scope', '$window', function ($scope, $window)
     $scope.selectRow = '10';
     $scope.sortE = 'exam_group_name';
     $scope.exams = "";
+    $scope.examUsed = "";
     $('#exam_content').Editor();
 
     //----------------------------------------------------------------------
@@ -97,11 +98,16 @@ app.controller('teaMyExamCtrl', ['$scope', '$window', function ($scope, $window)
         $('#delete_exam_group_modal').modal({backdrop: 'static'});
     };
     //----------------------------------------------------------------------
+    $scope.confirmDeleteExamGroup = function () {
+        $('#delete_exam_group_modal').modal('hide');
+        $('#delete_exam_group_again_modal').modal({backdrop: 'static'});
+    };
+    //----------------------------------------------------------------------
     $scope.okDeleteExamGroup = function () {
         var data = {
             id : $scope.groupID
         };
-        $('#delete_exam_group_part').waitMe({
+        $('#delete_exam_group_again_part').waitMe({
             effect: 'facebook',
             bg: 'rgba(255,255,255,0.9)',
             color: '#3bafda'
@@ -164,11 +170,17 @@ app.controller('teaMyExamCtrl', ['$scope', '$window', function ($scope, $window)
     $scope.deleteExam = function (data) {
         $scope.examName = data.exam_name;
         $scope.examID = data.id;
+        $scope.examUsed = findExamUsed(data.id);
         $('#delete_exam_modal').modal({backdrop: 'static'});
     };
     //----------------------------------------------------------------------
+    $scope.confirmDeleteExam = function () {
+        $('#delete_exam_modal').modal('hide');
+        $('#delete_exam_again_modal').modal({backdrop: 'static'});
+    };
+    //----------------------------------------------------------------------
     $scope.okDelete = function () {
-        $('#edit_exam_part').waitMe({
+        $('#edit_exam_again_part').waitMe({
             effect: 'facebook',
             bg: 'rgba(255,255,255,0.9)',
             color: '#3bafda'

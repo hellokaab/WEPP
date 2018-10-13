@@ -111,11 +111,17 @@ app.controller('groupCtrl', ['$scope', '$window', function ($scope, $window) {
     $scope.deleteGroup = function (data) {
         $scope.groupNameDelete = data.group_name;
         $scope.groupId = data.id;
+        $scope.amountMember = findMemberGroup(data.id).length;
         $('#delete_group_modal').modal({backdrop: 'static'});
     }
     //----------------------------------------------------------------------
+    $scope.confirmDelete = function () {
+        $('#delete_group_modal').modal('hide');
+        $('#delete_group_again_modal').modal({backdrop: 'static'});
+    }
+    //----------------------------------------------------------------------
     $scope.okDeleteGroup = function () {
-        $('#delete_group_part').waitMe({
+        $('#delete_group_again_part').waitMe({
             effect: 'win8_linear',
             bg: 'rgba(255,255,255,0.9)',
             color: '#3bafda'

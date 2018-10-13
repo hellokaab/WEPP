@@ -302,12 +302,12 @@ function deleteGroup(GID) {
         complete: function (xhr) {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
-                    $('#delete_group_part').waitMe('hide');
-                    $('#delete_group_modal').modal('hide');
+                    $('#delete_group_again_part').waitMe('hide');
+                    $('#delete_group_again_modal').modal('hide');
                     $('#success_modal').modal({backdrop: 'static'});
                 } else {
-                    $('#delete_group_part').waitMe('hide');
-                    $('#delete_group_modal').modal('hide');
+                    $('#delete_group_again_part').waitMe('hide');
+                    $('#delete_group_again_modal').modal('hide');
                     $('#unsuccess_modal').modal({backdrop: 'static'});
                 }
             }
@@ -668,12 +668,12 @@ function deleteExamGroup(data) {
         complete: function (xhr) {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
-                    $('#delete_exam_group_part').waitMe('hide');
-                    $('#delete_exam_group_modal').modal('hide');
+                    $('#delete_exam_group_again_part').waitMe('hide');
+                    $('#delete_exam_group_again_modal').modal('hide');
                     $('#success_modal').modal({backdrop: 'static'});
                 }  else {
-                    $('#delete_exam_group_part').waitMe('hide');
-                    $('#delete_exam_group_modal').modal('hide');
+                    $('#delete_exam_group_again_part').waitMe('hide');
+                    $('#delete_exam_group_again_modal').modal('hide');
                     $('#unsuccess_modal').modal({backdrop: 'static'});
                 }
             }
@@ -722,12 +722,12 @@ function deleteExam(EID) {
         complete: function (xhr) {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
-                    $('#delete_exam_part').waitMe('hide');
-                    $('#delete_exam_modal').modal('hide');
+                    $('#delete_exam_again_part').waitMe('hide');
+                    $('#delete_exam_again_modal').modal('hide');
                     $('#success_modal').modal({backdrop: 'static'});
                 } else {
-                    $('#delete_exam_part').waitMe('hide');
-                    $('#delete_exam_modal').modal('hide');
+                    $('#delete_exam_again_part').waitMe('hide');
+                    $('#delete_exam_again_modal').modal('hide');
                     $('#unsuccess_modal').modal({backdrop: 'static'});
                 }
             }
@@ -892,6 +892,20 @@ function readExamContent(data) {
         },
         url: url + 'exam-read-content',
         data: data,
+        async: false,
+    }).responseJSON;
+    return test;
+}
+
+function findExamUsed(EID) {
+    var test = $.ajax({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            Accept: "application/json"
+        },
+        url: url + 'exam-find-used',
+        data: {exam_id : EID},
         async: false,
     }).responseJSON;
     return test;
@@ -1100,10 +1114,12 @@ function deleteExaming(EMID) {
         complete: function (xhr) {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
-                    $('#delete_part').waitMe('hide');
+                    $('#delete_again_part').waitMe('hide');
+                    $('#delete_again_modal').modal('hide');
                     $('#success_modal').modal({backdrop: 'static'});
                 }  else {
-                    $('#delete_part').waitMe('hide');
+                    $('#delete_again_part').waitMe('hide');
+                    $('#delete_again_modal').modal('hide');
                     $('#unsuccess_modal').modal({backdrop: 'static'});
                 }
             }
@@ -1412,12 +1428,12 @@ function deleteSheetGroup(data) {
         complete: function (xhr) {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
-                    $('#delete_sheet_group_part').waitMe('hide');
-                    $('#delete_sheet_group_modal').modal('hide');
+                    $('#delete_sheet_group_again_part').waitMe('hide');
+                    $('#delete_sheet_group_again_modal').modal('hide');
                     $('#success_modal').modal({backdrop: 'static'});
                 }  else {
-                    $('#delete_sheet_group_part').waitMe('hide');
-                    $('#delete_sheet_group_modal').modal('hide');
+                    $('#delete_sheet_group_again_part').waitMe('hide');
+                    $('#delete_sheet_group_again_modal').modal('hide');
                     $('#unsuccess_modal').modal({backdrop: 'static'});
                 }
             }
@@ -1654,12 +1670,12 @@ function deleteSheet(ID) {
         complete: function (xhr) {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
-                    $('#delete_sheet_part').waitMe('hide');
-                    $('#delete_sheet_modal').modal('hide');
+                    $('#delete_sheet_again_part').waitMe('hide');
+                    $('#delete_sheet_again_modal').modal('hide');
                     $('#success_modal').modal({backdrop: 'static'});
                 } else {
-                    $('#delete_sheet_part').waitMe('hide');
-                    $('#delete_sheet_modal').modal('hide');
+                    $('#delete_sheet_again_part').waitMe('hide');
+                    $('#delete_sheet_again_modal').modal('hide');
                     $('#unsuccess_modal').modal({backdrop: 'static'});
                 }
             }
@@ -1721,6 +1737,20 @@ function findAllSheetSharedToMe(MyID) {
         async: false,
     }).responseJSON;
     return sheetSharedToMe
+}
+
+function findSheetUsed(SID) {
+    var test = $.ajax({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            Accept: "application/json"
+        },
+        url: url + 'sheet-find-used',
+        data: {sheet_id : SID},
+        async: false,
+    }).responseJSON;
+    return test;
 }
 
 //--------------------------- SheetingController ---------------------------
@@ -1820,10 +1850,12 @@ function deleteSheeting(STID) {
         complete: function (xhr) {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
-                    $('#delete_part').waitMe('hide');
+                    $('#delete_again_part').waitMe('hide');
+                    $('#delete_again_modal').modal('hide');
                     $('#success_modal').modal({backdrop: 'static'});
                 }  else {
-                    $('#delete_part').waitMe('hide');
+                    $('#delete_again_part').waitMe('hide');
+                    $('#delete_again_modal').modal('hide');
                     $('#unsuccess_modal').modal({backdrop: 'static'});
                 }
             }
