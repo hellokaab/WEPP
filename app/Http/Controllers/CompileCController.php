@@ -304,7 +304,7 @@ class CompileCController extends Controller
             // ตรวจสอบคำตอบ
             $checker = "";
             if($request->mode == "exam") {
-                $checker = $this->check_correct_ans_ex($lines_run, $request->exam_id);
+                $checker = $this->check_correct_ans_ex($lines_run, $request->exam_id,$folder_ans);
             } else if($request->mode == "sheet") {
                 $checker = $this->check_correct_ans_sh($lines_run, $request->sheet_id);
             }
@@ -536,13 +536,13 @@ class CompileCController extends Controller
 
     }
 
-    function check_correct_ans_ex($lines_run, $exam_id) {
+    function check_correct_ans_ex($lines_run, $exam_id,$folder_ans) {
         $exam = Exam::find($exam_id);
-        $run = $this->prepare_result($lines_run);
+        $run = $this->prepare_result($lines_run,$folder_ans);
 
         if ($run == 'OverTime') {
             return array("status" => "t", "res_run" => 'Over time', "time" => 0, "mem" => 0);
-        } else if ($run['mem'] > $exam->memory_size) {
+        } else if ($run['mem'] > $exam->memory_size && $exam->memory_size > 0) {
             return array("status" => "m", "res_run" => 'Over memory', "time" => $run['time'], "mem" => $run['mem']);
         } else if ($run['time'] > $exam->time_limit) {
             return array("status" => "t", "res_run" => 'Over time', "time" => $run['time'], "mem" => $run['mem']);
@@ -577,7 +577,7 @@ class CompileCController extends Controller
 
     function check_correct_ans_sh($lines_run, $sheet_id) {
         $sheet = Sheet::find($sheet_id);
-        $run = $this->prepare_result($lines_run);
+        $run = $this->prepare_result($lines_run,"");
 
         if ($run == 'OverTime') {
             return array("status" => "t", "res_run" => 'Over time', "time" => 0, "mem" => 0);
@@ -611,7 +611,7 @@ class CompileCController extends Controller
         }
     }
 
-    function prepare_result($lines_run) {
+    function prepare_result($lines_run,$folder_ans) {
         $iMem = $iTime = $iOverTime = -1;
         $res_run = '';
 
@@ -637,7 +637,10 @@ class CompileCController extends Controller
                 $res_run .= $ar_res_run[$i++]."\n";
             }
 
-            $mem = substr($lines_run[$iMem], 8);
+            $mem = "";
+            if(strlen($folder_ans)>0){
+                $mem = $this->calculate_memory($folder_ans);
+            }
             $time = substr($lines_run[$iTime], 8);
 
             return array('res_run' => trim($res_run), 'mem' => $mem, 'time' => $time);
@@ -846,7 +849,7 @@ class CompileCController extends Controller
         $code_in_file= '';
         $files = scandir($folder_ans);
         foreach ($files as $f) {
-            if (strpos($f, '.c') && $f != 'wepp_check.c') {
+            if (strpos($f, '.c') && strpos($f, '.class')) {
                 $handle = fopen("$folder_ans/$f", "r");
                 $code_in_file = fread($handle, filesize("$folder_ans/$f"));
                 fclose($handle);
@@ -1100,6 +1103,6 @@ class CompileCController extends Controller
             ($countfloat + $countfloatarray) * 4 + ($countshort + $countshortarray) * 2 +
             ($countdouble + $countdoublearray) * 8;
 
-        return $memory_used;
+        return $memory_used/1024;
     }
 }
