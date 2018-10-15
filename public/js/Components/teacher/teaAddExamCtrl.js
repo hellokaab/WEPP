@@ -18,6 +18,10 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
     $scope.input = '';
     $scope.main = '';
     $scope.selectTeacher = [];
+    $scope.completeMemLimit = true;
+    $scope.completeTimeLimit = true;
+    $scope.memLimit = "";
+    $scope.timeLimit = "";
 
     $(document).ready(function () {
         $('#ddl_group').val($window.groupID);
@@ -41,22 +45,30 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
     $scope.checkMemLimit = function () {
         $('#notice_exam_limit').hide();
 
-        $scope.completeMemLimit = false;
-        if ($.isNumeric($scope.memLimit) && $scope.memLimit.indexOf('.') < 0 && $scope.memLimit > 0) {
-            $scope.completeMemLimit = true;
+        if($scope.memLimit.length > 0) {
+            if ($.isNumeric($scope.memLimit) && $scope.memLimit.indexOf('.') < 0 && $scope.memLimit > 0) {
+                $scope.completeMemLimit = true;
+            } else {
+                $scope.completeMemLimit = false;
+                $('#notice_exam_limit').html('* กรุณาระบุเฉพาะจำนวนเต็ม และมากกว่า 0 เท่านั้น').show();
+            }
         } else {
-            $('#notice_exam_limit').html('* กรุณาระบุเฉพาะจำนวนเต็ม และมากกว่า 0 เท่านั้น').show();
+            $scope.completeMemLimit = true;
         }
     };
     //----------------------------------------------------------------------
     $scope.checkTimeLimit = function () {
         $('#notice_exam_limit').hide();
 
-        $scope.completeTimeLimit = false;
-        if ($.isNumeric($scope.timeLimit) && $scope.timeLimit > 0) {
-            $scope.completeTimeLimit = true;
+        if($scope.timeLimit.length > 0) {
+            if ($.isNumeric($scope.timeLimit) && $scope.timeLimit > 0) {
+                $scope.completeTimeLimit = true;
+            } else {
+                $scope.completeTimeLimit = false;
+                $('#notice_exam_limit').html('* กรุณาระบุเวลาในการประมวลให้มากกว่า 0 เท่านั้น').show();
+            }
         } else {
-            $('#notice_exam_limit').html('* กรุณาระบุเวลาในการประมวลให้มากกว่า 0 เท่านั้น').show();
+            $scope.completeTimeLimit = true;
         }
     };
     //----------------------------------------------------------------------
@@ -204,8 +216,8 @@ app.controller('teaAddExamCtrl', ['$scope', '$window', function ($scope, $window
                     exam_data: $scope.contentPath,
                     exam_inputfile: $scope.inputPath,
                     exam_outputfile: $scope.outputPath,
-                    memory_size: $scope.memLimit,
-                    time_limit: $scope.timeLimit,
+                    memory_size: $scope.memLimit.length > 0 ? $scope.memLimit : 0,
+                    time_limit: $scope.timeLimit.length > 0 ? $scope.timeLimit : 5,
                     full_score: $scope.fullScore,
                     cut_wrongans: $scope.cutWrongAnswer,
                     cut_comerror: $scope.cutComplieError,

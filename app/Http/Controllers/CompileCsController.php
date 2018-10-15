@@ -660,6 +660,10 @@ class CompileCsController extends Controller
 
         if ($run == 'OverTime') {
             return array("status" => "t", "res_run" => 'Over time', "time" => 0, "mem" => 0);
+        } else if ($run['mem'] > $exam->memory_size && $exam->memory_size > 0) {
+            return array("status" => "m", "res_run" => 'Over memory', "time" => $run['time'], "mem" => $run['mem']);
+        } else if ($run['time'] > $exam->time_limit) {
+            return array("status" => "t", "res_run" => 'Over time', "time" => $run['time'], "mem" => $run['mem']);
         } else {
             // อ่านไฟล์ output ของ Teacher
             $file_output = $exam->exam_output_file;
@@ -754,7 +758,7 @@ class CompileCsController extends Controller
             $mem = substr($lines_run[$iMem], 8);
             $time = substr($lines_run[$iTime], 8);
 
-            return array('res_run' => trim($res_run), 'mem' => $mem, 'time' => $time);
+            return array('res_run' => trim($res_run), 'mem' => 0, 'time' => $time);
         }
     }
 

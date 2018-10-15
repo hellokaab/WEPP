@@ -328,7 +328,7 @@
 
                         {{--<!-- Limit -->--}}
                         <div class="form-group">
-                            <label class="col-md-2 control-label">ข้อจำกัด<b class="danger">*</b></label>
+                            <label class="col-md-2 control-label">ข้อจำกัด</label>
                             <div class="col-md-9">
                                 <div class="row">
                                     <div class="col-md-3 text-center">
