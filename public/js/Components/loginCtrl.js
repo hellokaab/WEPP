@@ -15,6 +15,10 @@ app.controller("loginCtrl", function($scope) {
 
     };
 
+    $scope.ShowDev = function () {
+        $('#dev_modal').modal({backdrop: 'static'});
+    };
+
     $scope.AdminLogin = function () {
         $('#admin_login_modal').modal({backdrop: 'static'});
         setTimeout(function () {

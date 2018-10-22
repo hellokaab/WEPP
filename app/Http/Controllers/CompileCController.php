@@ -865,89 +865,126 @@ class CompileCController extends Controller
         $countshort = 0;
         $countdouble = 0;
 
+        $no_string = true;
+        $last_index_str = 0;
+
+        $no_comment = true;
+        $no_one_line_comment = true;
+
         for ($i = 6; $i < strlen($bufchar); $i++) {
-            if ($bufchar[$i - 3] == 'i' && $bufchar[$i - 2] == 'n' && $bufchar[$i - 1] == 't' && $bufchar[$i] != 'f') {
-                while (TRUE) {
-                    if($bufchar[$i]=="{"||$bufchar[$i]=="("){
-                        break;
-                    }
-                    if ($bufchar[$i] == ',') {
-                        $countint++;
-                    } elseif ($bufchar[$i] == ';') {
-                        $countint++;
-                        break;
-                    }
-                    $i++;
+
+            if($bufchar[$i] == "\""){
+                if($no_string){
+                    $no_string = false;
+                } else {
+                    $last_index_str = $i;
+                    $no_string = true;
                 }
             }
-            if ($bufchar[$i - 3] == 'c' && $bufchar[$i - 2] == 'h' && $bufchar[$i - 1] == 'a' && $bufchar[$i] == 'r') {
-                while (TRUE) {
-                    if($bufchar[$i]=="{"||$bufchar[$i]=="("){
-                        break;
-                    }
-                    if ($bufchar[$i] == ',') {
-                        $countcahr++;
-                    } elseif ($bufchar[$i] == ';') {
-                        $countcahr++;
-                        break;
-                    }
-                    $i++;
+            if($bufchar[$i-1] == "/" && $bufchar[$i] == "*"){
+                if($no_one_line_comment){
+                    $no_comment = false;
                 }
             }
-            if ($bufchar[$i - 3] == 'l' && $bufchar[$i - 2] == 'o' && $bufchar[$i - 1] == 'n' && $bufchar[$i] == 'g') { // long Howlong = 50; strpos($str,'long ') int int1 = 5; int int2 = 10; int int3 = 15;
-                while (TRUE) {
-                    if($bufchar[$i]=="{"||$bufchar[$i]=="("){
-                        break;
-                    }
-                    if ($bufchar[$i] == ',') {
-                        $countlong++;
-                    } elseif ($bufchar[$i] == ';') {
-                        $countlong++;
-                        break;
-                    }
-                    $i++;
+            if($bufchar[$i-1] == "*" && $bufchar[$i] == "/"){
+                $no_comment = true;
+            }
+            if($bufchar[$i-1] == "/" && $bufchar[$i] == "/"){
+                if($no_comment){
+                    $no_one_line_comment = false;
                 }
             }
-            if ($bufchar[$i - 4] == 'f' && $bufchar[$i - 3] == 'l' && $bufchar[$i - 2] == 'o' && $bufchar[$i - 1] == 'a' && $bufchar[$i] == 't') {
-                while (TRUE) {
-                    if($bufchar[$i]=="{"||$bufchar[$i]=="("){
-                        break;
-                    }
-                    if ($bufchar[$i] == ',') {
-                        $countfloat++;
-                    } elseif ($bufchar[$i] == ';') {
-                        $countfloat++;
-                        break;
-                    }
-                    $i++;
+            if(!$no_one_line_comment){
+                if ($bufchar[$i] == "\n"){
+                    $no_one_line_comment = true;
                 }
             }
-            if ($bufchar[$i - 4] == 's' && $bufchar[$i - 3] == 'h' && $bufchar[$i - 2] == 'o' && $bufchar[$i - 1] == 'r' && $bufchar[$i] == 't') {
-                while (TRUE) {
-                    if($bufchar[$i]=="{"||$bufchar[$i]=="("){
-                        break;
+            if($no_string) {
+                if($no_comment && $no_one_line_comment) {
+                    if ($bufchar[$i - 3] == 'i' && $bufchar[$i - 2] == 'n' && $bufchar[$i - 1] == 't' && $bufchar[$i] != 'f' && $i != $last_index_str) {
+                        while (TRUE) {
+                            if ($bufchar[$i] == "{" || $bufchar[$i] == "(") {
+                                break;
+                            }
+                            if ($bufchar[$i] == ',') {
+                                $countint++;
+                            } elseif ($bufchar[$i] == ';') {
+                                $countint++;
+                                break;
+                            }
+                            $i++;
+                        }
                     }
-                    if ($bufchar[$i] == ',') {
-                        $countshort++;
-                    } elseif ($bufchar[$i] == ';') {
-                        $countshort++;
-                        break;
+                    if ($bufchar[$i - 3] == 'c' && $bufchar[$i - 2] == 'h' && $bufchar[$i - 1] == 'a' && $bufchar[$i] == 'r') {
+                        while (TRUE) {
+                            if ($bufchar[$i] == "{" || $bufchar[$i] == "(") {
+                                break;
+                            }
+                            if ($bufchar[$i] == ',') {
+                                $countcahr++;
+                            } elseif ($bufchar[$i] == ';') {
+                                $countcahr++;
+                                break;
+                            }
+                            $i++;
+                        }
                     }
-                    $i++;
-                }
-            }
-            if ($bufchar[$i - 5] == 'd' && $bufchar[$i - 4] == 'o' && $bufchar[$i - 3] == 'u' && $bufchar[$i - 2] == 'b' && $bufchar[$i - 1] == 'l' && $bufchar[$i] == 'e') {
-                while (TRUE) {
-                    if($bufchar[$i]=="{"||$bufchar[$i]=="("){
-                        break;
+                    if ($bufchar[$i - 3] == 'l' && $bufchar[$i - 2] == 'o' && $bufchar[$i - 1] == 'n' && $bufchar[$i] == 'g') { // long Howlong = 50; strpos($str,'long ') int int1 = 5; int int2 = 10; int int3 = 15;
+                        while (TRUE) {
+                            if ($bufchar[$i] == "{" || $bufchar[$i] == "(") {
+                                break;
+                            }
+                            if ($bufchar[$i] == ',') {
+                                $countlong++;
+                            } elseif ($bufchar[$i] == ';') {
+                                $countlong++;
+                                break;
+                            }
+                            $i++;
+                        }
                     }
-                    if ($bufchar[$i] == ',') {
-                        $countdouble++;
-                    } elseif ($bufchar[$i] == ';') {
-                        $countdouble++;
-                        break;
+                    if ($bufchar[$i - 4] == 'f' && $bufchar[$i - 3] == 'l' && $bufchar[$i - 2] == 'o' && $bufchar[$i - 1] == 'a' && $bufchar[$i] == 't') {
+                        while (TRUE) {
+                            if ($bufchar[$i] == "{" || $bufchar[$i] == "(") {
+                                break;
+                            }
+                            if ($bufchar[$i] == ',') {
+                                $countfloat++;
+                            } elseif ($bufchar[$i] == ';') {
+                                $countfloat++;
+                                break;
+                            }
+                            $i++;
+                        }
                     }
-                    $i++;
+                    if ($bufchar[$i - 4] == 's' && $bufchar[$i - 3] == 'h' && $bufchar[$i - 2] == 'o' && $bufchar[$i - 1] == 'r' && $bufchar[$i] == 't') {
+                        while (TRUE) {
+                            if ($bufchar[$i] == "{" || $bufchar[$i] == "(") {
+                                break;
+                            }
+                            if ($bufchar[$i] == ',') {
+                                $countshort++;
+                            } elseif ($bufchar[$i] == ';') {
+                                $countshort++;
+                                break;
+                            }
+                            $i++;
+                        }
+                    }
+                    if ($bufchar[$i - 5] == 'd' && $bufchar[$i - 4] == 'o' && $bufchar[$i - 3] == 'u' && $bufchar[$i - 2] == 'b' && $bufchar[$i - 1] == 'l' && $bufchar[$i] == 'e') {
+                        while (TRUE) {
+                            if ($bufchar[$i] == "{" || $bufchar[$i] == "(") {
+                                break;
+                            }
+                            if ($bufchar[$i] == ',') {
+                                $countdouble++;
+                            } elseif ($bufchar[$i] == ';') {
+                                $countdouble++;
+                                break;
+                            }
+                            $i++;
+                        }
+                    }
                 }
             }
         }
@@ -958,142 +995,172 @@ class CompileCController extends Controller
         $countshortarray = 0;
         $countdoublearray = 0;
         for ($i = 6; $i < strlen($bufchar); $i++) {
-            if ($bufchar[$i - 3] == 'i' && $bufchar[$i - 2] == 'n' && $bufchar[$i - 1] == 't' && $bufchar[$i] != 'f') {
-                while (TRUE) {
-                    if($bufchar[$i]=="{"||$bufchar[$i]=="("){
-                        break;
-                    }
-                    if ($bufchar[$i - 1] == '[') {
-                        $burrefsize = "";
-                        while (TRUE) {
-                            if ($bufchar[$i] != ']') {
-                                $burrefsize = $burrefsize . $bufchar[$i];
-                            } else {
-                                $countint --;
-                                $countintarray += number_format($burrefsize);
-                                break;
-                            }
-                            $i++;
-                        }
-                    } elseif ($bufchar[$i] == ';') {
-                        break;
-                    }
-                    $i++;
+            if($bufchar[$i] == "\""){
+                if($no_string == 1){
+                    $no_string = 0;
+                } else {
+                    $last_index_str = $i;
+                    $no_string = 1;
                 }
             }
-            if ($bufchar[$i - 3] == 'c' && $bufchar[$i - 2] == 'h' && $bufchar[$i - 1] == 'a' && $bufchar[$i] == 'r') {
-                while (TRUE) {
-                    if($bufchar[$i]=="{"||$bufchar[$i]=="("){
-                        break;
-                    }
-                    if ($bufchar[$i - 1] == '[') {
-                        $burrefsize = "";
-                        while (TRUE) {
-                            if ($bufchar[$i] != ']') {
-                                $burrefsize = $burrefsize . $bufchar[$i];
-                            } else {
-                                $countcahr --;
-                                $countcahrarray += number_format($burrefsize);
-                                break;
-                            }
-                            $i++;
-                        }
-                    } elseif ($bufchar[$i] == ';') {
-                        break;
-                    }
-                    $i++;
+            if($bufchar[$i-1] == "/" && $bufchar[$i] == "*"){
+                if($no_one_line_comment){
+                    $no_comment = false;
                 }
             }
-            if ($bufchar[$i - 3] == 'l' && $bufchar[$i - 2] == 'o' && $bufchar[$i - 1] == 'n' && $bufchar[$i] == 'g') {
-                while (TRUE) {
-                    if($bufchar[$i]=="{"||$bufchar[$i]=="("){
-                        break;
-                    }
-                    if ($bufchar[$i - 1] == '[') {
-                        $burrefsize = "";
-                        while (TRUE) {
-                            if ($bufchar[$i] != ']') {
-                                $burrefsize = $burrefsize . $bufchar[$i];
-                            } else {
-                                $countlong --;
-                                $countlongarrray += number_format($burrefsize);
-                                break;
-                            }
-                            $i++;
-                        }
-                    } elseif ($bufchar[$i] == ';') {
-                        break;
-                    }
-                    $i++;
+            if($bufchar[$i-1] == "*" && $bufchar[$i] == "/"){
+                $no_comment = true;
+            }
+            if($bufchar[$i-1] == "/" && $bufchar[$i] == "/"){
+                if($no_comment){
+                    $no_one_line_comment = false;
                 }
             }
-            if ($bufchar[$i - 4] == 'f' && $bufchar[$i - 3] == 'l' && $bufchar[$i - 2] == 'o' && $bufchar[$i - 1] == 'a' && $bufchar[$i] == 't') {
-                while (TRUE) {
-                    if($bufchar[$i]=="{"||$bufchar[$i]=="("){
-                        break;
-                    }
-                    if ($bufchar[$i - 1] == '[') {
-                        $burrefsize = "";
-                        while (TRUE) {
-                            if ($bufchar[$i] != ']') {
-                                $burrefsize = $burrefsize . $bufchar[$i];
-                            } else {
-                                $countfloat --;
-                                $countfloatarray += number_format($burrefsize);
-                                break;
-                            }
-                            $i++;
-                        }
-                    } elseif ($bufchar[$i] == ';') {
-                        break;
-                    }
-                    $i++;
+            if(!$no_one_line_comment){
+                if ($bufchar[$i] == "\n"){
+                    $no_one_line_comment = true;
                 }
             }
-            if ($bufchar[$i - 4] == 's' && $bufchar[$i - 3] == 'h' && $bufchar[$i - 2] == 'o' && $bufchar[$i - 1] == 'r' && $bufchar[$i] == 't') {
-                while (TRUE) {
-                    if($bufchar[$i]=="{"||$bufchar[$i]=="("){
-                        break;
-                    }
-                    if ($bufchar[$i - 1] == '[') {
-                        $burrefsize = "";
+            if($no_string) {
+                if($no_comment && $no_one_line_comment) {
+                    if ($bufchar[$i - 3] == 'i' && $bufchar[$i - 2] == 'n' && $bufchar[$i - 1] == 't' && $bufchar[$i] != 'f') {
                         while (TRUE) {
-                            if ($bufchar[$i] != ']') {
-                                $burrefsize = $burrefsize . $bufchar[$i];
-                            } else {
-                                $countshort --;
-                                $countshortarray += number_format($burrefsize);
+                            if ($bufchar[$i] == "{" || $bufchar[$i] == "(") {
+                                break;
+                            }
+                            if ($bufchar[$i - 1] == '[') {
+                                $burrefsize = "";
+                                while (TRUE) {
+                                    if ($bufchar[$i] != ']') {
+                                        $burrefsize = $burrefsize . $bufchar[$i];
+                                    } else {
+                                        $countint--;
+                                        $countintarray += number_format($burrefsize);
+                                        break;
+                                    }
+                                    $i++;
+                                }
+                            } elseif ($bufchar[$i] == ';') {
                                 break;
                             }
                             $i++;
                         }
-                    } elseif ($bufchar[$i] == ';') {
-                        break;
                     }
-                    $i++;
-                }
-            }
-            if ($bufchar[$i - 5] == 'd' && $bufchar[$i - 4] == 'o' && $bufchar[$i - 3] == 'u' && $bufchar[$i - 2] == 'b' && $bufchar[$i - 1] == 'l' && $bufchar[$i] == 'e') {
-                while (TRUE) {
-                    if($bufchar[$i]=="{"||$bufchar[$i]=="("){
-                        break;
-                    }
-                    if ($bufchar[$i - 1] == '[') {
-                        $burrefsize = "";
+                    if ($bufchar[$i - 3] == 'c' && $bufchar[$i - 2] == 'h' && $bufchar[$i - 1] == 'a' && $bufchar[$i] == 'r') {
                         while (TRUE) {
-                            if ($bufchar[$i] != ']') {
-                                $burrefsize = $burrefsize . $bufchar[$i];
-                            } else {
-                                $countdouble --;
-                                $countdoublearray += number_format($burrefsize);
+                            if ($bufchar[$i] == "{" || $bufchar[$i] == "(") {
+                                break;
+                            }
+                            if ($bufchar[$i - 1] == '[') {
+                                $burrefsize = "";
+                                while (TRUE) {
+                                    if ($bufchar[$i] != ']') {
+                                        $burrefsize = $burrefsize . $bufchar[$i];
+                                    } else {
+                                        $countcahr--;
+                                        $countcahrarray += number_format($burrefsize);
+                                        break;
+                                    }
+                                    $i++;
+                                }
+                            } elseif ($bufchar[$i] == ';') {
                                 break;
                             }
                             $i++;
                         }
-                    } elseif ($bufchar[$i] == ';') {
-                        break;
                     }
-                    $i++;
+                    if ($bufchar[$i - 3] == 'l' && $bufchar[$i - 2] == 'o' && $bufchar[$i - 1] == 'n' && $bufchar[$i] == 'g') {
+                        while (TRUE) {
+                            if ($bufchar[$i] == "{" || $bufchar[$i] == "(") {
+                                break;
+                            }
+                            if ($bufchar[$i - 1] == '[') {
+                                $burrefsize = "";
+                                while (TRUE) {
+                                    if ($bufchar[$i] != ']') {
+                                        $burrefsize = $burrefsize . $bufchar[$i];
+                                    } else {
+                                        $countlong--;
+                                        $countlongarrray += number_format($burrefsize);
+                                        break;
+                                    }
+                                    $i++;
+                                }
+                            } elseif ($bufchar[$i] == ';') {
+                                break;
+                            }
+                            $i++;
+                        }
+                    }
+                    if ($bufchar[$i - 4] == 'f' && $bufchar[$i - 3] == 'l' && $bufchar[$i - 2] == 'o' && $bufchar[$i - 1] == 'a' && $bufchar[$i] == 't') {
+                        while (TRUE) {
+                            if ($bufchar[$i] == "{" || $bufchar[$i] == "(") {
+                                break;
+                            }
+                            if ($bufchar[$i - 1] == '[') {
+                                $burrefsize = "";
+                                while (TRUE) {
+                                    if ($bufchar[$i] != ']') {
+                                        $burrefsize = $burrefsize . $bufchar[$i];
+                                    } else {
+                                        $countfloat--;
+                                        $countfloatarray += number_format($burrefsize);
+                                        break;
+                                    }
+                                    $i++;
+                                }
+                            } elseif ($bufchar[$i] == ';') {
+                                break;
+                            }
+                            $i++;
+                        }
+                    }
+                    if ($bufchar[$i - 4] == 's' && $bufchar[$i - 3] == 'h' && $bufchar[$i - 2] == 'o' && $bufchar[$i - 1] == 'r' && $bufchar[$i] == 't') {
+                        while (TRUE) {
+                            if ($bufchar[$i] == "{" || $bufchar[$i] == "(") {
+                                break;
+                            }
+                            if ($bufchar[$i - 1] == '[') {
+                                $burrefsize = "";
+                                while (TRUE) {
+                                    if ($bufchar[$i] != ']') {
+                                        $burrefsize = $burrefsize . $bufchar[$i];
+                                    } else {
+                                        $countshort--;
+                                        $countshortarray += number_format($burrefsize);
+                                        break;
+                                    }
+                                    $i++;
+                                }
+                            } elseif ($bufchar[$i] == ';') {
+                                break;
+                            }
+                            $i++;
+                        }
+                    }
+                    if ($bufchar[$i - 5] == 'd' && $bufchar[$i - 4] == 'o' && $bufchar[$i - 3] == 'u' && $bufchar[$i - 2] == 'b' && $bufchar[$i - 1] == 'l' && $bufchar[$i] == 'e') {
+                        while (TRUE) {
+                            if ($bufchar[$i] == "{" || $bufchar[$i] == "(") {
+                                break;
+                            }
+                            if ($bufchar[$i - 1] == '[') {
+                                $burrefsize = "";
+                                while (TRUE) {
+                                    if ($bufchar[$i] != ']') {
+                                        $burrefsize = $burrefsize . $bufchar[$i];
+                                    } else {
+                                        $countdouble--;
+                                        $countdoublearray += number_format($burrefsize);
+                                        break;
+                                    }
+                                    $i++;
+                                }
+                            } elseif ($bufchar[$i] == ';') {
+                                break;
+                            }
+                            $i++;
+                        }
+                    }
                 }
             }
         }
