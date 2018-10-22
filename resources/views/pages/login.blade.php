@@ -115,7 +115,7 @@
                             <a href="#page-top"></a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="#services" id="test">ผู้จัดทำ</a>
+                            <a class="page-scroll" href="#" ng-click="ShowDev()">ผู้จัดทำ</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="#" ng-click="AdminLogin()">สำหรับผู้ดูแลระบบ</a>
@@ -200,6 +200,51 @@
                     <br>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">ตกลง</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dev Modal -->
+    <div id="dev_modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="panel panel-purple" style="margin-bottom: 0">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">คณะผู้จัดทำ</h3>
+                    </div>
+                    <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="center">
+                                    <img class="img-responsive" src="img/Kho.png">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h3 style="margin-top: 7px">นายพงศ์พันธ์ ปูนขุนทด</h3>
+                                <p style="font-size: 16px">ที่อยู่ : 15/5 หมู่ 12 ต.ด่านขุนทด อ.ด่านขุนทด จ.นครราชสีมา 30210</p>
+                                <p style="font-size: 16px">E-mail : pongpan.po@rmuti.ac.th</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="center">
+                                    <img class="img-responsive" src="img/Aem.png">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h3 style="margin-top: 7px">นายธนกร ชื่นสบาย</h3>
+                                <p style="font-size: 16px">ที่อยู่ : 821 ถ.เบญจรงค์ ซ.5 ต.ในเมือง อ.เมือง จ.นครราชสีมา 30000</p>
+                                <p style="font-size: 16px">E-mail : tanakorn.ch@rmuti.ac.th</p>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-purple" data-dismiss="modal">ปิด</button>
                     </div>
                 </div>
             </div>
